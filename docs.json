@@ -1,51 +1,62 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "mint", 
+  "name": "Chatzy AI",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3B8CE5",
+    "light": "#3B8CE5",
+    "dark": "#3B8CE5"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/chatzy_logo.svg",
+
+  
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Quick Start",
+            "icon" : "rocket",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "Quick start/Introduction",
+              "Quick start/Best-Practices",
+              "Quick start/Tutorials",
+              "Quick start/Use-cases"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Manage Teams",
+            "icon": "users",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "Manage-Teams/Inviting-Team-Members",
+              "Manage-Teams/Managing-Teams",
+              "Manage-Teams/Roles-&-Permissions"
             ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
+          }, {
+    "group": "Conversational AI Agent",
+    "icon": "robot",
+    "pages": [
+      "Conversational AI Agent/How to Train Your Bot with Data",
+      "Conversational AI Agent/Customizing Bot Behavior",
+      "Conversational AI Agent/Model Settings",
+      "Conversational AI Agent/Testing & Tuning in the Playground",
+      "Conversational AI Agent/Chunk Management"
+    ]
+  },
+  {
+    "group": "Flow-Based Agent",
+    "icon": "bolt",
+    "pages": [
+      "Flow-Based Agent/Overview",
+      "Flow-Based Agent/How It Works",
+      "Flow-Based Agent/Card Types",
+      "Flow-Based Agent/Smart AI Mode",
+      "Flow-Based Agent/Playground",
+      "Flow-Based Agent/Features & Benefits"
+    ]
+  }
+                  ]
       },
       {
         "tab": "API reference",
@@ -70,46 +81,35 @@
     ],
     "global": {
       "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
+    
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://www.chatzy.ai/blog",
           "icon": "newspaper"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/chatzy_logo.svg",
+    "dark": "/logo/chatzy_logo.svg",
+    "href": "https://www.chatzy.ai/"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@chatzy.ai"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
+    
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/ChatzyAI",
+      "youtube": "https://www.youtube.com/@ChatzyAI",
+      "linkedin": "https://linkedin.com/company/chatzy-ai",
+      "discord": "https://discord.gg/https://discord.gg/Gkwy8mfyxw"
     }
   }
 }
