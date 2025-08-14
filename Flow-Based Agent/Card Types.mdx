@@ -1,0 +1,44 @@
+Flow-based agents are built using modular Cards inside nodes. Each card serves a unique purpose—ranging from capturing input to executing backend logic or AI tasks.
+
+### 🎯 Input Cards
+Used to collect data or responses from users.
+
+| Card            | Purpose                               | Example                                           |
+|-----------------|---------------------------------------|---------------------------------------------------|
+| **Raw Input**   | Free-text input                       | “What’s your name?”                               |
+| **Single Choice** | One selection from listed options    | “Choose a language: English, Hindi”               |
+| **Multiple Choice** | Multiple selections allowed        | “Select favorite fruits: Apple, Banana”           |
+| **Dropdown**    | Compact list selection                | “Select country: India, USA”                      |
+| **File Upload** | Accept image/doc uploads              | “Upload your ID proof”                            |
+
+---
+
+### 💬 Message Cards
+Used to communicate static content or UI elements to the user.
+
+| Card              | Purpose                              | Example                                           |
+|-------------------|--------------------------------------|---------------------------------------------------|
+| **Text**          | Simple message display               | “Welcome to our support desk!”                    |
+| **Document**      | Send or preview documents            | “Download your invoice”                           |
+| **Card**          | Visual layout with image & info      | Product: Shirt, ₹499                              |
+| **Button**        | Triggers next action                  | “Click to Continue”                               |
+| **Action Button** | Performs backend/API action          | “Submit Order”                                    |
+
+## ⚙️ Logic & AI Cards
+These power your agent’s intelligence and backend capabilities.
+
+| Card                | Purpose                                       | Example                                                              |
+|---------------------|-----------------------------------------------|----------------------------------------------------------------------|
+| **Execute Code**    | Run JS/Python scripts                         | Calculate discount or call external API                              |
+| **AI Task**         | Use AI for summarization or classification    | “Summarize the uploaded resume”                                      |
+| **Query AI Assistant** | Generate dynamic responses using GPT       | “Generate greeting based on name & company”                          |
+
+> We have a built-in dictionary named `variables[]` that stores the defined variables.
+
+
+## 🗂 Flow Logic Cards
+Control the direction of the conversation.
+
+| Card           | Purpose                  | Example                                               |
+|----------------|--------------------------|-------------------------------------------------------|
+| **Transition** | Conditional branching    | “If answer is Yes → Node 2, else → Node 3”             |
