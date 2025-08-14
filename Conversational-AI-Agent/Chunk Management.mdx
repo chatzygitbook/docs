@@ -1,0 +1,26 @@
+Chatzy divides your bot’s processing into chunks. This helps it focus better and respond faster.
+
+<Frame>
+  <img src="/Conversational-AI-Agent/chunk_manage.png" alt="chunk management" className="rounded-lg" />
+</Frame>
+
+
+
+| Setting | Description |
+|---|---|
+| # Chunks | Number of data segments to split your content into (e.g., 5) |
+| Chunk Length | How large each chunk should be |
+| Hybrid Search | Combines semantic + keyword search |
+| Add Historical Context | Use past messages for continuity |
+| Max Tokens | Limit per response (e.g., 4000) |
+
+**Token Distribution Controls**
+Adjust how much focus each part of the response process gets:
+
+Example allocations:  
+- Base Prompt + Function Call + Media → ~1,500 tokens  
+- Context (Knowledge) → ~7,500 tokens  
+- Chat History → ~5,000 tokens  
+- Response + Reasoning → ~1,000 tokens
+
+> Use the handles to adjust token allocation dynamically.
