@@ -149,17 +149,19 @@
             "group": "🗺️ Journeys",
             "pages": [
               {
-                "group": "🌱 Getting Started",
+                "group": " Getting Started",
                 "pages": [
-                  "Journey/Overview",
-                  "Journey/First Steps"
+                  "Journeys/Overview",
+                  "Journeys/Pre Defined Templates",
+                  "Journeys/Triggers",
+                  "Journeys/Actions"
                 ]
               },
               {
-                "group": "🚀 Advanced Skills",
+                "group": " Examples",
                 "pages": [
-                  "Journey/Deep Dive",
-                  "Journey/Expert Tips"
+                  "Journeys/WA Lead Nurture",
+                  "Journeys/Assign to AI"
                 ]
               }
             ]
@@ -174,6 +176,27 @@
             "group": "📥 How to Use the “Conversations” Inbox in Chatzy AI",
             "pages": [
               "How to Use the Conversations Inbox in Chatzy AI"
+            ]
+          },
+          {
+            "group": "🔂 Miscellaneous",
+            "pages": [
+              {
+                "group": " Journey Sandbox",
+                "pages": [
+                  "/Miscellaneous/Function",
+                  "/Miscellaneous/Module",
+                  "/Miscellaneous/Type"
+                ]
+              },
+              {
+                "group": " Flow-based Bot Sandbox",
+                "pages": [
+                  "/Miscellaneous/1/Function",
+                  "/Miscellaneous/1/Module",
+                  "/Miscellaneous/1/Type"
+                ]
+              }
             ]
           }
         ]
