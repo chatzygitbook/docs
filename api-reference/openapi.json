@@ -1,94 +1,103 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
+    "title": "Chatzy AI API",
+    "version": "1.0.0",
+    "description": "Chatzy AI REST API for messaging, contact conversations, and agent interactions.",
+    "contact": {
+      "name": "Chatzy",
+      "url": "https://chatzy.ai",
+      "email": "support@chatzy.ai"
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Authentication to access the API"
     },
-    "version": "1.0.0"
+    {
+      "name": "Contact Conversations",
+      "description": "Get contact conversations"
+    },
+    {
+      "name": "Conversational AI Agent Interactions",
+      "description": "Interact with the conversational AI agent"
+    },
+    {
+      "name": "Auhtorized iframe Access",
+      "description": "APIs for authorized iframe access"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Use the `idToken` retrieved from `/get_id_token` as the Bearer token."
+      }
+    }
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod",
+      "description": "Production Server"
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+    "/get_id_token": {
+      "post": {
+        "summary": "Get ID Token",
+        "tags": ["Authentication"],
+        "description": "Authenticates a user with their email and password and returns a JWT `idToken`.\n\nThis `idToken` must be included in the `Authorization` header when calling **protected APIs** (indicated by the 🔒 lock icon).\n\n### 🛡️ Authorization Header Format:\n```http\nAuthorization: <idToken>\n```\n\nWithout a valid token, protected routes will respond with a 401 Unauthorized error. This token expires after **1 hour** after which you must call `/get_id_token` again to obtain a new one.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["user_email_id", "password"],
+                "properties": {
+                  "user_email_id": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "your-password"
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
           }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Successful authentication and token retrieval.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Successfully retrieved ID token"
+                        },
+                        "idToken": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        },
+                        "expiryAt": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 1752577991000
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -96,121 +105,617 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/get_contact_conversations": {
+      "get": {
+        "summary": "Get Contact Conversations",
+        "tags": ["Contact Conversations"],
+        "description": "Retrieves a paginated list of contact conversations associated with the given user.\n\nSupports optional search, pagination, and filtering by conversation status. This endpoint is commonly used to display a user's contact list in messaging interfaces.\n\n### 🔍 Parameters:\n- **user_email_id** *(required)* — Your Chatzy AI account email ID.\n- **search** *(optional)* — Filter contacts by name, email, phone number or iframe user ID.\n- **limit** *(optional)* — Number of contacts to return per page (default: 10, min: 1, max: 100).\n- **offset** *(optional)* — Number of contacts to skip for pagination (default: 0).\n- **filter** *(optional)* — Filter by conversation status:\n  - `all` — All conversations (default)\n  - `unread` — Only conversations with unread messages\n  - `live` — Active/live conversations\n\n### 🔐 Authorization:\nThis is a protected endpoint. You must include the `idToken` in the header:\n```http\nAuthorization: <idToken>\n```",
+        "security": [{ "BearerAuth": [] }],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
+            "name": "user_email_id",
+            "in": "query",
             "required": true,
+            "schema": { "type": "string" },
+            "description": "Email ID of the user whose contacts should be fetched."
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" },
+            "description": "Search by contact name, email or phone number."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
             "schema": {
               "type": "integer",
-              "format": "int64"
-            }
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            },
+            "description": "Number of results to return (min 1, max 100)."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "description": "Number of results to skip."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["all", "unread", "live"],
+              "default": "all"
+            },
+            "description": "Filter conversation status: all, unread, or live."
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "A list of contacts for whom there is a conversation.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "contacts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "contact_id": { "type": "string" },
+                                  "contact_name": { "type": "string" },
+                                  "phone_number": { "type": "string" },
+                                  "email": { "type": "string" },
+                                  "conversation_status": { "type": "string" },
+                                  "assigned_to": { "type": "string" },
+                                  "unread_message_count": { "type": "string" },
+                                  "latest_message_time": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "channels": {
+                                    "type": "array",
+                                    "items": { "type": "string" }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
+    },
+    "/get_contact_conversation_messages": {
+      "get": {
+        "summary": "Get Messages for Contact",
+        "tags": ["Contact Conversations"],
+        "description": "Returns all conversations and messages for a given `contact_id`.\n\n### 🔐 Authorization:\nThis is a protected endpoint. You must include the `idToken` in the header:\n```http\nAuthorization: <idToken>\n```",
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "contact_id",
+            "in": "query",
+            "required": true,
+            "description": "The unique ID of the contact to fetch messages for.",
+            "schema": {
+              "type": "string",
+              "example": "096662f6-5acc-4699-923c-f7326936b39f"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contact with all conversations and messages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "contact": {
+                              "type": "object",
+                              "properties": {
+                                "contact_id": { "type": "string" },
+                                "user_email_id": { "type": "string" },
+                                "first_name": { "type": "string" },
+                                "last_name": { "type": "string" },
+                                "phone_number": { "type": "string" },
+                                "created_at": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "last_interacted_at": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "contact_queries": { "type": "integer" },
+                                "is_blacklisted": { "type": "boolean" },
+                                "is_frozen": { "type": "boolean" },
+                                "frozen_until": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            },
+                            "conversations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "conversation_id": { "type": "string" },
+                                  "conversation_status": { "type": "string" },
+                                  "conversation_type": { "type": "string" },
+                                  "assigned_to": { "type": "string" },
+                                  "chatbot_id": { "type": "string" },
+                                  "messages": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "message_id": { "type": "string" },
+                                        "content": { "type": "string" },
+                                        "role": { "type": "string" },
+                                        "created_at": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "message_order": { "type": "integer" },
+                                        "wa_messages": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "status": { "type": "string" },
+                                              "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "data": { "type": "object" }
+                                            }
+                                          }
+                                        },
+                                        "instagram_messages": {
+                                          "type": "array",
+                                          "items": {}
+                                        },
+                                        "messenger_messages": {
+                                          "type": "array",
+                                          "items": {}
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/init_conversation": {
+      "get": {
+        "summary": "Initialize Conversation",
+        "description": "## 🤖 AI Agent Conversation Flow\n\nInteract with the conversational AI agent using this **4-step process**:\n\n### 1. **Initialize Conversation** (`/init_conversation`)\n- **Purpose**: Obtain a valid `conversation_id` for the session\n- **Returns**: `conversation_id` and optional introductory message\n- **Required for**: Starting any new conversation thread\n\n### 2. **Send Message** (`/get_inference`)\n- **Purpose**: Send user message to the AI agent\n- **Requires**: `chatbot_id`, `conversation_id`, and user message\n- **Action**: Triggers agent to begin generating response\n\n### 3. **Generate Temp Token** (`/generate_secret`)\n- **Purpose**: Get temporary JWT token for SSE authentication\n- **Requires**: `conversation_id` from step 1\n- **Returns**: Short-lived `temp_token` for streaming\n\n### 4. **Stream Response** (`/get-response`)\n- **Purpose**: Receive real-time AI agent response via SSE\n- **Requires**: `temp_token` from step 3\n- **Returns**: Streamed response chunks and control signals\n\n> **⚠️ Important**: This flow must be repeated for each new user message or session. The `temp_token` expires quickly and cannot be reused.\n\n",
+        "tags": ["Conversational AI Agent Interactions"],
+        "parameters": [
+          {
+            "name": "chatbot_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "UUID of the chatbot to initiate conversation with."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversation initialized successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "valid": { "type": "boolean" },
+                        "conversation_id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "introductory_message": {
+                          "type": "object",
+                          "description": "Optional message shown at the beginning of the conversation.",
+                          "properties": {
+                            "switch": {
+                              "type": "boolean",
+                              "description": "Flag to show or hide the message."
+                            },
+                            "buttons": {
+                              "type": "array",
+                              "description": "Optional list of buttons for quick replies or actions.",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "content": {
+                              "type": "string",
+                              "description": "Text content of the introductory message.",
+                              "example": "Hello! 👋"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_inference": {
       "post": {
-        "description": "Information about a new plant added to the store",
+        "summary": "Send Message to Conversational AI Agent",
+        "description": "Sends a message from the user to the Conversational AI agent for processing.",
+        "tags": ["Conversational AI Agent Interactions"],
         "requestBody": {
-          "description": "Plant added to the store",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "type": "object",
+                "required": ["chatbot_id", "conversation_id", "messages"],
+                "properties": {
+                  "chatbot_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "UUID of the chatbot to which the message is sent.",
+                    "example": "51de6a36-5532-49c2-888e-46754ce102ba"
+                  },
+                  "conversation_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "UUID of the ongoing conversation.",
+                    "example": "96333140-53c3-4d1d-bbd1-edd150d46ea2"
+                  },
+                  "messages": {
+                    "type": "object",
+                    "required": ["role", "content"],
+                    "description": "The message to send to the AI agent.",
+                    "properties": {
+                      "role": {
+                        "type": "string",
+                        "enum": ["user"],
+                        "description": "Role of the message sender. Only 'user' is allowed here.",
+                        "example": "user"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Text content of the user's message.",
+                        "example": "Hi, I'm looking to book a stay at Sunset Villa."
+                      }
+                    }
+                  },
+                  "conversation_type": {
+                    "type": "string",
+                    "enum": ["whatsapp", "website", "instagram", "messenger"],
+                    "description": "Optional source channel of the conversation.",
+                    "example": "whatsapp"
+                  },
+                  "wa_message_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Optional array of WhatsApp message IDs to link with this message.",
+                    "example": ["wamid.HBgMOTE4MjM3NTAyNjEwFQIA"]
+                  },
+                  "user_timezone": {
+                    "type": "string",
+                    "description": "Optional IANA timezone string from user's browser or app.",
+                    "example": "Asia/Kolkata"
+                  },
+                  "user_id": {
+                    "type": "string",
+                    "description": "Optional unique identifier of the user (internal mapping).",
+                    "example": "user-143242"
+                  }
+                }
+              },
+              "example": {
+                "chatbot_id": "51de6a36-5532-49c2-888e-46754ce102ba",
+                "conversation_id": "96333140-53c3-4d1d-bbd1-edd150d46ea2",
+                "messages": {
+                  "role": "user",
+                  "content": "Hi, I'd like to plan my trip."
+                },
+                "conversation_type": "website"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+            "description": "User message accepted for processing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "msg": {
+                          "type": "string",
+                          "example": "User message sent for processing"
+                        },
+                        "temp_token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
           }
         }
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    "/generate_secret": {
+      "get": {
+        "summary": "Generate Temporary Token for SSE",
+        "description": "Generates a temporary JWT token to be used for streaming responses via the `/get-response` SSE endpoint.",
+        "tags": ["Conversational AI Agent Interactions"],
+        "parameters": [
+          {
+            "name": "conversation_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Conversation ID to generate a temporary token for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "temp_token": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-response": {
+      "get": {
+        "summary": "Stream Conversation AI Agent Response (SSE)",
+        "tags": ["Conversational AI Agent Interactions"],
+        "description": ">⚠️ This is a streaming endpoint using [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).\n\nOpens a live SSE stream to receive real-time response messages from the conversational agent after sending a message.\n\nUse the temporary token received from `/generate_secret` or `/get_inference` as applicable to authenticate the stream.\n\nThe stream sends `event.data` messages that include control signals or agent-generated content:\n\n- `call_again`: Indicates a tool/function call occurred. You must call `/generate_secret` again to get a new token and reconnect to `/get-response`.\n- `no_message_found`: The agent was unable to generate a response as no user message corresponding to request found.\n- `close_connection`: Indicates the end of the stream. The client **must close** the `EventSource` connection.\n- `close_connection_incomplete_content`: AI model exceeded its response context window. Close the connection.\n- `close_connection_incomplete_tool_calls`: Context overflow occurred while generating tool call arguments. Close the connection.\n- `[FROZEN]` / `[BLACKLISTED]`: User access restrictions triggered. Close the connection.\n- JSON payloads: Contain AI-generated message content.\n\nThe client must listen using `EventSource` and handle the lifecycle and control signals accordingly.\n\nExample:\n\n```js\nconst displayNewMessageHandler = (message, token) => {\r\n  setConversationMessages((prev) => { // set your messages state here\r\n    const lastMessage = prev[prev.length - 1];\r\n    if (lastMessage.role === 'assistant' && lastMessage.streamToken === token) { // last message is assistant and has the same token -> chunks of message is to be appended\r\n      const updatedData = [...prev];\r\n      updatedData[prev.length - 1] = {\r\n        ...lastMessage,\r\n        content: lastMessage.content + message,\r\n      };\r\n      return updatedData;\r\n    } else { // new assistant message\r\n      const newMessage = { role: 'assistant', content: message, time: new Date().toLocaleString('en-IN'), streamToken: token };\r\n      return [...prev, newMessage];\r\n    }\r\n  });\r\n\r\n  // you have to save the conversationMessages to local storage or any other persistent storage, chatzy AI doesn't expose any API to fetch conversation history\r\n}\r\n\r\nconst callSourceHandler = (token) => { // token is the temp token generated by `/generate_secret?conversation_id=...`\r\n  const source = new EventSource(`https://backend-1.chatzy.ai/get-response?token=${token}`);\r\n\r\n  source.onmessage = (event) => {\r\n    if (event.data === 'call_again') {\r\n      // Tool call executed – regenerate token and reconnect\r\n      callAgainHandler();\r\n      source.close();\r\n    } else if(event.data === 'no_message_found') {\r\n      source.close();\r\n    } else if (event.data === 'close_connection') {\r\n      // End of stream\r\n      source.close();\r\n    } else if(event.data === 'close_connection_incomplete_content') {\r\n      source.close();\r\n    } else if(event.data === 'close_connection_incomplete_tool_calls') {\r\n      source.close();\r\n    } else if (['[FROZEN]', '[BLACKLISTED]'].includes(event.data)) {\r\n      console.warn('Your access is temporarily restricted.'); // show error message to user\r\n      source.close();\r\n    } else {\r\n      let dataObject;\r\n      try {\r\n        dataObject = JSON.parse(event.data);\r\n      } catch {\r\n        // console.error('Error parsing JSON data:', event.data);\r\n      }\r\n\r\n      if (dataObject?.content) {\r\n        displayNewMessageHandler(dataObject.content, token);\r\n      }\r\n    }\r\n  };\r\n\r\n  source.onerror = function (error) {\r\n    source.close();\r\n    console.error(`EventSource failed:`, error);\r\n  };\r\n}\r\n\r\nconst callAgainHandler = async () => {\r\n  const response = await fetch('/generate_secret?conversation_id=...');\r\n  const data = await response.json();\r\n  const token = data?.data?.temp_token;\r\n\r\n  if(token) {\r\n    callSourceHandler(token);\r\n  }\r\n}\r\n\r\n\n```\n\n**NOTE:** When streaming is ON you will receive chunks of message response and when streaming is OFF, you'll get full message response in single JSON content. e.g.\n\n\n**When Streaming is ON:**\n\n```json\ndata: {\"content\": \"How\"}\n\ndata: {\"content\": \" can\"}\n\ndata: {\"content\": \" I\"}\n\ndata: {\"content\": \" assist\"}\n\ndata: {\"content\": \" you\"}\n\ndata: {\"content\": \" today\"}\n\ndata: {\"content\": \"?\"}\n\ndata: close_connection\n\n```\n\n**When Streaming is OFF:**\n\n```json\ndata: {\"content\": \"How can I assist you today?\"}\n\ndata: close_connection\n\n```",
+        "servers": [
+          {
+            "url": "https://backend-1.chatzy.ai",
+            "description": "SSE Streaming Host"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "description": "**Temporary access token** used to authenticate the Server-Sent Events (SSE) stream.\n\nThis token is obtained from the `/generate_secret` endpoint after sending a message to the AI agent via `/get_inference`.\n\nPass it as a query parameter like this:\n\n```\n/get-response?token=YOUR_TEMP_TOKEN\n```\n\nIf the token is missing or invalid, the server will respond with a `401 Unauthorized` error.",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSE stream opened. Messages will be sent continuously as `text/event-stream`.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "example": "data: {\"content\": \"How\"}\n\ndata: {\"content\": \" can\"}\n\ndata: {\"content\": \" I\"}\n\ndata: {\"content\": \" assist\"}\n\ndata: {\"content\": \" you\"}\n\ndata: {\"content\": \" today\"}\n\ndata: {\"content\": \"?\"}\n\ndata: close_connection\n\n"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai_agent/get_access_token": {
+      "post": {
+        "summary": "Get Access Token",
+        "tags": ["Auhtorized iframe Access"],
+        "description": "Securely generate short-lived `access_token` and long-lived `refresh_token` for authorized iframe access.\n\n> ⚠️ **Important**: This endpoint **must be called from your server**, not from the client side. The `client_api_key` is sensitive and should never be exposed on the client side.\n\nOnce you obtain the tokens, pass the `access_token` to the client-side where the iframe will be embedded.\n\n### Embed URL for Iframe\nUse the following format to embed the iframe securely:\n\n```\nhttps://app.chatzy.ai/chatbot-iframe/{chatbot_id}?user_id=<USER_ID>&access_token=<ACCESS_TOKEN>\n```\n\nChatzy AI will validate the token from query params for every API call made within the iframe, ensuring the user is authorized to access the AI Agent.\n\n>**⚠️ Important**\n> - Ensure tokens are stored securely, as refresh token will be used to retrieve a new access token when the **old one expires**.\n> - **Refresh token logic is explained in the next API endpoint: `/ai-agent/refresh_token`.**\n> - Never expose the `client_api_key` on the frontend.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["user_id", "chatbot_id", "client_api_key"],
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "example": "user123 // client's customer id"
+                  },
+                  "chatbot_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "8a1e3f18-991b-4a2e-9973-f53e7fc94ff1"
+                  },
+                  "client_api_key": {
+                    "type": "string",
+                    "description": "AI Agent Auth Key - Can be retrieved from https://app.chatzy.ai/profile",
+                    "example": "ak-xxxxxxxxxxx"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access and refresh token response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "access_token": {
+                          "type": "string",
+                          "description": "JWT access token"
+                        },
+                        "refresh_token": {
+                          "type": "string",
+                          "description": "JWT refresh token"
+                        },
+                        "access_token_expires_at": {
+                          "type": "integer",
+                          "description": "Unix timestamp (ms) when access token expires",
+                          "example": 1753453415000
+                        },
+                        "refresh_token_expires_at": {
+                          "type": "integer",
+                          "description": "Unix timestamp (ms) when refresh token expires",
+                          "example": 1754057315000
+                        }
+                      },
+                      "required": ["access_token", "refresh_token", "access_token_expires_in", "refresh_token_expires_in"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai_agent/refresh_token": {
+      "post": {
+        "summary": "Get New Access Token from Refresh Token",
+        "tags": ["Auhtorized iframe Access"],
+        "description": "Generate a new short-lived `access_token` using a valid `refresh_token` previously issued.\n\n> ⚠️ **Important**: This endpoint **must be called from your server**. Never expose `refresh_token` or any sensitive token logic to the frontend or the iframe.\n\nWhen the `access_token` passed in the iframe query params expires, the Chatzy AI iframe will send a `postMessage` event to the parent window with following JSON payload:\n\n```js\n{\n  type: '[TOKEN_REFRESH]',\n  reason: 'TokenExpiredError'\n}\n```\n\nYour client application (the host of the iframe) **must listen for this `postMessage` event**, and **call this `/ai_agent/refresh_token` API from your server** to get a new `access_token` using the stored `refresh_token`.\n\nOnce you get the new token, **respond back to the iframe** with following JSON payload:\n\n```js\n{\n  type: '[TOKEN_REFRESH_RESPONSE]',\n  access_token: '<NEW_ACCESS_TOKEN>'\n}\n```\n\nThe Chatzy AI iframe will update the token internally and continue to make secure API calls using the new token.\n\n> 🔁 **Best Practice**: Only call this endpoint in response to the `[TOKEN_REFRESH]` message. Avoid calling it on every page load.\n\n> ⚠️ Do not send `refresh_token` to the iframe or store it in localStorage/cookies on the client. Chatzy AI iframe only needs `access_token` to make authorized API calls.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["user_id", "chatbot_id", "refresh_token"],
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "description": "Client's customer ID",
+                    "example": "user123"
+                  },
+                  "chatbot_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "8a1e3f18-991b-4a2e-9973-f53e7fc94ff1"
+                  },
+                  "refresh_token": {
+                    "type": "string",
+                    "description": "Valid refresh token issued during initial access token generation",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New access token issued successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "access_token": {
+                          "type": "string",
+                          "description": "Newly issued JWT access token"
+                        },
+                        "expires_at": {
+                          "type": "integer",
+                          "description": "Unix timestamp (ms) when the new access token will expire",
+                          "example": 1753454477000
+                        }
+                      },
+                      "required": ["access_token", "expires_at"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
