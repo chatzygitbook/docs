@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint", 
+  "theme": "mint",
   "name": "Chatzy AI",
   "colors": {
     "primary": "#3B8CE5",
@@ -8,84 +8,183 @@
     "dark": "#3B8CE5"
   },
   "favicon": "/logo/chatzy_logo.svg",
-
-  
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Quick Start",
-            "icon" : "rocket",
+            "group": "🚀 Quick Start",
             "pages": [
               "Quick start/Introduction",
               "Quick start/Best-Practices",
-              "Quick start/Tutorials",
-              "Quick start/Use-cases"
+              "Quick start/Use-cases",
+              "Quick start/Tutorials"
             ]
           },
           {
-            "group": "Manage Teams",
-            "icon": "users",
+            "group": "👥 Manage Teams",
             "pages": [
               "Manage-Teams/Inviting-Team-Members",
               "Manage-Teams/Managing-Teams",
               "Manage-Teams/Roles-&-Permissions"
             ]
-          }, {
-    "group": "Conversational AI Agent",
-    "icon": "robot",
-    "pages": [
-      "Conversational AI Agent/How to Train Your Bot with Data",
-      "Conversational AI Agent/Customizing Bot Behavior",
-      "Conversational AI Agent/Model Settings",
-      "Conversational AI Agent/Testing & Tuning in the Playground",
-      "Conversational AI Agent/Chunk Management"
-    ]
-  },
-  {
-    "group": "Flow-Based Agent",
-    "icon": "bolt",
-    "pages": [
-      "Flow-Based Agent/Overview",
-      "Flow-Based Agent/How It Works",
-      "Flow-Based Agent/Card Types",
-      "Flow-Based Agent/Smart AI Mode",
-      "Flow-Based Agent/Playground",
-      "Flow-Based Agent/Features & Benefits"
-    ]
-  }
-                  ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
+          },
           {
-            "group": "API documentation",
+            "group": "🤖 Conversational AI Agent",
             "pages": [
-              "api-reference/introduction"
+              "Conversational-AI-Agent/How to Train Your Bot with Data",
+              "Conversational-AI-Agent/Customizing Bot Behavior",
+              "Conversational-AI-Agent/Model Settings",
+              "Conversational-AI-Agent/Testing & Tuning in the Playground",
+              "Conversational-AI-Agent/Chunk Management"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "⚡ Flow-Based Agent",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "Flow-Based Agent/Overview",
+              "Flow-Based Agent/How It Works",
+              "Flow-Based Agent/Card Types",
+              "Flow-Based Agent/Smart AI Mode",
+              "Flow-Based Agent/Playground",
+              "Flow-Based Agent/Features & Benefits"
+            ]
+          },
+          {
+            "group": "📌 Choosing the Right AI Agent",
+            "pages": [
+              "Choosing the Right AI Agent"
+            ]
+          },
+          {
+            "group": "📊 Dashboard Guide",
+            "pages": [
+              "Dashboard Guide/Conversations Panel",
+              "Dashboard Guide/Conversation Details Viewer",              
+              "Dashboard Guide/Lead Notification",
+              "Dashboard Guide/Export Options",
+              "Dashboard Guide/Note"
+            ]
+          },
+          {
+            "group": "🤖 AI Agent Templates",
+            "pages": [
+              "AI Agent Templates/What Are Templates",
+              "AI Agent Templates/Available Templates",              
+              "AI Agent Templates/AI-Assisted AI Agent Creation",
+              "AI Agent Templates/Build an AI Agent from Scratch"
+              
+              
+              
+            ]
+          },
+          {
+            "group": "📂 Sources",
+            "pages": [
+              "Sources/Files",
+              "Sources/Uploading Files",
+              "Sources/Text Snippets",
+              "Sources/Website Crawling",
+              "Sources/Custom Q&A",              
+              "Sources/Google Drive",
+              "Sources/Images and Videos"           
+              
+            ]
+          },
+          {"group": "⚙️Model Comparison",
+        "pages": ["Model Comparison/Recommended Models"]},
+
+          {
+            "group": "🔍 How Responses Are Generated",
+            "pages": [
+              "How Responses Are Generated/The Cooking Analogy",
+              "How Responses Are Generated/What is Chunking",
+              "How Responses Are Generated/Ideal Chunk Size",
+              "How Responses Are Generated/What is the Context Window",
+              "How Responses Are Generated/You Can Customize",
+              "How Responses Are Generated/How are answers generated"              
+            ]
+          },
+          {
+            "group": "👤 Audience",
+            "pages": [
+              "Audience/Contacts",
+              "Audience/lists and segments",
+              "Audience/Exports",
+              "Audience/Summary Table",
+              "Audience/Contact Import Guide"
+            ]
+          },
+          {
+            "group": "💬 Conversations Tab",
+            "pages": [
+              "Conversations Tab/What Is the Conversations Tab",
+              "Conversations Tab/Navigating the Conversations Interface",
+              "Conversations Tab/Chat Sorting, Filters, & Status",
+              "Conversations Tab/Understanding Who's Handling the Conversation",
+              "Conversations Tab/WhatsApp",
+              "Conversations Tab/Media Handling",
+              "Conversations Tab/Platform Differences Messenger & Instagram",
+              "Conversations Tab/AI vs Human Who's Responding",              
+              "Conversations Tab/Team Access Agent Roles"
+              
+            ]
+          },
+          {
+            "group": "📱 WhatsApp Campaigns",
+            "pages": [
+              "WhatsApp campaigns/Install WhatsApp",
+              "WhatsApp campaigns/How to Create WhatsApp Template Messages in Chatzy AI",              
+              "WhatsApp campaigns/Send a WhatsApp campaign"
+            ]
+          },
+          {
+            "group": "💬 How to Create a WhatsApp Lead Nurture Journey on Chatzy AI",
+            "pages": [
+              "How to Create a WhatsApp Lead Nurture Journey on Chatzy AI"
+            ]
+          },
+          {
+            "group": "🗺️ Journeys",
+            "pages": [
+              {
+                "group": "🌱 Getting Started",
+                "pages": [
+                  "Journey/Overview",
+                  "Journey/First Steps"
+                ]
+              },
+              {
+                "group": "🚀 Advanced Skills",
+                "pages": [
+                  "Journey/Deep Dive",
+                  "Journey/Expert Tips"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "🔗 How to Use the Inbound Webhook Trigger to Connect Chatzy AI with External Systems",
+            "pages": [
+              "How to Use the Inbound Webhook Trigger to Connect Chatzy AI with External Systems"
+            ]
+          },
+          {
+            "group": "📥 How to Use the “Conversations” Inbox in Chatzy AI",
+            "pages": [
+              "How to Use the Conversations Inbox in Chatzy AI"
             ]
           }
         ]
       }
+      
     ],
     "global": {
       "anchors": [
-    
         {
-          "anchor": "Blog",
-          "href": "https://www.chatzy.ai/blog",
-          "icon": "newspaper"
+          "anchor": "📰 Blog",
+          "href": "https://www.chatzy.ai/blog"
         }
       ]
     }
@@ -98,11 +197,10 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
+        "label": "💌 Support",
         "href": "mailto:support@chatzy.ai"
       }
     ]
-    
   },
   "footer": {
     "socials": {
