@@ -1,0 +1,114 @@
+**Inbound Webhook trigger** - a powerful feature that connects Chatzy AI to any external system like a CRM, website form, or third-party tool.
+
+This is perfect for:
+* Importing leads from tools like **Wix**, **WordPress**, or **Zoho CRM**
+* Sending **automated WhatsApp messages** instantly after a form is submitted
+* Updating customer data in real-time
+
+Let's dive in 👇
+
+***
+
+### 🚀 What is an Inbound Webhook?
+
+An inbound webhook lets external systems **send data into Chatzy AI**, triggering a journey. For example:
+
+* Someone fills a contact form on your website
+  * → That data is sent to Chatzy via webhook
+  * → Chatzy automatically sends a WhatsApp message or updates the CRM
+
+***
+
+### 🛠️ Step 1: Create a Journey with Inbound Webhook Trigger
+
+1. Go to "**Journeys**" in the left menu
+2. Click "**Create Journey**"
+3. Name your journey (e.g., "Webhook Lead Follow-up")
+4. Choose **Blank Journey** so you can build from scratch
+5. Click on "**Add Trigger**"
+6. Select "**Inbound Webhook**"
+
+***
+
+### 🔗 Step 2: Generate the Webhook URL
+
+1. Click on "**Create Webhook**"
+2. A unique **Webhook URL** is generated
+    * This is where external systems will **POST data** to start this journey
+    * No authentication is required for now
+
+***
+
+### 📝 Step 3: Test with Postman or Any Form Tool
+
+**Example Use Case:**
+A form collects:
+
+* Name
+* Phone number
+* Food preference
+
+1. Open **Postman** (or your form platform's webhook settings)
+2. Make a **POST request** to the webhook URL
+3. Sample JSON Payload:
+
+```json
+{
+  "first_name": "Priya",
+  "last_name": "Sharma",
+  "phone": "919812345678",
+  "food_preference": "Vegetarian"
+
+}
+```
+
+***
+
+### 🛑 Step 4: Set the Contact Identifier
+
+To run the journey, Chatzy AI must know **who** the contact is.
+
+1. Under **Contact Identifier**, select the field (usually `phone`)
+2. Make sure the number:
+    * Has **country code** (e.g., `91` for India)
+    * Has **no spaces or plus sign**
+    * Example: `919812345678` (correct)
+    * ❌ Example: `+91 98123 45678` (incorrect)
+
+***
+
+### ⚙️ Step 5: Add Journey Actions
+
+#### 1. Send a WhatsApp Message
+* Click the "**+**" icon and choose "**Send Message**"
+* Select **WhatsApp**
+* Pick a **template message**
+* Use webhook variables to personalize it
+    * Example: "Hi `{{first_name}}`, thanks for choosing `{{food_preference}}` option!"
+
+#### 2. Update the Contact
+* Choose "**Update Contact**" action
+* Use the phone number from the webhook
+* Add custom attributes or tags
+    * Example: Add an attribute `food_preference = Vegetarian`
+
+***
+
+### ✅ Summary: Why Use This?
+
+The **Inbound Webhook Trigger** is perfect when:
+
+* You want to **trigger a journey from outside Chatzy AI**
+* Your marketing or CRM tools support **sending webhook calls**
+* You need **instant actions** (like WhatsApp messaging or tagging)
+
+***
+
+### 💡 Real-World Use Cases
+
+| Use Case                | How Webhook Helps                                    |
+| ----------------------- | ---------------------------------------------------- |
+| Wix Form Submission     | Send auto-replies via WhatsApp                       |
+| CRM Deal Created        | Notify user on WhatsApp or Messenger                 |
+| Webinar Sign-Up         | Update contact attributes like event interest        |
+| eCommerce Purchase      | Send shipping or confirmation messages               |
