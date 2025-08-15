@@ -1,0 +1,40 @@
+Use the **Visual Journey Builder Studio** to design and customize how your journey flows from the initial trigger to various automated actions.
+
+### **Step 1: Add a Trigger 🔔**
+
+The first step in creating a journey is selecting a **trigger** an event that starts the journey. Choose from several trigger options based on your use case:
+
+**Available Triggers:**
+
+1. **Inbound Webhook**
+    Starts the journey when data is received from an external system via a webhook.
+    * **Quick Configuration:**
+        1.  Click "**Create Webhook**" to generate a URL.
+        2.  Send a **POST request** to the webhook URL.
+        3.  Click "**Refresh Webhook**" to view the payload.
+        4.  Select a **Contact Identifier** (e.g., `phone`, `email`).
+        5.  Use dynamic values in the journey as `{{variable_name}}`.
+
+2. **Shopify - Abandoned Checkout**
+    Triggers when a customer abandons their cart on your Shopify store.
+    * **Quick Configuration:**
+        1.  Set the specific amount of Time to trigger the journey.
+
+3. **Conversation-Based Trigger**
+    Starts the journey based on user interaction with a specific chat message.
+    * **Quick Configuration:**
+        1.  Select **Channel**: WhatsApp, Instagram, or Messenger
+        2.  Choose **Event**:
+            * `Conversation Created`
+            * `First Conversation Created for Contact`
+            * `Conversation Resumed`
+        3.  **Apply Conditions (Optional):**
+            * Trigger from `template response`
+            * Exclude `template responses`
+            * Match `specific keyword(s)`
+            * Exclude `certain keyword(s)`
+
+4. **Contact Added to List**
+    Triggers the journey when a new contact is added to a specific list.
+    * **Quick Configuration:**
+        1.  Select the target list where contacts will be added to trigger the journey.

@@ -1,0 +1,127 @@
+### ✅ Pre-Requisites
+
+Before starting, make sure:
+1. You have **connected channels** (WhatsApp, Instagram, Messenger)
+2. You've already created at least **one AI Agent**
+    * Can be flow-based or conversational AI
+    
+***
+
+### ⚙️ Step-by-Step Guide
+
+#### 1. Create a New Journey
+
+* Go to "**Journeys**" in the left menu
+* Click "**Create Journey**"
+* Name it something like "**Assign to AI Agent**"
+* Start from a **blank template** (recommended for learning)
+
+Click "**Create**" to enter the Journey Studio.
+
+***
+
+#### 2. Set the Trigger
+
+Click "**Add Trigger**"
+Select "**Conversation**"
+
+On the right-side settings panel:
+* Choose your **channel** (WhatsApp, Instagram, or Messenger)
+
+**Event Options:**
+
+| Option                 | What it does                                                 |
+| ---------------------- | ------------------------------------------------------------ |
+| **Conversation Created** | Triggers **every time** a new conversation starts            |
+| **First Conversation Created** | Triggers **only once** for each contact, ever                |
+| **Conversation Resumed** | *(Skip for now)* |
+
+**Use Case Example:**
+You're running a Click-to-WhatsApp ad → Choose "**Conversation Created**" to start AI response each time a user contacts you.
+
+***
+
+#### 3. Add Conditions (Optional but Powerful)
+
+You can fine-tune when this journey should run:
+
+✅ **Condition 1: Conversation Created in Response to a Template Message**  
+- Triggers when a conversation starts as a reply to a specific template message.  
+- Lets you assign different AI agents based on which template was replied to.  
+- Useful for lead nurture or multi-campaign setups.  
+
+**Example:**  
+- Reply to Day 1 template → Assign to AI Agent A  
+- Reply to Day 3 template → Assign to AI Agent B  
+- Set time window: e.g., within 24 hours  
+
+---
+
+✅ **Condition 2: Conversation Created Excluding Response to a Template Message**  
+- Triggers when a conversation is created **without** being a reply to any template message.  
+- Useful for handling inbound messages that are not part of a template-driven campaign.  
+
+**Example:**  
+- Customer messages directly without replying to a template → Assign to General Inquiry Bot  
+
+---
+
+✅ **Condition 3: Conversation Created with Keyword**  
+- Triggers when a conversation is created and contains a specified keyword.  
+- Allows you to create separate journeys for each keyword.  
+
+**Example:**  
+- Customer replies with **"Book Appointment"** → Assign to Appointment Bot  
+- Customer replies with **"Tell Me More"** → Assign to Info Bot  
+
+---
+
+✅ **Condition 4: Conversation Created Excluding Keywords**  
+- Handles all conversations that do **not** contain certain keywords already handled by previous journeys.  
+
+**Example:**  
+- Journey A: Only if keyword is **"Pricing"**  
+- Journey B: Excludes **"Pricing"** → Handles all other cases  
+
+This ensures full coverage of all inbound messages.  
+
+***
+
+### 💡 What If You Use No Conditions?
+
+Then this journey runs on **every conversation**, no matter the keyword or template.
+
+> Useful for general inbound inquiries like "Hi," "Hello," etc.
+
+***
+
+### 4. Add the Action: Assign to AI Agent
+
+Click the **plus (+) icon** → Choose "**Assign to AI Agent**"
+
+In the settings panel:
+* Select from your **existing AI agents**
+* Ensure the agent is **fully configured** with responses or flow logic
+
+You can follow tutorials on:
+* Creating **flow-based bots**
+* Creating **conversational AI agents**
+
+***
+
+### 5. Save & Publish
+
+* Click "**Save**"
+* Then click "**Publish**" to make it live
+
+***
+
+### 6. Test the Journey
+
+1. Send a message to your WhatsApp/Instagram/Messenger
+2. If set up correctly, the **AI agent will respond instantly**
+3. Go to "**Conversations**" from the left menu
+    * AI-assigned conversations show a **green dot**
+    * You can open the thread to see how the AI is responding
+
+You can also **jump in manually** at any time to take over the conversation.

@@ -1,0 +1,83 @@
+### **Step 2: Define Actions ⚙️**
+
+Once a journey is triggered, **actions** define what happens next. These are the core building blocks of your journey, enabling automation, messaging, decision-making, and integration.
+
+**Common Action Types:**
+
+#### 1. ▢ Send Message
+Send a message to the user using a predefined template.
+
+* **Channels:** WhatsApp, Messenger, Instagram
+* **Key Features:**
+    * Multi-channel support
+    * Dynamic content with variables
+    * Structured templates
+* **Use Case:** Notify users about offers, reminders, or updates.
+
+#### 2. 💬 Send Message in Conversation
+Send a **contextual message** within an ongoing conversation thread.
+
+* **Supports** AI-generated replies, media, or text
+* **Use Case:** Maintain conversational context while engaging users.
+
+#### 3. ⏳ Wait
+**Pause** the journey for a specified duration or until a specific time.
+
+* **Options:** Relative duration or scheduled time
+* **Use Case:** Delay actions to match optimal user engagement times.
+
+#### 4. ⌚ Wait Until
+**Hold** the journey until a specific event or user action occurs.
+
+* **Supported Events:** e.g., "Last user message older than X"
+* **Use Case:** Wait for user reply or external signal before proceeding.
+
+#### 5. 🚀 Update Contact
+Modify user attributes, Variables, tags, or metadata during the journey.
+
+* **Use Case:** Dynamically enrich user profiles based on interactions.
+
+#### 6. 🛠️ Update Conversation
+Change conversation properties like status, tags, or assigned bot.
+
+* **Use Case:** Mark as resolved, tag priority, or route based on context.
+
+#### 7. 🤖 Assign to AI Agent
+Assigns the conversation to a AI agent.
+
+* **Use Case:** Automate lead qualification or handle user queries.
+
+#### 8. ➡️ Transfer to AI Agent
+Transfers the ongoing conversation to an AI agent once a **specific webhook** is triggered.
+
+* **Use Case:** Enable smooth escalation to automation when needed.
+
+#### 9. 📍 Execute Code
+Run **custom Python code** within the journey flow.
+
+* **Sandboxed Environment**
+* **Use Case:** Apply business logic, calculations, or API data handling.
+
+> We have predefined dict. called `variables` to save the Variables
+
+> Our Sandboxed Environment has some inbuilt `Functions`, `Modules` and `Type` check them by clicking on `Learn More` 
+
+#### 10. ✂️ Condition
+Add a **decision point** in the journey to create **dynamic branches** based on logic, user attributes, or event data.
+
+* Evaluate one or more conditions to determine the next step in the journey. This enables personalized flows for different user types or behaviors.
+* **Use case:**
+    * Supports multiple conditions using **AND/OR** logic
+    * Works with user attributes, message content, tags, event data, etc.
+    * Enables **multi-path branching** based on evaluation results
+
+#### 11. 🚪 Remove from Journey
+Exit a user from the current journey when criteria are met.
+
+* **Use Case:** Prevent duplicate actions, stop irrelevant flows.
+
+#### 12. 🔎 Extract Entities
+Use AI/LLM to extract structured data like name, email, intent from chat history.
+
+* **Output:** Structured JSON
+* **Use Case:** Populate CRM, enable personalized follow-ups, or segment users.
