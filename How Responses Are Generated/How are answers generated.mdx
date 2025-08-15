@@ -1,0 +1,32 @@
+In the beginning, Chatzy might not be able to generate your expected responses. But you can improve this. Below, we will give you a rough idea of how Chatzy uses your data to generate responses so that you can better understand the generation process and construct your knowledge base properly. 
+
+Two main factors mainly affect response generation:
+
+- Chunking
+
+- Context Window
+
+These two concepts, chunking, and the context window, share a connection. Think of it like preparing a meal: chunks are akin to the pieces of vegetables you chop, and the context window is like the size of the pan you use. Cutting the vegetables into just the right size pieces is crucial for the best flavor. Also, a bigger pan means you can cook more pieces at once.
+
+### What is Chunking?
+
+In simple terms, chunking is a technique that consists of splitting a text into smaller units, called chunks, which can be easily processed by a language model (LLM). Chunking plays a key role in optimizing semantic responses, as it allows you to reduce the complexity of the text and increase the relevance of the content that goes into LLM. 
+
+> Eg. When you upload a 1000-page document on HR policies, we break it down into smaller chunks and store each chunk separately. When the user asks - "How many working days in a week?", we will match the similarity of this user query with all the chunks that we have stored. Next, we will pick top 3 chunks and include them as part of context when asking the LLM for a response.
+
+> ⓘ Because we cannot feed the whole document to the LLM (due to constraints of the context window), we employ chunking.
+
+A smaller chunk size reduces context relevance. If the chunk size is too small, like just a sentence or two, it might not contain enough information about working days policies. It's like trying to understand a movie by watching just one scene - you miss the context.
+
+While a larger chunk size introduces more noise. If the chunk size is too large, like an entire chapter, it could include a lot of extra information not related to working days, such as vacation policies or dress codes. This is like trying to find a specific scene in a movie by watching the entire film - it's overwhelming and inefficient.
+
+So, it is important to set the right size for chunks.
+
+### How does the Context Window affect the Bot responses?
+
+The context window refers to the amount of text that an LLM (Language Model) can process in a single call. A larger context window allows for more data ingestion by the model in each query.
+
+You can change the chunk size, chunk length, and the context window (by changing the model) in Chatzy. Read the advanced settings guide for more info. 
+
+
+
