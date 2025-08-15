@@ -1,0 +1,32 @@
+
+These are built-in helper functions provided by the Chatzy Sandbox environment.  
+They are ready to use without needing additional setup.
+
+| Function Name          | Description |
+|------------------------|-------------|
+| **len**                | Returns the number of items in an object such as a list, tuple, or string. |
+| **range**              | Generates a sequence of numbers, often used in loops or iterations. |
+| **isinstance**         | Checks if an object is an instance of a specified type or class. |
+| **print**              | Outputs text or variable values to the console or log. |
+| **uuid**               | Generates a universally unique identifier (UUID) string. |
+| **get_unix_timestamp** | Returns the current time as the number of seconds since January 1, 1970 (Unix epoch). |
+| **upload_to_s3**       | Uploads a file or data object to an Amazon S3 storage bucket. |
+| **get_contact_details**| Retrieves stored contact information such as name, email, or phone number. |
+
+
+> We have an **inbuilt dictionary** in Chatzy named **`variables[]`** that stores all variables used in the environment.  
+  You can use it to store, retrieve, or update variable values at any point in your Execute Code node.
+
+> **Example:**  
+> variables["user_name"] = "John"   # Store a value <br/>
+> print(variables["user_name"])     # Access the value → Outputs: John
+
+---
+
+When referencing variables outside the Execute Code block, use the format `{{variable_name}}`.
+
+> **Example:**
+
+<Frame>
+  <img src="/Miscellaneous/misc.png" alt="how it works"  />
+</Frame>
