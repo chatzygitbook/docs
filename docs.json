@@ -180,6 +180,11 @@
     "href": "https://docs.chatzy.ai"
   },
   "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Sign Up",
+      "href": "https://app.chatzy.ai/login?auth_state=signup"
+    },
     "links": [
       {
         "label": "Blog",
