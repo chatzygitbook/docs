@@ -16,7 +16,7 @@
         "groups": [
           {
             "group": "🚀 Quick Start",
-            "pages": ["Quick start/Introduction", "Quick start/Best-Practices", "Quick start/Use-cases", "Quick start/Tutorials"]
+            "pages": ["Quick-start/Introduction", "Quick-start/Best-Practices", "Quick-start/Use-cases", "Quick-start/Tutorials"]
           },
           {
             "group": "👥 Manage Teams",
@@ -35,12 +35,12 @@
           {
             "group": "⚡ Flow-Based Agent",
             "pages": [
-              "Flow-Based Agent/Overview",
-              "Flow-Based Agent/How-It-Works",
-              "Flow-Based Agent/Card-Types",
-              "Flow-Based Agent/Smart-AI-Mode",
-              "Flow-Based Agent/Playground",
-              "Flow-Based Agent/Features-&-Benefits"
+              "Flow-Based-Agent/Overview",
+              "Flow-Based-Agent/How-It-Works",
+              "Flow-Based-Agent/Card-Types",
+              "Flow-Based-Agent/Smart-AI-Mode",
+              "Flow-Based-Agent/Playground",
+              "Flow-Based-Agent/Features-&-Benefits"
             ]
           },
           {
@@ -50,37 +50,37 @@
           {
             "group": "📊 Dashboard Guide",
             "pages": [
-              "Dashboard Guide/Conversations-Panel",
-              "Dashboard Guide/Conversation-Details-Viewer",
-              "Dashboard Guide/Lead-Notification",
-              "Dashboard Guide/Export-Options",
-              "Dashboard Guide/Note"
+              "Dashboard-Guide/Conversations-Panel",
+              "Dashboard-Guide/Conversation-Details-Viewer",
+              "Dashboard-Guide/Lead-Notification",
+              "Dashboard-Guide/Export-Options",
+              "Dashboard-Guide/Note"
             ]
           },
           {
             "group": "🤖 AI Agent Templates",
             "pages": [
-              "AI Agent Templates/What-Are-Templates",
-              "AI Agent Templates/Available-Templates",
-              "AI Agent Templates/AI-Assisted-AI-Agent-Creation",
-              "AI Agent Templates/Build-an-AI-Agent-from-Scratch"
+              "AI-Agent-Templates/What-Are-Templates",
+              "AI-Agent-Templates/Available-Templates",
+              "AI-Agent-Templates/AI-Assisted-AI-Agent-Creation",
+              "AI-Agent-Templates/Build-an-AI-Agent-from-Scratch"
             ]
           },
           {
             "group": "📂 Sources",
             "pages": ["Sources/Files", "Sources/Uploading-Files", "Sources/Text-Snippets", "Sources/Website-Crawling", "Sources/Custom-Q&A", "Sources/Google-Drive", "Sources/Images-and-Videos"]
           },
-          { "group": "⚙️ Model Comparison", "pages": ["Model Comparison/Recommended-Models"] },
+          { "group": "⚙️ Model Comparison", "pages": ["Model-Comparison/Recommended-Models"] },
 
           {
             "group": "🔍 How Responses Are Generated",
             "pages": [
-              "How Responses Are Generated/The-Cooking-Analogy",
-              "How Responses Are Generated/What-is-Chunking",
-              "How Responses Are Generated/Ideal-Chunk-Size",
-              "How Responses Are Generated/What-is-the-Context-Window",
-              "How Responses Are Generated/You-Can-Customize",
-              "How Responses Are Generated/How-are-answers-generated"
+              "How-Responses-Are-Generated/The-Cooking-Analogy",
+              "How-Responses-Are-Generated/What-is-Chunking",
+              "How-Responses-Are-Generated/Ideal-Chunk-Size",
+              "How-Responses-Are-Generated/What-is-the-Context-Window",
+              "How-Responses-Are-Generated/You-Can-Customize",
+              "How-Responses-Are-Generated/How-are-answers-generated"
             ]
           },
           {
@@ -90,20 +90,20 @@
           {
             "group": "💬 Conversations Tab",
             "pages": [
-              "Conversations Tab/What-Is-the-Conversations-Tab",
-              "Conversations Tab/Navigating-the-Conversations-Interface",
-              "Conversations Tab/Chat-Sorting,-Filters,-&-Status",
-              "Conversations Tab/Understanding-Who's-Handling-the-Conversation",
-              "Conversations Tab/WhatsApp",
-              "Conversations Tab/Media-Handling",
-              "Conversations Tab/Platform-Differences-Messenger-&-Instagram",
-              "Conversations Tab/AI-vs-Human-Who's-Responding",
-              "Conversations Tab/Team-Access-Agent-Roles"
+              "Conversations-Tab/What-Is-the-Conversations-Tab",
+              "Conversations-Tab/Navigating-the-Conversations-Interface",
+              "Conversations-Tab/Chat-Sorting,-Filters,-&-Status",
+              "Conversations-Tab/Understanding-Who's-Handling-the-Conversation",
+              "Conversations-Tab/WhatsApp",
+              "Conversations-Tab/Media-Handling",
+              "Conversations-Tab/Platform-Differences-Messenger-&-Instagram",
+              "Conversations-Tab/AI-vs-Human-Who's-Responding",
+              "Conversations-Tab/Team-Access-Agent-Roles"
             ]
           },
           {
             "group": "📱 WhatsApp Campaigns",
-            "pages": ["WhatsApp campaigns/Install-WhatsApp  ", "WhatsApp campaigns/How-to-Create-WhatsApp-Template-Messages-in-Chatzy-AI", "WhatsApp campaigns/Send-a-WhatsApp-campaign"]
+            "pages": ["WhatsApp-campaigns/Install-WhatsApp  ", "WhatsApp-campaigns/How-to-Create-WhatsApp-Template-Messages-in-Chatzy-AI", "WhatsApp-campaigns/Send-a-WhatsApp-campaign"]
           },
           {
             "group": "🗺️ Journeys",
