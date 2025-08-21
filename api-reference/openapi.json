@@ -24,7 +24,7 @@
       "description": "Interact with the conversational AI agent"
     },
     {
-      "name": "Auhtorized iframe Access",
+      "name": "Authorized iframe Access",
       "description": "APIs for authorized iframe access"
     }
   ],
@@ -49,7 +49,6 @@
       "post": {
         "summary": "Get ID Token",
         "tags": ["Authentication"],
-        "description": "Authenticates a user with their email and password and returns a JWT `idToken`.\n\nThis `idToken` must be included in the `Authorization` header when calling **protected APIs** (indicated by the 🔒 lock icon).\n\n### 🛡️ Authorization Header Format:\n```http\nAuthorization: <idToken>\n```\n\nWithout a valid token, protected routes will respond with a 401 Unauthorized error. This token expires after **1 hour** after which you must call `/get_id_token` again to obtain a new one.",
         "requestBody": {
           "required": true,
           "content": {
@@ -109,7 +108,6 @@
       "get": {
         "summary": "Get Contact Conversations",
         "tags": ["Contact Conversations"],
-        "description": "Retrieves a paginated list of contact conversations associated with the given user.\n\nSupports optional search, pagination, and filtering by conversation status. This endpoint is commonly used to display a user's contact list in messaging interfaces.\n\n### 🔍 Parameters:\n- **user_email_id** *(required)* — Your Chatzy AI account email ID.\n- **search** *(optional)* — Filter contacts by name, email, phone number or iframe user ID.\n- **limit** *(optional)* — Number of contacts to return per page (default: 10, min: 1, max: 100).\n- **offset** *(optional)* — Number of contacts to skip for pagination (default: 0).\n- **filter** *(optional)* — Filter by conversation status:\n  - `all` — All conversations (default)\n  - `unread` — Only conversations with unread messages\n  - `live` — Active/live conversations\n\n### 🔐 Authorization:\nThis is a protected endpoint. You must include the `idToken` in the header:\n```http\nAuthorization: <idToken>\n```",
         "security": [{ "BearerAuth": [] }],
         "parameters": [
           {
@@ -214,7 +212,6 @@
       "get": {
         "summary": "Get Messages for Contact",
         "tags": ["Contact Conversations"],
-        "description": "Returns all conversations and messages for a given `contact_id`.\n\n### 🔐 Authorization:\nThis is a protected endpoint. You must include the `idToken` in the header:\n```http\nAuthorization: <idToken>\n```",
         "security": [{ "BearerAuth": [] }],
         "parameters": [
           {
@@ -333,7 +330,6 @@
     "/init_conversation": {
       "get": {
         "summary": "Initialize Conversation",
-        "description": "## 🤖 AI Agent Conversation Flow\n\nInteract with the conversational AI agent using this **4-step process**:\n\n### 1. **Initialize Conversation** (`/init_conversation`)\n- **Purpose**: Obtain a valid `conversation_id` for the session\n- **Returns**: `conversation_id` and optional introductory message\n- **Required for**: Starting any new conversation thread\n\n### 2. **Send Message** (`/get_inference`)\n- **Purpose**: Send user message to the AI agent\n- **Requires**: `chatbot_id`, `conversation_id`, and user message\n- **Action**: Triggers agent to begin generating response\n\n### 3. **Generate Temp Token** (`/generate_secret`)\n- **Purpose**: Get temporary JWT token for SSE authentication\n- **Requires**: `conversation_id` from step 1\n- **Returns**: Short-lived `temp_token` for streaming\n\n### 4. **Stream Response** (`/get-response`)\n- **Purpose**: Receive real-time AI agent response via SSE\n- **Requires**: `temp_token` from step 3\n- **Returns**: Streamed response chunks and control signals\n\n> **⚠️ Important**: This flow must be repeated for each new user message or session. The `temp_token` expires quickly and cannot be reused.\n\n",
         "tags": ["Conversational AI Agent Interactions"],
         "parameters": [
           {
@@ -373,7 +369,7 @@
                             },
                             "buttons": {
                               "type": "array",
-                              "description": "Optional list of buttons for quick replies or actions.",
+                              "description": "Optional list of buttons for conversation starters.",
                               "items": {
                                 "type": "string"
                               }
@@ -398,7 +394,6 @@
     "/get_inference": {
       "post": {
         "summary": "Send Message to Conversational AI Agent",
-        "description": "Sends a message from the user to the Conversational AI agent for processing.",
         "tags": ["Conversational AI Agent Interactions"],
         "requestBody": {
           "required": true,
@@ -438,6 +433,29 @@
                       }
                     }
                   },
+                  "documents": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "file_name": {
+                          "type": "string",
+                          "description": "Name of the document.",
+                          "example": "document.pdf"
+                        },
+                        "mime_type": {
+                          "type": "string",
+                          "description": "MIME type of the document.",
+                          "example": "application/pdf"
+                        },
+                        "s3_url": {
+                          "type": "string",
+                          "description": "URL of the document in S3.",
+                          "example": "https://s3.amazonaws.com/my-bucket/doc-1234"
+                        }
+                      }
+                    }
+                  },
                   "conversation_type": {
                     "type": "string",
                     "enum": ["whatsapp", "website", "instagram", "messenger"],
@@ -452,15 +470,15 @@
                     "description": "Optional array of WhatsApp message IDs to link with this message.",
                     "example": ["wamid.HBgMOTE4MjM3NTAyNjEwFQIA"]
                   },
-                  "user_timezone": {
-                    "type": "string",
-                    "description": "Optional IANA timezone string from user's browser or app.",
-                    "example": "Asia/Kolkata"
-                  },
                   "user_id": {
                     "type": "string",
                     "description": "Optional unique identifier of the user (internal mapping).",
                     "example": "user-143242"
+                  },
+                  "client_message_key": {
+                    "type": "string",
+                    "description": "Optional unique identifier (client_message_key) used to link multiple audio inputs to a single user message. Each client_message_key is unique per user message and is generated before the user sends a message.\n\nExample:\n- A client generates a client_message_key (e.g., 'msg_123').\n- The user records and sends audio inputs 2-3 times. Each audio input request is sent to the `/stt` endpoint along with the same client_message_key. The server transcribes each audio input.\n- When the user finalizes their message, the same client_message_key is included in the `/get-inference` request. This links all the audio inputs, in the order they were provided, to the finalized user message.\n\nThis ensures conversations can be reconstructed accurately by mapping the final user message to the sequence of audio inputs associated with it.",
+                    "example": "22bacb4e-43ff-41e2-9800-ac62f33104ec"
                   }
                 }
               },
@@ -548,7 +566,6 @@
       "get": {
         "summary": "Stream Conversation AI Agent Response (SSE)",
         "tags": ["Conversational AI Agent Interactions"],
-        "description": ">⚠️ This is a streaming endpoint using [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events).\n\nOpens a live SSE stream to receive real-time response messages from the conversational agent after sending a message.\n\nUse the temporary token received from `/generate_secret` or `/get_inference` as applicable to authenticate the stream.\n\nThe stream sends `event.data` messages that include control signals or agent-generated content:\n\n- `call_again`: Indicates a tool/function call occurred. You must call `/generate_secret` again to get a new token and reconnect to `/get-response`.\n- `no_message_found`: The agent was unable to generate a response as no user message corresponding to request found.\n- `close_connection`: Indicates the end of the stream. The client **must close** the `EventSource` connection.\n- `close_connection_incomplete_content`: AI model exceeded its response context window. Close the connection.\n- `close_connection_incomplete_tool_calls`: Context overflow occurred while generating tool call arguments. Close the connection.\n- `[FROZEN]` / `[BLACKLISTED]`: User access restrictions triggered. Close the connection.\n- JSON payloads: Contain AI-generated message content.\n\nThe client must listen using `EventSource` and handle the lifecycle and control signals accordingly.\n\nExample:\n\n```js\nconst displayNewMessageHandler = (message, token) => {\r\n  setConversationMessages((prev) => { // set your messages state here\r\n    const lastMessage = prev[prev.length - 1];\r\n    if (lastMessage.role === 'assistant' && lastMessage.streamToken === token) { // last message is assistant and has the same token -> chunks of message is to be appended\r\n      const updatedData = [...prev];\r\n      updatedData[prev.length - 1] = {\r\n        ...lastMessage,\r\n        content: lastMessage.content + message,\r\n      };\r\n      return updatedData;\r\n    } else { // new assistant message\r\n      const newMessage = { role: 'assistant', content: message, time: new Date().toLocaleString('en-IN'), streamToken: token };\r\n      return [...prev, newMessage];\r\n    }\r\n  });\r\n\r\n  // you have to save the conversationMessages to local storage or any other persistent storage, chatzy AI doesn't expose any API to fetch conversation history\r\n}\r\n\r\nconst callSourceHandler = (token) => { // token is the temp token generated by `/generate_secret?conversation_id=...`\r\n  const source = new EventSource(`https://backend-1.chatzy.ai/get-response?token=${token}`);\r\n\r\n  source.onmessage = (event) => {\r\n    if (event.data === 'call_again') {\r\n      // Tool call executed – regenerate token and reconnect\r\n      callAgainHandler();\r\n      source.close();\r\n    } else if(event.data === 'no_message_found') {\r\n      source.close();\r\n    } else if (event.data === 'close_connection') {\r\n      // End of stream\r\n      source.close();\r\n    } else if(event.data === 'close_connection_incomplete_content') {\r\n      source.close();\r\n    } else if(event.data === 'close_connection_incomplete_tool_calls') {\r\n      source.close();\r\n    } else if (['[FROZEN]', '[BLACKLISTED]'].includes(event.data)) {\r\n      console.warn('Your access is temporarily restricted.'); // show error message to user\r\n      source.close();\r\n    } else {\r\n      let dataObject;\r\n      try {\r\n        dataObject = JSON.parse(event.data);\r\n      } catch {\r\n        // console.error('Error parsing JSON data:', event.data);\r\n      }\r\n\r\n      if (dataObject?.content) {\r\n        displayNewMessageHandler(dataObject.content, token);\r\n      }\r\n    }\r\n  };\r\n\r\n  source.onerror = function (error) {\r\n    source.close();\r\n    console.error(`EventSource failed:`, error);\r\n  };\r\n}\r\n\r\nconst callAgainHandler = async () => {\r\n  const response = await fetch('/generate_secret?conversation_id=...');\r\n  const data = await response.json();\r\n  const token = data?.data?.temp_token;\r\n\r\n  if(token) {\r\n    callSourceHandler(token);\r\n  }\r\n}\r\n\r\n\n```\n\n**NOTE:** When streaming is ON you will receive chunks of message response and when streaming is OFF, you'll get full message response in single JSON content. e.g.\n\n\n**When Streaming is ON:**\n\n```json\ndata: {\"content\": \"How\"}\n\ndata: {\"content\": \" can\"}\n\ndata: {\"content\": \" I\"}\n\ndata: {\"content\": \" assist\"}\n\ndata: {\"content\": \" you\"}\n\ndata: {\"content\": \" today\"}\n\ndata: {\"content\": \"?\"}\n\ndata: close_connection\n\n```\n\n**When Streaming is OFF:**\n\n```json\ndata: {\"content\": \"How can I assist you today?\"}\n\ndata: close_connection\n\n```",
         "servers": [
           {
             "url": "https://backend-1.chatzy.ai",
@@ -560,7 +577,7 @@
             "name": "token",
             "in": "query",
             "required": true,
-            "description": "**Temporary access token** used to authenticate the Server-Sent Events (SSE) stream.\n\nThis token is obtained from the `/generate_secret` endpoint after sending a message to the AI agent via `/get_inference`.\n\nPass it as a query parameter like this:\n\n```\n/get-response?token=YOUR_TEMP_TOKEN\n```\n\nIf the token is missing or invalid, the server will respond with a `401 Unauthorized` error.",
+            "description": "**Temporary access token** used to authenticate the Server-Sent Events (SSE) stream.\n\nThis token is obtained from the `/generate_secret` endpoint and also after sending a message to the AI agent via `/get_inference`.\n\nPass it as a query parameter like this:\n\n```\n/get-response?token=YOUR_TEMP_TOKEN\n```\n\nIf the token is missing or invalid, the server will respond with a `401 Unauthorized` error.",
             "schema": {
               "type": "string",
               "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
@@ -582,11 +599,169 @@
         }
       }
     },
+    "/stt": {
+      "post": {
+        "summary": "Audio Input",
+        "tags": ["Conversational AI Agent Interactions"],
+        "servers": [
+          {
+            "url": "https://backend-1.chatzy.ai",
+            "description": "SSE Streaming Host"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "description": "**Temporary access token** used to authenticate the endpoint.\n\nThis token is obtained from the `/generate_secret` endpoint. `\n\nIf the token is missing or invalid, the server will respond with a `401 Unauthorized` error.",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            }
+          },
+          {
+            "name": "chatbot_id",
+            "in": "query",
+            "required": true,
+            "description": "UUID of the conversation AI Agent to which the message is sent.",
+            "schema": {
+              "type": "string",
+              "example": "51de6a36-5532-49c2-888e-46754ce102ba"
+            }
+          },
+          {
+            "name": "client_message_key",
+            "in": "query",
+            "required": true,
+            "description": "Unique identifier (UUID) that groups multiple audio inputs under a single user message. This key is generated on the client side before sending audio and must be included in each `/stt` request. All audio transcriptions sharing the same client_message_key will later be mapped together with the finalized user message when sent to `/get-inference`.",
+            "schema": {
+              "type": "string",
+              "example": "51de6a36-5532-49c2-888e-46754ce102ba"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transcription generated successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "transcript": {
+                      "type": "string",
+                      "description": "Final transcription text of the provided audio input.",
+                      "example": "HELLO THERE\n"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/generate_presigned_url_no_auth": {
+      "get": {
+        "summary": "Conversational AI Agent Interactions",
+        "tags": ["Authorized iframe Access"],
+        "parameters": [
+          {
+            "name": "file_type",
+            "in": "query",
+            "required": true,
+            "description": "MIME type of the file to be uploaded. Only PDF and image files are supported.",
+            "schema": {
+              "type": "string",
+              "enum": ["application/pdf", "image/png", "image/jpeg"],
+              "example": "application/pdf"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pre-signed URL generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "type": "string",
+                              "description": "S3 bucket upload endpoint URL",
+                              "example": "https://chatzy-kb-store.s3.us-east-1.amazonaws.com/"
+                            },
+                            "fields": {
+                              "type": "object",
+                              "description": "Form fields required for uploading the file",
+                              "properties": {
+                                "Content-Type": {
+                                  "type": "string",
+                                  "description": "MIME type of the file",
+                                  "example": "application/pdf"
+                                },
+                                "bucket": {
+                                  "type": "string",
+                                  "example": "chatzy-kb-store"
+                                },
+                                "X-Amz-Algorithm": {
+                                  "type": "string",
+                                  "example": "AWS4-HMAC-SHA256"
+                                },
+                                "X-Amz-Credential": {
+                                  "type": "string",
+                                  "description": "AWS temporary credential string"
+                                },
+                                "X-Amz-Date": {
+                                  "type": "string",
+                                  "example": "20250821T075218Z"
+                                },
+                                "X-Amz-Security-Token": {
+                                  "type": "string",
+                                  "description": "Temporary session token"
+                                },
+                                "key": {
+                                  "type": "string",
+                                  "description": "S3 object key where the file will be stored",
+                                  "example": "icons/3fa1d79c-79d5-48b0-abcc-65ab4cd0073a"
+                                },
+                                "Policy": {
+                                  "type": "string",
+                                  "description": "Base64-encoded policy document"
+                                },
+                                "X-Amz-Signature": {
+                                  "type": "string",
+                                  "description": "AWS signature for request validation"
+                                }
+                              },
+                              "required": ["Content-Type", "bucket", "X-Amz-Algorithm", "X-Amz-Credential", "X-Amz-Date", "X-Amz-Security-Token", "key", "Policy", "X-Amz-Signature"]
+                            }
+                          },
+                          "required": ["url", "fields"]
+                        }
+                      },
+                      "required": ["url"]
+                    }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ai_agent/get_access_token": {
       "post": {
         "summary": "Get Access Token",
-        "tags": ["Auhtorized iframe Access"],
-        "description": "Securely generate short-lived `access_token` and long-lived `refresh_token` for authorized iframe access.\n\n> ⚠️ **Important**: This endpoint **must be called from your server**, not from the client side. The `client_api_key` is sensitive and should never be exposed on the client side.\n\nOnce you obtain the tokens, pass the `access_token` to the client-side where the iframe will be embedded.\n\n### Embed URL for Iframe\nUse the following format to embed the iframe securely:\n\n```\nhttps://app.chatzy.ai/chatbot-iframe/{chatbot_id}?user_id=<USER_ID>&access_token=<ACCESS_TOKEN>\n```\n\nChatzy AI will validate the token from query params for every API call made within the iframe, ensuring the user is authorized to access the AI Agent.\n\n>**⚠️ Important**\n> - Ensure tokens are stored securely, as refresh token will be used to retrieve a new access token when the **old one expires**.\n> - **Refresh token logic is explained in the next API endpoint: `/ai-agent/refresh_token`.**\n> - Never expose the `client_api_key` on the frontend.",
+        "tags": ["Authorized iframe Access"],
         "requestBody": {
           "required": true,
           "content": {
@@ -657,8 +832,7 @@
     "/ai_agent/refresh_token": {
       "post": {
         "summary": "Get New Access Token from Refresh Token",
-        "tags": ["Auhtorized iframe Access"],
-        "description": "Generate a new short-lived `access_token` using a valid `refresh_token` previously issued.\n\n> ⚠️ **Important**: This endpoint **must be called from your server**. Never expose `refresh_token` or any sensitive token logic to the frontend or the iframe.\n\nWhen the `access_token` passed in the iframe query params expires, the Chatzy AI iframe will send a `postMessage` event to the parent window with following JSON payload:\n\n```js\n{\n  type: '[TOKEN_REFRESH]',\n  reason: 'TokenExpiredError'\n}\n```\n\nYour client application (the host of the iframe) **must listen for this `postMessage` event**, and **call this `/ai_agent/refresh_token` API from your server** to get a new `access_token` using the stored `refresh_token`.\n\nOnce you get the new token, **respond back to the iframe** with following JSON payload:\n\n```js\n{\n  type: '[TOKEN_REFRESH_RESPONSE]',\n  access_token: '<NEW_ACCESS_TOKEN>'\n}\n```\n\nThe Chatzy AI iframe will update the token internally and continue to make secure API calls using the new token.\n\n> 🔁 **Best Practice**: Only call this endpoint in response to the `[TOKEN_REFRESH]` message. Avoid calling it on every page load.\n\n> ⚠️ Do not send `refresh_token` to the iframe or store it in localStorage/cookies on the client. Chatzy AI iframe only needs `access_token` to make authorized API calls.",
+        "tags": ["Authorized iframe Access"],
         "requestBody": {
           "required": true,
           "content": {

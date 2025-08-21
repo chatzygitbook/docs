@@ -156,15 +156,19 @@
           {
             "group": "Conversational AI Agent Interactions",
             "pages": [
+              "api-reference/conversational-ai-agent-interactions/ai-agent-conversation-flow",
               "api-reference/conversational-ai-agent-interactions/initialize-conversation",
               "api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent",
               "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
-              "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse"
+              "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
+              "api-reference/conversational-ai-agent-interactions/audio-input",
+              "api-reference/conversational-ai-agent-interactions/upload-documents",
+              "api-reference/conversational-ai-agent-interactions/generate-presigned-url"
             ]
           },
           {
-            "group": "Auhtorized iframe Access",
-            "pages": ["api-reference/auhtorized-iframe-access/get-access-token", "api-reference/auhtorized-iframe-access/get-new-access-token-from-refresh-token"]
+            "group": "Authorized iframe Access",
+            "pages": ["api-reference/authorized-iframe-access/get-access-token", "api-reference/authorized-iframe-access/get-new-access-token-from-refresh-token"]
           }
         ]
       }

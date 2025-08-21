@@ -1,3 +1,15 @@
 ---
 openapi: post /get_id_token
 ---
+
+Authenticates a user with their email and password and returns a JWT `idToken`.
+
+This `idToken` must be included in the `Authorization` header when calling **protected APIs**.
+
+### 🛡️ Authorization Header Format:
+
+```http
+Authorization: <idToken>
+```
+
+Without a valid token, protected routes will respond with a 401 Unauthorized error. This token expires after **1 hour** after which you must call `/get_id_token` again to obtain a new one.

@@ -1,0 +1,25 @@
+---
+openapi: post /ai_agent/get_access_token
+---
+
+Securely generate short-lived `access_token` and long-lived `refresh_token` for authorized iframe access.
+
+> ⚠️ **Important**: This endpoint **must be called from your server**, not from the client side. The `client_api_key` is sensitive and should never be exposed on the client side.
+
+Once you obtain the tokens, pass the `access_token` to the client-side where the iframe will be embedded.
+
+### Embed URL for Iframe
+
+Use the following format to embed the iframe securely:
+
+```http
+https://app.chatzy.ai/chatbot-iframe/{chatbot_id}?user_id=<USER_ID>&access_token=<ACCESS_TOKEN>
+```
+
+Chatzy AI will validate the token from query params for every API call made within the iframe, ensuring the user is authorized to access the AI Agent.
+
+**⚠️ Important**
+
+- Ensure tokens are stored securely, as refresh token will be used to retrieve a new access token when the **old one expires**.
+- **Refresh token logic is explained in the next API endpoint: `/ai-agent/refresh_token`.**
+- Never expose the `client_api_key` on the frontend.
