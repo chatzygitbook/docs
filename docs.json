@@ -34,6 +34,54 @@
               "quick-start/functionalities",
               "quick-start/pricing"
             ]
+          },
+          {
+            "group": " AI Agents",
+            "icon": "brain",
+            "pages": [
+              "ai-agents/overview",
+              "ai-agents/choosing-the-right-agent",
+              "ai-agents/creating-an-agent",
+              {
+                "group": "Conversational AI Agent",
+                "icon": "brain-cog",
+                "pages": [
+                  "ai-agents/conversational-ai-agent/overview",
+                  "ai-agents/conversational-ai-agent/data",
+                  {"group": "Settings",
+                  "pages": [
+                  "ai-agents/conversational-ai-agent/settings/overview",
+                  "ai-agents/conversational-ai-agent/settings/base-prompt",
+                  "ai-agents/conversational-ai-agent/settings/model",
+                  "ai-agents/conversational-ai-agent/settings/chat-widget",
+                  "ai-agents/conversational-ai-agent/settings/advance-settings",
+                  "ai-agents/conversational-ai-agent/settings/external-apis",
+                  "ai-agents/conversational-ai-agent/settings/tools",
+                  "ai-agents/conversational-ai-agent/settings/moderation",
+                  "ai-agents/conversational-ai-agent/settings/utilities"
+                
+                ]
+                    
+                    },
+                  "ai-agents/conversational-ai-agent/playground",
+                  "ai-agents/conversational-ai-agent/dashboard",
+                  "ai-agents/conversational-ai-agent/improving-agent-resources",
+                  "ai-agents/conversational-ai-agent/additional-concepts"
+                ]
+              },
+              {
+                "group": "Flow-Based AI Agent",
+                "icon": "bot-message-square",
+                "pages": [
+                  "ai-agents/flow-based-ai-agent/overview",
+                  "ai-agents/flow-based-ai-agent/studio",
+                  "ai-agents/flow-based-ai-agent/settings",
+                  "ai-agents/flow-based-ai-agent/playground",
+                  "ai-agents/flow-based-ai-agent/dashboard"
+                ]
+              }
+              
+            ]
           }
         ]
       },
