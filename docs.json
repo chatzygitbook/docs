@@ -15,128 +15,24 @@
         "icon": "book-open",
         "groups": [
           {
-            "group": "🚀 Quick Start",
-            "pages": ["Quick-start/Introduction", "Quick-start/Best-Practices", "Quick-start/Use-cases", "Quick-start/Tutorials"]
-          },
-          {
-            "group": "👥 Manage Teams",
-            "pages": ["Manage-Teams/Inviting-Team-Members", "Manage-Teams/Managing-Teams", "Manage-Teams/Roles-&-Permissions"]
-          },
-          {
-            "group": "🤖 Conversational AI Agent",
+            "group": " Quick Start",
+            "icon": "rocket",      
             "pages": [
-              "Conversational-AI-Agent/How-to-Train-Your-Bot-with-Data",
-              "Conversational-AI-Agent/Customizing-Bot-Behavior",
-              "Conversational-AI-Agent/Model-Settings",
-              "Conversational-AI-Agent/Testing-&-Tuning-in-the-Playground",
-              "Conversational-AI-Agent/Chunk-Management"
-            ]
-          },
-          {
-            "group": "⚡ Flow-Based Agent",
-            "pages": [
-              "Flow-Based-Agent/Overview",
-              "Flow-Based-Agent/How-It-Works",
-              "Flow-Based-Agent/Card-Types",
-              "Flow-Based-Agent/Smart-AI-Mode",
-              "Flow-Based-Agent/Playground",
-              "Flow-Based-Agent/Features-&-Benefits"
-            ]
-          },
-          {
-            "group": "📌 Choosing the Right AI Agent",
-            "pages": ["Choosing-the-Right-AI-Agent"]
-          },
-          {
-            "group": "📊 Dashboard Guide",
-            "pages": [
-              "Dashboard-Guide/Conversations-Panel",
-              "Dashboard-Guide/Conversation-Details-Viewer",
-              "Dashboard-Guide/Lead-Notification",
-              "Dashboard-Guide/Export-Options",
-              "Dashboard-Guide/Note"
-            ]
-          },
-          {
-            "group": "🤖 AI Agent Templates",
-            "pages": [
-              "AI-Agent-Templates/What-Are-Templates",
-              "AI-Agent-Templates/Available-Templates",
-              "AI-Agent-Templates/AI-Assisted-AI-Agent-Creation",
-              "AI-Agent-Templates/Build-an-AI-Agent-from-Scratch"
-            ]
-          },
-          {
-            "group": "📂 Sources",
-            "pages": ["Sources/Files", "Sources/Uploading-Files", "Sources/Text-Snippets", "Sources/Website-Crawling", "Sources/Custom-Q&A", "Sources/Google-Drive", "Sources/Images-and-Videos"]
-          },
-          { "group": "⚙️ Model Comparison", "pages": ["Model-Comparison/Recommended-Models"] },
-
-          {
-            "group": "🔍 How Responses Are Generated",
-            "pages": [
-              "How-Responses-Are-Generated/The-Cooking-Analogy",
-              "How-Responses-Are-Generated/What-is-Chunking",
-              "How-Responses-Are-Generated/Ideal-Chunk-Size",
-              "How-Responses-Are-Generated/What-is-the-Context-Window",
-              "How-Responses-Are-Generated/You-Can-Customize",
-              "How-Responses-Are-Generated/How-are-answers-generated"
-            ]
-          },
-          {
-            "group": "👤 Audience",
-            "pages": ["Audience/Contacts", "Audience/lists-and-segments", "Audience/Exports", "Audience/Summary-Table", "Audience/Contact-Import-Guide"]
-          },
-          {
-            "group": "💬 Conversations Tab",
-            "pages": [
-              "Conversations-Tab/What-Is-the-Conversations-Tab",
-              "Conversations-Tab/Navigating-the-Conversations-Interface",
-              "Conversations-Tab/Chat-Sorting,-Filters,-&-Status",
-              "Conversations-Tab/Understanding-Who's-Handling-the-Conversation",
-              "Conversations-Tab/WhatsApp",
-              "Conversations-Tab/Media-Handling",
-              "Conversations-Tab/Platform-Differences-Messenger-&-Instagram",
-              "Conversations-Tab/AI-vs-Human-Who's-Responding",
-              "Conversations-Tab/Team-Access-Agent-Roles"
-            ]
-          },
-          {
-            "group": "📱 WhatsApp Campaigns",
-            "pages": ["WhatsApp-campaigns/Install-WhatsApp  ", "WhatsApp-campaigns/How-to-Create-WhatsApp-Template-Messages-in-Chatzy-AI", "WhatsApp-campaigns/Send-a-WhatsApp-campaign"]
-          },
-          {
-            "group": "🗺️ Journeys",
-            "pages": [
+              "/quick-start/introduction",
               {
-                "group": " Getting Started",
-                "pages": ["Journeys/Overview", "Journeys/Pre-Defined-Templates", "Journeys/Triggers", "Journeys/Actions"]
+                "group": "Use Cases",
+                "icon": "users",    
+                "pages": [
+                  "/quick-start/use-cases/sales",
+                  "/quick-start/use-cases/customer-support",
+                  "/quick-start/use-cases/hospitality",
+                  "/quick-start/use-cases/travel",
+                  "/quick-start/use-cases/real-estate",
+                  "/quick-start/use-cases/education"
+                ]
               },
-              {
-                "group": " Examples",
-                "pages": ["Journeys/WA-Lead-Nurture", "Journeys/Assign-to-AI"]
-              }
-            ]
-          },
-          {
-            "group": "🔗 How to Use the Inbound Webhook Trigger to Connect Chatzy AI with External Systems",
-            "pages": ["How-to-Use-the-Inbound-Webhook-Trigger-to-Connect-Chatzy-AI-with-External-Systems"]
-          },
-          {
-            "group": "📥 How to Use the “Conversations” Inbox in Chatzy AI",
-            "pages": ["How-to-Use-the-Conversations-Inbox-in-Chatzy-AI"]
-          },
-          {
-            "group": "🔂 Miscellaneous",
-            "pages": [
-              {
-                "group": " Journey Sandbox",
-                "pages": ["/Miscellaneous/Function", "/Miscellaneous/Module", "/Miscellaneous/Type"]
-              },
-              {
-                "group": " Flow-based Bot Sandbox",
-                "pages": ["/Miscellaneous/1/Function", "/Miscellaneous/1/Module", "/Miscellaneous/1/Type"]
-              }
+              "/quick-start/functionalities",
+              "/quick-start/pricing"
             ]
           }
         ]
@@ -151,7 +47,10 @@
           },
           {
             "group": "Contact Conversations",
-            "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
+            "pages": [
+              "api-reference/contact-conversations/get-contact-conversations",
+              "api-reference/contact-conversations/get-messages-for-contact"
+            ]
           },
           {
             "group": "Conversational AI Agent Interactions",
@@ -164,7 +63,10 @@
           },
           {
             "group": "Auhtorized iframe Access",
-            "pages": ["api-reference/auhtorized-iframe-access/get-access-token", "api-reference/auhtorized-iframe-access/get-new-access-token-from-refresh-token"]
+            "pages": [
+              "api-reference/auhtorized-iframe-access/get-access-token",
+              "api-reference/auhtorized-iframe-access/get-new-access-token-from-refresh-token"
+            ]
           }
         ]
       }
@@ -217,7 +119,7 @@
       "x": "https://x.com/ChatzyAI",
       "youtube": "https://www.youtube.com/@ChatzyAI",
       "linkedin": "https://linkedin.com/company/chatzy-ai",
-      "discord": "https://discord.gg/https://discord.gg/Gkwy8mfyxw"
+      "discord": "https://discord.gg/Gkwy8mfyxw"
     },
     "links": [
       {
