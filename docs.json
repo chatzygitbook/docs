@@ -16,23 +16,23 @@
         "groups": [
           {
             "group": " Quick Start",
-            "icon": "rocket",      
+            "icon": "rocket",
             "pages": [
-              "/quick-start/introduction",
+              "quick-start/introduction",
               {
                 "group": "Use Cases",
-                "icon": "users",    
+                "icon": "users",
                 "pages": [
-                  "/quick-start/use-cases/sales",
-                  "/quick-start/use-cases/customer-support",
-                  "/quick-start/use-cases/hospitality",
-                  "/quick-start/use-cases/travel",
-                  "/quick-start/use-cases/real-estate",
-                  "/quick-start/use-cases/education"
+                  "quick-start/use-cases/sales",
+                  "quick-start/use-cases/customer-support",
+                  "quick-start/use-cases/hospitality",
+                  "quick-start/use-cases/travel",
+                  "quick-start/use-cases/real-estate",
+                  "quick-start/use-cases/education"
                 ]
               },
-              "/quick-start/functionalities",
-              "/quick-start/pricing"
+              "quick-start/functionalities",
+              "quick-start/pricing"
             ]
           }
         ]
@@ -47,10 +47,7 @@
           },
           {
             "group": "Contact Conversations",
-            "pages": [
-              "api-reference/contact-conversations/get-contact-conversations",
-              "api-reference/contact-conversations/get-messages-for-contact"
-            ]
+            "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
           },
           {
             "group": "Conversational AI Agent Interactions",
