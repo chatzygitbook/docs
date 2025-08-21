@@ -1,0 +1,31 @@
+---
+openapi: post /ai_agent/refresh_token
+---
+
+Generate a new short-lived `access_token` using a valid `refresh_token` previously issued.
+
+> ⚠️ **Important**: This endpoint **must be called from your server**. Never expose `refresh_token` or any sensitive token logic to the frontend or the iframe.
+
+When the `access_token` passed in the iframe query params expires, the Chatzy AI iframe will send a `postMessage` event to the parent window with following JSON payload:
+
+```json
+{
+    type: "[TOKEN_REFRESH]"
+    reason: "TokenExpiredError"
+}
+```
+
+Your client application (the host of the iframe) **must listen for this `postMessage` event**, and **call this `/ai_agent/refresh_token` API from your server** to get a new `access_token` using the stored `refresh_token`.
+
+Once you get the new token, **respond back to the iframe** with following JSON payload:
+
+```json
+{
+  "type": "[TOKEN_REFRESH_RESPONSE]",
+  "access_token": "<NEW_ACCESS_TOKEN>"
+}
+```
+
+The Chatzy AI iframe will update the token internally and continue to make secure API calls using the new token.
+
+> ⚠️ Do not send `refresh_token` to the iframe or store it in localStorage/cookies on the client. Chatzy AI iframe only needs `access_token` to make authorized API calls.

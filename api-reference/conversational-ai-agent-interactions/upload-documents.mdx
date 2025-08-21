@@ -1,0 +1,89 @@
+---
+title: Upload Documents
+---
+
+### To upload a document, the process involves two steps:
+
+1. Generate a pre-signed upload URL
+
+First, call the `/generate_presigned_url_no_auth` endpoint.
+
+This returns a pre-signed URL (valid for 5 minutes) and associated form fields including the file_type (MIME type).
+
+> **(MAX allowed file size is 2MB)**
+
+Example response:
+
+```json
+{
+  "data": {
+    "url": {
+      "url": "https://chatzy-kb-store.s3.us-east-1.amazonaws.com/",
+      "fields": {
+        "Content-Type": "application/pdf",
+        "bucket": "chatzy-kb-store",
+        "X-Amz-Algorithm": "AWS4-HMAC-SHA256",
+        "X-Amz-Credential": "...",
+        "X-Amz-Date": "20250821T075218Z",
+        "X-Amz-Security-Token": "...",
+        "key": "icons/3fa1d79c-79d5-48b0-abcc-65ab4cd0073a",
+        "Policy": "...",
+        "X-Amz-Signature": "..."
+      }
+    }
+  }
+}
+```
+
+2. Upload the file
+
+- Make a `POST` request to the returned url (`https://chatzy-kb-store.s3.us-east-1.amazonaws.com/`).
+- Send the provided fields and the file itself as `multipart form data`.
+- If the upload succeeds, AWS S3 responds with HTTP 204 (No Content).
+- Any other response indicates an error, handle it accordingly.
+
+![audio_input](/images/upload_documents_1.png)
+
+---
+
+### Using Uploaded Documents in `/get_inference`
+
+Once documents are uploaded, they should be passed as part of the documents field in the `/get_inference` API payload.
+
+Each document must contain:
+
+- `file_name` → Original file name (e.g., "document.pdf")
+- `mime_type` → File MIME type (e.g., "application/pdf")
+- `s3_url` → Built using the returned key from `/generate_presigned_url_no_auth`
+
+Format:
+
+```http
+https://chatzy-kb-store.s3.amazonaws.com{key}
+```
+
+Example documents array:
+
+```json
+[
+  {
+    "file_name": "document.pdf",
+    "mime_type": "application/pdf",
+    "s3_url": "https://chatzy-kb-store.s3.amazonaws.com/icons/3fa1d79c-79d5-48b0-abcc-65ab4cd0073a"
+  }
+]
+```
+
+**⚠️ Important**
+
+- A maximum of 5 documents can be attached in a single `/get_inference` request.
+- If the user sends only documents (without message content), the request payload must add a default `message` object with content as:
+
+```json
+{
+  "role": "user",
+  "content": "Document(s) Attached"
+}
+```
+
+If the user provides both message content and documents, then use the given message content along with the documents.

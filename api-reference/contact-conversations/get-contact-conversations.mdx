@@ -1,3 +1,19 @@
 ---
 openapi: get /get_contact_conversations
 ---
+
+Retrieves a paginated list of contact conversations associated with the given user.
+
+Supports optional search, pagination, and filtering by conversation status. This endpoint is commonly used to display a user's contact list in messaging interfaces.
+
+### Parameters:
+
+- **user_email_id** _(required)_
+- Your Chatzy AI account email ID.
+- **search** _(optional)_ - Filter contacts by name, email, phone number or iframe user ID.
+- **limit** _(optional)_ - Number of contacts to return per page (default: 10, min: 1, max: 100).
+- **offset** _(optional)_ - Number of contacts to skip for pagination (default: 0).
+- **filter** _(optional)_ - Filter by conversation status:
+- `all` - All conversations (default)
+- `unread` - Only conversations with unread messages
+- `live` - Active/live conversations

@@ -1,3 +1,13 @@
 ---
 openapi: get /init_conversation
 ---
+
+Retrieves a `conversation_id` for the session and verifies the chatbot_id provided.
+
+This also returns introductory message if the chatbot is configured to do so. You can configure introductory messages in the **Chat Widget** tab of the **AI Agent Settings** page.
+
+![Chat Widget Tab](/images/init_conversation_1.png)
+
+This will be visible like this at the beginning of the conversation:
+
+![Iframe](/images/init_conversation_2.png)

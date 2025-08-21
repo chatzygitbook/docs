@@ -1,0 +1,31 @@
+---
+title: AI Agent Conversation Flow
+---
+
+Interact with the conversational AI agent using this **4-step process**:
+
+### 1. **Initialize Conversation** (`/init_conversation`)
+
+- **Purpose**: Obtain a valid `conversation_id` for the session
+- **Returns**: `conversation_id` and optional introductory message
+- **Required for**: Starting any new conversation thread
+
+### 2. **Send Message** (`/get_inference`)
+
+- **Purpose**: Send user message to the AI agent
+- **Requires**: `chatbot_id`, `conversation_id`, and user message
+- **Action**: Triggers agent to begin generating response
+
+### 3. **Generate Temp Token** (`/generate_secret`)
+
+- **Purpose**: Get temporary JWT token for SSE authentication
+- **Requires**: `conversation_id` from step 1
+- **Returns**: Short-lived `temp_token` for streaming
+
+### 4. **Stream Response** (`/get-response`)
+
+- **Purpose**: Receive real-time AI agent response via SSE
+- **Requires**: `temp_token` from step 3 or from step 2 response (`get_inference` )
+- **Returns**: Streamed response chunks and control signals
+
+> **⚠️ Important**: This flow must be repeated for each new user message or session. The `temp_token` expires quickly and cannot be reused.
