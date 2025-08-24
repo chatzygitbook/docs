@@ -82,6 +82,42 @@
               }
               
             ]
+          },
+          {
+            "group": "Channels",
+            "icon":"satellite-dish",
+            "pages": [
+              "channels/overview",
+              {
+                "group": "Supported Channels",
+                "pages": [
+                  "channels/supported-channels/whatsapp",
+                  "channels/supported-channels/website",
+                  "channels/supported-channels/instagram",
+                  "channels/supported-channels/messenger",
+                  "channels/supported-channels/shopify",
+                  "channels/supported-channels/telegram"
+                ]
+
+                }
+            ]
+          },
+          {
+            "group": "Journey",
+            "icon": "route",
+            "pages": [
+              "journey/overview"
+              
+            ]
+          },
+          {
+            "group": "Campaigns",
+            "icon":"compass",
+            "pages": [
+              "campaigns/overview",
+              "campaigns/creating-campaigns",
+              "campaigns/campaign-stats"
+            ]
           }
         ]
       },
