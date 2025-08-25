@@ -131,10 +131,10 @@
               "api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent",
               "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
               "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
+              "api-reference/conversational-ai-agent-interactions/get-stream-status",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
-              "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
-              "api-reference/conversational-ai-agent-interactions/get-stream-status"
+              "api-reference/conversational-ai-agent-interactions/generate-presigned-url"
             ]
           },
           {
