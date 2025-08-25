@@ -48,21 +48,20 @@
                 "pages": [
                   "ai-agents/conversational-ai-agent/overview",
                   "ai-agents/conversational-ai-agent/data",
-                  {"group": "Settings",
-                  "pages": [
-                  "ai-agents/conversational-ai-agent/settings/overview",
-                  "ai-agents/conversational-ai-agent/settings/base-prompt",
-                  "ai-agents/conversational-ai-agent/settings/model",
-                  "ai-agents/conversational-ai-agent/settings/chat-widget",
-                  "ai-agents/conversational-ai-agent/settings/advance-settings",
-                  "ai-agents/conversational-ai-agent/settings/external-apis",
-                  "ai-agents/conversational-ai-agent/settings/tools",
-                  "ai-agents/conversational-ai-agent/settings/moderation",
-                  "ai-agents/conversational-ai-agent/settings/utilities"
-                
-                ]
-                    
-                    },
+                  {
+                    "group": "Settings",
+                    "pages": [
+                      "ai-agents/conversational-ai-agent/settings/overview",
+                      "ai-agents/conversational-ai-agent/settings/base-prompt",
+                      "ai-agents/conversational-ai-agent/settings/model",
+                      "ai-agents/conversational-ai-agent/settings/chat-widget",
+                      "ai-agents/conversational-ai-agent/settings/advance-settings",
+                      "ai-agents/conversational-ai-agent/settings/external-apis",
+                      "ai-agents/conversational-ai-agent/settings/tools",
+                      "ai-agents/conversational-ai-agent/settings/moderation",
+                      "ai-agents/conversational-ai-agent/settings/utilities"
+                    ]
+                  },
                   "ai-agents/conversational-ai-agent/playground",
                   "ai-agents/conversational-ai-agent/dashboard",
                   "ai-agents/conversational-ai-agent/improving-agent-resources",
@@ -80,12 +79,11 @@
                   "ai-agents/flow-based-ai-agent/dashboard"
                 ]
               }
-              
             ]
           },
           {
             "group": "Channels",
-            "icon":"satellite-dish",
+            "icon": "satellite-dish",
             "pages": [
               "channels/overview",
               {
@@ -98,26 +96,18 @@
                   "channels/supported-channels/shopify",
                   "channels/supported-channels/telegram"
                 ]
-
-                }
+              }
             ]
           },
           {
             "group": "Journey",
             "icon": "route",
-            "pages": [
-              "journey/overview"
-              
-            ]
+            "pages": ["journey/overview"]
           },
           {
             "group": "Campaigns",
-            "icon":"compass",
-            "pages": [
-              "campaigns/overview",
-              "campaigns/creating-campaigns",
-              "campaigns/campaign-stats"
-            ]
+            "icon": "compass",
+            "pages": ["campaigns/overview", "campaigns/creating-campaigns", "campaigns/campaign-stats"]
           }
         ]
       },
@@ -143,7 +133,8 @@
               "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
-              "api-reference/conversational-ai-agent-interactions/generate-presigned-url"
+              "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
+              "api-reference/conversational-ai-agent-interactions/get-stream-status"
             ]
           },
           {
