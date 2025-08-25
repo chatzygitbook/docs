@@ -1,3 +1,7 @@
 a[href*='mintlify.com'] {
   display: none !important;
 }
+
+footer > div {
+  padding: 2em !important;
+}
