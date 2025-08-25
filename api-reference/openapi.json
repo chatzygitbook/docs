@@ -665,7 +665,7 @@
     "/generate_presigned_url_no_auth": {
       "get": {
         "summary": "Conversational AI Agent Interactions",
-        "tags": ["Authorized iframe Access"],
+        "tags": ["Conversational AI Agent Interactions"],
         "parameters": [
           {
             "name": "file_type",
