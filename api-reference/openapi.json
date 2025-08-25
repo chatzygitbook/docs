@@ -664,7 +664,7 @@
     },
     "/generate_presigned_url_no_auth": {
       "get": {
-        "summary": "Conversational AI Agent Interactions",
+        "summary": "Generate Presigned URL for documents upload",
         "tags": ["Conversational AI Agent Interactions"],
         "parameters": [
           {
@@ -798,70 +798,12 @@
                         "messages": {
                           "type": "array",
                           "description": "All messages in the conversation",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message_id": { "type": "string" },
-                              "conversation_id": { "type": "string" },
-                              "role": {
-                                "type": "string",
-                                "enum": ["user", "assistant", "system"]
-                              },
-                              "content": { "type": "string" },
-                              "message_order": { "type": "integer" },
-                              "created_at": { "type": "string", "format": "date-time" },
-                              "message_status": {
-                                "type": "string",
-                                "enum": ["pending", "processed", "failed"]
-                              },
-                              "context": {
-                                "type": ["array", "null"],
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "content": { "type": "string" },
-                                    "distance": { "type": "number" },
-                                    "source_name": { "type": "string" }
-                                  }
-                                }
-                              }
-                            },
-                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
-                          }
+                          "items": { "type": "object" }
                         },
                         "latest_5": {
                           "type": "array",
                           "description": "Last 5 messages in the conversation",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message_id": { "type": "string" },
-                              "conversation_id": { "type": "string" },
-                              "role": {
-                                "type": "string",
-                                "enum": ["user", "assistant", "system"]
-                              },
-                              "content": { "type": "string" },
-                              "message_order": { "type": "integer" },
-                              "created_at": { "type": "string", "format": "date-time" },
-                              "message_status": {
-                                "type": "string",
-                                "enum": ["pending", "processed", "failed"]
-                              },
-                              "context": {
-                                "type": ["array", "null"],
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "content": { "type": "string" },
-                                    "distance": { "type": "number" },
-                                    "source_name": { "type": "string" }
-                                  }
-                                }
-                              }
-                            },
-                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
-                          }
+                          "items": { "type": "object" }
                         }
                       },
                       "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
