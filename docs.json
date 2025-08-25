@@ -92,9 +92,7 @@
                   "channels/supported-channels/whatsapp",
                   "channels/supported-channels/website",
                   "channels/supported-channels/instagram",
-                  "channels/supported-channels/messenger",
-                  "channels/supported-channels/shopify",
-                  "channels/supported-channels/telegram"
+                  "channels/supported-channels/messenger"
                 ]
               }
             ]
@@ -174,9 +172,7 @@
       "proxy": false
     }
   },
-  "contextual": {
-    "options": ["chatgpt", "perplexity"]
-  },
+
   "seo": {
     "indexing": "all",
     "metatags": {
