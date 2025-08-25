@@ -472,7 +472,7 @@
                   },
                   "user_id": {
                     "type": "string",
-                    "description": "Optional unique identifier of the user (internal mapping).",
+                    "description": "Optional unique identifier of the user (internal mapping). Passing this will create a new contact if it doesn't exist in Chatzy AI.",
                     "example": "user-143242"
                   },
                   "client_message_key": {
@@ -664,8 +664,8 @@
     },
     "/generate_presigned_url_no_auth": {
       "get": {
-        "summary": "Conversational AI Agent Interactions",
-        "tags": ["Authorized iframe Access"],
+        "summary": "Generate Presigned URL for documents upload",
+        "tags": ["Conversational AI Agent Interactions"],
         "parameters": [
           {
             "name": "file_type",
@@ -748,6 +748,65 @@
                         }
                       },
                       "required": ["url"]
+                    }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_stream_status": {
+      "get": {
+        "summary": "Get Stream Status",
+        "tags": ["Conversational AI Agent Interactions"],
+        "parameters": [
+          {
+            "name": "conversation_id",
+            "in": "query",
+            "required": true,
+            "description": "Conversation ID for which the stream status is to be checked.",
+            "schema": {
+              "type": "string",
+              "example": "96333140-53c3-4d1d-bbd1-edd150d46ea2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stream status and messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "stream_status": {
+                          "type": "string",
+                          "enum": ["is_streaming", "completed"],
+                          "description": "Current stream status"
+                        },
+                        "response_processing_status": {
+                          "type": "string",
+                          "enum": ["processing", "completed"],
+                          "description": "Processing status of the assistant response"
+                        },
+                        "messages": {
+                          "type": "array",
+                          "description": "All messages in the conversation",
+                          "items": { "type": "object" }
+                        },
+                        "latest_5": {
+                          "type": "array",
+                          "description": "Last 5 messages in the conversation",
+                          "items": { "type": "object" }
+                        }
+                      },
+                      "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
                     }
                   },
                   "required": ["data"]

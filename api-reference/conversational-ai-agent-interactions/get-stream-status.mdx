@@ -1,0 +1,164 @@
+---
+openapi: get /get_stream_status
+---
+
+The `get_stream_status` API checks the current status of a streaming process (conversation streaming). This is useful for checking if the streaming process is still active and if a response is generated for the latest message **in case client disconnects** from the stream.
+
+---
+
+## Case 1: Stream is starting
+
+```js
+if (!response_processing_status && stream_status === 'is_streaming') {
+  // code here
+}
+```
+
+- `stream_status` is "is_streaming" but `response_processing_status` is empty or `null`.
+- Meaning: The message is sent for processing, but no response is being processed yet.
+- Action taken:
+  - Calls `callSourceHandler()` to call the `get_response` endpoint to get the response.
+  - Shows loading state (setMessageLoading(true)).
+
+## Case 2: Stream is starting
+
+```js
+else if (response_processing_status === 'processing' && stream_status === 'is_streaming') {
+    // code here
+}
+```
+
+- `stream_status` is "is_streaming" and `response_processing_status` is "processing".
+- Meaning: The response is still being generated. No need to call `get_response` endpoint.
+- Action taken:
+
+  - Keeps showing the loading state `(setMessageLoading(true))`.
+  - Retries stream_status status until `MAX_TRIES` is reached or both get `completed` whichever first:
+    - If retries (tries) are less than `MAX_TRIES`, increase the counter.
+    - If retries exceed `MAX_TRIES`, stop loading and stop checking `(clearInterval(intervalId))`.
+
+## Case 3: Stream is completed
+
+```js
+else if (response_processing_status === 'completed' && status === 'completed') {
+    // code here
+}
+```
+
+- Both `stream_status` and `response_processing_status` are "completed".
+- Meaning: The response generation is finished.
+- Action taken:
+
+  - If the latest message is a function call (role = "function"):
+
+    - Set loading to true and call callAgainHandler() to continue processing.
+
+  - Otherwise:
+
+    - Filters new assistant messages that:
+
+      - Have non-empty content.
+      - Are not from the user.
+      - Are not duplicates (using message signature check).
+
+    - Adds new messages to the conversation in order (message_order).
+
+  - After processing:
+    - Stop showing loading `(setMessageLoading(false))`.
+    - Stop checking further `(clearInterval(intervalId))`.
+
+## Case 4: Unknown / Other status
+
+```js
+else {
+  clearInterval(intervalId);
+}
+```
+
+- Any other situation that doesn't match the above cases.
+- Meaning: Something unexpected happened or no valid status.
+- Action taken:
+  - Stops checking by clearing the interval.
+
+**Example:**
+
+```js
+const fetchStatus = async () => {
+  try {
+    const streamStatus = await api.get('/get_stream_status', {
+      converstion_id: conversationID,
+    });
+
+    if (cancelled) return;
+
+    if (streamStatus?.status === 200) {
+      const status = streamStatus.data?.data?.stream_status;
+      const response_processing_status = streamStatus.data?.data?.response_processing_status;
+      const messages = streamStatus.data?.data?.messages || [];
+      const latest5Messages = streamStatus.data?.data?.latest_5 || [];
+
+      if (!response_processing_status && status === 'is_streaming') {
+        callAgainHandler();
+        setMessageLoading(true);
+        clearInterval(intervalId);
+      } else if (response_processing_status === 'processing' && status === 'is_streaming') {
+        setMessageLoading(true);
+
+        if (tries < MAX_TRIES) {
+          tries++;
+        } else if (tries >= MAX_TRIES) {
+          setMessageLoading(false);
+          clearInterval(intervalId);
+        }
+      } else if (response_processing_status === 'completed' && status === 'completed') {
+        if (latest5Messages?.length && latest5Messages?.[0]?.role === 'function') {
+          // latest message is a function call
+          setMessageLoading(true);
+          callAgainHandler();
+        }
+
+        const newMessages = messages.filter((serverMsg) => {
+          const content = serverMsg?.content?.trim();
+          if (!content) return false;
+
+          if (serverMsg?.role === 'user') {
+            return false; // Skip user messages
+          }
+
+          const signature = getMessageSignature(serverMsg.content);
+          return !inMemorySignatures.has(signature);
+        });
+
+        if (newMessages.length > 0) {
+          console.log('Processing new messages:', newMessages.length);
+
+          newMessages
+            .sort((a, b) => a.message_order - b.message_order)
+            .forEach((serverMsg) => {
+              const messageData = {
+                id: uuid(),
+                content: serverMsg.content,
+                role: 'assistant',
+                timestamp: new Date(serverMsg.created_at).getTime(),
+              };
+
+              setConversationData((prev) => {
+                return [...prev, messageData];
+              });
+            });
+        }
+
+        setMessageLoading(false);
+        clearInterval(intervalId);
+      } else {
+        clearInterval(intervalId);
+      }
+    } else {
+      setMessageLoading(false);
+      clearInterval(intervalId);
+    }
+  } catch (err) {
+    clearInterval(intervalId);
+  }
+};
+```
