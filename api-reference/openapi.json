@@ -472,7 +472,7 @@
                   },
                   "user_id": {
                     "type": "string",
-                    "description": "Optional unique identifier of the user (internal mapping).",
+                    "description": "Optional unique identifier of the user (internal mapping). Passing this will create a new contact if it doesn't exist in Chatzy AI.",
                     "example": "user-143242"
                   },
                   "client_message_key": {
