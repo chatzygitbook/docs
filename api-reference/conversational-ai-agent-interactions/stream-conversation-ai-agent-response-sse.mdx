@@ -31,6 +31,7 @@ These indicate problems or user restrictions. In all cases, the client must clos
 - `no_message_found`: The agent was unable to generate a response as no user message corresponding to request found.
 - `close_connection_incomplete_content`: AI model exceeded its response context window.
 - `close_connection_incomplete_tool_calls`: Context overflow occurred while generating tool call arguments.
+- `__ERROR__: ....`: An error occurred while processing the request.
 - `[FROZEN]` / `[BLACKLISTED]`: User access restrictions triggered.
 
 ---
@@ -113,6 +114,9 @@ const callSourceHandler = (token) => {
       source.close();
     } else if (['[FROZEN]', '[BLACKLISTED]'].includes(event.data)) {
       console.warn('Your access is temporarily restricted.'); // show error message to user
+      source.close();
+    } else if (event.data.includes('__ERROR__')) {
+      console.error('Error occurred while processing the request:', event.data);
       source.close();
     } else {
       let dataObject;

@@ -758,6 +758,123 @@
         }
       }
     },
+    "/get_stream_status": {
+      "get": {
+        "summary": "Get Stream Status",
+        "tags": ["Conversational AI Agent Interactions"],
+        "parameters": [
+          {
+            "name": "conversation_id",
+            "in": "query",
+            "required": true,
+            "description": "Conversation ID for which the stream status is to be checked.",
+            "schema": {
+              "type": "string",
+              "example": "96333140-53c3-4d1d-bbd1-edd150d46ea2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stream status and messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "stream_status": {
+                          "type": "string",
+                          "enum": ["is_streaming", "completed"],
+                          "description": "Current stream status"
+                        },
+                        "response_processing_status": {
+                          "type": "string",
+                          "enum": ["processing", "completed"],
+                          "description": "Processing status of the assistant response"
+                        },
+                        "messages": {
+                          "type": "array",
+                          "description": "All messages in the conversation",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "message_id": { "type": "string" },
+                              "conversation_id": { "type": "string" },
+                              "role": {
+                                "type": "string",
+                                "enum": ["user", "assistant", "system"]
+                              },
+                              "content": { "type": "string" },
+                              "message_order": { "type": "integer" },
+                              "created_at": { "type": "string", "format": "date-time" },
+                              "message_status": {
+                                "type": "string",
+                                "enum": ["pending", "processed", "failed"]
+                              },
+                              "context": {
+                                "type": ["array", "null"],
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "content": { "type": "string" },
+                                    "distance": { "type": "number" },
+                                    "source_name": { "type": "string" }
+                                  }
+                                }
+                              }
+                            },
+                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
+                          }
+                        },
+                        "latest_5": {
+                          "type": "array",
+                          "description": "Last 5 messages in the conversation",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "message_id": { "type": "string" },
+                              "conversation_id": { "type": "string" },
+                              "role": {
+                                "type": "string",
+                                "enum": ["user", "assistant", "system"]
+                              },
+                              "content": { "type": "string" },
+                              "message_order": { "type": "integer" },
+                              "created_at": { "type": "string", "format": "date-time" },
+                              "message_status": {
+                                "type": "string",
+                                "enum": ["pending", "processed", "failed"]
+                              },
+                              "context": {
+                                "type": ["array", "null"],
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "content": { "type": "string" },
+                                    "distance": { "type": "number" },
+                                    "source_name": { "type": "string" }
+                                  }
+                                }
+                              }
+                            },
+                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
+                          }
+                        }
+                      },
+                      "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
+                    }
+                  },
+                  "required": ["data"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ai_agent/get_access_token": {
       "post": {
         "summary": "Get Access Token",
@@ -885,123 +1002,6 @@
                       "required": ["access_token", "expires_at"]
                     }
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/get_stream_status": {
-      "get": {
-        "summary": "Get Stream Status",
-        "tags": ["Conversational AI Agent Interactions"],
-        "parameters": [
-          {
-            "name": "conversation_id",
-            "in": "query",
-            "required": true,
-            "description": "Conversation ID for which the stream status is to be checked.",
-            "schema": {
-              "type": "string",
-              "example": "96333140-53c3-4d1d-bbd1-edd150d46ea2"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Stream status and messages",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "stream_status": {
-                          "type": "string",
-                          "enum": ["is_streaming", "completed"],
-                          "description": "Current stream status"
-                        },
-                        "response_processing_status": {
-                          "type": "string",
-                          "enum": ["processing", "completed"],
-                          "description": "Processing status of the assistant response"
-                        },
-                        "messages": {
-                          "type": "array",
-                          "description": "All messages in the conversation",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message_id": { "type": "string" },
-                              "conversation_id": { "type": "string" },
-                              "role": {
-                                "type": "string",
-                                "enum": ["user", "assistant", "system"]
-                              },
-                              "content": { "type": "string" },
-                              "message_order": { "type": "integer" },
-                              "created_at": { "type": "string", "format": "date-time" },
-                              "message_status": {
-                                "type": "string",
-                                "enum": ["pending", "processed", "failed"]
-                              },
-                              "context": {
-                                "type": ["array", "null"],
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "content": { "type": "string" },
-                                    "distance": { "type": "number" },
-                                    "source_name": { "type": "string" }
-                                  }
-                                }
-                              }
-                            },
-                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
-                          }
-                        },
-                        "latest_5": {
-                          "type": "array",
-                          "description": "Last 5 messages in the conversation",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message_id": { "type": "string" },
-                              "conversation_id": { "type": "string" },
-                              "role": {
-                                "type": "string",
-                                "enum": ["user", "assistant", "system"]
-                              },
-                              "content": { "type": "string" },
-                              "message_order": { "type": "integer" },
-                              "created_at": { "type": "string", "format": "date-time" },
-                              "message_status": {
-                                "type": "string",
-                                "enum": ["pending", "processed", "failed"]
-                              },
-                              "context": {
-                                "type": ["array", "null"],
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "content": { "type": "string" },
-                                    "distance": { "type": "number" },
-                                    "source_name": { "type": "string" }
-                                  }
-                                }
-                              }
-                            },
-                            "required": ["message_id", "conversation_id", "role", "content", "message_order", "created_at", "message_status"]
-                          }
-                        }
-                      },
-                      "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
-                    }
-                  },
-                  "required": ["data"]
                 }
               }
             }
