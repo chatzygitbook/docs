@@ -1,0 +1,61 @@
+
+
+The **External APIs** tab lets you extend your chatbot’s abilities by connecting it to external services. With these integrations, your bot can go beyond its built-in knowledge fetching real-time data, sending information, or interacting with your applications.
+
+
+
+
+<Frame>
+  <img src="/ai-agents/conversational-ai-agent/settings/api.gif" />
+</Frame>
+---
+
+### Key Settings
+- **API Name**  
+  A simple label to identify the API connection.
+
+- **Endpoint**  
+  The specific URL (web address) the chatbot will send requests to.
+
+- **Description**  
+  A short explanation of what the API does, and the use cases when should chatbot send request.
+
+- **Method**  
+  Defines how the chatbot communicates with the API:  
+  - **GET** → Retrieve information from an external service.  
+  - **POST** → Send information to an external service.  
+
+- **Auth Token**  
+  A secure key that verifies your chatbot’s access rights to the API.  
+  Ensures only authorized requests are processed.
+
+
+- **Variables (Query Parameters)**  
+  This section lets you create dynamic inputs for your API calls.  
+  Variables are added as **Query Parameters** (key-value pairs) at the end of the endpoint URL.  
+
+  Each variable includes:  
+  - **Name** → Identifier for the variable (e.g., `city`).  
+  - **Type** → Data type of the value (e.g., `string`).  
+  - **Description** → Short explanation of the variable’s role.  
+  - **Example** → Sample value showing how it works in practice.  
+
+  **Example:**  
+  If you define a variable with:  
+  - Name: `city`  
+  - Value: `Pune`  
+
+  The API call will look like:  
+  ```https://api.example.com/weather?city=Pune```
+---
+
+
+
+| Setting        | Purpose                                                        |
+|----------------|----------------------------------------------------------------|
+| **API Name**   | Label to identify the API                                      |
+| **Endpoint**   | Web address where the request is sent                          |
+| **Description**| What the API does                                              |
+| **Method**     | GET (retrieve) / POST (send)                                   |
+| **Auth Token** | Security key for authentication                                |
+| **Variables**  | Dynamic query parameters (e.g., `?city=Pune`) for flexibility  |

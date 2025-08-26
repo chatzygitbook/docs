@@ -1,0 +1,47 @@
+
+
+The **Advanced Settings** tab gives you detailed control over how your chatbot processes information. These options affect how data is retrieved, how conversations are remembered, and how responses are generated.
+
+
+<Frame>
+  <img src="/ai-agents/conversational-ai-agent/settings/adv-settings.gif" />
+</Frame>
+
+### Key Features
+
+- **Adjust Chunks**  
+  Control how your uploaded data is split into smaller units (*chunks*) for the AI to process.  
+  - **Chunks**: Number of segments your data is divided into (e.g., 5).  
+  - **Chunk Length**: Size of each chunk.  
+  - **Tip**: Smaller chunks improve precision but may lose context, while larger chunks preserve more information but can be less focused.
+
+- **Hybrid Search**  
+  Enhances retrieval accuracy by combining two methods:  
+  - **Keyword Search**: Matches exact words or phrases.  
+  - **Semantic Search**: Understands meaning and intent.  
+  This dual approach ensures better results for conversational or complex queries.
+
+- **Add Historical Context**  
+  Enables the chatbot to reference earlier parts of the conversation (both user and AI messages).  
+  This improves continuity and relevance but uses additional credits per message.
+
+- **Max Tokens**  
+  Sets the maximum length of a response (measured in tokens  words or word parts).  
+  Helps manage cost, control verbosity, and ensure the bot responds within limits.
+
+- **Token Distribution**  
+  Visual slider that shows how your total `Max Tokens` are allocated across different components:  
+  - **Base Prompt + Function Call + Media**  
+  - **Context (Knowledge)**  
+  - **Chat History**  
+  - **Response + Reasoning**  
+
+  Example allocation:  
+  - Base Prompt + Function Call + Media → ~1,500 tokens  
+  - Context (Knowledge) → ~7,500 tokens  
+  - Chat History → ~5,000 tokens  
+  - Response + Reasoning → ~1,000 tokens  
+
+  > You can dynamically adjust these allocations to balance accuracy, context retention, and reasoning depth.
+
+---
