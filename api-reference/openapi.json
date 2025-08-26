@@ -122,7 +122,7 @@
             "in": "query",
             "required": false,
             "schema": { "type": "string" },
-            "description": "Search by contact name, email or phone number."
+            "description": "Search by contact name, email, phone number or iframe user id."
           },
           {
             "name": "limit",
