@@ -1,0 +1,50 @@
+### Chunking
+
+Chunking is the process of splitting large documents or datasets into smaller, manageable pieces called *chunks*.  
+
+- **Why it matters**: AI models can only process a limited number of tokens at once. By chunking data, the system ensures that long documents are searchable and retrievable.  
+
+- **Best practices**:  
+  - **Smaller chunks** → Higher precision (AI focuses better), but risk losing broader context.  
+  - **Larger chunks** → Preserve context, but retrieval may include extra, less relevant information.  
+  - The right balance depends on your use cases.  
+
+---
+
+### How RAG Works in a Chatbot
+
+**Retrieval-Augmented Generation (RAG)** enhances chatbot responses by combining two steps:  
+
+1. **Retrieve** → The system searches through your *chunked knowledge base* using methods like:  
+   - **Semantic search**: Finds results based on meaning, not just keywords.  
+   - **Hybrid search**: Combines semantic and keyword matching for better accuracy.  
+
+2. **Generate** → The retrieved chunks are passed as *context* to the AI model, which then crafts the final answer.  
+
+---
+
+### Benefits of RAG  
+- Prevents the chatbot from “hallucinating” answers.  
+- Grounds responses in your actual uploaded data.  
+- Efficiently handles large knowledge bases by retrieving only the most relevant chunks.  
+
+---
+
+### RAG Process Flow
+
+```plaintext
+User Question
+      │
+      ▼
+Retrieve Relevant Chunks ──► Knowledge Base (chunked data)
+      │
+      ▼
+Pass Chunks as Context to AI
+      │
+      ▼
+AI Generates Accurate, Context-Aware Answer
+```
+
+⚡ **In short**:  
+- *Chunking* makes your data searchable.  
+- *RAG* ensures the chatbot pulls the most relevant pieces and uses them to generate accurate, context-aware answers.  
