@@ -88,12 +88,7 @@
               "channels/overview",
               {
                 "group": "Supported Channels",
-                "pages": [
-                  "channels/supported-channels/whatsapp",
-                  "channels/supported-channels/website",
-                  "channels/supported-channels/instagram",
-                  "channels/supported-channels/messenger"
-                ]
+                "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger"]
               }
             ]
           },
@@ -119,7 +114,11 @@
           },
           {
             "group": "Contact Conversations",
-            "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
+            "pages": [
+              "api-reference/contact-conversations/get-contact-conversations",
+              "api-reference/contact-conversations/get-messages-for-contact",
+              "api-reference/contact-conversations/get-messages-for-contact-simplified"
+            ]
           },
           {
             "group": "Conversational AI Agent Interactions",
