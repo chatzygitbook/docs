@@ -35,6 +35,12 @@
         "scheme": "bearer",
         "bearerFormat": "JWT",
         "description": "Use the `idToken` retrieved from `/get_id_token` as the Bearer token."
+      },
+      "BearerAuthIframe": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Use the `access_token` retrieved from `/ai_agent/get_access_token` as the Bearer token."
       }
     }
   },
@@ -327,121 +333,6 @@
         }
       }
     },
-    "/get_messages_for_contact": {
-      "get": {
-        "summary": "Get Messages for Contact (Simplified)",
-        "tags": ["Contact Conversations"],
-        "security": [{ "BearerAuth": [] }],
-        "parameters": [
-          {
-            "name": "identifier_key",
-            "in": "query",
-            "required": true,
-            "description": "Identifier type for the contact (iframe_user_id or phone_number).",
-            "schema": {
-              "type": "string",
-              "enum": ["iframe_user_id", "phone_number"],
-              "example": "phone_number"
-            }
-          },
-          {
-            "name": "identifier_value",
-            "in": "query",
-            "required": true,
-            "description": "The value of the identifier (e.g., phone number or iframe_user_id).",
-            "schema": {
-              "type": "string",
-              "maxLength": 500,
-              "example": "+911234567890"
-            }
-          },
-          {
-            "name": "user_email_id",
-            "in": "query",
-            "required": true,
-            "description": "The user email ID associated with the contact.",
-            "schema": {
-              "type": "string",
-              "format": "email",
-              "example": "user@example.com"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of messages to return (default: 20, max: 100).",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 20
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "description": "Number of messages to skip (for pagination, default: 0).",
-            "schema": {
-              "type": "integer",
-              "minimum": 0,
-              "default": 0
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contact and paginated messages.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "contact": {
-                          "type": "object",
-                          "properties": {
-                            "contact_id": { "type": "string" },
-                            "user_email_id": { "type": "string", "format": "email" },
-                            "first_name": { "type": "string" },
-                            "last_name": { "type": "string" },
-                            "phone_number": { "type": "string" },
-                            "iframe_user_id": { "type": "string" },
-                            "created_at": { "type": "string", "format": "date-time" },
-                            "updated_at": { "type": "string", "format": "date-time" },
-                            "last_interacted_at": { "type": "string", "format": "date-time" }
-                          }
-                        },
-                        "messages": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message_id": { "type": "string" },
-                              "conversation_id": { "type": "string" },
-                              "conversation_created_at": { "type": "string", "format": "date-time" },
-                              "content": { "type": "string" },
-                              "role": { "type": "string" },
-                              "tool_calls": { "type": "string", "nullable": true },
-                              "documents": { "type": "string", "nullable": true },
-                              "created_at": { "type": "string", "format": "date-time" },
-                              "message_order": { "type": "integer" }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/init_conversation": {
       "get": {
         "summary": "Initialize Conversation",
@@ -707,6 +598,121 @@
                 "schema": {
                   "type": "string",
                   "example": "data: {\"content\": \"How\"}\n\ndata: {\"content\": \" can\"}\n\ndata: {\"content\": \" I\"}\n\ndata: {\"content\": \" assist\"}\n\ndata: {\"content\": \" you\"}\n\ndata: {\"content\": \" today\"}\n\ndata: {\"content\": \"?\"}\n\ndata: close_connection\n\n"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get_messages_for_contact": {
+      "get": {
+        "summary": "Get Messages for Contact (Simplified)",
+        "tags": ["Conversational AI Agent Interactions"],
+        "security": [{ "BearerAuthIframe": [] }],
+        "parameters": [
+          {
+            "name": "identifier_key",
+            "in": "query",
+            "required": true,
+            "description": "Identifier type for the contact (iframe_user_id or phone_number).",
+            "schema": {
+              "type": "string",
+              "enum": ["iframe_user_id", "phone_number"],
+              "example": "phone_number"
+            }
+          },
+          {
+            "name": "identifier_value",
+            "in": "query",
+            "required": true,
+            "description": "The value of the identifier (e.g., phone number or iframe_user_id).",
+            "schema": {
+              "type": "string",
+              "maxLength": 500,
+              "example": "+911234567890"
+            }
+          },
+          {
+            "name": "user_email_id",
+            "in": "query",
+            "required": true,
+            "description": "The user email ID associated with the contact.",
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "user@example.com"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of messages to return (default: 20, max: 100).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Number of messages to skip (for pagination, default: 0).",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contact and paginated messages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "contact": {
+                          "type": "object",
+                          "properties": {
+                            "contact_id": { "type": "string" },
+                            "user_email_id": { "type": "string", "format": "email" },
+                            "first_name": { "type": "string" },
+                            "last_name": { "type": "string" },
+                            "phone_number": { "type": "string" },
+                            "iframe_user_id": { "type": "string" },
+                            "created_at": { "type": "string", "format": "date-time" },
+                            "updated_at": { "type": "string", "format": "date-time" },
+                            "last_interacted_at": { "type": "string", "format": "date-time" }
+                          }
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "message_id": { "type": "string" },
+                              "conversation_id": { "type": "string" },
+                              "conversation_created_at": { "type": "string", "format": "date-time" },
+                              "content": { "type": "string" },
+                              "role": { "type": "string" },
+                              "tool_calls": { "type": "string", "nullable": true },
+                              "documents": { "type": "string", "nullable": true },
+                              "created_at": { "type": "string", "format": "date-time" },
+                              "message_order": { "type": "integer" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

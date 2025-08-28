@@ -114,11 +114,7 @@
           },
           {
             "group": "Contact Conversations",
-            "pages": [
-              "api-reference/contact-conversations/get-contact-conversations",
-              "api-reference/contact-conversations/get-messages-for-contact",
-              "api-reference/contact-conversations/get-messages-for-contact-simplified"
-            ]
+            "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
           },
           {
             "group": "Conversational AI Agent Interactions",
@@ -129,6 +125,7 @@
               "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
               "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
               "api-reference/conversational-ai-agent-interactions/get-stream-status",
+              "api-reference/contact-conversations/get-messages-for-contact-simplified",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
               "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
