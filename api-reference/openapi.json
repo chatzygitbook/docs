@@ -797,7 +797,7 @@
                         },
                         "messages": {
                           "type": "array",
-                          "description": "Last 10 latest messages in the conversation",
+                          "description": "Latest 10 messages in the conversation",
                           "items": { "type": "object" }
                         }
                       },
