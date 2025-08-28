@@ -873,6 +873,55 @@
         }
       }
     },
+    "/insert_nudge_message": {
+      "post": {
+        "summary": "Insert a nudge message into a conversation",
+        "tags": ["Conversational AI Agent Interactions"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Conversation ID where the nudge message will be added",
+                    "example": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  "nudge_message": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "Text content of the nudge message",
+                    "example": "Hi, do you need any help?"
+                  }
+                },
+                "required": ["conversation_id", "nudge_message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Nudge message inserted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Nudge message inserted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/get_stream_status": {
       "get": {
         "summary": "Get Stream Status",

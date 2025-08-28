@@ -131,7 +131,8 @@
               "api-reference/conversational-ai-agent-interactions/get-stream-status",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
-              "api-reference/conversational-ai-agent-interactions/generate-presigned-url"
+              "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
+              "api-reference/conversational-ai-agent-interactions/insert-nudge-message"
             ]
           },
           {
