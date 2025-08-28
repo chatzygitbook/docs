@@ -797,16 +797,11 @@
                         },
                         "messages": {
                           "type": "array",
-                          "description": "All messages in the conversation",
-                          "items": { "type": "object" }
-                        },
-                        "latest_5": {
-                          "type": "array",
-                          "description": "Last 5 messages in the conversation",
+                          "description": "Last 10 latest messages in the conversation",
                           "items": { "type": "object" }
                         }
                       },
-                      "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
+                      "required": ["stream_status", "response_processing_status", "messages"]
                     }
                   },
                   "required": ["data"]
