@@ -73,8 +73,23 @@
                 "icon": "bot-message-square",
                 "pages": [
                   "ai-agents/flow-based-ai-agent/overview",
-                  "ai-agents/flow-based-ai-agent/studio",
-                  "ai-agents/flow-based-ai-agent/settings",
+                  {
+                    "group": "Studio",
+                    "pages": [
+                  "ai-agents/flow-based-ai-agent/studio/overview"
+
+                  ]
+                  },
+                  {
+                    "group": "Settings",
+                    "pages": [
+                  "ai-agents/flow-based-ai-agent/settings/smart-ai-mode",
+                  "ai-agents/flow-based-ai-agent/settings/chat-widget"
+                  ]
+                  },
+
+
+                  
                   "ai-agents/flow-based-ai-agent/playground",
                   "ai-agents/flow-based-ai-agent/dashboard"
                 ]
