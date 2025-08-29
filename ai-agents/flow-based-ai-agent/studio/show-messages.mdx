@@ -1,0 +1,73 @@
+
+
+The **Show Messages** cards are for the chatbot's output what the user sees and receives. These cards let you present information in various formats to make the conversation more engaging and informative.
+
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/show-messages.png"  />
+</Frame>
+
+---
+
+#### **Text**
+This is the most basic way to send a message. You simply add a block of text for the chatbot to display.  
+
+* **Message to show**: Enter the text you want the chatbot to send to the user.  
+
+> **Example:**  
+> Message: `Hi there! How may I assist you today?`
+
+---
+
+#### **Document**
+This card allows the chatbot to send a document to the user.  
+
+* **Document URL**: The web address of the document you want to send. You can also upload a document directly.  
+* **Filename**: The name the document will have when the user downloads it.  
+* **Caption**: A short message to display alongside the document.  
+
+> **Example:**  
+> * **Document URL**: `https://www.chatzy.ai/assets/price-sheet.pdf`  
+> * **Filename**: `Price_Sheet.pdf`  
+> * **Caption**: `Here is our latest pricing information.`
+
+---
+
+#### **Card**
+This is a powerful card for showing rich, structured information, such as product details or a profile.  
+
+* **Title**: The main heading for the card (e.g., the product name).  
+* **Price**: An optional field for displaying the item's price.  
+* **Image URL**: The web address for an image to display on the card. You can also upload an image directly.  
+* **Link**: The URL for a button at the bottom of the card.  
+* **Link Text**: The text that appears on the link button (e.g., "Learn More" or "Buy Now").  
+
+> **Example:**  
+> * **Title**: `The Mega-Bot 2000`  
+> * **Price**: `$499`  
+> * **Image URL**: `https://www.chatzy.ai/assets/megabot.png`  
+> * **Link**: `https://www.chatzy.ai/buy-now`  
+> * **Link Text**: `Buy Now`
+
+---
+
+#### **Button**
+This card creates a clickable button with a link. It's useful for directing the user to a specific webpage.  
+
+* **Text**: The text that appears on the button (e.g., "Visit Website").  
+* **Link**: The URL the button directs the user to.  
+
+> **Example:**  
+> * **Text**: `Contact Us`  
+> * **Link**: `https://www.chatzy.ai/contact`
+
+---
+
+#### **Action Button**
+Similar to a regular button, this card creates a clickable button. However, instead of linking to an external webpage, it triggers an action within your chat flow, allowing you to advance the conversation based on the user's choice.  
+
+* **Text**: The text that appears on the button.  
+* **Triggered Action**: Defines which Live agent Modal in the conversation should start when clicked.  
+
+> **Example:**  
+> * **Text**: `Request a Demo`  
+> * **Triggered Action**: Open Live Agent model Genesys.

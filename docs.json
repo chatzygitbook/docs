@@ -76,7 +76,11 @@
                   {
                     "group": "Studio",
                     "pages": [
-                  "ai-agents/flow-based-ai-agent/studio/overview"
+                  "ai-agents/flow-based-ai-agent/studio/overview",
+                  "ai-agents/flow-based-ai-agent/studio/capture-input",
+                  "ai-agents/flow-based-ai-agent/studio/show-messages",
+                  "ai-agents/flow-based-ai-agent/studio/execute",
+                  "ai-agents/flow-based-ai-agent/studio/flow-logic"
 
                   ]
                   },

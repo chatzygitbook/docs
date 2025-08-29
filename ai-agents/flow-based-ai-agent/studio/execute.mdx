@@ -1,0 +1,78 @@
+
+
+The **Execute** cards give your chatbot the ability to perform actions behind the scenes. Unlike input or message cards, these are for running code, calling AI models, or querying other agents to accomplish complex tasks.
+
+
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/execute.png"  />
+</Frame>
+---
+
+#### Execute Code
+This powerful card allows you to run custom code directly within your flow. It’s useful for data manipulation, logic, calculations, or integrating external APIs.  
+
+When using this card, you have access to **pre-configured globals** that simplify coding:
+
+* **Functions**  
+  * `len(obj)`: Returns the length of an object (e.g., list, string).  
+  * `range(start, stop)`: Generates a sequence of numbers.  
+  * `print(message)`: Logs output safely.  
+  * `get_details()`: Retrieves predefined details from your flow.  
+  * `get_contact_details()`: Fetches lead or user information.  
+  * `upload_to_s3(file)`: Uploads a file to Amazon S3 storage.  
+  * `save_details(data)`: Saves data for later use in the flow.  
+
+* **Modules**  
+  * `httpx`: For making HTTP requests to external APIs.  
+  * `json`: Parse and manipulate JSON data.  
+  * `re`: Use regular expressions to validate or extract text patterns.  
+  * `datetime`, `timezone`, `timedelta`: Handle dates, times, and timezones.  
+
+* **Types**  
+  * `str`: Strings of text.  
+  * `int`: Whole numbers.  
+  * `float`: Decimal numbers.  
+  * `list`: Ordered collection of items.  
+  * `dict`: Key-value pairs.  
+  * `set`: Unordered unique items.  
+  * `tuple`: Immutable sequence of values.  
+
+> **Example:**  
+> Get the current time and save it to a variable:  
+> ```python
+> 
+> current_time = datetime.datetime.now()
+> print(f"Current time is {current_time}")
+> ```
+
+---
+
+#### AI Task
+This card sends a specific instruction to an AI model to perform a **focused task** and return a response. Unlike normal conversation, it is designed for precise execution.  
+
+* **Instructions**: A concise directive for the AI.  
+* **Input**: The data the AI should process.  (Here you can also use the variable to use dynamic data.)
+* **Model**: The AI model to use.  
+* **Store in variable**: Save the AI’s output.  
+
+> **Example:**  
+> Summarize a block of text using AI:  
+> * **Instructions**: `Summarize the following text.`  
+> * **Input**: `The sun is a star at the center of the solar system...`  
+> * **Model**: `GPT-4o Mini`  
+> * **Store in variable**: `summary_text`
+
+---
+
+#### Query AI Agent
+This card lets your chatbot query another **specialized AI Agent** that you’ve configured. It helps in creating a network of collaborative agents.  
+
+* **Query**: The request you want to send.  
+* **Conversational AI Agent**: Choose which agent to query.  
+* **Store in variable**: Save the response.  
+
+> **Example:**  
+> Ask a stock-checking agent for Google’s stock price:  
+> * **Query**: `What is the latest stock price for Google?`  
+> * **Conversational AI Agent**: `Stock_Checker_Bot`  
+> * **Store in variable**: `google_stock_price`

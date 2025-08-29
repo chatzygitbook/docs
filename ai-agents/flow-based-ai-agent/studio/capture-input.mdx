@@ -1,0 +1,75 @@
+
+
+Within a Node, the **Capture Input** cards are used to collect information from the user in various formats. These are your primary tools for gathering data during a conversation.
+
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/capture-input.png"  />
+</Frame>
+
+---
+
+#### **Raw Input**
+This card asks the user an open-ended question and captures their response as free-form text. It's ideal for questions that require a unique, typed answer, like a name or a detailed request.  
+
+* **Question to ask**: The message the user will see.  
+* **Let AI Process your input**: A toggle to let the AI analyze and understand the user's free text response.  
+* **Regex (Regular Expression)**: An advanced option to validate the user's input with a specific pattern (e.g., an email address format or a phone number).  
+* **Store in variable**: Saves the user's response in a variable for later use in the flow.  
+
+> **Example:** "What is your full name?"
+
+---
+
+#### **Single Choice**
+This card presents a set of options from which the user can select only one.  
+
+* **Question to ask**: The message the user will see.  
+* **Choices**: The list of options you want to present to the user.  
+* **Use Interactive WhatsApp message**: A toggle to format the choices as interactive buttons when the chatbot is integrated with WhatsApp.  
+* **Store in variable**: Saves the user's selection in a variable for later use in the flow.  
+
+> **Example:** "Are you a new or returning customer?" with options like `New` and `Returning`.
+
+---
+
+#### **Multiple Choice**
+This card allows the user to select one or more options from a list.  
+
+* **Question to ask**: The message the user will see.  
+* **Choices**: The list of options you want to present.  
+* **Use Interactive WhatsApp message**: A toggle to format the choices as an interactive WhatsApp message.  
+* **Store in variable**: Saves the user's selections in a variable.  
+
+> **Example:** "Which features are you interested in?" with checkboxes for `Messaging`, `Analytics`, `Integrations`.
+
+---
+
+#### **Dropdown**
+This card provides a compact menu for the user to select a single option from a list.  
+
+* **Question to ask**: The message the user will see.  
+* **Choices**: The list of options to be included in the dropdown menu.  
+* **File Input**: An option to allow the user to upload a file in addition to the dropdown selection.  
+* **Use Interactive WhatsApp message**: A toggle to format the choices as an interactive WhatsApp message.  
+* **Store in variable**: Saves the user's selection in a variable.  
+
+> **Example:** "Please select your country of residence."
+
+---
+
+#### **Image/Document Upload**
+This card enables the user to upload files, such as images or documents, directly into the conversation.  
+
+* **Question to ask**: The message the user will see.  
+
+> **Example:** "Please upload a photo of your product for our support team."
+
+---
+
+#### **Location**
+This card prompts the user to share their geographical location.  
+
+* **Question to ask**: The message the user will see.  
+* **Store in variable**: Saves the user's location data in a variable.  
+
+> **Example:** "Can you share your location so I can find the nearest store for you?"

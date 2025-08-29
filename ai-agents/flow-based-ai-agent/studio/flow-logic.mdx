@@ -1,0 +1,13 @@
+
+The **Flow Logic** cards are the controls that determine how your conversation moves from one step to the next. They are the "if-then" statements of your chatbot flow, allowing you to create dynamic and intelligent paths.
+
+
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/flow-logic.png"  />
+</Frame>
+
+* **Transition**: This is the core card for controlling the conversation's flow. It allows you to transition (or move) from the current node to another node based on a specific condition.
+    * **Condition**: This is a required field where you define the rule that must be true for the transition to happen. The condition is a simple boolean expression.
+        * **Example:**
+            * A condition of `True` creates an unconditional transition, meaning the conversation will always move to the next connected node.
+            * A condition could also check a variable, such as `user_input == "yes"`, to move the conversation to a new node only if the user said "yes."
