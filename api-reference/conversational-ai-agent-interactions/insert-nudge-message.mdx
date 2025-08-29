@@ -1,0 +1,57 @@
+---
+openapi: post /insert_nudge_message
+---
+
+Inserts a nudge message into an ongoing conversation.  
+Nudge messages are designed to re-engage users by prompting them with a friendly reminder or question.
+
+**Important:**  
+Nudge messages that are sent while the AI Agent is generating a response will not be inserted into the conversation and will be ignored.
+
+---
+
+## Usage Scenarios
+
+### 1. Using Chatzy's iframe as the UI
+
+When you embed Chatzy's iframe URL inside your application or website, you **must send a `postMessage`** to the iframe to insert a nudge message.
+
+Example:
+
+```js
+const iframe = document.getElementById('chatzy-iframe');
+
+const message = {
+  type: '[ASSISTANT_NUDGE]',
+  nudge_message: 'This is a test nudge sent into the iframe',
+};
+
+// Send to iframe
+iframe.contentWindow.postMessage(JSON.stringify(message), '*');
+```
+
+- The iframe id will be `chatzy-iframe` if you are using the default embed code.
+- If you assign a custom id to the iframe, replace "chatzy-iframe" with your own iframe element’s ID.
+- The iframe URL can be embedded inside any app or website and the mechanism remains the same.
+
+**Note:**
+When a `postMessage` is received, Chatzy AI internally calls this `/insert_nudge_message` endpoint on your behalf. You don't need to call it directly in this case.
+
+### 2. Using Your Own Custom UI
+
+If you are not using Chatzy's iframe but have built your own UI for conversations, you can insert the nudge message directly into your interface as you see fit.
+
+However, to keep Chatzy's backend conversation history in sync, you must call this endpoint immediately after inserting the nudge into your UI.
+
+- `POST /insert_nudge_message`
+
+- Request body:
+
+```json
+{
+  "conversation_id": "550e8400-e29b-41d4-a716-446655440000",
+  "nudge_message": "Hi, do you need any help?"
+}
+```
+
+This ensures the nudge message is properly logged and will be reflected in Chatzy's systems.

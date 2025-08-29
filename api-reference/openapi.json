@@ -35,6 +35,12 @@
         "scheme": "bearer",
         "bearerFormat": "JWT",
         "description": "Use the `idToken` retrieved from `/get_id_token` as the Bearer token."
+      },
+      "BearerAuthIframe": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Use the `access_token` retrieved from `/ai_agent/get_access_token` as the Bearer token."
       }
     }
   },
@@ -599,6 +605,121 @@
         }
       }
     },
+    "/get_messages_for_contact": {
+      "get": {
+        "summary": "Get Messages for Contact (Simplified)",
+        "tags": ["Conversational AI Agent Interactions"],
+        "security": [{ "BearerAuthIframe": [] }],
+        "parameters": [
+          {
+            "name": "identifier_key",
+            "in": "query",
+            "required": true,
+            "description": "Identifier type for the contact (iframe_user_id or phone_number).",
+            "schema": {
+              "type": "string",
+              "enum": ["iframe_user_id", "phone_number"],
+              "example": "phone_number"
+            }
+          },
+          {
+            "name": "identifier_value",
+            "in": "query",
+            "required": true,
+            "description": "The value of the identifier (e.g., phone number or iframe_user_id).",
+            "schema": {
+              "type": "string",
+              "maxLength": 500,
+              "example": "+911234567890"
+            }
+          },
+          {
+            "name": "user_email_id",
+            "in": "query",
+            "required": true,
+            "description": "The user email ID associated with the contact.",
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "user@example.com"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of messages to return (default: 20, max: 100).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Number of messages to skip (for pagination, default: 0).",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contact and paginated messages.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "contact": {
+                          "type": "object",
+                          "properties": {
+                            "contact_id": { "type": "string" },
+                            "user_email_id": { "type": "string", "format": "email" },
+                            "first_name": { "type": "string" },
+                            "last_name": { "type": "string" },
+                            "phone_number": { "type": "string" },
+                            "iframe_user_id": { "type": "string" },
+                            "created_at": { "type": "string", "format": "date-time" },
+                            "updated_at": { "type": "string", "format": "date-time" },
+                            "last_interacted_at": { "type": "string", "format": "date-time" }
+                          }
+                        },
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "message_id": { "type": "string" },
+                              "conversation_id": { "type": "string" },
+                              "conversation_created_at": { "type": "string", "format": "date-time" },
+                              "content": { "type": "string" },
+                              "role": { "type": "string" },
+                              "tool_calls": { "type": "string", "nullable": true },
+                              "documents": { "type": "string", "nullable": true },
+                              "created_at": { "type": "string", "format": "date-time" },
+                              "message_order": { "type": "integer" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/stt": {
       "post": {
         "summary": "Audio Input",
@@ -758,6 +879,55 @@
         }
       }
     },
+    "/insert_nudge_message": {
+      "post": {
+        "summary": "Insert a nudge message into a conversation",
+        "tags": ["Conversational AI Agent Interactions"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Conversation ID where the nudge message will be added",
+                    "example": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  "nudge_message": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "Text content of the nudge message",
+                    "example": "Hi, do you need any help?"
+                  }
+                },
+                "required": ["conversation_id", "nudge_message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Nudge message inserted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Nudge message inserted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/get_stream_status": {
       "get": {
         "summary": "Get Stream Status",
@@ -797,16 +967,11 @@
                         },
                         "messages": {
                           "type": "array",
-                          "description": "All messages in the conversation",
-                          "items": { "type": "object" }
-                        },
-                        "latest_5": {
-                          "type": "array",
-                          "description": "Last 5 messages in the conversation",
+                          "description": "Latest 10 messages in the conversation",
                           "items": { "type": "object" }
                         }
                       },
-                      "required": ["stream_status", "response_processing_status", "messages", "latest_5"]
+                      "required": ["stream_status", "response_processing_status", "messages"]
                     }
                   },
                   "required": ["data"]

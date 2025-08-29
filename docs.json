@@ -103,12 +103,7 @@
               "channels/overview",
               {
                 "group": "Supported Channels",
-                "pages": [
-                  "channels/supported-channels/whatsapp",
-                  "channels/supported-channels/website",
-                  "channels/supported-channels/instagram",
-                  "channels/supported-channels/messenger"
-                ]
+                "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger"]
               }
             ]
           },
@@ -145,9 +140,11 @@
               "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
               "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
               "api-reference/conversational-ai-agent-interactions/get-stream-status",
+              "api-reference/contact-conversations/get-messages-for-contact-simplified",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
-              "api-reference/conversational-ai-agent-interactions/generate-presigned-url"
+              "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
+              "api-reference/conversational-ai-agent-interactions/insert-nudge-message"
             ]
           },
           {

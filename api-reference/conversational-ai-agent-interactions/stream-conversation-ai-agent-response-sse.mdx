@@ -12,15 +12,15 @@ The stream sends `event.data` messages that include control signals or agent-gen
 
 ---
 
-## 1. Lifecycle Control
+## 1. Connection Closing
 
-- `call_again`: Indicates a tool/function call occurred. You must call `/generate_secret` again to get a new token and reconnect to `/get-response`.
+- `close_connection`: Indicates the normal end of the stream. The client **must close** the `EventSource` connection.
 
 ---
 
-## 2. Connection Closing
+## 2. Stream Continuation
 
-- `close_connection`: Indicates the normal end of the stream. The client **must close** the `EventSource` connection.
+- `call_again`: Indicates a tool/function call occurred. You've to set your message loading state to true and new message chunks will be sent in the stream.
 
 ---
 
@@ -31,14 +31,15 @@ These indicate problems or user restrictions. In all cases, the client must clos
 - `no_message_found`: The agent was unable to generate a response as no user message corresponding to request found.
 - `close_connection_incomplete_content`: AI model exceeded its response context window.
 - `close_connection_incomplete_tool_calls`: Context overflow occurred while generating tool call arguments.
+- `close_connection_incomplete_request`: Context overflow occurred while generating response.
 - `__ERROR__: ....`: An error occurred while processing the request.
 - `[FROZEN]` / `[BLACKLISTED]`: User access restrictions triggered.
 
 ---
 
-## 4. AI-Generated Content
+## 4. AI Agent Response Content
 
-- JSON payloads: Contain AI-generated message content. When streaming is ON you will receive message chunks, and when streaming is OFF you will get the full response in a single JSON payload.
+- JSON payloads: Contain AI Agent Response message content. When streaming is **ON you will receive message chunks**, and when streaming is **OFF you will get the full response in a single JSON payload**.
 
 **When Streaming is ON:**
 
@@ -100,9 +101,8 @@ const callSourceHandler = (token) => {
 
   source.onmessage = (event) => {
     if (event.data === 'call_again') {
-      // Tool call executed – regenerate token and reconnect
-      callAgainHandler();
-      source.close();
+      // Tool call executed
+      // set your message loading state here
     } else if (event.data === 'close_connection') {
       // End of stream
       source.close();
@@ -111,6 +111,8 @@ const callSourceHandler = (token) => {
     } else if (event.data === 'close_connection_incomplete_content') {
       source.close();
     } else if (event.data === 'close_connection_incomplete_tool_calls') {
+      source.close();
+    } else if (event.data === 'close_connection_incomplete_request') {
       source.close();
     } else if (['[FROZEN]', '[BLACKLISTED]'].includes(event.data)) {
       console.warn('Your access is temporarily restricted.'); // show error message to user
@@ -136,15 +138,5 @@ const callSourceHandler = (token) => {
     source.close();
     console.error(`EventSource failed:`, error);
   };
-};
-
-const callAgainHandler = async () => {
-  const response = await fetch('/generate_secret?conversation_id=...');
-  const data = await response.json();
-  const token = data?.data?.temp_token;
-
-  if (token) {
-    callSourceHandler(token);
-  }
 };
 ```
