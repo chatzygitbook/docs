@@ -1,0 +1,62 @@
+The **Smart AI Mode** tab allows you to enhance your Flow-based chatbot flows with an intelligent layer of AI. This mode uses a **Master Agent** to handle unexpected questions, making your chatbot more flexible, natural, and conversational.
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/settings/smart-ai-mode.png"  />
+</Frame>
+
+---
+
+### Master Agent
+
+The **Master Agent** acts as a safety net for your chatbot flow. Whenever a user asks something that falls outside the predefined conversation path, the Master Agent intelligently takes over. After answering, it smoothly brings the user back into the intended flow.  
+> ⚠️ Note: Using the Master Agent consumes **conversational AI credits**.
+
+---
+
+#### Key Functions of the Master Agent
+
+* **Searching the Knowledge Base**  
+  Queries a linked Knowledge Base (a collection of your documents, FAQs, or uploaded data) to provide relevant answers to user questions.
+
+* **Updating Bot Variables**  
+  Dynamically updates variables based on user input, allowing more personalized and context-aware conversations.
+
+* **Guiding Back to the Flow**  
+  Ensures that after answering an off-track question, the user is redirected back to the correct conversation flow.
+
+---
+
+#### Configuration Options
+
+When setting up the Master Agent, you can configure the following:
+
+* **Select Knowledge Base Chatbot**  
+  Choose the chatbot that is connected to your Knowledge Base. This ensures the Master Agent has access to your documents and data.  
+
+* **When to Query Knowledge Base?** *(Required)*  
+  Define the conditions under which the Master Agent should activate and perform a knowledge base search.  
+
+* **Additional Instructions**  
+  Provide specific guidelines (like tone, limits, or preferences) for the Master Agent to follow while handling queries.  
+
+* **About the Company**  
+  Share short context about your company, which helps the Master Agent frame answers in a brand-consistent way.  
+
+* **Company Name, Support Email, Support Phone Number**  
+  Give the Master Agent key contact details to pass on to users if needed.  
+
+* **Conversation Reset Flag**  
+  A toggle that determines whether the chat history should reset after the Master Agent takes over. Useful for starting fresh after unexpected diversions.  
+
+---
+
+#### Example Use Case
+
+Imagine your **e-commerce support bot** handles order tracking. A customer suddenly asks:  
+*“Do you sell gift cards?”*  
+
+Since this question isn’t in the predefined order-tracking flow, the **Master Agent**:  
+1. Searches the Knowledge Base → Finds info about gift cards.  
+2. Answers: *“Yes, we offer digital gift cards available in ₹500, ₹1000, and ₹2000 values.”*  
+3. Guides the user back → *“Now, would you like to continue with tracking your order?”*  
+
+This keeps conversations natural without breaking the flow.
