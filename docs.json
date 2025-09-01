@@ -107,6 +107,7 @@
               "channels/overview",
               {
                 "group": "Supported Channels",
+                "icon":"satellite-dish",
                 "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger"]
               }
             ]
@@ -114,7 +115,16 @@
           {
             "group": "Journey",
             "icon": "route",
-            "pages": ["journey/overview"]
+            "pages": ["journey/overview","journey/getting-started","journey/dashboard",{
+                    "group": "Studio",
+                    "icon":"external-link",
+                    "pages": [
+                  "journey/studio/overview",
+                  "journey/studio/triggers"
+                  
+                  ]
+                  }
+                ]
           },
           {
             "group": "Campaigns",
