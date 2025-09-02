@@ -120,7 +120,17 @@
                     "icon":"external-link",
                     "pages": [
                   "journey/studio/overview",
-                  "journey/studio/triggers"
+                  "journey/studio/triggers",{
+                    "group":"Actions",
+                    "pages":[
+                      "journey/studio/actions/overview",
+                      "journey/studio/actions/send-message",
+                      "journey/studio/actions/send-message-in-conversation",
+                      "journey/studio/actions/wait",
+                      "journey/studio/actions/wait-until"
+                    
+                    ]
+                  }
                   
                   ]
                   }

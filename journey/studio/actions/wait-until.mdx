@@ -1,0 +1,18 @@
+
+
+The **Wait Until** action pauses a journey until a specific event or condition is met, rather than a fixed amount of time. This enables dynamic flows that can adapt to user inactivity, responses, or other real-time events.
+<Frame>
+  <img src="/journey/studio/actions/wait-until.png" alt="wa1" className="rounded-lg" />
+</Frame>
+#### Configuration Fields
+
+- **Wait**  
+  Defines the duration linked to the selected event. For example, if the event is *Last user message is older than duration*, you can specify the duration here (e.g., 10 minutes).
+
+- **Event**  
+  Dropdown to select the condition that must be satisfied for the journey to proceed.  
+  Example: *Last user message is older than duration* (commonly used to re-engage inactive users).
+
+- **Conversation ID**  
+  Identifies the specific conversation that the action should monitor for the defined event.
+    <br/>`{{conversation_id}}`

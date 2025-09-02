@@ -1,0 +1,22 @@
+
+The **Send Message in Conversation** action is used to send a message within an existing and active conversation. Unlike the **Send Message** action (which is for outbound one-way communication), this action is designed to be part of a two-way dialogue.
+
+<Frame>
+  <img src="/journey/studio/actions/smc.png" alt="wa1" className="rounded-lg" />
+</Frame>
+#### Configuration Fields
+
+- **Conversation ID**  
+  The unique identifier of the conversation where the message should be sent. This ensures the message is delivered to the correct ongoing chat.
+
+- **Channel**  
+  Select the messaging platform (e.g., WhatsApp, Messenger, Instagram) where the message will be sent.
+
+- **Message Type**  
+  Defines the format of the message. Options can include **Text**, **Card**, **Document**, and others depending on platform support.
+
+- **Message Body**  
+  The actual content of the message to be sent.
+
+- **AI Generated Follow-up Message**  
+  Toggle option that, when enabled, lets the AI dynamically generate the message body to provide more context-aware and natural responses.

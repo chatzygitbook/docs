@@ -2,112 +2,72 @@
 
 Use the **Visual Journey Builder Studio** to design and customize how your journey flows from the initial trigger to various automated actions.
 
----
+## Adding a Trigger
 
-## Step 1: Add a Trigger
-
-The first step in creating a journey is selecting a **trigger**, which is the event that starts the journey.  
+The first step in creating a journey is selecting a **trigger**, which is the event that starts the journey.
 You can choose from several trigger options depending on your use case.
 
-<Frame>
-  <img src="/journey/studio/triggers.png" alt="triggers-overview" className="rounded-lg" />
-</Frame>
+![triggers-overview](/journey/studio/triggers/triggers.png)
 
----
+## Trigger Types
 
-## Available Triggers
+### Inbound Webhook
 
-### 1. Inbound Webhook  
+The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system, like CRMs, forms, or e-commerce platforms.
 
-The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system.  
-This is commonly used to connect your chatbot with tools like CRMs, forms, or e-commerce platforms. For example, if a lead fills out a form on your website, the webhook can send that data to the chatbot and automatically begin a conversation.
+![webhook-trigger](/journey/studio/triggers/trigger1.png)
 
-When the webhook is triggered, the chatbot can identify the user (e.g., by phone number or email) and use the incoming data inside the flow.
+**Setup Steps:**
+1. Create a unique webhook URL in the platform.
+2. Configure your external app to send a POST request to this URL.
+   - Example: A form submission sends details to the webhook.
+3. Refresh the webhook to view incoming data and map fields (for example, `name`, `email`, `order_id`).
+4. Select a contact identifier (phone number, email, etc.).
+5. Use mapped variables inside the journey with `{{variable_name}}`.
+   - Example: “Hi `{{name}}`, we received your order `{{order_id}}`.”
 
-<Frame>
-  <img src="/journey/studio/trigger1.png" alt="webhook-trigger" className="rounded-lg" />
-</Frame>
+### Shopify - Abandoned Checkout
 
-#### How to Set It Up
+Designed for Shopify stores, this trigger helps recover lost sales by messaging customers who abandoned their carts.
 
-1. **Create Webhook** – Generate a unique webhook URL from the platform. This is the address where your external system will send data.  
-2. **Send Data** – Configure your external app to make an HTTP **POST request** to this webhook URL.  
-   Example: When someone submits a form, their details are sent to the webhook.  
-3. **View & Map Payload** – Click **Refresh Webhook** to see the data being sent. Then map those fields (e.g., `name`, `email`, `order_id`) to chatbot variables.  
-4. **Choose Contact Identifier** – Select how the user should be recognized (e.g., by phone number or email). This ensures the chatbot knows which contact the journey belongs to.  
-5. **Use Dynamic Variables** – Once mapped, you can reuse the data inside your journey using `{{variable_name}}`.  
-   Example: “Hi {{name}}, we received your order {{order_id}}.”  
+![shopify-trigger](/journey/studio/triggers/trigger2.png)
 
----
+**Setup Steps:**
+1. Connect your Shopify store.
+2. Set the wait time before contacting customers.
+   - Example: Wait 30 minutes after cart abandonment.
+3. Personalize messages using cart details.
+   - Example: “Hi `{{name}}`, you left `{{product_name}}` in your cart.”
 
-### 2. Shopify - Abandoned Checkout  
+### Conversation-Based Trigger
 
-The **Shopify Abandoned Checkout** trigger is tailored for online stores using Shopify.  
-It helps recover lost sales by automatically reaching out to customers who added items to their cart but didn’t finish the checkout.
+This starts a journey when a user initiates a chat on a channel (WhatsApp, Instagram, Messenger, etc.).
 
-<Frame>
-  <img src="/journey/studio/trigger2.png" alt="shopify-trigger" className="rounded-lg" />
-</Frame>
+![conversation-trigger](/journey/studio/triggers/trigger3.png)
 
-When the trigger is activated, the chatbot can send reminders, offer discounts, or provide assistance — increasing the chances of converting the abandoned cart into a successful purchase.
+**Setup Steps:**
+1. Select the channel to monitor.
+2. Choose the event type:
+   - Conversation Created
+   - First Conversation for Contact
+   - Conversation Resumed
+3. (Optional) Add keyword conditions or exclusions.
+   - Trigger only on template replies.
+   - Trigger only if a user does not reply to a template.
+   - Include or exclude specific keywords.
 
-#### How to Set It Up
+**Example:**
+If a user messages “pricing” on WhatsApp, the chatbot launches the **Pricing Information Journey** immediately.
 
-1. **Enable the Trigger** – Connect your Shopify store so the system can detect when a cart is abandoned.  
-2. **Set a Delay (Wait Time)** – Decide how long to wait before contacting the user.  
-   - Example: Wait 30 minutes after checkout is abandoned.  
-   - Purpose: Gives the customer time to return on their own before the chatbot intervenes.  
-3. **Personalize the Conversation** – Use the abandoned cart details (like product name or total amount) inside your chatbot messages.  
-   Example: “Hi {{name}}, you left {{product_name}} in your cart. Would you like to complete your order?”  
+### Contact Added to List
 
----
+This trigger starts a journey whenever a new contact is added to a list (such as onboarding or welcome flows).
 
-### 3. Conversation-Based Trigger  
+![list-trigger](/journey/studio/triggers/trigger4.png)
 
-The **Conversation Trigger** starts a journey when a user initiates a new chat on a specific channel.  
-This is useful for setting up automatic responses whenever a user sends the first message or resumes an old conversation.
+**Setup Steps:**
+1. Select the target list (for example, New Leads, Newsletter Subscribers, Trial Users).
+2. Define the journey actions, such as sending a welcome message, onboarding flow, or automated follow-up.
 
-<Frame>
-  <img src="/journey/studio/trigger3.png" alt="conversation-trigger" className="rounded-lg" />
-</Frame>
-
-It allows you to capture intent early and guide the user into a predefined flow without requiring manual intervention.
-
-#### How to Set It Up
-
-1. **Select a Channel** – Choose the messaging platform you want to monitor, such as **WhatsApp**, **Instagram**, or **Messenger**.  
-2. **Choose an Event** – Decide what should activate the journey:  
-   - `Conversation Created` – A new chat starts.  
-   - `First Conversation for Contact` – The user is interacting with you for the first time.  
-   - `Conversation Resumed` – The user returns after inactivity.  
-3. **Apply Conditions (Optional)** – Add filters to make the trigger more precise:  
-   - Trigger only if the user replies to a template message.  
-   - Trigger only if the user does not reply to a template message.  
-   - Trigger based on specific keywords in the user’s message.  
-   - Exclude certain keywords to prevent irrelevant triggers.  
-
-**Example Use Case**:  
-A user messages “I want to know about pricing” on WhatsApp.  
-If you’ve set a keyword condition for “pricing,” the chatbot immediately starts the **Pricing Information Journey**, sending them details without delay.  
-
----
-
-### 4. Contact Added to List  
-
-The **Contact Added to List Trigger** automatically starts a journey when a new contact is added to a specific list.  
-This is especially useful for welcome flows, onboarding sequences, or lead nurturing campaigns, ensuring that every new contact receives immediate and consistent engagement.
-
-<Frame>
-  <img src="/journey/studio/trigger4.png" alt="list-trigger" className="rounded-lg" />
-</Frame>
-
-#### How to Set It Up
-
-1. **Select a List** – Choose the target list from your CRM or database.  
-   Example: “New Leads,” “Newsletter Subscribers,” or “Trial Users.”  
-2. **Define the Journey** – Once a new contact is added to the chosen list, the configured journey will begin. This can include sending a welcome message, sharing resources, or starting an automated follow-up sequence.  
-
-**Example Use Case**:  
-A new lead fills out a signup form on your website.  
-They’re automatically added to your **“New Leads” list**.  
-The trigger immediately starts the **Onboarding Journey**, sending a welcome message and guiding them through next steps.  
+**Example:**
+When a lead is added to the **New Leads** list, the journey begins with a welcome message and next-step guidance.
