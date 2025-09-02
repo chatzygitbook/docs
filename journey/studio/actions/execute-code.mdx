@@ -1,0 +1,53 @@
+
+
+The **Execute Code** action allows you to run custom code directly within your journey. This gives you the flexibility to perform operations beyond the built-in actions, such as making calculations, manipulating data, or integrating with external services.
+
+When using this action, you have access to pre-configured **Globals** that make coding easier and safer.
+
+<Frame>
+  <img src="/journey/studio/actions/execute-code.png" alt="wa1" className="rounded-lg" />
+</Frame>
+---
+
+#### Execute Code Globals
+
+- **Functions**  
+  Pre-built operations you can call directly in your code.  
+  - `len`: Gets the length of an object.  
+  - `range`: Generates a sequence of numbers.  
+  - `isinstance`: Checks if an object is of a certain type.  
+  - `print`: Safe logging function.  
+  - `uuid`: Generates a unique ID.  
+  - `get_unix_timestamp`: Gets the current Unix timestamp.  
+  - `upload_to_s3`: Uploads a file to an S3 bucket.  
+  - `get_contact_details`: Retrieves a contact's information.  
+
+- **Modules**  
+  Imported Python libraries available for use.  
+  - `httpx`: For making HTTP requests.  
+  - `json`: For parsing and serializing JSON data.  
+  - `ElementTree`: For parsing XML data.  
+  - `re`: For working with regular expressions.  
+
+- **Types**  
+  Basic data types you can work with.  
+  - `str`: String type.  
+  - `int`: Integer type.  
+  - `float`: Float type.  
+  - `list`: List type.  
+  - `dict`: Dictionary type.  
+  - `set`: Set type.  
+  - `tuple`: Tuple type.  
+
+
+### Test Run
+
+The **Test Run** feature allows you to test your custom code before you save it to the journey. This is an essential debugging tool that helps you ensure your code works as expected and is free of errors.
+
+When you click **Test Run**, the platform executes your code in a safe, isolated environment. You can use this to:
+
+- Check for any syntax errors in your code.  
+- Verify that your code produces the correct output.  
+- See how your code interacts with the variables and functions available in the journey.  
+
+Using this feature helps you confidently build and publish your flows, knowing that your code will perform correctly.

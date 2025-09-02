@@ -1,0 +1,11 @@
+
+The **Extract Entities** action is a powerful tool that automatically pulls specific, structured information from a user's free-form text. This automates the data collection process, allowing you to capture important details like dates, names, or places from a conversation and save them in variables for later use.
+<Frame>
+  <img src="/journey/studio/actions/extract-entities.png" alt="wa1" className="rounded-lg" />
+</Frame>
+#### Configuration Fields
+
+- **Conversation ID**: This is the unique identifier for the conversation where the data will be extracted from. The use of the `{{conversation_id}}` variable ensures that the action is performed on the current conversation.
+- **Entities**: This is where you define the specific pieces of information you want to extract.
+  - **Entity name**: The name of the variable where the extracted data will be stored (e.g., `date`, `product_id`).
+  - **Entity format**: The type or format of the information you want to extract, such as "Date," "Email," "Phone Number," or any custom format you define.
