@@ -1,25 +1,55 @@
-The **Contacts** area is your master database of all users who've interacted with your AI Agent (via WhatsApp, chat, or other channels).
+### Contacts Dashboard
 
-### 🔍 What You Can Do:
+The **Contacts Dashboard** is your central hub for managing all your leads and customers. Here, you can view, filter, and organize your contact list to better manage your audience.
+<Frame>
+  <img src="/audience/contacts.png" />
+</Frame>
+---
 
-* **View Contact Details**
-    * Unique ID (email/phone)
-    * Channel indicator (e.g. WhatsApp)
-    * Email, phone number
-    * Tags and custom attributes
-    * Created/updated timestamps
-* **Create Contacts Manually**
-    * Enter name, email or phone (one required)
-    * Add tags (to organize users)
-    * Add attributes (e.g. region, interest)
-    * Blacklist or freeze contact if needed
-* **Import Contacts via CSV**
-    * Upload a spreadsheet to bulk add users
-    * All fields like email, phone, tags are auto-mapped
-* **Edit or Delete Contacts**
-    * Directly from the table interface
+#### Key Features
+
+* **Search & Filters**: Quickly find contacts using the search bar or filter them by selecting a specific **list** or **tags**. This allows you to segment your audience for targeted campaigns.  
+* **Import CSV**: Import contacts in bulk from an existing file to quickly add your entire contact list.  
+* **Create**: Use the **`+ Create`** button to manually add a new contact.  
+* **Contact List**: The main table provides a clear overview of your contacts, including their name, email, phone number, and when their record was created or updated.  
 
 ---
 
-> ✅ **Use this section to:**
-> Manage all user profiles, apply filters, update data, and keep your contact base organized.
+### Contact Management
+
+The dashboard makes it easy to manage your audience by either manually creating contacts or importing them in bulk.
+
+---
+
+#### Create New Contact
+
+When you click the **`+ Create`** button, a pop-up appears where you can manually add a single contact.
+<Frame>
+  <img src="/audience/n-c.png" />
+</Frame>
+* **First Name & Last Name**: Enter the contact's name.  
+* **Email & Phone Number**: Used as primary identifiers. At least one is required.  
+* **Blacklisted**: Prevents any communication from being sent to this contact.  
+* **Frozen**: Temporarily pauses communication with the contact.  
+* **Tags**: Add labels to categorize the contact (e.g., `VIP`, `Lead`, `Support`).  
+* **Attributes**: Store custom data points (e.g., `City`, `Last Purchase Date`).  
+
+---
+
+#### Import Contacts (CSV)
+
+The **Import CSV** option lets you upload a spreadsheet to add multiple contacts at once. The process has three steps:
+<Frame>
+  <img src="/audience/i-c.png" />
+</Frame>
+**1. Upload CSV File**  
+* The file must include either a `phone_number` or an `email` column.  
+* Accepted column headers: `phone_number`, `email`, `full_name`.  
+* Maximum of **10,000 contacts** per upload.  
+* Phone numbers must include the country code and contain no spaces or special characters.  
+
+**2. Review Sample**  
+* After uploading, you can review a sample of your data to confirm proper formatting.  
+
+**3. Apply Categories**  
+* Apply **lists** or **tags** to the imported contacts during this step to keep them organized.  

@@ -144,9 +144,19 @@
                 ]
           },
           {
-            "group": "Campaigns",
-            "icon": "compass",
-            "pages": ["campaigns/overview", "campaigns/creating-campaigns", "campaigns/campaign-stats"]
+            "group": "Conversations",
+            "icon": "messages-square",
+            "pages": ["conversations/overview"]
+          },
+          {
+            "group": "Audience",
+            "icon": "contact",
+            "pages": [
+
+              "audience/contacts",
+              "audience/lists",
+              "audience/exports"
+            ]
           }
         ]
       },
