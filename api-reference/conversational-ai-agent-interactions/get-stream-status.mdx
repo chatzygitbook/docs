@@ -17,8 +17,8 @@ if (response_processing_status === null && stream_status === 'is_streaming') {
 - `stream_status` is "is_streaming" but `response_processing_status` is `null`.
 - Meaning: The message is sent for processing, but no response is being processed yet.
 - Action taken:
-  - Calls `callSourceHandler(token)` (with `temp_token`) to call the `get_response` endpoint to get the response.
-  - Shows message loading state.
+  - API call to the `get_response` endpoint to get the response.
+  - Show message loading state.
 
 ## Case 2: Stream initialized and processing
 
@@ -33,9 +33,9 @@ else if (response_processing_status === 'processing' && stream_status === 'is_st
 - Action taken:
 
   - Keeps showing the message loading state.
-  - Retries `stream_status` status until `MAX_TRIES` is reached or both (`stream_status` and `response_processing_status`) get `completed` whichever first:
+  - Poll `/get_stream_status` endpoint until `MAX_TRIES` is reached or both (`stream_status` and `response_processing_status`) get `completed` whichever first:
     - If retries (tries) are less than `MAX_TRIES`, increase the counter.
-    - If retries exceed `MAX_TRIES`, stop loading and stop checking `(clearInterval(intervalId))`.
+    - If retries exceed `MAX_TRIES`, stop loading and stop polling.
 
 ## Case 3: Stream is completed
 
@@ -50,10 +50,7 @@ else if (response_processing_status === 'completed' && stream_status === 'comple
 - Meaning: The AI Agent has finished generating the response.
 - Action taken:
 
-  - Find the latest user message index in both current messages and saved conversation.
-  - Collect all assistant messages that appear after the latest user message.
-  - Map them into new message objects with timestamp formatting.
-  - Replace everything after the latest user message in conversationData with these new assistant messages.
+  - Call the `/get_messages_for_conversation` endpoint to get the latest messages and show them to the UI.
 
 - After processing:
   - Turn off the message loading state
@@ -71,87 +68,3 @@ else {
 - Meaning: Something unexpected happened or no valid status.
 - Action taken:
   - Stops checking by clearing the interval.
-
-**Example:**
-
-```js
-const callAgainHandler = async () => {
-  const response = await generateSecret(conversationID);
-  const token = response.data?.data?.temp_token;
-  if (token) {
-    callSourceHandler(token);
-  }
-};
-
-const MAX_TRIES = 20;
-const POLL_INTERVAL = 3000; // 3 seconds
-
-const fetchStatus = async () => {
-  try {
-    const streamStatus = await api.get('/get_stream_status', {
-      converstion_id: conversationID,
-    });
-
-    if (cancelled) return;
-
-    if (streamStatus?.status === 200) {
-      const status = streamStatus.data?.data?.stream_status;
-      const response_processing_status = streamStatus.data?.data?.response_processing_status;
-      const messages = streamStatus.data?.data?.messages || [];
-      const latest5Messages = streamStatus.data?.data?.latest_5 || [];
-
-      if (!response_processing_status && status === 'is_streaming') {
-        callAgainHandler();
-        // show message loading state here
-        clearInterval(intervalId);
-      } else if (response_processing_status === 'processing' && status === 'is_streaming') {
-        // show message loading state here
-
-        if (tries < MAX_TRIES) {
-          // retry polling until MAX_TRIES
-          tries++;
-        } else if (tries >= MAX_TRIES) {
-          setMessageLoading(false);
-          clearInterval(intervalId);
-        }
-      } else if (response_processing_status === 'completed' && status === 'completed') {
-        // assistant response generation completed
-        const latestUserIndex = messages?.map((m) => m?.role)?.lastIndexOf('user');
-        const savedLatestUserIndex = conversationData?.map((m) => m?.role)?.lastIndexOf('user');
-        const assistantAfterLatest = messages?.slice(latestUserIndex + 1)?.filter((m) => m?.role === 'assistant');
-
-        if (assistantAfterLatest?.length) {
-          console.log('Processing new messages:', assistantAfterLatest?.length);
-
-          const newMessageData = assistantAfterLatest.map((serverMsg) => {
-            const istFormattedDate = new Date(serverMsg?.created_at).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-            return {
-              content: serverMsg?.content ?? '',
-              role: 'assistant',
-              time: istFormattedDate,
-            };
-          });
-
-          setConversationData((prev) => {
-            const before = prev?.slice(0, savedLatestUserIndex + 1);
-            return [...before, ...newMessageData];
-          });
-        }
-
-        // turn off message loading state here
-        clearInterval(intervalId);
-      } else {
-        clearInterval(intervalId);
-      }
-    } else {
-      setMessageLoading(false);
-      clearInterval(intervalId);
-    }
-  } catch (err) {
-    clearInterval(intervalId);
-  }
-};
-
-fetchStatus();
-intervalId = setInterval(fetchStatus, POLL_INTERVAL);
-```
