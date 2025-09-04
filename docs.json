@@ -76,24 +76,18 @@
                   {
                     "group": "Studio",
                     "pages": [
-                  "ai-agents/flow-based-ai-agent/studio/overview",
-                  "ai-agents/flow-based-ai-agent/studio/capture-input",
-                  "ai-agents/flow-based-ai-agent/studio/show-messages",
-                  "ai-agents/flow-based-ai-agent/studio/execute",
-                  "ai-agents/flow-based-ai-agent/studio/flow-logic"
-
-                  ]
+                      "ai-agents/flow-based-ai-agent/studio/overview",
+                      "ai-agents/flow-based-ai-agent/studio/capture-input",
+                      "ai-agents/flow-based-ai-agent/studio/show-messages",
+                      "ai-agents/flow-based-ai-agent/studio/execute",
+                      "ai-agents/flow-based-ai-agent/studio/flow-logic"
+                    ]
                   },
                   {
                     "group": "Settings",
-                    "pages": [
-                  "ai-agents/flow-based-ai-agent/settings/smart-ai-mode",
-                  "ai-agents/flow-based-ai-agent/settings/chat-widget"
-                  ]
+                    "pages": ["ai-agents/flow-based-ai-agent/settings/smart-ai-mode", "ai-agents/flow-based-ai-agent/settings/chat-widget"]
                   },
 
-
-                  
                   "ai-agents/flow-based-ai-agent/playground",
                   "ai-agents/flow-based-ai-agent/dashboard"
                 ]
@@ -107,7 +101,7 @@
               "channels/overview",
               {
                 "group": "Supported Channels",
-                "icon":"satellite-dish",
+                "icon": "satellite-dish",
                 "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger"]
               }
             ]
@@ -115,14 +109,19 @@
           {
             "group": "Journey",
             "icon": "route",
-            "pages": ["journey/overview","journey/getting-started","journey/dashboard",{
-                    "group": "Studio",
-                    "icon":"external-link",
-                    "pages": [
+            "pages": [
+              "journey/overview",
+              "journey/getting-started",
+              "journey/dashboard",
+              {
+                "group": "Studio",
+                "icon": "external-link",
+                "pages": [
                   "journey/studio/overview",
-                  "journey/studio/triggers",{
-                    "group":"Actions",
-                    "pages":[
+                  "journey/studio/triggers",
+                  {
+                    "group": "Actions",
+                    "pages": [
                       "journey/studio/actions/overview",
                       "journey/studio/actions/send-message",
                       "journey/studio/actions/send-message-in-conversation",
@@ -138,10 +137,9 @@
                       "journey/studio/actions/extract-entities"
                     ]
                   }
-                  
-                  ]
-                  }
                 ]
+              }
+            ]
           },
           {
             "group": "Conversations",
@@ -151,12 +149,7 @@
           {
             "group": "Audience",
             "icon": "contact",
-            "pages": [
-
-              "audience/contacts",
-              "audience/lists",
-              "audience/exports"
-            ]
+            "pages": ["audience/contacts", "audience/lists", "audience/exports"]
           }
         ]
       },
@@ -181,7 +174,7 @@
               "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
               "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
               "api-reference/conversational-ai-agent-interactions/get-stream-status",
-              "api-reference/contact-conversations/get-messages-for-contact-simplified",
+              "api-reference/conversational-ai-agent-interactions/get-messages-for-conversation",
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
               "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
