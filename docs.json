@@ -160,6 +160,11 @@
             "group": "Manage Teams",
             "icon": "users",
             "pages": ["manage-teams/inviting-team-members", "manage-teams/roles-and-permissions"]
+          },
+          {
+            "group": "Message Templates",
+            "icon": "file-text",
+            "pages": ["message-templates/overview","message-templates/whatsapp-templates","message-templates/messenger-templates","message-templates/instagram-templates"]
           }
         ]
       },

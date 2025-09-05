@@ -1,0 +1,75 @@
+---
+title: "WhatsApp Templates"
+icon: "whatsapp"
+iconType: "solid"
+---
+
+The **WhatsApp Message Templates** section is where you manage your pre-approved messages for outbound communication on WhatsApp. These templates are required by WhatsApp for all messages sent outside of an active conversation window.
+
+To create a new template, click the **`+ Create Template`** button. Once a template is submitted, WhatsApp can take up to **24 hours** to review it.  
+In some cases, approval may happen within a minute, but a pending status implies a manual review is needed.
+
+<Frame>
+  <img src="/message-templates/whatsapp-templates/wa-templates.png" alt="wa1" className="rounded-lg" />
+</Frame>
+---
+
+### Dashboard Overview
+
+The main dashboard provides an overview of all your templates:
+
+| Column               | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Template ID**       | A unique identifier for the template.                                       |
+| **Template Name**     | The name you assigned to the template.                                      |
+| **Template Language** | The language of the template's content (e.g., English).                     |
+| **Template Category** | The purpose of the template (e.g., Marketing, Utility, Authentication).      |
+| **Template Status**   | The approval status from WhatsApp (`Approved`, `Rejected`, or `Pending`). |
+
+---
+
+### Creating WhatsApp Message Templates
+
+The creation process varies slightly depending on the template’s category, but all templates must be **submitted to WhatsApp for approval** before they can be used for outbound communication.
+
+---
+
+#### Template Categories
+
+When creating a template, you must select a **category**, which defines its purpose and allowed content:
+
+- **Marketing** → Promotional content, product announcements, special offers.  
+- **Utility** → Transactional updates, order status, delivery notifications, appointment reminders.  
+- **Authentication** → Secure verification messages with one-time passcodes (OTPs) for account logins or sign-ups.  
+<Frame>
+  <img src="/message-templates/whatsapp-templates/wa1.png" alt="wa1" className="rounded-lg" />
+</Frame>
+---
+
+#### Marketing & Utility Templates
+
+Marketing and Utility templates share the same creation interface. They support rich content and personalization:
+
+- **Template Name** → Unique identifier for your template.  
+- **Template Language** → Language of the message.  
+- **Header** *(optional)* → Can include text, an image, or a document.  
+- **Body** → Main content of the message. Supports variables (`{{1}}`, `{{2}}`) for personalization.  
+- **Footer** *(optional)* → Smaller text section at the bottom of the message.  
+- **Buttons** → Up to 10 interactive buttons for customer responses or actions.  
+<Frame>
+  <img src="/message-templates/whatsapp-templates/wa2.png" alt="wa1" className="rounded-lg" />
+</Frame>
+---
+
+#### Authentication Templates
+
+Authentication templates are more restricted due to security requirements. The form is pre-filled and cannot be freely edited. You may only configure limited options:
+
+- **Add Security Recommendation** → Includes a disclaimer like: *“For your security, do not share this code.”*  
+- **Add Expiry Time** → Adds an expiration notice and lets you specify how long the code remains valid.  
+<Frame>
+  <img src="/message-templates/whatsapp-templates/wa3.png" alt="wa1" className="rounded-lg" />
+</Frame>
+---
+
+> ⚠️ **Important:** WhatsApp requires strict adherence to its template guidelines. Templates with promotional language submitted under **Utility** or **Authentication** categories may be **rejected**.
