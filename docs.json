@@ -142,6 +142,11 @@
             ]
           },
           {
+            "group": "Campaigns",
+            "icon": "flag",
+            "pages": ["campaigns/overview", "campaigns/creating-campaigns","campaigns/campaign-stats" ]
+          },
+          {
             "group": "Conversations",
             "icon": "messages-square",
             "pages": ["conversations/overview"]
@@ -150,6 +155,11 @@
             "group": "Audience",
             "icon": "contact",
             "pages": ["audience/contacts", "audience/lists", "audience/exports"]
+          },
+          {
+            "group": "Manage Teams",
+            "icon": "users",
+            "pages": ["manage-teams/inviting-team-members", "manage-teams/roles-and-permissions"]
           }
         ]
       },

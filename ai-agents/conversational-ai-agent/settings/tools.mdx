@@ -12,9 +12,8 @@ The **Tools** tab extends your chatbot’s capabilities with built-in functions 
 - **Journey**  
   Trigger a pre-designed sequence of actions (called a *journey*) for your chatbot to follow.  
   A journey could be:  
-  - Lead qualification process  
-  - Customer onboarding   
-  - Support escalation flow  
+  - Forwarding Lead to CRM  
+  - Transferring chat from one AI agent to another
 
 > To trigger a journey, include the command `workflow_trigger` in your prompt.
 
@@ -24,14 +23,12 @@ The **Tools** tab extends your chatbot’s capabilities with built-in functions 
   - **Get Details** → Automatically fetch user information from the chat (e.g., phone number, profile name).  
 
 - **Additional Settings**  
-  - **Get Contact Details** → Collect user information such as name, email, or phone number directly during the conversation.  
-    This is especially useful for **lead generation** or **customer service workflows**.  
-
+  - **Get Contact Details** → Fetches user information such as conversation ID, Tags  associated with the number.  
 ---
 
 | Tool / Setting        | Purpose                                                                 |
 |------------------------|-------------------------------------------------------------------------|
 | **Journey**            | Trigger automated conversational flows (e.g., onboarding, lead capture) |
 | **Close Conversation** | End a WhatsApp conversation gracefully                                  |
-| **Get Details**        | Retrieve user info from WhatsApp (phone, profile name)                  |
-| **Get Contact Details**| Collect user data like name, email, phone during chat                   |
+| **Get Details**        | Retrieve user info from WhatsApp e.g. Full name                  |
+| **Get Contact Details**| Fetches user data like conversation ID, Tags during chat                   |

@@ -1,7 +1,4 @@
-
-
 The **Advanced Settings** tab gives you detailed control over how your chatbot processes information. These options affect how data is retrieved, how conversations are remembered, and how responses are generated.
-
 
 <Frame>
   <img src="/ai-agents/conversational-ai-agent/settings/adv-settings.gif" />
@@ -12,22 +9,62 @@ The **Advanced Settings** tab gives you detailed control over how your chatbot p
 - **Adjust Chunks**  
   Control how your uploaded data is split into smaller units (*chunks*) for the AI to process.  
   - **Chunks**: Number of segments your data is divided into (e.g., 5).  
-  - **Chunk Length**: Size of each chunk.  
-  - **Tip**: Smaller chunks improve precision but may lose context, while larger chunks preserve more information but can be less focused.
+  - **Chunk Length**: Size of each chunk (measured in characters).  
+  - **Formula**:  
+    `# Chunks × Chunk Length = Context Length`  
+    Example: `3 × 1500 = 4500 chars`  
+  - **Tip**: Smaller chunks improve precision but may reduce contextual understanding. Larger chunks preserve more information but can introduce irrelevant details.
+
+---
 
 - **Hybrid Search**  
-  Enhances retrieval accuracy by combining two methods:  
-  - **Keyword Search**: Matches exact words or phrases.  
-  - **Semantic Search**: Understands meaning and intent.  
-  This dual approach ensures better results for conversational or complex queries.
+  Improves relevancy in knowledge search by combining keyword and semantic matching.  
+  - **How it Works**:  
+    - Retrieves a larger set of chunks:  
+      `# Chunks × Initial Fetch Multiplier` (default: 5).  
+    - Runs a **text search** across these expanded results.  
+    - Combines **similarity search** + **text search** into a final relevancy score.  
+  - **Alpha Parameter (0–1)**:  
+    - `Alpha = 1` → similarity-focused (semantic emphasis).  
+    - `Alpha = 0` → text-focused (keyword emphasis).  
+    - Values in between balance both methods (default: `0.5`).  
+  - **Use Case**:  
+    Adjust for your needs — use higher alpha for conversational queries, lower alpha for exact keyword lookups.  
+
+  > Customize Hybrid Search to fine-tune how your bot balances meaning vs. exact match.
+
+---
 
 - **Add Historical Context**  
   Enables the chatbot to reference earlier parts of the conversation (both user and AI messages).  
-  This improves continuity and relevance but uses additional credits per message.
+  - **Benefit**: Improves continuity, relevance, and personalized responses.  
+  - **Historical Context Length**: Number of previous messages included in the search.  
+    Example: Setting `2` means the AI considers the latest user query + the previous assistant response.  
+  - **Credits**: Consumes additional credits (`0.2 credit per message`).  
+ #### Prompt Example: Using Historical Context for Query Construction  
+  ```md
+  ### Example: Query Construction Using Historical Context  
+
+  **Instruction:**  
+  Analyze the recent conversation history to identify the user’s current intent and construct an optimal knowledge base retrieval query. Focus on the most recent exchanges to determine the immediate need.  
+
+  **Query Construction Requirements:**  
+  - Extract key terms, keywords, and specific entities from user messages.  
+  - Include relevant technical terms, process names, and contextual details.  
+  - For requests involving documents, payments, or mail drafts → ensure entity names (e.g., company, product, institution) are included.  
+  - Construct queries that maximize the chances of retrieving targeted knowledge base content.  
+  - If the user intent is unclear or unrelated to KB topics, return `"null"`.  
+
+  **Output:**  
+  Provide the constructed query with essential keywords and terms needed for accurate knowledge base retrieval.
+  ```
+---
 
 - **Max Tokens**  
-  Sets the maximum length of a response (measured in tokens  words or word parts).  
+  Sets the maximum length of a response (measured in tokens – words or word parts).  
   Helps manage cost, control verbosity, and ensure the bot responds within limits.
+
+---
 
 - **Token Distribution**  
   Visual slider that shows how your total `Max Tokens` are allocated across different components:  
@@ -43,5 +80,3 @@ The **Advanced Settings** tab gives you detailed control over how your chatbot p
   - Response + Reasoning → ~1,000 tokens  
 
   > You can dynamically adjust these allocations to balance accuracy, context retention, and reasoning depth.
-
----
