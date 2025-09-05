@@ -801,6 +801,17 @@
               "enum": ["application/pdf", "image/png", "image/jpeg"],
               "example": "application/pdf"
             }
+          },
+          {
+            "name": "public",
+            "in": "query",
+            "required": false,
+            "description": "Set to 1 if the uploaded file should be publicly available.",
+            "schema": {
+              "type": "integer",
+              "enum": [0, 1],
+              "example": 1
+            }
           }
         ],
         "responses": {
