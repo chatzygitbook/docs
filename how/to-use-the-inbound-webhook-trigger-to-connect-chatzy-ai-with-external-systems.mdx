@@ -1,0 +1,57 @@
+---
+title: "How to Use the Inbound webhook Trigger to connect Chatzy AI with external systems"
+icon: "webhook"
+iconType: "solid"
+---
+The **Inbound Webhook Trigger** is a powerful feature that connects Chatzy AI with external systems such as CRMs, website forms, or third-party tools.  
+It enables **real-time automation**, making it ideal for:  
+
+- Importing leads from platforms like **Wix**, **WordPress**, or **Zoho CRM**  
+- Sending **automated WhatsApp messages** immediately after a form submission  
+- Updating customer data and attributes in real-time  
+
+---
+
+### What is an Inbound Webhook?
+
+An inbound webhook allows external systems to **send data into Chatzy AI**, which can then trigger a journey.  
+
+**Example:**  
+- A user submits a form on your website  
+- The form data is sent to Chatzy via a webhook  
+- Chatzy triggers a journey, such as sending a WhatsApp message or updating CRM records  
+
+---
+
+### Step 1: Create a Journey with Inbound Webhook
+
+1. Navigate to **Journeys** in the left menu  
+2. Click **Create Journey**  
+3. Enter a name (e.g., *Webhook Lead Follow-up*)  
+4. Choose **Blank Journey** to start fresh  
+5. Add a **Trigger** → select **Inbound Webhook**  
+
+---
+
+### Step 2: Generate the Webhook URL
+
+1. Click **Create Webhook**  
+2. A unique **Webhook URL** is generated  
+   - External systems will make a **POST request** to this URL  
+   - This request starts the journey automatically  
+
+---
+
+### Step 3: Test with Postman or Form Tool
+
+You can test by sending a POST request from **Postman** or directly from your form integration.  
+
+**Sample JSON Payload:**
+
+```json
+{
+  "first_name": "Priya",
+  "last_name": "Sharma",
+  "phone": "919812345678",
+  "food_preference": "Vegetarian"
+}

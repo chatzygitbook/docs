@@ -1,0 +1,67 @@
+---
+title: "How to Connect WhatsApp with CRM"
+icon: "plug"
+iconType: "solid"
+---
+The **Integrations** section allows you to connect Chatzy AI with external platforms such as a CRM.  
+With **WhatsApp Integration**, you can send and receive messages directly from your CRM, while also receiving delivery status updates and incoming messages.
+
+---
+
+### 1. Installation
+
+1. Go to the **Integrations** section in Chatzy AI.  
+2. Locate **WhatsApp Integration**.  
+3. Click **Install Integration**.  
+
+This step automatically configures the required endpoints and generates security credentials for your CRM connection.  
+<Frame>
+  <img src="/how-to/int1.png" alt="Dashboard Overview" className="rounded-lg" />
+</Frame>
+---
+
+### 2. Key Settings
+
+Once installed, the integration dashboard provides the following key settings:
+
+<Frame>
+  <img src="/how-to/int2.png" alt="Dashboard Overview" className="rounded-lg" />
+</Frame>
+#### API Endpoint & API Key
+- **API Endpoint** – The URL where your CRM will send requests to deliver messages through Chatzy.  
+- **API Key** – A unique key used to authenticate your CRM requests.  
+  - **Important**: The API Key is shown only once during setup. Store it securely, as it cannot be retrieved later.  
+
+#### Webhook Setup
+- **Webhook URL** – The endpoint in your CRM where Chatzy sends event notifications.  
+- **Events to be Sent** – Choose which events to push back to your CRM. Available options include:  
+  - **Sent** – Message was sent successfully from Chatzy.  
+  - **Delivered** – Message reached the recipient’s device.  
+  - **Read** – Message was opened/read by the recipient.  
+  - **Failed** – Message failed to send or deliver.  
+  - **New Message** – A new inbound message has been received from the user.  
+
+---
+
+### 3. How It Works
+
+1. Your CRM sends an **API request** (authenticated with the API Key) to the **API Endpoint** to initiate message delivery.  
+2. Chatzy processes the request and routes the message to WhatsApp.  
+3. Status updates and inbound messages are sent back to your **Webhook URL** based on the events you selected.  
+
+---
+
+### 4. Benefits
+
+- Centralized communication directly within your CRM.  
+- Real-time synchronization of WhatsApp messages and delivery statuses.  
+- Automated updates on customer activity, reducing manual intervention.  
+
+---
+
+### 5. Summary
+
+The **WhatsApp Integration** provides a seamless way to connect Chatzy AI with your CRM:  
+- Outgoing messages are triggered from the CRM via the API Endpoint.  
+- Incoming events and messages are synced back to your CRM through webhooks.  
+- Secure, real-time communication ensures your CRM and Chatzy remain fully aligned.  

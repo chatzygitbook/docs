@@ -1,0 +1,115 @@
+---
+title: "How Chatzy AI generates responses"
+icon: "brain"
+iconType: "solid"
+---
+
+When you upload documents or connect data sources, Chatzy AI doesn’t just memorize everything at once.  
+Instead, it uses a structured process to break down, store, and retrieve information so answers are accurate, relevant, and fast.  
+This guide explains how answers are generated, why chunking matters, what the context window is, and how you can customize these settings.
+
+---
+
+## How Answers Are Generated
+
+1. **User asks a question**  
+   The AI checks your connected knowledge base.  
+
+2. **Search and retrieval**  
+   Instead of scanning the entire knowledge base, it splits content into smaller pieces (called chunks) and searches only the most relevant ones.  
+
+3. **Ranking and filtering**  
+   Both semantic (meaning-based) and keyword-based search are used to find the best matches.  
+
+4. **Context building**  
+   Relevant chunks, past conversation history, and the base system prompt are merged into a single context window.  
+
+5. **Answer generation**  
+   The AI uses this context to produce the final response.  
+
+---
+
+## What Is Chunking
+
+Chunking is the process of splitting text into smaller, meaningful parts.  
+Without chunking, the AI might miss details or struggle with efficiency.  
+With chunks that are too small, it may lose context.  
+
+The goal is the right chunk size: large enough to preserve meaning, small enough to be searchable.
+
+---
+
+## Ideal Chunk Size
+
+Every dataset is unique, but here are general guidelines:  
+
+- **Small chunks (300–600 characters)**  
+  - Better precision for fact-based queries  
+  - Risk of missing surrounding context  
+
+- **Medium chunks (800–1,500 characters)**  
+  - Balanced precision and context retention  
+  - Recommended default for most documents  
+
+- **Large chunks (2,000+ characters)**  
+  - Preserve flow of long narratives (e.g., policies, manuals)  
+  - May include extra irrelevant content  
+
+Formula:  
+``` No. of chunks × chunk length = context length ```
+
+
+Example:  
+3 chunks × 1,500 characters = 4,500 characters of context available for answer generation.
+
+---
+
+## What Is the Context Window
+
+The context window is the maximum amount of text the AI can consider at once.  
+It includes:  
+
+- Base prompt (system rules and personality)  
+- Selected knowledge chunks  
+- Conversation history (if enabled)  
+- Your current question  
+
+When the limit is reached, older or less relevant text is pushed out.  
+
+Example:  
+If the AI has a 16k token context window and you feed it 20k tokens, the last 4k will be cut off.  
+This is why good chunking and retrieval are crucial.
+
+---
+
+## Customization Options
+
+Chatzy AI allows you to fine-tune how data is processed:  
+
+- **Chunk length and count** – Adjust how your data is split  
+- **Hybrid search** – Combine keyword and semantic matching  
+- **Historical context** – Control how many past messages are remembered  
+- **Max tokens** – Limit maximum response length  
+- **Token distribution** – Decide how much of the window is used for knowledge, history, or reasoning  
+
+These settings help you balance accuracy, speed, and cost efficiency.
+
+---
+
+## Best Practices
+
+- Use medium-sized chunks (800–1,500 characters) for most cases  
+- Enable hybrid search when your data includes both structured terms and natural language  
+- Keep critical information together in the same chunk (e.g., policy rule with its explanation)  
+- If answers feel too vague, try smaller chunks; if too fragmented, try larger chunks  
+
+---
+
+## Summary
+
+- Chatzy AI generates answers by retrieving relevant chunks, combining them with conversation context, and producing a natural reply.  
+- Chunking ensures data is manageable and searchable.  
+- The context window defines how much information the AI can process at once.  
+- You can customize settings to optimize accuracy and cost for your specific use case.  
+
+By understanding these concepts, you can design knowledge bases that are faster, smarter, and more reliable in answering user queries.

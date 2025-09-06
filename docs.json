@@ -165,6 +165,16 @@
             "group": "Message Templates",
             "icon": "file-text",
             "pages": ["message-templates/overview","message-templates/whatsapp-templates","message-templates/messenger-templates","message-templates/instagram-templates"]
+          },
+          {
+            "group": "Dashboard",
+            "icon": "house",
+            "pages": ["dashboard/overview"]
+          },
+          {
+            "group": "How",
+            "icon": "info",
+            "pages": ["how/to-use-the-conversations-inbox-in-chatzy-ai", "how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems", "how/to-create-whatsapp-campaign","how/to-connect-whatsapp-with-crm","how/how-chatzy-ai-generates-responses"]
           }
         ]
       },
