@@ -15,15 +15,36 @@ The **Tools** tab extends your chatbot’s capabilities with built-in functions 
   - Forwarding Lead to CRM  
   - Transferring chat from one AI agent to another
 
+<Frame>
+  <img src="/ai-agents/conversational-ai-agent/settings/tools2.png" />
+</Frame>
+
+Paste your webhook endpoint in the textbox.
+
 > To trigger a journey, include the command `workflow_trigger` in your prompt.
 
+> Example :- When the customer confirms appointment, call the function `workflow_trigger` these details:
+
+  ```{
+    "customer_name": "<customer's name>",
+    "customer_phone": "<Phone number of the customer>",
+    "appointment_date": "<date of appointment>",
+    "time_slot": "<time slot>"
+
+  }
+  ```
+---
 - **WhatsApp Tools**  
   These are specialized functions for bots integrated with **WhatsApp**:  
   - **Close Conversation** → Formally end a WhatsApp chat, ensuring a clean exit for both user and bot.  
-  - **Get Details** → Automatically fetch user information from the chat (e.g., phone number, profile name).  
+  - **Get Details** → Fetch all information associated with the current conversation. Such as Phone number, Full name, Email ID, Conversation_id.
 
 - **Additional Settings**  
-  - **Get Contact Details** → Fetches user information such as conversation ID, Tags  associated with the number.  
+  - **Get Contact Details** → Retrieve all information associated with a contact. This includes:
+
+    Basic details: email, phone, name, contact_id, ifram_user_id
+
+Custom attributes (if any)
 ---
 
 | Tool / Setting        | Purpose                                                                 |

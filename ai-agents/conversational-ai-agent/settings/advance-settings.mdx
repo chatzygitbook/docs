@@ -36,26 +36,28 @@ The **Advanced Settings** tab gives you detailed control over how your chatbot p
 ---
 
 - **Add Historical Context**  
-  Enables the chatbot to reference earlier parts of the conversation (both user and AI messages).  
+Turn this option on when you want to construct a knowledge base search query specific to exact key terms or entities from the user’s message.  
+
   - **Benefit**: Improves continuity, relevance, and personalized responses.  
-  - **Historical Context Length**: Number of previous messages included in the search.  
-    Example: Setting `2` means the AI considers the latest user query + the previous assistant response.  
+  - **Initial Fetch Multiplier**: Defines how many more documents to fetch in the initial retrieval stage before ranking (default: 5).  
+  - **Alpha**: Balances the weight between query relevance and conversation context when scoring retrieved results (default: 0.5).  
   - **Credits**: Consumes additional credits (`0.2 credit per message`).  
+
  #### Prompt Example: Using Historical Context for Query Construction  
   ```md
   ### Example: Query Construction Using Historical Context  
 
-  **Instruction:**  
+  Instruction:
   Analyze the recent conversation history to identify the user’s current intent and construct an optimal knowledge base retrieval query. Focus on the most recent exchanges to determine the immediate need.  
 
-  **Query Construction Requirements:**  
+  Query Construction Requirements:
   - Extract key terms, keywords, and specific entities from user messages.  
   - Include relevant technical terms, process names, and contextual details.  
   - For requests involving documents, payments, or mail drafts → ensure entity names (e.g., company, product, institution) are included.  
   - Construct queries that maximize the chances of retrieving targeted knowledge base content.  
   - If the user intent is unclear or unrelated to KB topics, return `"null"`.  
 
-  **Output:**  
+  Output: 
   Provide the constructed query with essential keywords and terms needed for accurate knowledge base retrieval.
   ```
 ---

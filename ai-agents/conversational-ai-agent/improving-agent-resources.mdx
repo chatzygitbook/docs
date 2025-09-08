@@ -1,31 +1,16 @@
+### 1. If conversational AI agent isn't providing the answer you expect.
+you can follow these troubleshooting steps 
+<Accordion title="When the answer comes from the knowledge base">
+  This scenario applies when the information you expect the agent to provide is in your uploaded documents or data.
 
-Enhancing your agent's resources ensures better performance, higher
-accuracy, and smoother user experiences. Here are a few best practices:
+  **1. Verify the content**: First, check that the correct answer is present within your knowledge base documents.
+  <br/>**2. Check the context**: If the information is present, the agent may not be retrieving it correctly.
+  - **If the appropriate chunk is in the context**: The agent is retrieving the correct information but is not using it properly. In this case, you should **change the prompt** to better guide the agent's response.
+  - **If the appropriate chunk is NOT in the context**: The agent is failing to retrieve the correct information. You should **adjust your search settings**, such as the `Hybrid Search` configuration, `chunk length`, or `context` to improve retrieval.
+</Accordion>
 
-## Best Practices
+<Accordion title="When the answer comes from the prompt">
+  This scenario applies when the desired answer is part of the agent's core instructions, personality, or a specific rule you've defined.
 
--   **Provide Clean, Structured Data**\
-    Well-formatted and organized data helps your agent retrieve accurate
-    answers quickly. Avoid uploading noisy or redundant information.
-
--   **Use Diverse Knowledge Sources**\
-    Combine different formats---FAQs, guides, manuals, and product
-    catalogs---to give your agent richer context.
-
--   **Update Content Regularly**\
-    Keep your resources up-to-date with the latest information,
-    policies, and product details to avoid outdated responses.
-
--   **Optimize Chunk Sizes**\
-    Adjust data chunking in settings for a balance between precision
-    (small chunks) and context retention (larger chunks).
-
-
-
--   **Prioritize Frequently Asked Questions**\
-    Upload FAQs as a separate, easily retrievable source to speed up
-    common queries.
-
--   **Test and Refine Regularly**\
-    Monitor responses, identify gaps, and fine-tune your resources to
-    continuously improve accuracy.
+  You should simply **modify the prompt** to be more specific or to include the exact instructions you want the agent to follow.
+</Accordion>
