@@ -21,11 +21,13 @@ The **Tools** tab extends your chatbot’s capabilities with built-in functions 
 
 Paste your webhook endpoint in the textbox.
 
-> To trigger a journey, include the command `workflow_trigger` in your prompt.
+> To trigger a journey, include the below line `workflow_trigger` in your prompt.
 
-> Example :- When the customer confirms appointment, call the function `workflow_trigger` these details:
+> Example :- 
+``` 
+When the customer confirms appointment, call the function `workflow_trigger` these details:
 
-  ```
+  
   {
     "customer_name": "<customer's name>",
     "customer_phone": "<Phone number of the customer>",
@@ -41,9 +43,9 @@ Paste your webhook endpoint in the textbox.
   - **Get Details** → Fetch all information associated with the current conversation. Such as Phone number, Full name, Email ID, Conversation_id.
 
 - **Additional Settings**  
-  - **Get Contact Details** → Retrieve all information associated with a contact. This includes:
+  - **Get Contact Details** → Retrieve all information associated with a contact for which current conversation is happening. This includes:
 
-    Basic details: email, phone, name, contact_id, ifram_user_id
+    Basic details: email, phone, name, contact_id, iframe_user_id
 
 Custom attributes (if any)
 ---
