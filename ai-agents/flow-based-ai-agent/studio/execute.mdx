@@ -47,13 +47,24 @@ When using this card, you have access to **pre-configured globals** that simplif
 
 ---
 
-#### AI Task
+#### **AI Task**  
 This card sends a specific instruction to an AI model to perform a **focused task** and return a response. Unlike normal conversation, it is designed for precise execution.  
 
-* **Instructions**: A concise directive for the AI.  
-* **Input**: The data the AI should process.  (Here you can also use the variable to use dynamic data.)
-* **Model**: The AI model to use.  
-* **Store in variable**: Save the AI’s output.  
+* **Instructions**: A concise directive for the AI describing exactly what it should do.  
+  - For example, you might tell the AI to validate a user’s input against a predefined list and return either the closest match or a default value like `"Other"`.  
+* **Input**: The data the AI should process.  
+  - This can be text directly entered or dynamic values passed from variables (e.g., capturing what a user typed earlier).  
+* **Model**: The AI model that will execute the instruction (e.g., a lightweight or advanced GPT model depending on your needs).  
+* **Store in variable**: The place where the AI’s output will be saved so it can be reused later in the flow.  
+
+**How it works in the example**:  
+1. The user provides some input (like a name).  
+2. The AI Task receives that input and compares it against a defined list.  
+3. If the input matches an item (even with minor variations like spelling), the AI returns the exact standardized value.  
+4. If no match is found, the AI returns a fallback such as `"Other"`.  
+
+This approach ensures that messy or inconsistent user input is converted into clean, structured data that can be reliably used in the chatbot journey, CRM updates, or API calls.  
+
 
 > **Example:**  
 > Summarize a block of text using AI:  

@@ -43,6 +43,10 @@ Turn this option on when you want to construct a knowledge base search query spe
   - **Alpha**: Balances the weight between query relevance and conversation context when scoring retrieved results (default: 0.5).  
   - **Credits**: Consumes additional credits (`0.2 credit per message`).  
 
+> If this option is **off**, the user’s query is used directly to search the knowledge base, which might result in less relevant chunks being picked.  
+> When you **turn this on**, we use an LLM along with historical context to construct the query. This results in more relevant chunks being selected from the knowledge base, ultimately producing more coherent and context-aware chatbot replies.  
+
+
  #### Prompt Example: Using Historical Context for Query Construction  
   ```md
   ### Example: Query Construction Using Historical Context  

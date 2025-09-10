@@ -14,8 +14,10 @@ This card asks the user an open-ended question and captures their response as fr
 - **Let AI Process your input**: A toggle to let the AI analyze and understand the user's free text response.
 - **Regex (Regular Expression)**: An advanced option to validate the user's input with a specific pattern (e.g., an email address format or a phone number).
 - **Store in variable**: Saves the user's response in a variable for later use in the flow.
-
-  ![image.png](/images/image.png)
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/raw.png"  />
+</Frame>
+  
 
 ---
 
@@ -28,12 +30,9 @@ This card presents a set of options from which the user can select only one.
 - **Use Interactive WhatsApp message**: A toggle to format the choices as interactive buttons when the chatbot is integrated with WhatsApp.
 - **Store in variable**: Saves the user's selection in a variable for later use in the flow.
 
-<img
-  src="/images/image.png"
-  alt="image.png"
-  title="image.png"
-  
-/>
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/single-choice.png"  />
+</Frame>
 
 ---
 
@@ -46,22 +45,27 @@ This card allows the user to select one or more options from a list.
 - **Use Interactive WhatsApp message**: A toggle to format the choices as an interactive WhatsApp message.
 - **Store in variable**: Saves the user's selections in a variable.
 
-  ![image.png](/images/image.png)
-
+  <Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/multiple-choice.png"  />
+  </Frame>
 ---
 
 #### **Dropdown**
 
 This card provides a compact menu for the user to select a single option from a list.
 
-- **Question to ask**: The message the user will see.
-- **Choices**: The list of options to be included in the dropdown menu.
-- **File Input**: An option to allow the user to upload a file in addition to the dropdown selection.
-- **Use Interactive WhatsApp message**: A toggle to format the choices as an interactive WhatsApp message.
-- **Store in variable**: Saves the user's selection in a variable.
+- **Question to ask**: The message the user will see.  
+- **Choices**: The list of options to be included in the dropdown menu.  
+- **File Input**: Use this option when you have **a large number of dropdown choices** that would be tedious to add manually. Instead of typing them one by one, you can upload a **CSV file** where the first column contains the list of options.  
 
-> **Example:** "Please select your country of residence."
+  > **How it works:** Once you upload the CSV, each row in the first column is automatically converted into a dropdown option. The file must **not contain headers**. This allows you to quickly manage and update dropdowns without manual entry.  
 
+- **Use Interactive WhatsApp message**: A toggle to format the choices as an interactive WhatsApp message.  
+- **Store in variable**: Saves the user's selection in a variable.  
+
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/dropdown.png"  />
+</Frame>
 ---
 
 #### **Image/Document Upload**
@@ -69,9 +73,9 @@ This card provides a compact menu for the user to select a single option from a 
 This card enables the user to upload files, such as images or documents, directly into the conversation.
 
 - **Question to ask**: The message the user will see.
-
-> **Example:** "Please upload a photo of your product for our support team."
-
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/image-ver.png"  />
+</Frame>
 ---
 
 #### **Location**
@@ -80,5 +84,6 @@ This card prompts the user to share their geographical location.
 
 - **Question to ask**: The message the user will see.
 - **Store in variable**: Saves the user's location data in a variable.
-
-> **Example:** "Can you share your location so I can find the nearest store for you?"
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/location.png"  />
+</Frame>
