@@ -41,10 +41,12 @@ When using this card, you have access to **pre-configured globals** that simplif
 > Get the current time and save it to a variable:  
 > ```python
 > 
-> current_time = datetime.datetime.now()
+> current_time = datetime.now()
 > print(f"Current time is {current_time}")
 > ```
-
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/code.png"  />
+</Frame>
 ---
 
 #### **AI Task**  
@@ -66,13 +68,9 @@ This card sends a specific instruction to an AI model to perform a **focused tas
 This approach ensures that messy or inconsistent user input is converted into clean, structured data that can be reliably used in the chatbot journey, CRM updates, or API calls.  
 
 
-> **Example:**  
-> Summarize a block of text using AI:  
-> * **Instructions**: `Summarize the following text.`  
-> * **Input**: `The sun is a star at the center of the solar system...`  
-> * **Model**: `GPT-4o Mini`  
-> * **Store in variable**: `summary_text`
-
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/aitask.png"  />
+</Frame>
 ---
 
 #### Query AI Agent
@@ -82,8 +80,6 @@ This card lets your chatbot query another **specialized AI Agent** that you’ve
 * **Conversational AI Agent**: Choose which agent to query.  
 * **Store in variable**: Save the response.  
 
-> **Example:**  
-> Ask a stock-checking agent for Google’s stock price:  
-> * **Query**: `What is the latest stock price for Google?`  
-> * **Conversational AI Agent**: `Stock_Checker_Bot`  
-> * **Store in variable**: `google_stock_price`
+<Frame>
+  <img src="/ai-agents/flow-based-ai-agent/studio/query.png"  />
+</Frame>
