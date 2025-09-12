@@ -144,7 +144,7 @@
           {
             "group": "Campaigns",
             "icon": "flag",
-            "pages": ["campaigns/overview", "campaigns/creating-campaigns","campaigns/campaign-stats" ]
+            "pages": ["campaigns/overview", "campaigns/creating-campaigns", "campaigns/campaign-stats"]
           },
           {
             "group": "Conversations",
@@ -164,7 +164,7 @@
           {
             "group": "Message Templates",
             "icon": "file-text",
-            "pages": ["message-templates/overview","message-templates/whatsapp-templates","message-templates/messenger-templates","message-templates/instagram-templates"]
+            "pages": ["message-templates/overview", "message-templates/whatsapp-templates", "message-templates/messenger-templates", "message-templates/instagram-templates"]
           },
           {
             "group": "Dashboard",
@@ -174,7 +174,13 @@
           {
             "group": "How",
             "icon": "info",
-            "pages": ["how/to-use-the-conversations-inbox-in-chatzy-ai", "how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems", "how/to-create-whatsapp-campaign","how/to-connect-whatsapp-with-crm","how/how-chatzy-ai-generates-responses"]
+            "pages": [
+              "how/to-use-the-conversations-inbox-in-chatzy-ai",
+              "how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems",
+              "how/to-create-whatsapp-campaign",
+              "how/to-connect-whatsapp-with-crm",
+              "how/how-chatzy-ai-generates-responses"
+            ]
           }
         ]
       },
@@ -203,7 +209,8 @@
               "api-reference/conversational-ai-agent-interactions/audio-input",
               "api-reference/conversational-ai-agent-interactions/upload-documents",
               "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
-              "api-reference/conversational-ai-agent-interactions/insert-nudge-message"
+              "api-reference/conversational-ai-agent-interactions/insert-nudge-message",
+              "api-reference/conversational-ai-agent-interactions/get-followup-suggestions"
             ]
           },
           {

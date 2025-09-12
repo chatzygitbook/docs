@@ -942,6 +942,82 @@
         }
       }
     },
+    "/followup-suggestions": {
+      "get": {
+        "summary": "Get Followup Suggestions",
+        "description": "Get followup suggestions for the conversation.",
+        "tags": ["Conversational AI Agent Interactions"],
+        "servers": [
+          {
+            "url": "https://backend-1.chatzy.ai",
+            "description": "SSE Streaming Host"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "conversation_id",
+            "in": "query",
+            "required": true,
+            "description": "UUID of the conversation to fetch followup suggestions for.",
+            "schema": {
+              "type": "string",
+              "example": "96333140-53c3-4d1d-bbd1-edd150d46ea2"
+            }
+          },
+          {
+            "name": "suggestions_count",
+            "in": "query",
+            "required": false,
+            "description": "Number of followup suggestions to fetch (default 5, min 3, max 10).",
+            "schema": {
+              "type": "integer",
+              "default": 5,
+              "minimum": 3,
+              "maximum": 10
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "description": "Model to use for generating followup suggestions. Allowed values: gpt-4o-mini, gemini-2.5-flash.",
+            "schema": {
+              "type": "string",
+              "enum": ["gpt-4o-mini", "gemini-2.5-flash"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Followup suggestions returned successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "suggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "example": "Can you explain that in simpler terms?"
+                      },
+                      "example": [
+                        "Can you explain that in simpler terms?",
+                        "What are the next steps I should take?",
+                        "Could you provide an example?",
+                        "How do I fix this issue?",
+                        "Can you summarize the main points?"
+                      ]
+                    }
+                  },
+                  "required": ["suggestions"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/get_stream_status": {
       "get": {
         "summary": "Get Stream Status",
