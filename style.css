@@ -5,3 +5,7 @@ a[href*='mintlify.com'] {
 footer > div {
   padding: 2em !important;
 }
+
+footer > div > div:nth-last-child(-n + 2) {
+  display: none;
+}
