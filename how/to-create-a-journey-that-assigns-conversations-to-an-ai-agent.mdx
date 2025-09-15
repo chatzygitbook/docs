@@ -1,0 +1,85 @@
+---
+title: "How to Create a Journey that Assigns Conversations to an AI Agent"
+icon: "bot"
+iconType: "solid"
+---
+
+The **Assign to AI Agent** journey ensures that every new conversation on WhatsApp, Instagram, or Messenger is automatically handled by an AI chatbot instead of waiting for a human agent.  
+This helps businesses **respond instantly**, qualify leads, and provide **24/7 support**.  
+
+---
+
+### Business Use Case
+
+Imagine running a **click-to-WhatsApp ad** or sharing a **QR code** that opens WhatsApp.  
+- A customer sends a message  
+- The journey automatically assigns the conversation to your AI agent  
+- The AI chatbot begins the conversation immediately—asking qualification questions, sharing product info, or guiding the customer through a process  
+
+The same setup works for **Instagram DMs** and **Messenger conversations**.  
+
+---
+
+### Step 1: Create a Journey
+
+1. Navigate to **Journeys** in the left menu  
+2. Click **Create Journey**  
+3. Enter a name (e.g., *Assign to AI Agent*)  
+4. Select **Blank Journey** to build from scratch  
+
+---
+
+### Step 2: Add the Trigger
+
+1. Add a **Trigger** → select **Conversation**  
+2. Choose your channel: **WhatsApp**, **Instagram**, or **Messenger**  
+3. Select when the journey should run:  
+   - **Conversation Created** → triggers every time a new conversation starts  
+   - **First Conversation Created for Contact** → triggers only the very first time a customer messages you  
+   - **Conversation Resumed** → (optional, used when an existing conversation restarts)  
+
+---
+
+### Step 3: Add Conditions (Optional)
+
+Conditions allow fine control over when the journey runs:  
+
+- **Template Message Condition (WhatsApp only)**  
+  - Example: Replies to “Day 1” template → Assign AI Agent A  
+  - Replies to “Day 3” template → Assign AI Agent B  
+
+- **Keyword Condition**  
+  - Example: Customer replies with *“Book Appointment”* → Assign Appointment AI Agent  
+  - Customer replies with *“Tell Me More”* → Assign Product Info AI Agent  
+
+- **Exclude Keywords**  
+  - Example: Journey A triggers only for “Pricing”  
+  - Journey B excludes “Pricing” to handle all other messages  
+
+If no conditions are set, the journey will run for **all new conversations**.  
+
+---
+
+### Step 4: Assign to AI Agent
+
+1. After configuring the trigger, click the **plus icon**  
+2. Choose **Action → Assign to AI Agent**  
+3. Select the AI Agent you want to handle the conversation  
+   - Can be a **flow-based chatbot** or a **conversational AI agent**  
+   - Ensure the AI agent is already set up with the logic or content it needs  
+
+---
+
+### Step 5: Publish and Test
+
+1. Click **Save** → then **Publish**  
+2. Send a test message to your business channel (e.g., WhatsApp)  
+3. The AI chatbot should reply instantly  
+4. Go to the **Conversations tab** to see assigned chats (AI agent conversations are marked with a green dot)  
+
+---
+
+to Create a Journey that Assigns Conversations to an AI AgentWith this setup, Chatzy AI ensures:  
+- Instant replies for every new lead  
+- Automated qualification and routing  
+- Reduced dependency on human agents  

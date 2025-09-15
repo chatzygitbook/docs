@@ -1,0 +1,125 @@
+---
+title: "How to Create a WhatsApp Lead Nurture Journey"
+icon: "message-circle"
+iconType: "solid"
+---
+
+A **WhatsApp Lead Nurture Journey** helps businesses stay connected with leads by sending them messages at regular intervals.  
+This ensures leads don’t go cold and receive consistent engagement over time.  
+
+---
+
+### Business Context
+
+Businesses often generate leads from:  
+- Website form submissions  
+- Instagram/Facebook Ads (Click-to-WhatsApp)  
+- Existing customer databases  
+
+Instead of leaving these leads idle, you can **automate nurturing**:  
+- Day 0 → Send a welcome message  
+- Day 3 → Follow up with another message  
+- Day 7 → Share more details or reminders  
+
+This keeps conversations warm until leads are ready to convert.  
+
+---
+
+### Prerequisites
+
+Before creating this journey, make sure you’ve completed:  
+-  Connecting your WhatsApp account  
+-  Creating WhatsApp message templates  
+-  Creating and adding contacts to a list  
+
+These are required for the automation to work.  
+
+---
+
+### Step 1: Create a Journey
+
+1. Navigate to **Journeys** in the left sidebar  
+2. Click **Create Journey**  
+3. Give your journey a descriptive name (e.g., *WhatsApp Lead Nurture*)  
+4. Choose **Blank Journey** (even though a WhatsApp Lead Nurture template exists, we’ll build this from scratch for learning)  
+5. Click **Create** to open the Journey Studio  
+
+---
+
+### Step 2: Add the Trigger
+
+1. Click **Add Trigger**  
+2. Select **Contact Added to List**  
+3. Choose the list you want to use (e.g., *Leads from Website Form*)  
+
+ Note: If the same contact is added again to the same list, the journey won’t re-trigger for them.  
+
+ Advanced Option:  
+You can also trigger journeys from **Inbound Webhooks** (e.g., when a CRM creates a lead or a website form is submitted).  
+
+---
+
+### Step 3: Add the First WhatsApp Message
+
+1. Click the **plus (+)** button after the trigger  
+2. Choose **Action → Send Message**  
+3. In the settings:  
+   - Select **WhatsApp** as the channel  
+   - Use the variable **Contact → Phone Number** for the recipient  
+   - Select one of your **approved WhatsApp templates**  
+
+4. Fill in the template parameters:  
+   - For media parameters → upload the file or add a public URL  
+   - For text parameters → either type a static value or use variables (e.g., `{{contact.firstname}}` to personalize the greeting)  
+
+---
+
+### Step 4: Add a Wait Step
+
+1. After the first message, click **plus (+)**  
+2. Select **Wait**  
+3. Set the wait duration (e.g., **3 days**)  
+4. (Optional) Choose a specific time of day for the next step to execute  
+
+---
+
+### Step 5: Add More Messages
+
+1. After the wait step, add another **Send Message** action  
+2. Configure it the same way:  
+   - Select WhatsApp  
+   - Use the phone number variable  
+   - Pick a new template (e.g., a follow-up or reminder)  
+   - Fill in template parameters  
+
+3. Repeat the process: add **Wait** → then **Send Message**, until your nurture flow is complete  
+
+---
+
+### Step 6: Publish the Journey
+
+1. Click **Publish** at the top of the Journey Studio  
+2. Once published, the journey is live and will run automatically whenever a new contact enters the list  
+
+---
+
+### Step 7: Test the Journey
+
+1. Go to **Contacts** → select a contact (you can use your own number for testing)  
+2. Add the contact to the list that triggers the journey  
+3. Return to the **Journey page → Runs tab**  
+   - You’ll see all contacts currently in the journey  
+   - You can track which step each contact is on (e.g., message sent, waiting period, next message queued)  
+
+---
+
+ With this setup, Chatzy AI ensures:  
+- **Timely follow-ups** without manual effort  
+- **Personalized lead nurturing** at scale  
+- **Improved conversion rates** from warm leads  
+
+---
+
+Next Steps:  
+- Explore how to trigger journeys from **external CRMs or webhooks**  
+- Try combining nurture messages with **conditional routing** for even smarter automation  

@@ -175,11 +175,14 @@
             "group": "How",
             "icon": "info",
             "pages": [
+               "how/to-create-a-journey-that-assigns-conversations-to-an-ai-agent",
+               "how/to-create-a-whatsapp-lead-nurture-journey",
               "how/to-use-the-conversations-inbox-in-chatzy-ai",
               "how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems",
               "how/to-create-whatsapp-campaign",
               "how/to-connect-whatsapp-with-crm",
               "how/how-chatzy-ai-generates-responses"
+             
             ]
           }
         ]
