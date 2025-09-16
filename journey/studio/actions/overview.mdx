@@ -1,86 +1,68 @@
-### Adding the Next Step to Your Journey
-
-After you have defined a trigger for your journey, you can add subsequent steps to build out your conversational flow.
-
-<Frame>
-  <img src="/journey/studio/actions/overview.png" alt="wa1" className="rounded-lg" />
-</Frame>
-- **Add a New Step**  
-  Click the **`+`** button below a trigger or a previous step to add the next action. This opens a menu of available actions to choose from.
-
----
-
-###  Define Actions
+### Define Actions
 
 Once a journey is triggered, **actions** define what happens next. These are the core building blocks of your journey, enabling automation, messaging, decision-making, and integration.
 
-#### 1. Send Message
-Send a message to the user using a predefined template.
+<Columns cols={1}>
 
-- **Channels:** WhatsApp, Messenger, Instagram  
-- **Key Features:** Multi-channel support, dynamic content with variables, structured templates  
-- **Use Case:** Notify users about offers, reminders, or updates  
+  <Card title="Send Message" icon="message-circle" href="https://docs.chatzy.ai/journey/studio/actions/send-message">
+    Send a message to the user using a predefined template.  
+    <br/>**Channels:** WhatsApp, Messenger, Instagram  
+    <br/>**Use Case:** Notify users about offers, reminders, or updates  
+  </Card>
 
-#### 2. Send Message in Conversation
-Send a contextual message within an ongoing conversation thread.
+  <Card title="Send Message in Conversation" icon="message-square" href="https://docs.chatzy.ai/journey/studio/actions/send-message-in-conversation">
+    Send a contextual message within an ongoing conversation thread.  
+    <br/>**Use Case:** Maintain conversational context while engaging users  
+  </Card>
 
-- **Supports:** AI-generated replies, media, or text  
-- **Use Case:** Maintain conversational context while engaging users  
+  <Card title="Wait" icon="clock" href="https://docs.chatzy.ai/journey/studio/actions/wait">
+    Pause the journey for a specified duration or until a specific time.  
+    <br/>**Use Case:** Delay actions to match optimal user engagement times  
+  </Card>
 
-#### 3. Wait
-Pause the journey for a specified duration or until a specific time.
+  <Card title="Wait Until" icon="hourglass" href="https://docs.chatzy.ai/journey/studio/actions/wait-until">
+    Hold the journey until a specific event or user action occurs.  
+    <br/>**Use Case:** Wait for user reply or external signal before proceeding  
+  </Card>
 
-- **Options:** Relative duration or scheduled time  
-- **Use Case:** Delay actions to match optimal user engagement times  
+  <Card title="Update Contact" icon="user" href="https://docs.chatzy.ai/journey/studio/actions/update-contact">
+    Modify user attributes, variables, tags, or metadata during the journey.  
+    <br/>**Use Case:** Dynamically enrich user profiles based on interactions  
+  </Card>
 
-#### 4. Wait Until
-Hold the journey until a specific event or user action occurs.
+  <Card title="Update Conversation" icon="message-circle-more" href="https://docs.chatzy.ai/journey/studio/actions/update-conversation">
+    Change conversation properties like status, tags, or assigned bot.  
+    <br/>**Use Case:** Mark as resolved, tag priority, or route based on context  
+  </Card>
 
-- **Supported Events:** e.g., "Last user message older than X"  
-- **Use Case:** Wait for user reply or external signal before proceeding  
+  <Card title="Assign to AI Agent" icon="bot" href="https://docs.chatzy.ai/journey/studio/actions/assign-to-ai-agent">
+    Assigns the conversation to an AI agent.  
+    <br/>**Use Case:** Automate lead qualification or handle user queries  
+  </Card>
 
-#### 5. Update Contact
-Modify user attributes, variables, tags, or metadata during the journey.
+  <Card title="Transfer to AI Agent" icon="bot-message-square" href="https://docs.chatzy.ai/journey/studio/actions/transfer-to-ai-agent">
+    Transfers the ongoing conversation to an AI agent.  
+    <br/>**Use Case:** Enable smooth escalation to automation when needed  
+  </Card>
 
-- **Use Case:** Dynamically enrich user profiles based on interactions  
+  <Card title="Execute Code" icon="code" href="https://docs.chatzy.ai/journey/studio/actions/execute-code">
+    Run custom Python code within the journey flow.  
+    <br/>**Use Case:** Apply business logic, calculations, or API data handling  
+  </Card>
 
-#### 6. Update Conversation
-Change conversation properties like status, tags, or assigned bot.
+  <Card title="Condition" icon="git-branch" href="https://docs.chatzy.ai/journey/studio/actions/condition">
+    Add a decision point in the journey to create dynamic branches.  
+    <br/>**Use Case:** Personalized flows for different user behaviors  
+  </Card>
 
-- **Use Case:** Mark as resolved, tag priority, or route based on context  
+  <Card title="Remove from Journey" icon="x-circle" href="https://docs.chatzy.ai/journey/studio/actions/remove-from-journey">
+    Exit a user from the current journey when criteria are met.  
+    <br/>**Use Case:** Prevent duplicate actions, stop irrelevant flows  
+  </Card>
 
-#### 7. Assign to AI Agent
-Assigns the conversation to an AI agent.
+  <Card title="Extract Entities" icon="scan-text" href="https://docs.chatzy.ai/journey/studio/actions/extract-entities">
+    Use AI/LLM to extract structured data like name, email, or intent.  
+    <br/>**Use Case:** Populate CRM or enable personalized follow-ups  
+  </Card>
 
-- **Use Case:** Automate lead qualification or handle user queries  
-
-#### 8. Transfer to AI Agent
-Transfers the ongoing conversation to an AI agent.
-
-- **Use Case:** Enable smooth escalation to automation when needed  
-
-#### 9. Execute Code
-Run custom Python code within the journey flow.
-
-- **Sandboxed Environment**  
-- **Use Case:** Apply business logic, calculations, or API data handling  
-- **Note:** Use the predefined dict `variables` to save values. The sandbox includes inbuilt functions, modules, and types. See [Learn More](/learn-more).  
-
-#### 10. Condition
-Add a decision point in the journey to create dynamic branches based on logic, user attributes, or event data.
-
-- Supports multiple conditions using AND/OR logic  
-- Works with attributes, message content, tags, event data, etc.  
-- Enables multi-path branching  
-- **Use Case:** Personalized flows for different user behaviors  
-
-#### 11. Remove from Journey
-Exit a user from the current journey when criteria are met.
-
-- **Use Case:** Prevent duplicate actions, stop irrelevant flows  
-
-#### 12. Extract Entities
-Use AI/LLM to extract structured data like name, email, or intent from chat history.
-
-- **Output:** Structured JSON  
-- **Use Case:** Populate CRM, enable personalized follow-ups, or segment users  
+</Columns>

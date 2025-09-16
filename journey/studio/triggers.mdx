@@ -17,24 +17,12 @@ The **Inbound Webhook** trigger allows your journey to start when data is sent f
 **Setup Steps:**
 1. Create a unique webhook URL in the platform.
 2. Configure your external app to send a POST request to this URL.
-   - Example: A form submission sends details to the webhook.
-3. Refresh the webhook to view incoming data and map fields (for example, `name`, `email`, `order_id`).
-4. Select a contact identifier (phone number, email, etc.).
-5. Use mapped variables inside the journey with `{{variable_name}}`.
-   - Example: “Hi `{{name}}`, we received your order `{{order_id}}`.”
+   - Example: Appointment booking details sent to the webhook.
+3. Refresh the webhook to view incoming data and map fields (for example, `name`, `phone_number`, `appointment_date`).
+4. Select a contact identifier (phone number or Conversation ID).
+5. Use mapped variables inside the journey with `{{inbound_webhook.variables.       }}`.
+   - Example: “Hi `{{{{inbound_webhook.variables.customer_name}}}}`, Your appointment is confirmed for `{{inbound_webhook.variables.appointment_date}}`.”
 
-### Shopify - Abandoned Checkout
-
-Designed for Shopify stores, this trigger helps recover lost sales by messaging customers who abandoned their carts.
-
-![shopify-trigger](/journey/studio/triggers/trigger2.png)
-
-**Setup Steps:**
-1. Connect your Shopify store.
-2. Set the wait time before contacting customers.
-   - Example: Wait 30 minutes after cart abandonment.
-3. Personalize messages using cart details.
-   - Example: “Hi `{{name}}`, you left `{{product_name}}` in your cart.”
 
 ### Conversation-Based Trigger
 

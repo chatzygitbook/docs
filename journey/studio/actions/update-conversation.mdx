@@ -7,10 +7,9 @@ The **Update Conversation** action modifies the properties of an ongoing convers
 #### Configuration Fields
 
 - **Conversation ID**  
-  The unique identifier for the conversation to be updated. You can use a variable such as `{{conversation_id}}` to automatically apply updates to the current conversation within the journey.
+  The unique identifier for the conversation to be updated. You can use a variable such as `{{inbound_webhook.conversation_id}}` to automatically apply updates to the current conversation within the journey.
 
 - **Params**  
   Key-value pairs used to update conversation details. For example:  
-  - `status: Resolved`  
-  - `notes: User requested callback`  
+  - `conversation_status: closed`  
   These updates can add metadata, mark progress, or provide additional context for agents.

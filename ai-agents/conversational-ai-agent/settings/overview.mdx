@@ -1,31 +1,41 @@
 ## Chatbot Customization Tabs
 
 <Frame>
-  <img src="/ai-agents/conversational-ai-agent/settings/overview.png"  />
+  <img src="/ai-agents/conversational-ai-agent/settings/overview.png" className="rounded-lg" />
 </Frame>
 
+<Columns cols={1}>
 
-###  **Base Prompt** 
-    Think of this as the chatbot's brain. This is where you define its core personality and instructions. You can set its main goal, how it should respond, and the overall chat flow to ensure it behaves exactly as you want it to.
+  <Card title="Base Prompt" icon="brain" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/base-prompt">
+    Define your chatbot’s core personality, goals, and instructions to control how it responds and flows in conversations.
+  </Card>
 
+  <Card title="Model" icon="cpu" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/model">
+    Select the AI engine powering your chatbot. Different models excel at different tasks, from comprehension to creativity.
+  </Card>
 
-### **Model** 
-    This is where you choose the AI engine that powers your chatbot. Different models have different strengths, like understanding complex language or generating creative responses. Choosing the right one helps your bot perform best for its specific task.
+  <Card title="Chat Widget" icon="layout" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/chat-widget">
+    Customize the look and feel of the chat window — colors, fonts, and icons — to align with your brand’s style.
+  </Card>
 
-### **Chat Widget** 
-    This is all about the chatbot's appearance. You can customize how the chat window looks on your website things like colors, fonts, and icons to make sure it matches your brand's style.
+  <Card title="Advanced Settings" icon="sliders" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/advanced-settings">
+    Fine-tune technical details for balancing accuracy, engagement, and overall chatbot behavior.
+  </Card>
 
-### **Advance Settings** 
-    This tab is for fine-tuning the chatbot's behavior. Here, you can adjust more technical details, to get the perfect balance between useful and engaging.
+  <Card title="External APIs" icon="link" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/external-apis">
+    Connect your chatbot with third-party apps and services for real-time data access and extended functionality.
+  </Card>
 
-### **External APIs** 
-    This allows you to connect your chatbot to other applications. By linking to external services, you can give your bot new abilities, like accessing real-time information or performing actions in other software.
+  <Card title="Tools" icon="wrench" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/tools">
+    Equip the chatbot with tools to perform specific actions like triggering journeys, closing conversations, or fetching data.
+  </Card>
 
-### **Tools** 
-    This section is for giving your chatbot specific skills. You can equip it with different "tools" to perform actions, such as triggering Journey, Closing conversations, or fetching contact details.
+  <Card title="Moderation" icon="shield" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/moderation">
+    Set content rules to filter or block inappropriate messages and keep conversations safe.
+  </Card>
 
-### **Moderation** 
-    This is your safety control center. You set rules here to filter out or block inappropriate content, ensuring your chatbot's conversations remain safe and appropriate for your users.
+  <Card title="Utilities" icon="settings" href="https://docs.chatzy.ai/ai-agents/conversational-ai-agent/settings/utilities">
+    Access general-purpose features like date & time context or message timestamps for better management.
+  </Card>
 
-### **Utilities** 
-    This is your general Utilities toolbox. It likely contains various helpful features for managing your chatbot, such as including Date & Time Context, include message timestamps.
+</Columns>
