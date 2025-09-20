@@ -163,7 +163,7 @@
             ]
           },
           {
-            "group": "Auhtorized iframe Access",
+            "group": "Authorized iframe Access",
             "pages": ["api-reference/auhtorized-iframe-access/get-access-token", "api-reference/auhtorized-iframe-access/get-new-access-token-from-refresh-token"]
           }
         ]

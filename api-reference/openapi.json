@@ -980,10 +980,10 @@
             "name": "model",
             "in": "query",
             "required": false,
-            "description": "Model to use for generating followup suggestions. Allowed values: gpt-4o-mini, gemini-2.5-flash.",
+            "description": "Model to use for generating followup suggestions. Allowed values: gpt-4o-mini, gemini-2.5-flash-lite.",
             "schema": {
               "type": "string",
-              "enum": ["gpt-4o-mini", "gemini-2.5-flash"]
+              "enum": ["gpt-4o-mini", "gemini-2.5-flash-lite"]
             }
           }
         ],
