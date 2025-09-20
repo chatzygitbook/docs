@@ -1,4 +1,4 @@
-The **Extract Entities** action is a powerful tool that automatically pulls specific, structured information from a user's past conversation history. It uses LLM (Large Language Model) capabilities to intelligently extract data — such as addresses, names, or dates — based on what the user has already said, and saves them into variables for later use. This allows for seamless automation of data capture without needing the user to re-enter information.
+The **Extract Entities** action is a powerful tool that automatically pulls specific, structured information from a user's past conversation history. It uses LLM (Large Language Model) capabilities to intelligently extract data - such as addresses, names, or dates - based on what the user has already said, and saves them into variables for later use. This allows for seamless automation of data capture without needing the user to re-enter information.
 
 <Frame>
   <img src="/journey/studio/actions/extract-entities.png" alt="wa1" className="rounded-lg" />
@@ -9,7 +9,13 @@ The **Extract Entities** action is a powerful tool that automatically pulls spec
 - **Conversation ID**: A unique identifier for the conversation from which data will be extracted. Using the `{{conversation_id}}` variable ensures that the current conversation's context is used.
 
 - **Entities**: This is where you define what information you want to extract from the user's conversation.
-  - **Entity name**: The name of the variable where the extracted data will be saved (e.g., `user_address`, `meeting_date`, `user_email`).
+  - **Entity name**: The name of the variable where the extracted data will be saved (e.g., `user_address`, `meeting_date`, `user_email`) this isn't a part work flow variables.
   - **Entity format**: The expected format of the data to extract  such as `"Date"`, `"Email"`, `"Phone Number"`, or a custom-defined type.
 
 > 💡 **Example**: If the user previously said _"My address is in Delhi"_ and you’ve configured `address` as an entity, the Extract Entities action will analyze the conversation history and automatically save **"Delhi"** into the `address` variable.
+
+> you can use extract-entities later in your flow as we’ll <br/>
+e.g.
+```python
+  updated_address = variables["extracted_entities"]["address"] 
+```  

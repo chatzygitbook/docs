@@ -1,18 +1,101 @@
 
 
 The **Wait Until** action pauses a journey until a specific event or condition is met, rather than a fixed amount of time. This enables dynamic flows that can adapt to user inactivity, responses, or other real-time events.
+<Columns cols={2}>
 <Frame>
   <img src="/journey/studio/actions/wait-until.png" alt="wa1" className="rounded-lg" />
 </Frame>
+<Frame>
+  <img src="/journey/studio/actions/wait-until2.png" alt="wa1" className="rounded-lg" />
+</Frame>
+</Columns>
+
 #### Configuration Fields
 
 - **Wait**  
   Defines the duration linked to the selected event. For example, if the event is *Last user message is older than duration*, you can specify the duration here (e.g., 10 minutes).
 
 - **Event**  
-  Dropdown to select the condition that must be satisfied for the journey to proceed.  
-  Example: *Last user message is older than duration* (commonly used to re-engage inactive users).
+ 
+Dropdown to select the condition that must be satisfied for the journey to proceed.  
 
-- **Conversation ID**  
-  Identifies the specific conversation that the action should monitor for the defined event.
-    <br/>`{{conversation_id}}`
+  - **Last user message is older than duration**  
+    Useful for re-engaging users who haven’t replied for a certain time. 
+    
+    - Conversation ID
+    Identifies the specific conversation that the action should monitor for the defined event.
+      <br/>`{{conversation_id}}`
+
+  - **Time remaining before external event**  
+     Triggers an action before a scheduled event. <br/> 
+     - The event time must be provided in the format:  
+
+    ``` 
+    "%A, %B %d, %Y %I:%M %p" 
+    ``` 
+
+    Each symbol has a meaning:<br/>
+
+      %A → Full weekday name (e.g., Monday, Tuesday)<br/>
+
+      %B → Full month name (e.g., September, January)<br/>
+
+      %d → Day of the month (01–31)<br/>
+
+      %Y → Full year (e.g., 2025)<br/>
+
+      %I → Hour (01–12, 12-hour clock)<br/>
+
+      %M → Minutes (00–59)<br/>           
+
+      %p → AM or PM indicator             
+    e.g.
+  **Wednesday, September 17, 2025 07:30 PM**
+<Accordion title="Sending Meeting Reminder Before Scheduled Time ">
+
+Suppose you have a meeting booking form on your website. When a user books a meeting, the details (date & time) are sent to your CRM. From there, the CRM triggers an **Inbound Webhook** in Chatzy.  
+
+You can then set up a flow like this:  
+
+<Frame>
+  <img src="/journey/studio/actions/wait-until-eg.png" alt="wait-until-example" className="rounded-lg" />
+</Frame>
+
+1. **Inbound Webhook**  
+   - Captures the meeting data from your CRM, including the scheduled time.  
+
+    Example webhook payload:  
+   ```json
+   {
+     "meeting_id": "mtg_12345",
+     "title": "Stand Up Meeting",
+     "scheduled_time": "Saturday, September 20, 2025 10:00 PM",
+     "phone_number": "918237502610",
+     "organizer": {
+       "name": "Avinash",
+       "email": "avinash@chatzy.ai"
+     }
+   }
+   ```
+
+2. **Wait Until**  
+   - Configure the action to wait until a specific duration *before the meeting*.  
+   - Example: *20 minutes before the scheduled meeting time*.  
+   - In the **Event Time** field, use a **dynamic variable** from the webhook:  
+     ```  
+     {{inbound_webhook.scheduled_time}}  
+     ```  
+   - ⚠️ Make sure your CRM sends the date-time in this format:  
+     ```
+     %A, %B %d, %Y %I:%M %p
+     ```  
+     If not you have to convert it in the format using the `Execute Code ` action before wait-until action then save that new variable and use it in `Event Time` section.
+
+3. **Send Message**  
+   - Finally, send a reminder message template to the user:  
+     > *Hello, you have a meeting scheduled on Saturday at 1:00 PM. Thank you!*  
+
+This setup ensures that users automatically receive reminders before their scheduled meetings or events.  
+
+</Accordion>
+

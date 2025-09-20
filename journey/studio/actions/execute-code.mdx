@@ -20,8 +20,26 @@ When using this action, you have access to pre-configured **Globals** that make 
   - `uuid`: Generates a unique ID.  
   - `get_unix_timestamp`: Gets the current Unix timestamp.  
   - `upload_to_s3`: Uploads a file to an S3 bucket.  
-  - `get_contact_details`: Retrieves a contact's information.  
-
+  - `get_contact_details`: Retrieves **predefined details** about the current contact.  
+    - The returned object includes useful variables you can directly use in your code:  
+      ```python
+      details = {
+        "phn_number": <users phone number>,
+        "first_name": <users first name>,
+        "last_name": <users last name>,
+        "email_id": <users email id>,
+        "contact_id": <users contact id>,
+        "iframe_user_id": <users iframe id >
+        # ... plus any custom attributes saved for the contact
+      }
+      ```  
+    - This means you can quickly access user data without writing extra queries.  
+    - **Example usage:**  
+      ```python
+      details = get_contact_details()
+      print(f"Hello {details['first_name']}, we’ll contact you at {details['phn_number']}.")
+      ```
+      Output: `Hello Avinash, we’ll contact you at 918237502610.`   
 - **Modules**  
   Imported Python libraries available for use.  
   - `httpx`: For making HTTP requests.  

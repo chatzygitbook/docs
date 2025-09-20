@@ -17,8 +17,35 @@ When using this card, you have access to **pre-configured globals** that simplif
   * `len(obj)`: Returns the length of an object (e.g., list, string).  
   * `range(start, stop)`: Generates a sequence of numbers.  
   * `print(message)`: Logs output safely.  
-  * `get_details()`: Retrieves predefined details from your flow.  
-  * `get_contact_details()`: Fetches lead or user information.  
+  * `get_contact_details()`: Retrieves **predefined details** about the current contact.  
+    - The returned object includes useful variables you can directly use in your code:  
+      ```python
+      details = {
+        "phn_number": <users phone number>,
+        "first_name": <users first name>,
+        "last_name": <users last name>,
+        "email_id": <users email id>,
+        "contact_id": <users contact id>,
+        "iframe_user_id": <users iframe id >
+        # ... plus any custom attributes saved for the contact
+      }
+      ```  
+    - This means you can quickly access user data without writing extra queries.  
+    - **Example usage:**  
+      ```python
+      details = get_contact_details()
+      print(f"Hello {details['first_name']}, we’ll contact you at {details['phn_number']}.")
+      ```
+      Output: `Hello Avinash, we’ll contact you at 918237502610.`   
+  * `get_details()`: Fetches user information from current conversation id.
+    ```python
+      details = {
+        "phn_number": <users phone number>,
+        "full_name": <users full name>,
+        "conversation_id": <current conversation id>
+      }
+      ```  
+
   * `upload_to_s3(file)`: Uploads a file to Amazon S3 storage.  
   * `save_details(data)`: Saves data for later use in the flow.  
 

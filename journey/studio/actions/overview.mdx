@@ -11,9 +11,14 @@ Once a journey is triggered, **actions** define what happens next. These are the
   </Card>
 
   <Card title="Send Message in Conversation" icon="message-square" href="https://docs.chatzy.ai/journey/studio/actions/send-message-in-conversation">
-    Send a contextual message within an ongoing conversation thread.  
-    <br/>**Use Case:** Maintain conversational context while engaging users  
+    Send a follow-up message within 24 Hrs conversation window on WhatsApp.
+    
   </Card>
+  ---
+> **Instruction:**  
+> If you want to send a **direct message** to a user when there’s no open conversation window, use the **Send Message** action.  
+> If the user already has an active **24-hour conversation window**, then use the **Send Message in Conversation** action instead.
+---
 
   <Card title="Wait" icon="clock" href="https://docs.chatzy.ai/journey/studio/actions/wait">
     Pause the journey for a specified duration or until a specific time.  

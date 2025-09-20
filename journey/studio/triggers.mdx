@@ -10,39 +10,74 @@ You can choose from several trigger options depending on your use case.
 
 ### Inbound Webhook
 
-The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system, like CRMs, forms, or e-commerce platforms.
-
-![webhook-trigger](/journey/studio/triggers/trigger1.png)
-
+The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system, like CRMs, forms, or from another AI agent within Chatzy AI.
+<Columns cols={2}>
+<Frame>
+  <img src="/journey/studio/triggers/trigger1.png" alt="wa1" className="rounded-lg" />
+</Frame>
+<Frame>
+  <img src="/journey/studio/triggers/tigger1b.png" alt="wa1" className="rounded-lg" />
+</Frame>
+</Columns>
 **Setup Steps:**
 1. Create a unique webhook URL in the platform.
 2. Configure your external app to send a POST request to this URL.
    - Example: Appointment booking details sent to the webhook.
 3. Refresh the webhook to view incoming data and map fields (for example, `name`, `phone_number`, `appointment_date`).
 4. Select a contact identifier (phone number or Conversation ID).
-5. Use mapped variables inside the journey with `{{inbound_webhook.variables.       }}`.
+5. Contact Identifier Value  
+
+   If you select **Phone Number** as the contact identifier, use:  
+
+   ```handlebars
+   {{inbound_webhook.inbound_webhook.phone_number}}
+   ```
+
+   If you select Conversation ID as the contact identifier, use:
+   ``` handlebars
+   {{inbound_webhook.inbound_webhook.conversation_id}} 
+   ```
+
+ 
+
+- Use mapped variables inside the journey with `{{inbound_webhook.variables.       }}`.
    - Example: “Hi `{{{{inbound_webhook.variables.customer_name}}}}`, Your appointment is confirmed for `{{inbound_webhook.variables.appointment_date}}`.”
 
 
 ### Conversation-Based Trigger
 
 This starts a journey when a user initiates a chat on a channel (WhatsApp, Instagram, Messenger, etc.).
-
-![conversation-trigger](/journey/studio/triggers/trigger3.png)
-
+<Columns cols={1}>
+<Frame>
+  <img src="/journey/studio/triggers/trigger3.png" alt="wa1" className="rounded-lg" />
+</Frame>
+</Columns>
 **Setup Steps:**
 1. Select the channel to monitor.
 2. Choose the event type:
-   - Conversation Created
-   - First Conversation for Contact
-   - Conversation Resumed
-3. (Optional) Add keyword conditions or exclusions.
-   - Trigger only on template replies.
-   - Trigger only if a user does not reply to a template.
-   - Include or exclude specific keywords.
+   - **Conversation Created** → triggers every time a new conversation starts  
+   - **First Conversation Created for Contact** → triggers only the very first time a customer messages you  
+   - **Conversation Resumed** → (optional, used when an existing conversation restarts)  
 
-**Example:**
-If a user messages “pricing” on WhatsApp, the chatbot launches the **Pricing Information Journey** immediately.
+3. (Optional) Add keyword conditions or exclusions.
+  Conditions allow fine control over when the journey runs:  
+
+   - **Template Message Condition (WhatsApp only)**  
+    Example: Replies to “Day 1” template → Assign AI Agent A  
+    Replies to “Day 3” template → Assign AI Agent B  
+
+   - **Keyword Condition**  
+    Example: Customer replies with *“Book Appointment”* → Assign Appointment AI Agent  
+    Customer replies with *“Tell Me More”* → Assign Product Info AI Agent  
+
+   - **Exclude Keywords**  
+    Example: Journey A triggers only for “Pricing”  
+    Journey B excludes “Pricing” to handle all other messages  
+
+   If no conditions are set, the journey will run for **all new conversations**.  
+   <br/>
+   **Example:**
+   If a user messages “pricing” on WhatsApp, the chatbot launches the **Pricing Information Journey** immediately.
 
 ### Contact Added to List
 
