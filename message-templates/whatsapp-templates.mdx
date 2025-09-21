@@ -4,72 +4,115 @@ icon: "whatsapp"
 iconType: "solid"
 ---
 
-The **WhatsApp Message Templates** section is where you manage your pre-approved messages for outbound communication on WhatsApp. These templates are required by WhatsApp for all messages sent outside of an active conversation window.
+<Frame>
+  <img src="/message-templates/whatsapp-templates/wa-templates.png" alt="WhatsApp Templates Overview" className="rounded-lg" />
+</Frame>
 
-To create a new template, click the **`+ Create Template`** button. Once a template is submitted, WhatsApp can take up to **24 hours** to review it.  
-In some cases, approval may happen within a minute, but a pending status implies a manual review is needed.
+## How to Create WhatsApp Template Messages in Chatzy AI
+
+Hey there! Welcome to this guide, where you will learn how to create WhatsApp template messages in **Chatzy AI**.
+
+Before moving forward, make sure you have connected your **WhatsApp number** to Chatzy AI and it is visible under **Channels → WhatsApp**.
+
+If not, please check the previous tutorial video before proceeding.
+
+---
+
+### Step 1: Navigate to Message Templates
+
+- Go to the **Message Templates** section of Chatzy AI.  
+- Select the **WhatsApp** channel to view your existing templates and their approval status.  
+- If you haven’t created any templates yet, this page will be empty.  
+- Click on the **`+ Create Template`** button to start creating a new template.
+
+---
+
+### Step 2: Select the Right Category
+
+WhatsApp requires you to choose a **category** for each template. This defines its purpose:
+
+| Category        | Purpose |
+|------------------|--------|
+| **Authentication** | One-time passwords (OTPs), login verification. |
+| **Utility**       | Transactional updates: order confirmations, account updates, reminders. |
+| **Marketing**     | Promotional content, sales announcements, brand awareness. |
+
+> 💡 **Tip:** Choosing the correct category is essential. Selecting the wrong one may lead to rejection by Meta.  
+> Marketing templates usually cost more to send. For pricing details, visit the **Pricing** page on Chatzy AI.
 
 <Frame>
-  <img src="/message-templates/whatsapp-templates/wa-templates.png" alt="wa1" className="rounded-lg" />
+  <img src="/message-templates/whatsapp-templates/wa1.png" alt="WhatsApp Template Categories" className="rounded-lg" />
 </Frame>
----
-
-### Dashboard Overview
-
-The main dashboard provides an overview of all your templates:
-
-| Column               | Description                                                                 |
-|-----------------------|-----------------------------------------------------------------------------|
-| **Template ID**       | A unique identifier for the template.                                       |
-| **Template Name**     | The name you assigned to the template.                                      |
-| **Template Language** | The language of the template's content (e.g., English).                     |
-| **Template Category** | The purpose of the template (e.g., Marketing, Utility, Authentication).      |
-| **Template Status**   | The approval status from WhatsApp (`Approved`, `Rejected`, or `Pending`). |
 
 ---
 
-### Creating WhatsApp Message Templates
+### Step 3: Add Basic Information
 
-The creation process varies slightly depending on the template’s category, but all templates must be **submitted to WhatsApp for approval** before they can be used for outbound communication.
+- **Template Name** → Pick a unique and easy-to-identify name.  
+- **Language** → Choose the language of your message.  
+- Decide if the template will contain **text only** or **media**.
+
+If adding **media** (image, video, or document):  
+- Select the media type in the **Header** dropdown and upload your file.  
+- The uploaded media is only for preview. You will need to upload it again while sending campaigns.
+
+You can also add **text in the header**. Header text appears in **bold** at the top.
 
 ---
 
-#### Template Categories
+### Step 4: Write the Message
 
-When creating a template, you must select a **category**, which defines its purpose and allowed content:
+- **Body** → This is the main message content. Supports emojis, **bold**, and *italic* text.  
+- Keep it **short and engaging** for better delivery rates.
 
-- **Marketing** → Promotional content, product announcements, special offers.  
-- **Utility** → Transactional updates, order status, delivery notifications, appointment reminders.  
-- **Authentication** → Secure verification messages with one-time passcodes (OTPs) for account logins or sign-ups.  
+- **Footer** *(optional)* → Use it for greetings or less prominent info.
+
+---
+
+### Step 5: Add Interactivity with Buttons
+
+Buttons make your template **interactive**:
+
+| Button Type         | Action |
+|----------------------|-------|
+| **Quick Reply**      | Lets users reply with predefined options directly in WhatsApp. |
+| **Call to Action (CTA)** | Takes users to a webpage or initiates a phone call. |
+
 <Frame>
-  <img src="/message-templates/whatsapp-templates/wa1.png" alt="wa1" className="rounded-lg" />
+  <img src="/message-templates/whatsapp-templates/wa2.png" alt="Adding Buttons" className="rounded-lg" />
 </Frame>
+
 ---
 
-#### Marketing & Utility Templates
+### Step 6: Use Variables for Personalization
 
-Marketing and Utility templates share the same creation interface. They support rich content and personalization:
+Variables let you insert dynamic, user-specific details like **names, order numbers, or dates**.
 
-- **Template Name** → Unique identifier for your template.  
-- **Template Language** → Language of the message.  
-- **Header** *(optional)* → Can include text, an image, or a document.  
-- **Body** → Main content of the message. Supports variables (`{{1}}`, `{{2}}`) for personalization.  
-- **Footer** *(optional)* → Smaller text section at the bottom of the message.  
-- **Buttons** → Up to 10 interactive buttons for customer responses or actions.  
+- Add variables in the **Header** (Text type) or **Body** using **double curly brackets**.  
+- Example: `{{1}}`, `{{2}}` for multiple placeholders.  
+- Add **sample values** for each variable to help Meta understand and approve your template faster.
+
+> ⚠️ These sample values are for demonstration only. You must provide real values when sending campaigns.
+
+---
+
+### Step 7: Review & Submit
+
+Once everything looks good in the preview:
+
+- Click **Create** to submit your template.  
+- Meta usually approves templates within a few seconds, but it may take up to **24 hours**.  
+- Refresh the page to check the template’s status.
+
 <Frame>
-  <img src="/message-templates/whatsapp-templates/wa2.png" alt="wa1" className="rounded-lg" />
+  <img src="/message-templates/whatsapp-templates/wa3.png" alt="Approval Process" className="rounded-lg" />
 </Frame>
+
 ---
 
-#### Authentication Templates
+## ✅ Final Tips
+- Follow WhatsApp’s **template guidelines** strictly.  
+- Submitting **promotional language** under **Utility** or **Authentication** categories may cause **rejection**.
 
-Authentication templates are more restricted due to security requirements. The form is pre-filled and cannot be freely edited. You may only configure limited options:
-
-- **Add Security Recommendation** → Includes a disclaimer like: *“For your security, do not share this code.”*  
-- **Add Expiry Time** → Adds an expiration notice and lets you specify how long the code remains valid.  
-<Frame>
-  <img src="/message-templates/whatsapp-templates/wa3.png" alt="wa1" className="rounded-lg" />
-</Frame>
----
-
-> ⚠️ **Important:** WhatsApp requires strict adherence to its template guidelines. Templates with promotional language submitted under **Utility** or **Authentication** categories may be **rejected**.
+Creating engaging and effective WhatsApp template messages in **Chatzy AI** is that simple.  
+Get started today to enhance your customer communication effortlessly!

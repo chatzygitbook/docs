@@ -1,0 +1,98 @@
+---
+title: "How to Add a Follow-up in a Conversation"
+icon: "refresh-ccw-dot"
+iconType: "solid"
+---
+
+This guide explains how to set up a follow-up message on WhatsApp (or other channels) while staying compliant with the **24-hour conversation window** rules.
+
+**Key sequence:** **Send Message** → **Wait** → **Send Message in Conversation**
+
+- **Send Message** → Starts or re-opens the conversation (works even if the 24-hour window is closed).  
+- **Wait** → Pauses the journey for a defined duration.  
+- **Send Message in Conversation** → Sends the follow-up inside the active 24-hour window.  
+
+---
+
+### Business Use Case
+
+Suppose you want to greet a new lead with a welcome template and then follow up 10 minutes later by asking if they’d like a demo. This sequence ensures your follow-up lands at the right time and in the same conversation thread.
+
+---
+
+### Step 1: Create a Journey
+
+1. Go to **Journeys** in the left menu.  
+2. Click **Create Journey**.  
+3. Enter a name (e.g., *Follow-up Journey*) and choose **Blank Journey**.  
+
+---
+
+### Step 2: Add a Trigger
+
+1. Add a **Trigger** (e.g., **Conversation Created**, **Contact Added to List**, or **Inbound Webhook**).  
+2. Select the channel (WhatsApp, Instagram, Messenger) and configure any conditions as needed.  
+
+---
+
+### Step 3: Add the Initial Send Message Action
+
+1. Click the **+** button → **Action → Send Message**.  
+2. Configure the action:  
+
+   - **Channel** → Select WhatsApp, Messenger, or Instagram.  
+   - **Phone Number** → The recipient’s phone (e.g., `{{contact.phone_number}}` or `{{inbound_webhook.phone_number}}`).  
+   - **Template** → Choose an approved template message.  
+
+> ⚡ **Why this step?**  
+> `Send Message` ensures the conversation is started or reopened, even if the 24-hour window isn’t active yet.  
+
+---
+
+### Step 4: Add a Wait Step
+
+1. After the Send Message step, click **+** → **Action → Wait**.  
+2. Set a wait duration (e.g., **10 minutes**) or a specific time or a relative delay that fits your use case. Optionally pick a specific time of day if needed.  
+
+> Example: Wait 10 minutes to give the user time to engage before sending the follow-up.  
+
+---
+
+### Step 5: Add the Send Message in Conversation Action
+
+1. After the Wait step, click **+** → **Action → Send Message in Conversation**.  
+2. Configure the action:  
+
+   - **Conversation ID** → Select the active conversation ID (e.g., `{{conversation_id}}` or `{{inbound_webhook.inbound_webhook.conversation_id}}`).  
+   - **Channel** → WhatsApp (make sure the conversation window is still open).  
+   - **Message Type** → Text, Image, Video, Document, etc.  
+   - **Message Body** → Enter the follow-up message, or enable **AI Generated Follow-up Message** for a context-aware reply.  
+
+> ⚡ **Why this step?**  
+> `Send Message in Conversation` delivers the follow-up inside the existing 24-hour chat, keeping context intact and ensuring compliance.  
+
+---
+
+### Step 6: Publish and Test
+
+1. Click **Save** → **Publish**.  
+2. Test the flow:  
+   - Trigger the journey (via webhook, conversation, or list).  
+   - Confirm the initial `Send Message` is delivered.  
+   - Wait for the set delay.  
+   - Verify the `Send Message in Conversation` arrives in the same chat.  
+   - Check the **Conversations tab** to confirm both messages are visible in one active conversation.  
+
+---
+
+### Tips & Notes
+
+- For inbound webhooks, use:  
+  - **Phone** → `{{inbound_webhook.inbound_webhook.phone_number}}`  
+  - **Conversation ID** → `{{inbound_webhook.inbound_webhook.conversation_id}}`  
+
+- Always use **Send Message** to open/re-open conversations, and **Send Message in Conversation** only for active 24-hour windows.  
+
+---
+
+✅ With this setup, your chatbot can automatically send follow-ups that feel natural, land at the right time, and fully comply with platform policies.  

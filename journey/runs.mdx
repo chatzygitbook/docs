@@ -1,0 +1,35 @@
+---
+title: "Journey Runs"
+icon: "buffer"
+iconType: "solid"
+---
+
+If you click on a journey name in the **Journey Dashboard**, you’ll access the **Journey Runs** tab.  
+This tab is your debugging and analytics hub  it logs every execution of a journey, helping you track performance and troubleshoot issues.
+
+<Frame>
+  <img src="/journey/runs.png" alt="journey-runs" className="rounded-lg" />
+</Frame>
+
+---
+
+### Journey Runs List
+The main table provides a summary of each journey execution:
+
+| Column         | Description |
+|----------------|-------------|
+| **Contact**    | The name or number of the contact who started the journey. |
+| **State**      | The current status of the journey (e.g., `completed`, `waiting`, `failed`). |
+| **Last Step**  | The most recent trigger or action executed. |
+| **Version**    | The version of the journey that was run. |
+| **Created at** | When the journey started. |
+| **Updated at** | When the last step was completed. |
+
+---
+
+### Steps Completed
+Clicking on a specific journey run opens a detailed view:
+
+* **Steps Completed** – A sequential log of every trigger and action executed.  
+* **Variables** – Expanding a step reveals all variables created and used.  
+  This is especially useful for debugging how data flows across steps and ensuring mappings work as expected.

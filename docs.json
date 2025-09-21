@@ -113,6 +113,7 @@
               "journey/overview",
               "journey/getting-started",
               "journey/dashboard",
+              "journey/runs",
               {
                 "group": "Studio",
                 "icon": "external-link",
@@ -181,7 +182,9 @@
               "how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems",
               "how/to-create-whatsapp-campaign",
               "how/to-connect-whatsapp-with-crm",
-              "how/how-chatzy-ai-generates-responses"
+              "how/how-chatzy-ai-generates-responses",
+              "how/to-add-follow-up",
+              "how/to-transfer-whatsapp-conversation-from-a-conversational-to-a-flow-based-ai-agent-in-chatzy-ai"
             ]
           }
         ]

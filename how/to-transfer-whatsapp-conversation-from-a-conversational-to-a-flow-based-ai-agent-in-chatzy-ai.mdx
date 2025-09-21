@@ -1,0 +1,96 @@
+---
+title: "How to transfer WA conversation from a Conversational to a Flow-based AI agent in Chatzy AI?"
+icon: "whatsapp"
+iconType: "solid"
+---
+
+
+This guide explains how to transfer an active WhatsApp conversation from a **Conversational AI Agent** to a **Flow-Based AI Agent** in Chatzy AI.  
+The transfer relies on configuring both a **Journey** and the **Conversational AI Agent** to communicate through a webhook.
+
+---
+
+### Requirements
+
+
+- A **Conversational AI Agent** (to handle natural conversation).  
+- A **Flow-Based AI Agent** (to which you want to transfer conversation).  
+
+---
+
+### Step 1: Create a Journey and Webhook
+
+1. Navigate to **Journeys** in the left menu.  
+2. Click **Create Journey** → choose **Blank Journey**.  
+3. Set the **Trigger** as **Inbound Webhook**.  
+4. Save the webhook and **copy the webhook endpoint URL**.  
+
+---
+
+### Step 2: Configure Journey to Handle the Webhook
+
+1. In the journey, click **+ Add** → **Action → Transfer to AI Agent**.  
+2. Select the **AI Agent** you want to transfer the conversation to.  
+3. Save and **Publish the Journey**.  
+
+---
+
+### Step 3: Configure the Conversational AI Agent
+
+1. Open your **Conversational AI Agent**.  
+2. Go to **Settings → Tools**.  
+3. Enable **Trigger Journey**.  
+4. Paste the **webhook endpoint** you copied earlier into the **Webhook Endpoint field**.  
+
+---
+
+### Step 4: Update the Base Prompt  
+
+Inside your agent’s **Base Prompt**, define **when** to trigger the webhook.  
+Use the following instruction format:  
+
+```text
+When the <condition>, call the function `workflow_trigger`
+```
+
+Example:  
+```text
+When the user shares their email, call the function `workflow_trigger`
+```
+
+This ensures the AI knows exactly when to trigger the Journey webhook.
+
+---
+
+### End-to-End Example
+
+#### Scenario  
+You run a WhatsApp chatbot for demo requests. When a user says **“I want a demo”**, the AI should trigger a Journey that collects lead details and assigns the conversation to a sales agent.
+
+#### Setup  
+
+1. **Create Journey**  
+   - Trigger → **Inbound Webhook**  
+   - Action → **Transfer to AI Agent: Sales Agent**  
+   - Save & Publish  
+
+2. **Conversational AI Agent**  
+   - Go to **Settings → Tools → Trigger Journey**  
+   - Paste webhook endpoint from the Journey  
+   - Update Base Prompt with:  
+     ```text
+     When the user says they want a demo, call the function `workflow_trigger`
+     ```
+
+3. **Flow**  
+   - User types: *“I want a demo”*  
+   - AI detects intent → triggers webhook  
+   - Journey starts → transfers conversation to Sales AI Agent  
+   - Sales Agent continues with lead qualification  
+
+---
+
+✅ With this setup, your Conversational AI Agent can seamlessly hand off tasks to a Journey, making your automation **smarter, context-aware, and collaborative**.
+
+
+
