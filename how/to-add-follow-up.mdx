@@ -6,10 +6,10 @@ iconType: "solid"
 
 This guide explains how to set up a follow-up message on WhatsApp (or other channels) while staying compliant with the **24-hour conversation window** rules.
 
-**Key sequence:** **Send Message** → **Wait** → **Send Message in Conversation**
+**Key sequence:** **Assign to AI agnet** → **Wait until** → **Send Message in Conversation**
 
-- **Send Message** → Starts or re-opens the conversation (works even if the 24-hour window is closed).  
-- **Wait** → Pauses the journey for a defined duration.  
+- **Assign To AI agent** → Starts or re-opens the conversation window when user replies to the AI agent .  
+- **Wait-until** → Pauses the journey for a defined duration after the last message of the user.  
 - **Send Message in Conversation** → Sends the follow-up inside the active 24-hour window.  
 
 ---
@@ -35,26 +35,19 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 
 ---
 
-### Step 3: Add the Initial Send Message Action
+### Step 3: Add the Assign to AI agent Action
 
-1. Click the **+** button → **Action → Send Message**.  
-2. Configure the action:  
+1. Click the **+** button → **Action → Assign to AI agent → Select the AI agent **.  
 
-   - **Channel** → Select WhatsApp, Messenger, or Instagram.  
-   - **Phone Number** → The recipient’s phone (e.g., `{{contact.phone_number}}` or `{{inbound_webhook.phone_number}}`).  
-   - **Template** → Choose an approved template message.  
-
-> ⚡ **Why this step?**  
-> `Send Message` ensures the conversation is started or reopened, even if the 24-hour window isn’t active yet.  
 
 ---
 
-### Step 4: Add a Wait Step
+### Step 4: Add a Wait-until Step
 
-1. After the Send Message step, click **+** → **Action → Wait**.  
-2. Set a wait duration (e.g., **10 minutes**) or a specific time or a relative delay that fits your use case. Optionally pick a specific time of day if needed.  
+1. After the Assign to AI Agent step, click **+** → **Action → Wait-until**.  
+2. Set a wait duration (e.g., **10 minutes**) or a specific time that fits your use case. Select event as **Last message is older than duration**
 
-> Example: Wait 10 minutes to give the user time to engage before sending the follow-up.  
+> Example: Wait 10 minutes after users last message to send the Follow-up.  
 
 ---
 
@@ -78,8 +71,8 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 1. Click **Save** → **Publish**.  
 2. Test the flow:  
    - Trigger the journey (via webhook, conversation, or list).  
-   - Confirm the initial `Send Message` is delivered.  
-   - Wait for the set delay.  
+   - Confirm the initial `assign to AI agent` is Triggered.  
+   - Wait-until for the set delay after the users message.  
    - Verify the `Send Message in Conversation` arrives in the same chat.  
    - Check the **Conversations tab** to confirm both messages are visible in one active conversation.  
 
@@ -91,7 +84,6 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
   - **Phone** → `{{inbound_webhook.inbound_webhook.phone_number}}`  
   - **Conversation ID** → `{{inbound_webhook.inbound_webhook.conversation_id}}`  
 
-- Always use **Send Message** to open/re-open conversations, and **Send Message in Conversation** only for active 24-hour windows.  
 
 ---
 

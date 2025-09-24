@@ -9,13 +9,20 @@ The **Extract Entities** action is a powerful tool that automatically pulls spec
 - **Conversation ID**: A unique identifier for the conversation from which data will be extracted. Using the `{{conversation_id}}` variable ensures that the current conversation's context is used.
 
 - **Entities**: This is where you define what information you want to extract from the user's conversation.
-  - **Entity name**: The name of the variable where the extracted data will be saved (e.g., `user_address`, `meeting_date`, `user_email`) this isn't a part work flow variables.
+  - **Entity name**: The name of the Entity that you want to extract  (e.g., `user_address`, `meeting_date`, `user_email`) this isn't a part work flow variables.
   - **Entity format**: The expected format of the data to extract  such as `"Date"`, `"Email"`, `"Phone Number"`, or a custom-defined type.
+
+
+- **Storage**: Extracted entities are stored inside the journey’s workflow variables.  
+  The `workflow variables` is a dictionary, and within it, `extracted_entities` is another dictionary that holds all the extracted key–value pairs.  
 
 > 💡 **Example**: If the user previously said _"My address is in Delhi"_ and you’ve configured `address` as an entity, the Extract Entities action will analyze the conversation history and automatically save **"Delhi"** into the `address` variable.
 
 > you can use extract-entities later in your flow as we’ll <br/>
+
+The Extracted entities are available in workflow variables and can be referenced using syntax.
 e.g.
+
 ```python
   updated_address = variables["extracted_entities"]["address"] 
 ```  

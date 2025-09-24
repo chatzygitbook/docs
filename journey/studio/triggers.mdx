@@ -1,84 +1,130 @@
-
 ## Adding a Trigger
 
-The first step in creating a journey is selecting a **trigger**, which is the event that starts the journey.
+The first step in creating a journey is selecting a **trigger**, which is the event that starts the journey.  
 You can choose from several trigger options depending on your use case.
 
-![triggers-overview](/journey/studio/triggers/triggers.png)
+<Frame>
+  <img src="/journey/studio/triggers/triggers.png" alt="Triggers Overview" className="rounded-lg" />
+</Frame>
+
+---
 
 ## Trigger Types
 
 ### Inbound Webhook
 
-The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system, like CRMs, forms, or from another AI agent within Chatzy AI.
+The **Inbound Webhook** trigger allows your journey to start when data is sent from an external system—like CRMs, forms, or even another AI agent within Chatzy AI.  
+
 <Columns cols={2}>
-<Frame>
-  <img src="/journey/studio/triggers/trigger1.png" alt="wa1" className="rounded-lg" />
-</Frame>
-<Frame>
-  <img src="/journey/studio/triggers/tigger1b.png" alt="wa1" className="rounded-lg" />
-</Frame>
+  <Frame>
+    <img src="/journey/studio/triggers/trigger1.png" alt="Inbound Webhook Setup" className="rounded-lg" />
+  </Frame>
+  <Frame>
+    <img src="/journey/studio/triggers/tigger1b.png" alt="Webhook Mapping" className="rounded-lg" />
+  </Frame>
 </Columns>
+
 **Setup Steps:**
-1. Create a unique webhook URL in the platform.
-2. Configure your external app to send a POST request to this URL.
-   - Example: Appointment booking details sent to the webhook.
-3. Refresh the webhook to view incoming data and map fields (for example, `name`, `phone_number`, `appointment_date`).
-4. Select a contact identifier (phone number or Conversation ID).
-5. Contact Identifier Value  
+1. Create a unique webhook URL in the platform.  
+2. Configure your external app to send a `POST` request to this URL.  
+   - Example: Appointment booking details sent to the webhook.  
+3. Refresh the webhook to view incoming data and map fields (for example, `name`, `phone_number`, `appointment_date`).  
+4. Select a contact identifier (e.g., phone number or conversation ID).  
 
-   If you select **Phone Number** as the contact identifier, use:  
+**Using Variables from Your Journey Trigger**  
 
-   ```handlebars
-   {{inbound_webhook.inbound_webhook.phone_number}}
-   ```
+When your journey is triggered by an external source like a webhook, the incoming data is stored in a payload. To access specific variables from this payload, you must use a nesting method with **dot notation**.  
 
-   If you select Conversation ID as the contact identifier, use:
-   ``` handlebars
-   {{inbound_webhook.inbound_webhook.conversation_id}} 
-   ```
+**Example:**  
+1. If your webhook receives data with a `phone_number`, reference it like this:  
+```handlebars
+{{inbound_webhook.phone_number}}
+```
+---
+2. Suppose your inbound webhook payload includes a customer object with a name and email.
 
- 
+```json
+{
+  "customer": {
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com"
+  }
+}
 
-- Use mapped variables inside the journey with `{{inbound_webhook.variables.       }}`.
-   - Example: “Hi `{{{{inbound_webhook.variables.customer_name}}}}`, Your appointment is confirmed for `{{inbound_webhook.variables.appointment_date}}`.”
+```
+To use the customer's name in your flow, you would reference it like this: 
 
-
+```handlebars 
+{{inbound_webhook.customer.name}}
+```
+---
 ### Conversation-Based Trigger
 
-This starts a journey when a user initiates a chat on a channel (WhatsApp, Instagram, Messenger, etc.).
-<Columns cols={1}>
-<Frame>
-  <img src="/journey/studio/triggers/trigger3.png" alt="wa1" className="rounded-lg" />
-</Frame>
-</Columns>
-**Setup Steps:**
-1. Select the channel to monitor.
-2. Choose the event type:
-   - **Conversation Created** → triggers every time a new conversation starts  
-   - **First Conversation Created for Contact** → triggers only the very first time a customer messages you  
-   - **Conversation Resumed** → (optional, used when an existing conversation restarts)  
 
-3. (Optional) Add keyword conditions or exclusions.
-  Conditions allow fine control over when the journey runs:  
+Trigger conditions allow you to fine-tune **when** a journey should run. By enabling these filters, you can ensure your chatbot only responds to specific scenarios such as template replies, keywords, or exclusions.
 
-   - **Template Message Condition (WhatsApp only)**  
-    Example: Replies to “Day 1” template → Assign AI Agent A  
-    Replies to “Day 3” template → Assign AI Agent B  
+---
 
-   - **Keyword Condition**  
-    Example: Customer replies with *“Book Appointment”* → Assign Appointment AI Agent  
-    Customer replies with *“Tell Me More”* → Assign Product Info AI Agent  
+#### Conversation Created in Response to a Template Message
 
-   - **Exclude Keywords**  
-    Example: Journey A triggers only for “Pricing”  
-    Journey B excludes “Pricing” to handle all other messages  
+Available only on  **WhatsApp**, this condition triggers a journey only when a customer replies to a specific template message you sent earlier.
 
-   If no conditions are set, the journey will run for **all new conversations**.  
-   <br/>
-   **Example:**
-   If a user messages “pricing” on WhatsApp, the chatbot launches the **Pricing Information Journey** immediately.
+**Example:**  
+You are running a nurture sequence with two templates: **Day 1** and **Day 3**.  
+- **Journey A** handles replies to *Day 1*  and assigns conversations to **AI Agent A**.  
+- **Journey B** handles replies to *Day 3*  and assigns conversations to **AI Agent B**.  
 
+You can also set a **time window**. If a reply comes after the window (e.g., 24 hours), the journey will not trigger.
+
+
+#### Conversation Created  Excluding Response to a Template Message
+
+This condition triggers a journey when a new conversation is created **unless** the conversation was started as a reply to a template message. Use this when you want to handle only organic or non-template-driven conversations.
+
+**Use case:**  
+- You send campaign templates that are handled by dedicated journeys.  
+- You also want a separate journey to handle organic incoming messages (website visitors, direct DMs, directory lookups).  
+- Configure one journey with **"Conversation Created in response to a template message"** for template replies, and another with **"Conversation Created  Excluding Response to a Template Message"** to capture all other new conversations.
+
+**Example:**  
+- A user replies to a Day 1 template → handled by the template-specific journey.  
+- A user finds your number on the website and messages “Hi” → handled by the journey that **excludes** template replies.
+
+---
+
+#### Conversation Created with Keyword
+
+This condition triggers a journey based on keywords or phrases in the customer’s message.  
+
+**Example:**  
+You send a message with two quick reply buttons: **Book Appointment** and **Tell Me More**.  
+- If the user replies with *“Book Appointment”*, the journey assigns them to an **Appointment Booking AI Agent**.  
+- If the user replies with *“Tell Me More”*, the journey assigns them to a **Product Info AI Agent**.  
+
+---
+
+#### Excluding Conditions
+
+Exclusion filters help you build more advanced routing by preventing certain messages from triggering a journey.
+
+**Example:**  
+You have 2 different journeys
+
+- **Journey A** → triggers **only** if the message contains the keyword *“Pricing”*.  
+- **Journey B** → triggers for all messages **except** those containing *“Pricing”*.  
+
+This ensures all “Pricing” queries go to Journey A, while everything else is handled by Journey B.
+
+---
+
+#### Default Path
+
+If no conditions are enabled, the journey becomes the **default path** and triggers on *any new conversation*.  
+
+**Example:**  
+A customer messages *“Hi”* on WhatsApp. With no conditions set, your default journey will still run and handle the greeting.
+
+---
 ### Contact Added to List
 
 This trigger starts a journey whenever a new contact is added to a list (such as onboarding or welcome flows).

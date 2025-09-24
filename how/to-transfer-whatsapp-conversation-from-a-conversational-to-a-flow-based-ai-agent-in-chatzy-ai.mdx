@@ -23,8 +23,10 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 1. Navigate to **Journeys** in the left menu.  
 2. Click **Create Journey** → choose **Blank Journey**.  
 3. Set the **Trigger** as **Inbound Webhook**.  
-4. Save the webhook and **copy the webhook endpoint URL**.  
+4. Set contact identifier to Conversation ID
+5. Save the webhook and **copy the webhook endpoint URL**.  
 
+> It only works when the Contact identifier is Conversation ID
 ---
 
 ### Step 2: Configure Journey to Handle the Webhook
@@ -65,30 +67,31 @@ This ensures the AI knows exactly when to trigger the Journey webhook.
 ### End-to-End Example
 
 #### Scenario  
-You run a WhatsApp chatbot for demo requests. When a user says **“I want a demo”**, the AI should trigger a Journey that collects lead details and assigns the conversation to a sales agent.
+You run a WhatsApp chatbot that first **qualifies leads**. Once a lead is successfully qualified, the chatbot should transfer the conversation to a **Booking AI Agent** to complete the scheduling process.
 
 #### Setup  
 
 1. **Create Journey**  
    - Trigger → **Inbound Webhook**  
-   - Action → **Transfer to AI Agent: Sales Agent**  
+   - Action → **Transfer to AI Agent: Booking Agent**  
    - Save & Publish  
 
-2. **Conversational AI Agent**  
+2. **Conversational AI Agent (Lead Qualification Bot)**  
    - Go to **Settings → Tools → Trigger Journey**  
    - Paste webhook endpoint from the Journey  
    - Update Base Prompt with:  
      ```text
-     When the user says they want a demo, call the function `workflow_trigger`
+     When the lead is qualified and ready to book, call the function `workflow_trigger`
      ```
 
 3. **Flow**  
-   - User types: *“I want a demo”*  
-   - AI detects intent → triggers webhook  
-   - Journey starts → transfers conversation to Sales AI Agent  
-   - Sales Agent continues with lead qualification  
+   - User interacts with the **Lead Qualification Bot** (answers questions, provides details).  
+   - Once the user is marked as **qualified**, the bot triggers the webhook.  
+   - Journey starts → transfers the conversation to the **Booking AI Agent**.  
+   - Booking Agent continues by helping the user select a slot and confirm the appointment.  
 
 ---
+
 
 ✅ With this setup, your Conversational AI Agent can seamlessly hand off tasks to a Journey, making your automation **smarter, context-aware, and collaborative**.
 
