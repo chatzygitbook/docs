@@ -99,3 +99,43 @@ This setup ensures that users automatically receive reminders before their sched
 
 </Accordion>
 
+## Wait Until Working Hours
+
+The **Wait Until Working Hours** function is a smart way to manage your conversational flows. This feature ensures that your chatbot's journey continues only during a specified time window, preventing messages from being sent to customers at inconvenient times (e.g., midnight).
+<Frame>
+  <img src="/journey/studio/actions/wait-until-wh.png" alt="wait-until-example" className="rounded-lg" />
+</Frame>
+Here’s how it works:
+
+- You set a **Start time** and **End time** to define your working hours.  
+- The journey checks if the wait period ends within this window.  
+- If the wait finishes **inside** your working hours, the journey resumes immediately.  
+- If it finishes **outside**, the journey pauses and automatically resumes at the next scheduled start time.  
+
+---
+
+<Accordion title="📌 Example: Lead Qualification Follow-Up">
+
+Suppose you’re using an **AI Agent for lead qualification** on WhatsApp.  
+
+1. **Lead Qualification Starts**  
+   - The AI asks for details like *budget, location, and timeline*.  
+   - The user replies with some details but stops midway.
+
+2. **Wait Until Action**  
+   - Add a **Wait Until** step with the event:  
+     *Last user message is older than 1 hour*.  
+   - This ensures that the journey only proceeds if the user has been inactive for at least an hour.
+
+3. **Wait Until Working Hours**  
+   - Your working hours are set from **10:00 AM to 7:00 PM**.  
+   - If the 1-hour inactivity check ends at **3:00 PM**, the follow-up is sent immediately.  
+   - If the 1-hour inactivity check ends at **11:00 PM**, the journey pauses and automatically resumes at **10:00 AM** the next day.  
+
+4. **Follow-Up Message**  
+   - The bot sends:  
+     > “Hey, just checking in. Would you like to continue with your booking?”  
+
+✅ **Result:** Leads are nurtured promptly during business hours, while customers aren’t disturbed at odd times.  
+
+</Accordion>
