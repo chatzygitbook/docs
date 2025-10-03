@@ -2,4 +2,6 @@
 openapi: get /get_messages_for_conversation
 ---
 
-Returns paginated messages for a given conversation.
+Returns paginated messages for a given conversation. This endpoint is useful for building a chat interface and fetch past conversation history based on the `conversation_id`.
+
+You must have to save the `conversation_id` at the start of the conversation and use it in this endpoint to fetch messages for the conversation.

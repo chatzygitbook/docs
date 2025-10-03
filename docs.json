@@ -194,29 +194,44 @@
         "icon": "code",
         "groups": [
           {
+            "group": "Conversational AI Agent Interactions",
+            "pages": [
+              {
+                "group": "AI Agent Flow",
+                "icon": "bot",
+                "pages": [
+                  "api-reference/conversational-ai-agent-interactions/ai-agent-conversation-flow-overview",
+                  "api-reference/conversational-ai-agent-interactions/initialize-conversation",
+                  "api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent",
+                  "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse"
+                ]
+              },
+              {
+                "group": "Utility Endpoints",
+                "icon": "library",
+                "pages": [
+                  "api-reference/conversational-ai-agent-interactions/get-messages-for-conversation",
+                  "api-reference/conversational-ai-agent-interactions/get-stream-status",
+                  "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
+                  "api-reference/conversational-ai-agent-interactions/audio-input",
+                  "api-reference/conversational-ai-agent-interactions/get-followup-suggestions",
+                  "api-reference/conversational-ai-agent-interactions/insert-nudge-message",
+                  {
+                    "group": "Upload Documents",
+                    "icon": "file-up",
+                    "pages": ["api-reference/conversational-ai-agent-interactions/upload-documents-overview", "api-reference/conversational-ai-agent-interactions/generate-presigned-url"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "group": "Authentication",
             "pages": ["api-reference/authentication/get-id-token"]
           },
           {
             "group": "Contact Conversations",
             "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
-          },
-          {
-            "group": "Conversational AI Agent Interactions",
-            "pages": [
-              "api-reference/conversational-ai-agent-interactions/ai-agent-conversation-flow",
-              "api-reference/conversational-ai-agent-interactions/initialize-conversation",
-              "api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent",
-              "api-reference/conversational-ai-agent-interactions/generate-temporary-token-for-sse",
-              "api-reference/conversational-ai-agent-interactions/stream-conversation-ai-agent-response-sse",
-              "api-reference/conversational-ai-agent-interactions/get-stream-status",
-              "api-reference/conversational-ai-agent-interactions/get-messages-for-conversation",
-              "api-reference/conversational-ai-agent-interactions/audio-input",
-              "api-reference/conversational-ai-agent-interactions/upload-documents",
-              "api-reference/conversational-ai-agent-interactions/generate-presigned-url",
-              "api-reference/conversational-ai-agent-interactions/insert-nudge-message",
-              "api-reference/conversational-ai-agent-interactions/get-followup-suggestions"
-            ]
           },
           {
             "group": "Authorized iframe Access",
