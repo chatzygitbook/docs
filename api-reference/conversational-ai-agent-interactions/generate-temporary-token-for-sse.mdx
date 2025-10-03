@@ -1,3 +1,7 @@
 ---
 openapi: get /generate_secret
 ---
+
+This endpoint generates a temporary token to be used for streaming responses via the `/get-response` SSE endpoint.
+
+This can be used when response from the `/get_stream_status` endpoint is `stream_status : is_streaming` and `response_processing_status: null` ([Case 1](/api-reference/conversational-ai-agent-interactions/get-stream-status#case-1%3A-stream-not-started-yet) in **Stream Status** section).

@@ -1,0 +1,30 @@
+---
+title: Overview
+---
+
+Interact with the conversational AI agent using this **3-step process**:
+
+### 1. **Start Conversation** (`/init_conversation`)
+
+- **Purpose**: Create a new conversation session.
+- **Required**:
+  - `chatbot_id` -> Get this from **Conversational AI Agents** > open your agent's menu (⋮ / hamburger) > **Copy Agent ID**.
+- **Response**: Returns a `conversation_id` (used in later steps) and a intorductory message (if enabled).
+
+### 2. **Send Message** (`/get_inference`)
+
+- **Purpose**: Send a user message to the AI.
+- **Required**:
+  - `chatbot_id` (from step 1)
+  - `conversation_id` (from `/init_conversation`)
+  - `message` (your text)
+- **Response**: Sends user message for processing and returns a `temp_token`.
+
+### 3. **Stream Reply** (`/get-response`)
+
+- **Purpose**: Get the AI's response in real time via SSE (Server-Sent Events).
+- **Required**:
+  - `temp_token` (from `/get_inference` response or generated separately)
+- **Response**: Streams reply response chunks and control signals until the answer is complete.
+
+> **⚠️ Important**: This flow must be repeated for each new user message or session. The `temp_token` expires quickly (validity of `1 minute`) and cannot be reused.
