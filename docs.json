@@ -91,6 +91,15 @@
                   "ai-agents/flow-based-ai-agent/playground",
                   "ai-agents/flow-based-ai-agent/dashboard"
                 ]
+              },
+              {
+                "group": "Squads",
+                "icon": "square-stack",
+                "pages": [
+                  "ai-agents/squads/overview",
+                  "ai-agents/squads/studio",
+                  "ai-agents/squads/chat-logs"
+                ]
               }
             ]
           },

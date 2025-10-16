@@ -1,0 +1,57 @@
+### What Are Squads?
+A **Squad** is a team of multiple Conversational AI Agents that work together to handle complex workflows and multi-step processes.  
+Instead of relying on a single generalist agent, a Squad divides tasks among specialized agents each with its own role, expertise, and knowledge base, ensuring faster, more accurate, and scalable automation.
+
+### Best For
+- Multi-stage customer workflows (lead → booking → support)  
+- Departmental automation (sales, support, operations)  
+- Escalation and handoff between specialized agents  
+- AI-driven collaboration for context-rich conversations  
+
+### Key Strengths
+- **Collaborative Intelligence:** Multiple agents coordinate to complete end-to-end workflows.  
+- **Role-Based Specialization:** Each agent focuses on a defined domain - e.g., Lead Qualification, Booking, Support.  
+- **Seamless Handoffs:** Context, variables, and chat history are shared across agents automatically.  
+- **Scalable Automation:** Easily expand by adding new agents or workflows without breaking the existing system.  
+
+### Limitations
+- **Requires Clear Role Definitions:** Each agent must have a distinct and non-overlapping purpose.  
+- **Context Management:** Ensure proper data handoff to maintain conversation continuity.  
+- **Performance Tuning:** Balance between agent count and efficiency for optimal results.  
+
+
+### Squad Architectures
+You can choose from the following multi-agent architectures, depending on your use case and workflow design  
+
+
+<Frame>
+  <img src="/ai-agents/squads/architectures.png" />
+</Frame>
+
+| **Architecture** | **Description** |
+|-------------------|------------------|
+| **Network** | All agents communicate freely with each other, ideal for collaborative brainstorming or multi-domain reasoning. |
+| **Supervisor** | A central controller agent assigns tasks to others and consolidates results, ensuring structured flow. |
+| **Hierarchical** | A tree-like structure where supervisors manage sub-agents, great for large organizations or layered workflows. |
+| **Custom** | Build your own connection graph between agents to match unique process logic and data flow. |
+
+### Setup Notes in ChatzyAI
+- Create individual **Conversational AI Agents** first - each with its defined role and knowledge base.  
+- Go to **Squads → Create Squad** 
+
+---
+
+<Card title="Create a Squad" icon="users" href="https://app.chatzy.ai/squads">
+  Build your first Squad and enable collaborative AI workflows.
+</Card>
+
+---
+
+Once you create a Squad, you’ll see the following screen:
+
+<Frame>
+  <img src="/ai-agents/squads/overview.png" />
+</Frame>
+<Frame>
+  <img src="/ai-agents/squads/overview2.png" />
+</Frame>
