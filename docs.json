@@ -100,6 +100,30 @@
                   "ai-agents/squads/studio",
                   "ai-agents/squads/chat-logs"
                 ]
+              },
+              {
+                "group": "Voice",
+                "icon": "speech",
+                "pages": [
+                  "ai-agents/voice-ai-agent/overview",
+                  "ai-agents/voice-ai-agent/data",
+                  {
+                    "group": "Settings",
+                    "pages": [
+                      "ai-agents/voice-ai-agent/settings/overview",
+                      "ai-agents/voice-ai-agent/settings/base-prompt",
+                      "ai-agents/voice-ai-agent/settings/model",
+                      "ai-agents/voice-ai-agent/settings/voice",
+                      "ai-agents/voice-ai-agent/settings/engine",
+                      "ai-agents/voice-ai-agent/settings/telephony",
+                      "ai-agents/voice-ai-agent/settings/advance-settings",
+                      "ai-agents/voice-ai-agent/settings/external-apis",
+                      "ai-agents/voice-ai-agent/settings/utilities"
+                    ]
+                  },
+                  "ai-agents/voice-ai-agent/playground",
+                  "ai-agents/voice-ai-agent/dashboard"
+                ]
               }
             ]
           },

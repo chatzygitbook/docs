@@ -1,0 +1,88 @@
+<Frame>
+  <img src="/ai-agents/voice-ai-agent/data.gif"  />
+</Frame>
+
+
+
+Your bot learns from various data sources. The more relevant the data, the better your agent performs.
+
+## **Supported Data Types:**
+- **Text:** Paste plain text directly into the platform.
+- **Files:** Upload formats like `.pdf`, `.docx`, `.txt`, `.csv` (max 20MB).
+- **Website URLs:** Add a URL and let Chatzy extract useful content.
+- **FAQs:** Manually input question-answer pairs for precise responses.
+- **Google Drive:** Link a public folder with view-only access.
+
+---
+### Website Data Options
+
+When adding **Website URLs** as a data source, Chatzy provides multiple ways to fetch content:
+
+- **Crawl**  
+  Automatically scans all pages linked from the given URL (excluding file downloads).  
+  Example: entering `https://example.com` will crawl all linked pages under that domain.
+
+- **Sitemap**  
+  Provide an XML sitemap URL to fetch structured content from your website.
+
+- **Link**  
+  Add a single webpage URL to pull specific content.
+
+- **CSV File**  
+  Upload a CSV that contains multiple URLs for bulk training.
+
+---
+
+**Apify Crawler (Optional)**
+
+You can toggle **Use Apify Crawler** for a more advanced and accurate crawling option.  
+- It consumes **2 credits per webpage crawled**.  
+- Designed to extract cleaner, structured data optimized for LLM training.  
+- Learn more: [Apify Content Crawler](https://apify.com/apify/website-content-crawler).
+
+---
+
+> The Website tab gives you flexibility — crawl entire sites, upload sitemaps, add single links, or bulk import via CSV. For maximum accuracy, enable **Apify Crawler**.
+
+---
+
+### FAQ CSV Q&A Import
+
+You can also bulk import FAQs by uploading a **CSV file**:  
+- The **first column** will be treated as the *question*.  
+- The **second column** will be treated as the *answer*.  
+- The file **must not contain headers**.  
+
+This is useful for quickly loading a large set of predefined Q&A pairs into your agent.
+
+---
+
+
+### Google Drive Import
+
+You can connect your Google Drive to train your agent with files:  
+- Enter the **view-only link** of a Google Drive folder containing your **Sheets or Documents**.  
+- The system will process all files inside the folder.  
+- Ensure the folder is **publicly accessible** (view-only).  
+
+This allows seamless training from existing documents stored in Google Drive.
+
+---
+
+
+**🚀 Training Steps:**
+1. Upload or connect your data.
+2. Click **Train** in the top-right corner.
+3. Wait for the progress bar to complete.
+4. Once training finishes, your bot is ready to use the data in live chats.
+---
+
+### **Source Type Summary**
+
+| Source Type   | Example Formats             | Max Size      |
+|---------------|-----------------------------|---------------|
+| Text          | Manual paste                | —             |
+| File Upload   | PDF, DOCX, TXT, CSV         | 20 MB         |
+| Website URL   | Link to be crawled for data | —             |
+| FAQ           | Q&A pairs for knowledge     | —             |
+| Google Drive  | Folder link with docs       | —             |
