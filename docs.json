@@ -95,11 +95,7 @@
               {
                 "group": "Squads",
                 "icon": "square-stack",
-                "pages": [
-                  "ai-agents/squads/overview",
-                  "ai-agents/squads/studio",
-                  "ai-agents/squads/chat-logs"
-                ]
+                "pages": ["ai-agents/squads/overview", "ai-agents/squads/studio", "ai-agents/squads/chat-logs"]
               },
               {
                 "group": "Voice",
@@ -330,16 +326,12 @@
             "href": "https://www.chatzy.ai/"
           },
           {
-            "label": "About",
-            "href": "https://www.chatzy.ai/about"
-          },
-          {
-            "label": "Use Cases",
-            "href": "http://chatzy.ai/usecases"
+            "label": "Solutions",
+            "href": "https://chatzy.ai/solutions"
           },
           {
             "label": "Blog",
-            "href": "https://www.chatzy.ai/blog"
+            "href": "https://www.chatzy.ai/blogs"
           }
         ]
       },
@@ -348,11 +340,11 @@
         "items": [
           {
             "label": "Privacy Policy",
-            "href": "https://www.chatzy.ai/privacy-policy"
+            "href": "https://chatzy.ai/legal/privacy-policy"
           },
           {
             "label": "Terms of Service",
-            "href": "https://www.chatzy.ai/terms-of-service"
+            "href": "https://chatzy.ai/legal/terms-of-service"
           }
         ]
       }
