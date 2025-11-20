@@ -160,6 +160,8 @@
                       "journey/studio/actions/update-contact",
                       "journey/studio/actions/update-conversation",
                       "journey/studio/actions/assign-to-ai-agent",
+                      "journey/studio/actions/assign-to-voice-ai-agent",
+                      "journey/studio/actions/initiate-outbound-whatsapp-call",
                       "journey/studio/actions/transfer-to-ai-agent",
                       "journey/studio/actions/execute-code",
                       "journey/studio/actions/conditions",
@@ -214,7 +216,7 @@
               "how/how-chatzy-ai-generates-responses",
               "how/to-add-follow-up",
               "how/to-transfer-whatsapp-conversation-from-a-conversational-to-a-flow-based-ai-agent-in-chatzy-ai",
-              "how/to-enable-whatsapp-calling"
+              "how/to-setup-whatsapp-calling"
             ]
           }
         ]
