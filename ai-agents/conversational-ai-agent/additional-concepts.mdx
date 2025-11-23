@@ -1,32 +1,49 @@
-### Chunking
+<Accordion title=" Chunking">
 
-Chunking is the process of splitting large documents or datasets into smaller, manageable pieces called *chunks*.  
-
-- **Why it matters**: AI models can only process a limited number of tokens at once. By chunking data, the system ensures that long documents are searchable and retrievable.  
-
-- **Best practices**:  
-  - **Smaller chunks** → Higher precision (AI focuses better), but risk losing broader context.  
-  - **Larger chunks** → Preserve context, but retrieval may include extra, less relevant information.  
-  - The right balance depends on your use cases.  
+Chunking is the process of splitting large documents or datasets into smaller, manageable pieces called **chunks**.
 
 ---
 
-### How RAG Works in a Chatbot
-
-**Retrieval-Augmented Generation (RAG)** enhances chatbot responses by combining two steps:  
-
-1. **Retrieve** → The system searches through your *chunked knowledge base* using methods like:  
-   - **Semantic search**: Finds results based on meaning, not just keywords.  
-   - **Hybrid search**: Combines semantic and keyword matching for better accuracy.  
-
-2. **Generate** → The retrieved chunks are passed as *context* to the AI model, which then crafts the final answer.  
+### Why Chunking Matters
+AI models can only process a limited number of tokens at once.  
+Chunking ensures that long documents remain **searchable**, **indexable**, and **retrievable**.
 
 ---
 
-### Benefits of RAG  
-- Prevents the chatbot from “hallucinating” answers.  
-- Grounds responses in your actual uploaded data.  
-- Efficiently handles large knowledge bases by retrieving only the most relevant chunks.  
+### Best Practices
+- **Smaller chunks** → Higher precision (AI focuses better) but may lose broader context  
+- **Larger chunks** → Preserve context but may retrieve less relevant information  
+- The right balance depends on your data and use case  
+
+---
+
+### Summary  
+Chunking makes your data **searchable and structured**, preparing it for retrieval systems like RAG.
+</Accordion>
+
+
+<Accordion title=" RAG (Retrieval-Augmented Generation)">
+
+RAG enhances chatbot accuracy by combining **retrieval** + **generation**.
+
+---
+
+### How RAG Works
+
+1. **Retrieve Relevant Chunks**  
+   - Uses **semantic search** (meaning-based)  
+   - Or **hybrid search** (semantic + keyword)
+
+2. **Generate Answer**  
+   - Retrieved chunks are passed as *context*  
+   - The AI model uses them to create accurate, grounded responses  
+
+---
+
+### Benefits of RAG
+- Prevents hallucinations  
+- Ensures responses are based on your uploaded data  
+- Efficient even for large knowledge bases  
 
 ---
 
@@ -45,6 +62,83 @@ Pass Chunks as Context to AI
 AI Generates Accurate, Context-Aware Answer
 ```
 
-⚡ **In short**:  
-- *Chunking* makes your data searchable.  
-- *RAG* ensures the chatbot pulls the most relevant pieces and uses them to generate accurate, context-aware answers.  
+In short:
+
+- Chunking makes the data searchable.
+
+- RAG retrieves what’s needed and uses it to generate better answers.
+</Accordion>
+
+<Accordion title="Advance Settings for Conversational AI Agent">
+
+###  Location Request
+If your chatbot needs the user’s live location during the conversation, you can instruct it to send a **location request button**. This is useful for scenarios such as booking a service visit, delivery verification, or assigning the nearest agent.
+
+**Important:**  
+You must clearly mention the **use case inside your Base Prompt**, explaining *when* the bot should send this JSON.
+
+Use this when:
+- You need the user's address or live location for delivery, service visits, event check-ins, etc.
+
+**JSON format (use exactly as shown):**  
+
+```json
+{
+      "type": "location_request", 
+      "content": "Replace with the message that you want to display"
+}
+```
+
+
+---
+
+###  Call Permission Request  
+Use this when your AI agent needs to **ask the user for permission to place a WhatsApp call** (required for business-initiated calls).
+
+Why it's needed:
+- WhatsApp requires explicit user consent before initiating an outbound call.
+
+**Best used for:**
+- Sales follow-ups  
+- Demo or consultation calls  
+- Appointment confirmation calls  
+
+**Important:**  
+Specify **when the bot should request permission** inside your Base Prompt along with json so it triggers appropriately.(e.g., “If the user requests a callback, use ONLY the following for call permission request”).
+
+**JSON format:**  
+
+```json
+{
+      "type": "call_permission_request", 
+      "content": "Replace with the message that you want to display"
+}
+```
+
+
+---
+
+### WhatsApp Call Button  
+This option allows the agent to display a **Call Now button** directly inside the conversation.
+
+Use this when:
+- You want the *user* to start the call themselves (no approval template required).
+- Ideal for support lines, quick escalation, or urgent help.
+
+When the user taps the button, the call is placed immediately from their device.
+
+
+**Important:**  
+In your Base Prompt, describe **in which situations** this button should appear (e.g., “If the user asks to talk to support, use ONLY the following for call button”).
+
+**JSON format:**  
+
+```json
+{
+      "type": "voice_call", 
+      "content": "Replace with the message that you want to display"
+}
+```
+</Accordion>
+
+

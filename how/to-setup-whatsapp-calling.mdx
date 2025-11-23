@@ -4,90 +4,100 @@ icon: "whatsapp"
 iconType: "solid"
 ---
 
-This guide explains how to enable and setup WhatsApp calling to assign a Voice AI Agent to answer incoming calls or make outgoing calls via Chatzy AI.
+This guide explains how to enable and set up WhatsApp calling to assign a Voice AI Agent to answer incoming calls or make outgoing calls via Chatzy AI.
 
 ---
 
 ### Requirements
 
-- **Connected WhatsApp Number:** You must have a WhatsApp number connected in the [**Channels**](https://app.chatzy.ai/channels/whatsapp) section.
-- **Voice AI Agent:** You must have a configured Voice AI Agent.
+- **Connected WhatsApp Number:** You must have a WhatsApp number connected in the [Channels](https://app.chatzy.ai/channels/whatsapp) section.  
+- [**Voice AI Agent:**](https://app.chatzy.ai/voice-ai-agents) You must have a configured Voice AI Agent.
 
 ---
 
-### Step 1: Enable WhatsApp Calling
+## Enable WhatsApp Calling
 
-1. Navigate to **Channels** in the left-hand menu.
-2. Click on **WhatsApp**. Your connected WhatsApp numbers will appear here.
-3. Click the **Three Dots** icon under the **Actions** column and select **Enable WhatsApp Calling**. The configuration menu will appear.
+1. Navigate to **Channels** in the left-hand menu.  
+2. Click on **WhatsApp**. Your connected WhatsApp numbers will appear here.  
+3. Click the **Three Dots** icon under the **Actions** column and select **Enable WhatsApp Calling**.  
 <Frame>
-  <img src="/how/wacall1.png" alt="Dashboard Overview" className="rounded-lg" />
+  <img src="/how/wacall1.png" className="rounded-lg" />
 </Frame>
-4. Check the box labeled **Enable WhatsApp calling**.
-5. You may set up weekly working hours according to your needs. **Note:** Don't forget to select the appropriate **Time Zone**.
-6. Once configured, click **Save** or **Update** to apply changes.
+4. Check the box labeled **Enable WhatsApp calling**.  
+5. Configure your weekly working hours and select the correct **Time Zone**.  
+6. Click **Save** or **Update**.
 
 ---
 
-### Step 2: Set Up the Call Permission Template
+# Call Handling Setup
 
-1. Navigate to the **Message Templates** section of Chatzy AI.
-2. Select the **WhatsApp** channel to view your existing templates and their status.
-3. Click the `+ Create Template` button to begin.
-4. Set the **Category** to **Utility**, enter an appropriate name for the template, and select the **Language**.
-5. In the **Body** field, write the message you want to display when asking the user for call permission.
-6. Check the box labeled **Call permission request**.
+<Accordion title="Incoming Calls – Assign to Voice AI Agent">
+
+### Set Up Voice AI Agent for Incoming Calls
+
+1. Go to the **Journeys** section.  
+2. Click **Create Journey**, give it a name, choose **Blank Template**, and click **Create**.  
+3. Click **Add Trigger** → select **Incoming Call**.  
 <Frame>
-  <img src="/how/wacall2.png" alt="Dashboard Overview" className="rounded-lg" />
+  <img src="/how/wacall3.png" className="rounded-lg" />
 </Frame>
-7. You can review a preview of the template on the right side of the screen.
-8. Once satisfied, click **Create**.
 
-> WhatsApp can take up to 24 hours to review (approve/reject) a template.
+4. Add an action → select **Assign to Voice AI Agent**.  
+<Frame>
+  <img src="/how/wacall4.png" className="rounded-lg" />
+</Frame>
+
+5. Open the settings of the action. Select the **Voice AI Agent** from the dropdown.  
+<Frame>
+  <img src="/how/wacall5.png" className="rounded-lg" />
+</Frame>
+
+6. Click **Save**, then **Publish** to activate the journey.
+
+</Accordion>
+<Accordion title="Outbound Calls – Using Voice AI Agent">
+
+### Step 1: Create a WhatsApp Call Permission Template
+
+For business-initiated WhatsApp calls, you must first get the user's permission.
+
+1. Go to **Message Templates** → select **WhatsApp**.  
+2. Click **+ Create Template**.  
+3. Set **Category: Marketing**, give it a name, and choose the **Language**.  
+4. Write your permission message inside the **Body** field.  
+5. Enable the **Call permission request** toggle.
+
+<Frame>
+  <img src="/how/wacall2.png" className="rounded-lg" />
+</Frame>
+
+6. Review the preview and click **Create**.  
+> WhatsApp may take up to 24 hours to approve the template.
+
 
 ---
-### Step 3: Set Up Voice AI Agent for Incoming Calls
 
-1. Head over to the **Journeys** section of Chatzy AI.
-2. Click **Create Journey**. Enter an appropriate name, select the **Blank Template**, and click **Create**.
-3. Click **Add Trigger** and select **Incoming Call**.
+### Step 2: Set Up Outbound WhatsApp Calls in Journeys
+
+1. Go to **Journeys** and open the journey where you want to trigger the call.  
+2. Go to the step after which the call should be initiated (e.g., after an `Execute Code` action, `Wait` action, etc.).  
+3. Add a new action: **Initiate Outbound WhatsApp Call**.  
+
+4. Set the correct **Phone Number**, depending on the trigger:
+
+- Inbound Webhook trigger:  
+  `{{inbound_webhook.phone_number}}`
+
+- Conversation trigger:  
+  `{{contact.phone_number}}`
+
+5. Select the **Voice AI Agent** that should make the call. 
 <Frame>
-  <img src="/how/wacall3.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-4. Add a new action and select **Assign to Voice AI Agent**.
-<Frame>
-  <img src="/how/wacall4.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-5. Open the settings for the **Assign to Voice AI Agent** action. Click the dropdown menu labeled **Select Voice AI Agent** and choose the specific agent you wish to use.
-<Frame>
-  <img src="/how/wacall5.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-6. Once finished, click **Save** and then **Publish** to activate the journey.
+  <img src="/how/wacall6.png" className="rounded-lg" />
+</Frame> 
+6. Click **Save**, then **Publish**.
+</Accordion>
 
 ---
-### Step 4: Set Up Voice AI Agent for Outbound Calls
 
-1. Head over to the **Journeys** section of Chatzy AI.
-2. Click **Create Journey**. Enter an appropriate name, select the **Blank Template**, and click **Create**.
-3. Click **Add Trigger** and select **Inbound Webhook**, then click **Create Webhook**.
-4. Configure your external application to send a `POST` request to the generated URL.
-    * *Example:* Sending appointment booking details to the webhook.
-5. Refresh the webhook to view incoming data and map the fields (e.g., `name`, `phone_number`).
-    > **Note:** Remember to include the `phone_number` in your payload.
-6. Set the **Contact Identifier** value to the phone number field.
-    > `{{inbound_webhook.phone_number}}`
-
-<Frame>
-  <img src="/how/wacall6.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-
-7. Add a new action and select **Initiate Outbound WhatsApp Call**.
-<Frame>
-  <img src="/how/wacall8.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-8. Open the settings for the **Initiate Outbound WhatsApp Call** action. In the **Phone Number** field, insert the same contact identifier variable: `{{inbound_webhook.phone_number}}`.
-9. Click the dropdown menu labeled **Select Voice AI Agent** and choose the specific agent you wish to use.
-<Frame>
-  <img src="/how/wacall7.png" alt="Dashboard Overview" className="rounded-lg" />
-</Frame>
-10. Once finished, click **Save** and then **Publish** to activate the journey.
+[Learn more](https://docs.chatzy.ai/ai-agents/conversational-ai-agent/additional-concepts#advance-settings-for-conversational-ai-agent) about how call buttons work inside a Conversational AI Agent.
