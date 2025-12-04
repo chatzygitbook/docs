@@ -13,7 +13,7 @@ When you open the Studio, you’ll see an empty canvas where you can start addin
 - **Right-click anywhere** on the canvas to add a new Agent node.  
 - Use drag-and-drop to **connect agents** with directional links.  
 - **Color Codes:**  
-  - 🟢 **Persistent Agents** – These are your **root or main agents** that maintain state, memory, and continuity across interactions.  
+  - 🟢 **Persistent Agents** – These are your **root or main agents** that maintain state, conversation history, and continuity across interactions.  
   - 🔵 **Transient Agents** – These are **temporary agents** that handle specific subtasks (e.g., customer support, scheduling). Once their task is done, control returns to the Persistent agent.  
 
 
@@ -29,11 +29,11 @@ When you open the Studio, you’ll see an empty canvas where you can start addin
 
 #### **Key Features**
 
-#####  **Agent Nodes**  
-Each node represents a **Conversational AI Agent**. You can set:  
-- **Name & Description**  
-- Whether it’s **Persistent** or **Transient**  
-- Whether it’s the **Start Agent** (the root agent that begins the workflow)  
+##### **Agent Nodes**  
+Each node represents a **Conversational AI Agent**, and you can configure the following:  
+- **Description** – A brief summary of the use cases that the specific AI agent is responsible for.  
+- Whether the agent is **Persistent** or **Transient**.  
+- Whether the agent is the **Start Agent**, which serves as the entry point for the workflow.  
 
 #####  **Right-Side Panel**  
 When you select a node, a configuration panel appears on the right. You can:  
@@ -45,11 +45,21 @@ When you select a node, a configuration panel appears on the right. You can:
 The arrows between agents define **communication flow** or **handover direction**. You can build:  
 - **Supervisor Models** – One main agent oversees others.  
 - **Network Models** – Agents interact bidirectionally for shared tasks.  
-- **Hierarchical or Custom Models** – Multi-level or domain-specific routing.  
+- **Custom Models** – Multi-level or domain-specific routing.  
 
 #####  **Save & Playground Preview**  
 - Click **Save** to store your Squad configuration.  
 - Use **Open Playground** to test how agents collaborate in real time.  
+
+---
+#### About conversation context
+- When you have two or more **persistent agents**, they automatically share the conversation history, allowing each agent to maintain full context as the dialogue progresses.
+
+- When a query is routed from a **persistent agent to a transient agent**, the conversation history is **not** shared.
+
+- The transient agent receives only a clearly defined task, processes it, and returns the output without accessing or retaining the broader context.
+
+- This ensures clean, focused task execution while keeping long-term conversational logic within the persistent agents.
 
 ---
 
@@ -57,12 +67,6 @@ The arrows between agents define **communication flow** or **handover direction*
 - Use a **Persistent root agent** for overall control and memory retention.  
 - Assign **Transient agents** for specialized or temporary goals.  
 - Start with 2–3 agents, then expand your architecture as complexity grows.  
-- You can design any of the following structures:  
-  <Frame>  
-    <img src="/ai-agents/squads/architectures.png" />  
-  </Frame>  
- 
----
 
 #### **Terminology Glossary**
 

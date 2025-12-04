@@ -8,42 +8,70 @@ Instead of relying on a single generalist agent, a Squad divides tasks among spe
 - Escalation and handoff between specialized agents  
 - AI-driven collaboration for context-rich conversations  
 
+
 ### Key Strengths
 - **Collaborative Intelligence:** Multiple agents coordinate to complete end-to-end workflows.  
 - **Role-Based Specialization:** Each agent focuses on a defined domain - e.g., Lead Qualification, Booking, Support.  
-- **Seamless Handoffs:** Context, variables, and chat history are shared across agents automatically.  
-- **Scalable Automation:** Easily expand by adding new agents or workflows without breaking the existing system.  
+- **Shared conversation history:** When the conversation is getting transfered between persitent agents, they share the conversation history. 
 
-### Limitations
-- **Requires Clear Role Definitions:** Each agent must have a distinct and non-overlapping purpose.  
-- **Context Management:** Ensure proper data handoff to maintain conversation continuity.  
-- **Performance Tuning:** Balance between agent count and efficiency for optimal results.  
 
+---
+
+If your workflow is large and involves multiple API calls, there’s a good chance users may ask questions that fall outside the responsibility of the current agent. In such cases, **Squad** is an ideal solution.
+
+
+For example, imagine you run a car-rental business with an AI **Sales** agent that handles pricing, introductions, and general sales queries, and a separate **Service** agent that manages billing and onboarding. If, during onboarding, the user suddenly asks to change the car, the conversation needs to be handed back to the Sales agent. **Squad automatically manages this kind of agent handoff**, ensuring the user is always routed to the right agent without manual intervention.
 
 ### Squad Architectures
 You can choose from the following multi-agent architectures, depending on your use case and workflow design  
 
+**Network** 
 
 <Frame>
-  <img src="/ai-agents/squads/architectures.png" />
+  <img src="/ai-agents/squads/squad1.png" />
 </Frame>
+---
+
+**Supervisor** 
+<Frame>
+  <img src="/ai-agents/squads/squad3.png" />
+</Frame>
+---
+
+**Custom**
+<Frame>
+  <img src="/ai-agents/squads/squad2.png" />
+</Frame>
+
+
+
 
 | **Architecture** | **Description** |
 |-------------------|------------------|
 | **Network** | All agents communicate freely with each other, ideal for collaborative brainstorming or multi-domain reasoning. |
 | **Supervisor** | A central controller agent assigns tasks to others and consolidates results, ensuring structured flow. |
-| **Hierarchical** | A tree-like structure where supervisors manage sub-agents, great for large organizations or layered workflows. |
 | **Custom** | Build your own connection graph between agents to match unique process logic and data flow. |
 
-### Setup Notes in ChatzyAI
-- Create individual **Conversational AI Agents** first - each with its defined role and knowledge base.  
-- Go to **Squads → Create Squad** 
 
 ---
 
 <Card title="Create a Squad" icon="users" href="https://app.chatzy.ai/squads">
   Build your first Squad and enable collaborative AI workflows.
 </Card>
+
+---
+Before creating the Squad, you must properly configure all the required Conversational AI agents and clearly specify in their prompts the conditions under which a conversation should be transferred from one agent to another. For example:
+
+<Columns cols={2}>
+  <Frame>
+    <img src="/ai-agents/squads/prompt1.png" alt="Inbound Webhook Setup" className="rounded-lg" />
+  </Frame>
+  <Frame>
+    <img src="/ai-agents/squads/prompt2.png" alt="Webhook Mapping" className="rounded-lg" />
+  </Frame>
+</Columns>
+
+In both the Sales and Support AI agents, the prompts include the conditions that determine when the conversation should be handed off to the other agent.
 
 ---
 
