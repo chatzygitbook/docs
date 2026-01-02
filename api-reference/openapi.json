@@ -229,6 +229,53 @@
               "type": "string",
               "example": "096662f6-5acc-4699-923c-f7326936b39f"
             }
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "required": false,
+            "description": "Filter messages by communication channel.",
+            "schema": {
+              "type": "string",
+              "enum": ["whatsapp", "instagram", "messenger", "website"],
+              "example": "whatsapp"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of messages to return.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "example": 50
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Number of messages to skip before starting to collect the result set.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "example": 0
+            }
+          },
+          {
+            "name": "grouped_conversations",
+            "in": "query",
+            "required": false,
+            "description": "Whether to group messages by conversation, when set to false, the response will contain a flat list of messages.",
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "example": true
+            }
           }
         ],
         "responses": {
