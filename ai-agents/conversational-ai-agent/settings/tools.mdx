@@ -15,17 +15,17 @@ The **Tools** tab extends your chatbot’s capabilities with built-in functions 
   - Forwarding Lead to CRM  
   - Transferring chat from one AI agent to another
 
-<Frame>
-  <img src="/ai-agents/conversational-ai-agent/settings/tools2.png" />
-</Frame>
 
-Paste your webhook endpoint in the textbox.
+Turn the toggle on and select the journey(s) that you want to trigger
 
-> To trigger a journey, include the below line `workflow_trigger` in your prompt.
+*NOTE: only journeys with trigger inbound webhook will be available in dropdown options*
+
+> To trigger a journey, mention the condition with journey name in your prompt.
+For every selected journey you need to mention the useccase properly
 
 > Example :- 
 ``` 
-When the customer confirms appointment, call the function `workflow_trigger` these details:
+When the customer confirms appointment, trigger  `book_appointment` journey these details:
 
   
   {
@@ -35,6 +35,7 @@ When the customer confirms appointment, call the function `workflow_trigger` the
     "time_slot": "<time slot>"
 
   }
+  
   ```
 ---
 - **WhatsApp Tools**  
