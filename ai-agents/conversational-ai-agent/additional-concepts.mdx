@@ -22,51 +22,122 @@ Chunking makes your data **searchable and structured**, preparing it for retriev
 </Accordion>
 
 
-<Accordion title=" RAG (Retrieval-Augmented Generation)">
+<Accordion title="RAG (Retrieval-Augmented Generation)">
 
-RAG enhances chatbot accuracy by combining **retrieval** + **generation**.
-
----
-
-### How RAG Works
-
-1. **Retrieve Relevant Chunks**  
-   - Uses **semantic search** (meaning-based)  
-   - Or **hybrid search** (semantic + keyword)
-
-2. **Generate Answer**  
-   - Retrieved chunks are passed as *context*  
-   - The AI model uses them to create accurate, grounded responses  
+RAG (Retrieval-Augmented Generation) improves chatbot accuracy by combining **knowledge retrieval** with **LLM generation**.  
+Instead of relying only on the model’s memory, responses are grounded in your uploaded data.
 
 ---
 
-### Benefits of RAG
-- Prevents hallucinations  
-- Ensures responses are based on your uploaded data  
-- Efficient even for large knowledge bases  
+## How RAG Works in Chatzy
+
+### 1) Knowledge Base Upload & Processing
+
+- Users upload their Knowledge Base in the **Data section**
+- The system:
+  - Splits content into chunks  
+  - Generates vector embeddings  
+  - Stores them in the database
+
+Chunking can be configured in **Advanced Bot Settings**:
+- Number of chunks  
+- Chunk length  
 
 ---
 
-### RAG Process Flow
+### 2) Query Understanding
+
+When a user sends a message:
+
+- The system checks if KB(knowledge base) sources are available
+- A lightweight GPT model analyzes:
+  - User message  
+  - Conversation history  
+- It generates a **search query** based on user intent
+
+👉 If no relevant intent is found, the search query may be `null`.
+
+---
+
+### 3) Retrieval Step
+
+**If query is null**
+- No KB context is attached  
+- The LLM answers normally
+
+**If query exists**
+- Vector search is performed on the KB  
+- Top N relevant chunks are retrieved  
+
+Similarity and relevance thresholds can be configured in **Advanced Settings**.
+
+---
+
+### 4) Hybrid Search (Optional)
+
+Hybrid Search combines **similarity search** and **text (keyword) search** into a final relevancy score.
+
+How it works:
+- Extra chunks are fetched as a broad match  
+- This step may include some noise  
+- The system then **reranks results**  
+- Only the top N most relevant chunks are kept  
+
+This ensures:
+- Better precision  
+- Less irrelevant context  
+- Higher response quality
+
+---
+
+### 5) Generation Step
+
+- Retrieved chunks are combined
+- Added to the system prompt as context
+- Sent to the LLM with instructions
+
+The LLM then generates a grounded, context-aware response.
+
+---
+
+## RAG Process Flow
 
 ```plaintext
-User Question
-      │
-      ▼
-Retrieve Relevant Chunks ──► Knowledge Base (chunked data)
-      │
-      ▼
-Pass Chunks as Context to AI
-      │
-      ▼
-AI Generates Accurate, Context-Aware Answer
+User Query
+   │
+   ▼
+Intent → Search Query Generation
+   │
+   ▼
+Vector / Hybrid Search on KB
+   │
+   ▼
+Reranking (Top N Chunks)
+   │
+   ▼
+Context + Prompt → LLM
+   │
+   ▼
+Final Answer
+
 ```
 
-In short:
+---
 
-- Chunking makes the data searchable.
+## Benefits of RAG
 
-- RAG retrieves what’s needed and uses it to generate better answers.
+✅ Reduces hallucinations <br/>
+✅ Grounds answers in your data <br/>
+✅ Works well for large knowledge bases <br/>
+✅ Configurable retrieval behavior <br/>
+✅ More accurate and trustworthy responses
+
+---
+
+**In short:**
+Chunking makes your data searchable, and RAG ensures the model uses the *right* information at the *right* time.
+
+
 </Accordion>
 
 <Accordion title="Advance Settings for Conversational AI Agent">
