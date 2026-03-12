@@ -49,3 +49,13 @@ A new conversation appears with no assigned agent.
 Agent A replies first and becomes the assigned agent.
 
 ---
+## Case 4. Conversation is Closed, Abandoned, or Template
+
+If the conversation is **Closed**, **Abandoned**, or created from a **Template**:
+
+- A **new conversation** will be created when a message is sent.
+- The conversation will be **assigned to the agent who sent the message**.
+
+Example  
+An agent sends a template message to a user after the conversation was closed.  
+A new conversation opens and gets assigned to that agent.
