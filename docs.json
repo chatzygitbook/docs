@@ -221,6 +221,13 @@
               "how/to-setup-whatsapp-calling",
               "how/to-assign-human-agent-to-a-conversation"
             ]
+          },
+          {
+            "group" :"META",
+            "icon" : "meta",
+            "pages": [
+              "meta/how-to-verify-meta-business-portfolio"
+            ]
           }
         ]
       },
