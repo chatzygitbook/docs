@@ -1,29 +1,70 @@
-
-
 <Frame>
-  <img src="/ai-agents/conversational-ai-agent/settings/overview.png"  />
+  <img src="/ai-agents/conversational-ai-agent/settings/overview.png" />
 </Frame>
+
 ---
 
-The **Base Prompt** tab is your command center for teaching the AI how to think and act. By customizing the sections within this tab, you set the fundamental rules that will guide every conversation your chatbot has.
+# Base Prompt
 
-* **Goal**: This section is for defining the primary purpose of your chatbot. Is its job to answer customer questions, book appointments, or simply greet visitors? Setting a clear goal ensures the chatbot stays focused and effective.
+The **Base Prompt** is where you define how your AI agent should think, behave, and respond. 
 
-    >   **Example:** `You are Ava, ChatzyAI's assistant, your goal is to provide helpful information about products and answer customer support queries.`
+Use the Base Prompt editor to:
 
-* **Personality**: Here, you define the chatbot's tone and behavior. Do you want it to sound professional, friendly, or a bit playful? The personality you choose will shape how it interacts with users and represents your brand.
+- Define the agent's purpose and responsibilities
+- Set the tone, personality, and communication style
+- Create conversation flows and response guidelines
+- Add business rules, instructions, and guardrails
+- Configure tools, APIs, and WhatsApp interactions directly from the prompt
 
-    >   **Example:** `Be friendly, helpful, and slightly enthusiastic. Use clear and concise language.`
+> **Example:**
+>
+> `You are Ava, ChatzyAI's customer support assistant. Your goal is to answer customer queries, provide product information, and help users resolve issues.`
+>
+> `Be friendly, professional, and concise.`
+>
+> `Always greet the user, understand their requirement, and provide the most relevant solution.`
+>
+> `If the user requests pricing information, provide available plans and direct them to the sales team when required.`
 
-* **Chat Flow**: Use this to structure the conversation. You can guide the chatbot to follow a specific sequence of steps, like starting with a greeting, asking for a name, and then presenting a list of options. This helps create a smooth and predictable user experience.
+---
 
-    >   **Example:**<br/>
-        >   `1. Greet the user with "Hello! How can I help you today?"`<br/>
-        >   `2. Ask "Are you looking for product information or support?"`<br/>
-        >   `3. Based on the answer, provide relevant information or direct them to the support resources.`
+## Accessing Tools, APIs, and WhatsApp Components
 
-* **Instructions**: This is where you add specific rules and guidelines. You can give the chatbot detailed commands, such as "always provide a summary at the end of the chat" or "never use emojis." This gives you fine-grained control over its responses.
+Internal Tools, External APIs, and WhatsApp components are easier to discover and configure directly from the prompt editor.
 
-    >   **Example:**
-        >   `Always provide a link to our FAQ page if the user has a question about pricing.`
-        >   `Do not use slang or overly casual language.`
+Simply type `/` anywhere inside the Base Prompt editor to view available options.
+
+Using `/`, you can quickly:
+
+- Add Internal Tools
+- Connect External APIs
+- Insert WhatsApp Interactive Buttons
+- Configure utility actions
+- Access supported integrations
+
+> We highly recommend exploring the `/` menu while building prompts, as it significantly speeds up agent configuration.
+
+---
+
+## Autosave and Version Control
+
+The platform now includes **Autosave** and **Version Control** for:
+
+- Conversational AI Agents
+- Flow-Based AI Agents
+- Journeys
+
+As you make changes, they are automatically saved to your **Working Draft**.
+
+Once you're satisfied with your updates, you can:
+
+- Save the current state as a version checkpoint
+- Create drafts for experimentation
+- Review previously saved versions
+- Test different versions in the Playground
+- Publish the version that best fits your use case
+
+This allows you to safely iterate on prompts and configurations without losing previous work.
+
+> **Tip:** Use version checkpoints before making major prompt changes so you can easily compare results and roll back if needed.
+
