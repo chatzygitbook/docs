@@ -151,22 +151,39 @@
                     "group": "Actions",
                     "pages": [
                       "journey/studio/actions/overview",
+                      {"group": "Messaging",
+                        "pages": [
                       "journey/studio/actions/send-message",
-                      "journey/studio/actions/send-message-in-conversation",
-                      "journey/studio/actions/wait",
-                      "journey/studio/actions/wait-until",
-                      "journey/studio/actions/update-contact",
-                      "journey/studio/actions/update-conversation",
+                      "journey/studio/actions/send-message-in-conversation"] 
+                      },
+                      {"group": "AI & Agent",
+                        "pages": [
                       "journey/studio/actions/assign-to-ai-agent",
                       "journey/studio/actions/assign-to-voice-ai-agent",
                       "journey/studio/actions/assign-to-human-agent",
                       "journey/studio/actions/initiate-outbound-whatsapp-call",
                       "journey/studio/actions/transfer-to-ai-agent",
-                      "journey/studio/actions/transfer-to-human-agent",
-                      "journey/studio/actions/execute-code",
+                      "journey/studio/actions/transfer-to-human-agent"] 
+                      },
+                      {"group": "Contacts & conversations",
+                        "pages": [
+                      "journey/studio/actions/update-contact",
+                      "journey/studio/actions/update-conversation",
+                      "journey/studio/actions/extract-entities"] 
+                      },
+                      
+                      {"group": "Flow control",
+                        "pages": [
+                      "journey/studio/actions/wait",
+                      "journey/studio/actions/wait-until",
                       "journey/studio/actions/conditions",
-                      "journey/studio/actions/remove-from-journey",
-                      "journey/studio/actions/extract-entities"
+                      "journey/studio/actions/remove-from-journey"] 
+                      },
+                      
+                      {"group": "Messaging",
+                        "pages": [
+                      "journey/studio/actions/execute-code"] 
+                      }
                     ]
                   }
                 ]
