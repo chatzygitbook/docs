@@ -180,7 +180,7 @@
                       "journey/studio/actions/remove-from-journey"] 
                       },
                       
-                      {"group": "Messaging",
+                      {"group": "Integrations",
                         "pages": [
                       "journey/studio/actions/execute-code"] 
                       }
