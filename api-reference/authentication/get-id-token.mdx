@@ -13,3 +13,54 @@ Authorization: <idToken>
 ```
 
 Without a valid token, protected routes will respond with a 401 Unauthorized error. This token expires after **1 hour** after which you must call `/get_id_token` again to obtain a new one.
+
+### 🔐 Accounts with two-factor authentication
+
+If the account has 2FA enabled, email and password alone are not enough — the request responds `401` with:
+
+```json
+{ "error": { "error": "This account has two-factor authentication enabled. Retry this request with a `totp_code` from your authenticator app." } }
+```
+
+Retry including the six-digit code from your authenticator app:
+
+```json
+{
+  "user_email_id": "user@example.com",
+  "password": "your-password",
+  "totp_code": "123456"
+}
+```
+
+<Warning>
+  TOTP codes are single-use and rotate every 30 seconds, so a server cannot generate one. Do not
+  attempt to automate this step — use the refresh token flow below instead.
+</Warning>
+
+## Staying signed in without a password
+
+Every successful sign-in also returns a **`refreshToken`**. Send it back on its own to get a fresh
+`idToken` — no password, and no two-factor code:
+
+```json
+{ "refresh_token": "eyJjdHkiOiJKV1QiLCJlbmMi..." }
+```
+
+This is the flow to use for servers, cron jobs and CI. Two-factor authentication does not apply
+here, because the second factor was already satisfied when the refresh token was issued.
+
+**Set it up once:**
+
+1. Sign in by hand with `user_email_id`, `password` and — if 2FA is on — a `totp_code`.
+2. Store the returned `refreshToken` wherever you keep secrets.
+3. From then on, call this endpoint with `refresh_token` whenever the `idToken` expires (hourly).
+
+<Warning>
+  A refresh token is valid for **30 days** from the moment it is issued, and refreshing does not
+  extend it. `refreshTokenExpiresAt` in the response tells you exactly when it dies — alert on it,
+  and repeat step 1 before that date. After it expires, requests fail with `401` until you sign in
+  with your password again.
+</Warning>
+
+Treat a refresh token like a password: store it encrypted, never commit it. To revoke one, change
+the account password or sign out everywhere, which invalidates all outstanding refresh tokens.
