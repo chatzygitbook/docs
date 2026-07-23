@@ -1,0 +1,25 @@
+---
+title: "Download PDF"
+
+---
+
+The **Download Conversation PDF** action generates a PDF transcript of a conversation and stores its downloadable URL in a workflow variable. This is useful for archiving conversations, sharing chat transcripts, or attaching them to external systems such as CRMs, support tickets, or email notifications.
+
+#### Configuration Fields
+
+- **Conversation ID**  
+  Specify the conversation ID as per your conversation trigger. 
+
+  **Example:**  
+  `{{conversation_id}}` 
+
+- **Save PDF URL as**  
+  Enter the name of the workflow variable where the generated PDF URL should be stored. Once the action is executed, you can reference this variable in subsequent actions.
+
+  **Example Variable Name:**  
+  `conversation_pdf_url`
+
+  **Usage Example:**  
+  `{{conversation_pdf_url}}`
+
+> **Tip:** You can use the generated PDF URL in later workflow steps, such as sending it via email, uploading it to a CRM, storing it in Google Sheets, or passing it to another API.
