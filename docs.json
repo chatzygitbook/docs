@@ -154,7 +154,9 @@
                       {"group": "Messaging",
                         "pages": [
                       "journey/studio/actions/send-message",
-                      "journey/studio/actions/send-message-in-conversation"] 
+                      "journey/studio/actions/send-message-in-conversation",
+                    "journey/studio/actions/reply-to-instagram-comments",
+                  "journey/studio/actions/send-connection-requests"] 
                       },
                       {"group": "AI & Agent",
                         "pages": [
@@ -169,7 +171,8 @@
                         "pages": [
                       "journey/studio/actions/update-contact",
                       "journey/studio/actions/update-conversation",
-                      "journey/studio/actions/extract-entities"] 
+                      "journey/studio/actions/extract-entities",
+                    "journey/studio/actions/download-pdf"] 
                       },
                       
                       {"group": "Flow control",
@@ -177,12 +180,16 @@
                       "journey/studio/actions/wait",
                       "journey/studio/actions/wait-until",
                       "journey/studio/actions/conditions",
-                      "journey/studio/actions/remove-from-journey"] 
+                      "journey/studio/actions/remove-from-journey",
+                      "journey/studio/actions/trigger-journey"
+                    ] 
                       },
                       
                       {"group": "Integrations",
                         "pages": [
-                      "journey/studio/actions/execute-code"] 
+                      "journey/studio/actions/execute-code",
+                      "journey/studio/actions/conversation-event",
+                      "journey/studio/actions/google-sheet"] 
                       }
                     ]
                   }
