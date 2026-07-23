@@ -61,15 +61,28 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["user_email_id", "password"],
+                "description": "Send either `user_email_id` + `password` (plus `totp_code` if two-factor is enabled), or `refresh_token` on its own to renew without a password.",
                 "properties": {
                   "user_email_id": {
                     "type": "string",
+                    "description": "Required unless `refresh_token` is supplied.",
                     "example": "user@example.com"
                   },
                   "password": {
                     "type": "string",
+                    "description": "Required unless `refresh_token` is supplied.",
                     "example": "your-password"
+                  },
+                  "refresh_token": {
+                    "type": "string",
+                    "description": "Renew an ID token without a password or two-factor code. Use this for unattended integrations. Cannot be combined with `password`.",
+                    "example": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIi..."
+                  },
+                  "totp_code": {
+                    "type": "string",
+                    "description": "Six-digit code from your authenticator app. Required only if the account has two-factor authentication enabled.",
+                    "pattern": "^[0-9]{6}$",
+                    "example": "123456"
                   }
                 }
               }
@@ -99,6 +112,17 @@
                           "type": "integer",
                           "format": "int64",
                           "example": 1752577991000
+                        },
+                        "refreshToken": {
+                          "type": "string",
+                          "description": "Returned on password sign-in only. Store it and send it back as `refresh_token` to renew without a password. Valid for 30 days.",
+                          "example": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIi..."
+                        },
+                        "refreshTokenExpiresAt": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "When the refresh token stops working. Re-authenticate with a password before this time.",
+                          "example": 1755169991000
                         }
                       }
                     }
