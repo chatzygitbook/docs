@@ -1,0 +1,100 @@
+---
+title: "Send Scheduled WhatsApp Reminders from Google Sheets"
+icon: "clock"
+iconType: "solid"
+---
+
+This guide shows you how to automatically send WhatsApp reminders whenever a new row is added to a Google Sheet. The reminder will be sent at the scheduled date and time using a Chatzy Journey.
+
+## Step 1: Create a Google Sheet
+
+Create a Google Sheet containing all the information required for your reminder, such as:
+
+- Customer Name
+- Phone Number
+- Reminder Date & Time
+- Message Details
+- Any other custom fields
+
+---
+
+## Step 2: Create an Apps Script
+
+Open your Google Sheet and navigate to **Extensions → Apps Script**.
+
+Create a script that watches for new or updated rows and sends the row data to a Chatzy webhook once all the required fields are filled.
+
+> **Tip:** You can use any LLM to generate an Apps Script that sends a POST request to your webhook with the required data.
+
+---
+
+## Step 3: Create a Journey
+
+Create a new Journey in Chatzy.
+
+- Set the **Trigger** to **Inbound Webhook**.
+- Copy the generated webhook URL.
+
+Paste this webhook URL into your Google Apps Script so it can trigger the Journey whenever new data is available.
+
+---
+
+## Step 4: Create a WhatsApp Template
+
+Create the WhatsApp template that will be sent as the reminder message.
+
+Refer to the guide below:
+
+https://docs.chatzy.ai/message-templates/whatsapp-templates
+
+---
+
+## Step 5: Add a Wait Until Action
+
+Inside the same Journey, add a **Wait Until** action.
+
+Configure it as follows:
+
+- **Event:** Time remaining before external event
+
+Make sure the date and time received from your webhook match the format expected by the Wait Until action.
+
+For supported fields and date formats, refer to:
+
+https://docs.chatzy.ai/journey/studio/actions/wait-until#configuration-fields
+
+---
+
+## Step 6: Add a Send Message Action
+
+After the **Wait Until** action, add a **Send Message** action.
+
+Configure the action as follows:
+
+- Select your WhatsApp Template.
+- Under **Existing Conversation Config**, choose **Make part of conversation**.
+- Keep **Assigned to AI Agent** enabled.
+
+For more details, see:
+
+https://docs.chatzy.ai/journey/studio/actions/send-message
+
+---
+
+## Step 7: Publish the Journey
+
+Save your Journey and click **Publish** to make it live.
+
+---
+
+## Step 8: Test the Automation
+
+Add a new row to your Google Sheet and ensure all required fields are filled.
+
+Once your Apps Script sends the webhook request:
+
+1. The Journey will start automatically.
+2. The **Wait Until** action will pause the Journey until the scheduled time.
+3. The WhatsApp reminder will be sent automatically using your selected template.
+
+That's it! Your Google Sheet is now connected to Chatzy, allowing you to send scheduled WhatsApp reminders without any manual intervention.
