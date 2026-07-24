@@ -1,43 +1,63 @@
-
-
-The **Model** tab lets you select the AI engine that powers your chatbot. Your choice impacts the chatbot's **speed**, **intelligence**, and **overall performance**.  
+The **Model** tab allows you to choose the Large Language Model (LLM) that powers your AI agent. The selected model directly affects response quality, speed, context size, reasoning capability, and credit consumption.
 
 <Frame>
-  <img src="/ai-agents/conversational-ai-agent/settings/model.png"  />
+  <img src="/ai-agents/conversational-ai-agent/settings/model.png" />
 </Frame>
 
 ---
-#### Temperature
-The **Temperature** slider controls how predictable or creative the AI’s responses are:  
-- **Reserved (0):** Highly factual and predictable responses. Best for customer support, FAQs, or data extraction.  
-- **Creative (>0):** More varied and imaginative responses. Ideal for brainstorming, creative writing, or casual conversations.  
 
-#### Available Models
-Each model offers unique strengths for different use cases:  
-- **GPT-4o 128K** – Advanced, versatile model for complex and demanding tasks.  
-- **GPT-4o-Mini 128K** – Lightweight, fast, and cost-effective for simpler tasks.  
-- **Claude Sonnet 4 200K** – Balanced model with strong reasoning for multi-step problem solving.  
-- **Claude 3.5 Haiku 200K** – Extremely fast and affordable, best for high-volume and lightweight tasks.  
-- **Gemini 2.5 Flash 1M** – Efficient blend of reasoning and speed, adaptable to a wide range of tasks.  
+## Temperature
 
-#### Custom Reasoning
-With **Custom Reasoning**, the AI can process complex, multi-step problems more effectively.  
-- Available only for: **Claude Sonnet 4 200K** and **Gemini 2.5 Flash 1M**.  
+The **Temperature** setting controls how deterministic or creative the AI's responses are.
 
-**Select Max Reasoning Tokens** <br/>
-When **Custom Reasoning** is enabled, you can adjust the **Max Reasoning Tokens** setting.  
-- This determines the AI’s "thinking budget" before generating a response.  
-- **Higher token count:** Better quality answers for complex queries (but may increase latency).  
-- **Lower token count:** Faster responses, suitable for straightforward tasks.  
+- **Reserved (0)** – Produces factual, consistent, and predictable responses. Recommended for customer support, FAQs, lead qualification, and business workflows.
+- **Creative (>0)** – Generates more diverse and creative responses. Ideal for brainstorming, content generation, and open-ended conversations.
 
 ---
 
-### Agent Comparison Table
+## Available Models
 
-| Model Name              | Best For                                           | Reasoning Capability |
-|--------------------------|---------------------------------------------------|-----------------------|
-| **GPT-4o 128K**          | Most powerful and versatile; complex workflows.   | No                    |
-| **GPT-4o-Mini 128K**     | Speed + cost efficiency for general tasks.        | No                    |
-| **Claude Sonnet 4 200K** | Balanced; strong reasoning for advanced problems. | Yes                   |
-| **Claude 3.5 Haiku 200K**| Ultra-fast; affordable for simple, high-volume use.| No                    |
-| **Gemini 2.5 Flash 1M**  | Wide range; balances reasoning with speed.        | Yes                   |
+ChatzyAI supports models from multiple AI providers.
+
+### OpenAI
+- **GPT-4.1 1M** – High-quality model with a 1 million token context window.
+- **GPT-4.1 Mini 1M** – Faster and more cost-efficient version of GPT-4.1.
+- **GPT-4o 128K** – Fast, multimodal model suitable for most conversational tasks.
+- **GPT-4o Mini 128K** – Lightweight version of GPT-4o for high-volume workloads.
+- **GPT-5 400K** – Advanced reasoning model with a large context window.
+- **GPT-5 Mini 400K** – Faster and lower-cost version of GPT-5.
+- **GPT-5.4 1M** – Large-context model designed for complex workflows.
+- **GPT-5.4 Mini 272K** – Cost-efficient GPT-5.4 variant.
+- **GPT-5.6 Luna 1M** – Optimized for high-quality conversational experiences.
+- **GPT-5.6 Terra 1M** – Enterprise-grade model with excellent reasoning and context handling.
+- **O4 Mini 200K** – Optimized reasoning model for analytical and multi-step tasks.
+
+### Anthropic
+- **Claude Haiku 4.5 200K** – Extremely fast and efficient for lightweight conversations.
+- **Claude Sonnet 4.6 1M** – Powerful reasoning model with a large context window.
+
+### Google
+- **Gemini 2.5 Flash 1M** – Balanced model offering excellent speed and reasoning.
+- **Gemini 2.5 Flash Lite 1M** – Lightweight and cost-efficient Flash model.
+- **Gemini 3.1 Flash Lite 1M** – Faster generation for high-volume use cases.
+- **Gemini 3.5 Flash 1M** – Google's latest Flash model with improved reasoning and performance.
+
+---
+
+## Choosing the Right Model
+
+Different models are optimized for different workloads.
+
+| Use Case | Recommended Models |
+|-----------|--------------------|
+| Customer Support | GPT-4o, GPT-4o Mini, Claude Haiku 4.5 |
+| Lead Qualification | GPT-4.1 Mini, GPT-4o Mini, Gemini Flash Lite |
+| Sales Conversations | GPT-5, GPT-5.4, Claude Sonnet 4.6 |
+| Complex Reasoning | GPT-5, GPT-5.6 Terra, Claude Sonnet 4.6, O4 Mini |
+| Large Knowledge Bases | GPT-4.1, GPT-5.4, GPT-5.6 Luna, Gemini Flash |
+| Cost-Optimized Deployments | GPT-4o Mini, GPT-4.1 Mini, Claude Haiku 4.5, Gemini Flash Lite |
+
+---
+
+
+> **Tip:** Larger context windows allow the AI to reference more conversation history and larger knowledge bases, but may consume more credits depending on the selected model.

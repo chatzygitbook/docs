@@ -1,60 +1,93 @@
-
-
-The **Tools** tab extends your chatbot’s capabilities with built-in functions and integrations. These tools allow your bot to move beyond simple Q&A and perform specific actions within conversations.
+The **Tools** tab allows your Conversational AI Agent to trigger journey and schedule appointments directly from conversations.
 
 <Frame>
   <img src="/ai-agents/conversational-ai-agent/settings/tools.png" />
 </Frame>
 
 ---
-### Available Tools
 
-- **Journey**  
-  Trigger a pre-designed sequence of actions (called a *journey*) for your chatbot to follow.  
-  A journey could be:  
-  - Forwarding Lead to CRM  
-  - Transferring chat from one AI agent to another
+## Journey
 
+The **Trigger Journey** feature allows your Conversational AI Agent to automatically trigger a Journey when specific conditions are met during a conversation.
 
-Turn the toggle on and select the journey(s) that you want to trigger
-
-*NOTE: only journeys with trigger inbound webhook will be available in dropdown options*
-
-> To trigger a journey, mention the condition with journey name in your prompt.
-For every selected journey you need to mention the useccase properly
-
-> Example :- 
-``` 
-When the customer confirms appointment, trigger  `book_appointment` journey these details:
-
-  
-  {
-    "customer_name": "<customer's name>",
-    "customer_phone": "<Phone number of the customer>",
-    "appointment_date": "<date of appointment>",
-    "time_slot": "<time slot>"
-
-  }
-  
-  ```
----
-- **WhatsApp Tools**  
-  These are specialized functions for bots integrated with **WhatsApp**:  
-  - **Close Conversation** → Formally end a WhatsApp chat, ensuring a clean exit for both user and bot.  
-  - **Get Details** → Fetch all information associated with the current conversation. Such as Phone number, Full name, Email ID, Conversation_id.
-
-- **Additional Settings**  
-  - **Get Contact Details** → Retrieve all information associated with a contact for which current conversation is happening. <br/>This includes:
-
-    Basic details:  phone(`phn_number`), name(`first_name`), contact_id(`contact_id`), iFrame user Id(`iframe_user_id`)
+Enable the **Trigger Journey** toggle and select the journey you want the AI agent to trigger.
 
 
-Custom attributes (if any)
+> **Note:** Only journeys that use an **Inbound Webhook** trigger are available for selection.
+
 ---
 
-| Tool / Setting        | Purpose                                                                 |
-|------------------------|-------------------------------------------------------------------------|
-| **Journey**            | Trigger automated conversational flows (e.g., onboarding, lead capture) |
-| **Close Conversation** | End a WhatsApp conversation gracefully                                  |
-| **Get Details**        | Retrieve user info from WhatsApp e.g. Full name                  |
-| **Get Contact Details**| Fetches user data like conversation ID, Tags during chat                   |
+### Configuring Journey Triggers
+
+After selecting a journey, describe **when** the AI should trigger it directly in your Base Prompt.
+
+Clearly specify:
+
+- The condition for triggering the journey.
+- The journey name.
+- The data that should be passed to the journey.
+
+For every selected journey, you should clearly explain its purpose and trigger conditions within your prompt using **"/"** commands
+
+**Example**
+
+```text
+When the customer confirms an appointment, trigger_journey_email_test and pass the following details:
+
+{
+  "customer_name": "<customer's name>",
+  "customer_phone": "<customer's phone number>",
+  "appointment_date": "<appointment date>",
+  "time_slot": "<selected time slot>"
+}
+```
+
+Once the specified condition is met, the AI agent automatically invokes the selected journey with the provided context.
+
+---
+
+## Cal.com Integration
+
+Chatzy AI supports native integration with **Cal.com** for appointment scheduling.
+
+Before enabling appointment booking, connect your Cal.com account using the **Connect Cal.com here** option.
+
+After connecting your account:
+
+1. Enable the **Book Appointment** toggle.
+2. Select the **Cal.com Event** that should be booked by the AI agent.
+3. Choose the **Timezone** that should be used while checking availability and scheduling appointments.
+
+<Frame>
+  <img src="/ai-agents/conversational-ai-agent/settings/tools2.png" />
+</Frame>
+
+The selected event determines which appointment type the AI agent can book, while the timezone ensures that available slots are shown and scheduled correctly.
+
+Once configured, the selected Cal.com tools become available directly inside the **Base Prompt**.
+
+Simply type `/` in the prompt editor to access the available appointment tools, including:
+
+- **Check Availability Of Slots**
+- **Book Appointment**
+- **Reschedule Appointment**
+- **Cancel Appointment**
+- **Get Bookings**
+
+
+You can then describe **when** each tool should be used during the conversation.
+
+**Example**
+
+```text
+
+When a user wants to schedule a demo, first /check_availability_of_slots
+
+If the user selects a suitable slot, use the /book_appointment to create the booking.
+
+If the user wants to change an existing booking, use the /reschedule_appointment
+
+If the user wants to cancel their appointment, use the /cancel_appointment
+```
+
+> **Tip:** Clearly describe the conditions under which each Cal.com tool should be used in your prompt. 

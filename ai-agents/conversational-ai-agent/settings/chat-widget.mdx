@@ -1,51 +1,106 @@
-
-
-The **Chat Widget** tab lets you customize how the chatbot looks and behaves when embedded on your website. This ensures the chat experience feels seamless, engaging, and aligned with your brand.  
+The **Chat Widget** tab lets you configure both the **behavior** and **appearance** of your chatbot widget before embedding it on your website. From greetings and conversation starters to branding and widget controls, this section allows you to tailor the chat experience to match your business.
 
 <Frame>
-  <img src="/ai-agents/conversational-ai-agent/settings/chat-widget.gif"  />
+  <img src="/ai-agents/conversational-ai-agent/settings/chat-widget1.png" />
 </Frame>
 
-### Key Features
+---
 
-- **Introductory Message**  
-  The first message users see when they open the widget. Use it to greet visitors and set expectations for the conversation.  
+## Conversation Experience
 
-- **Conversation Starters**  
-  Predefined questions or prompts that users can click to instantly begin a chat. Helps guide interactions and boost engagement.  
+### Introductory Message
 
-- **Enable Auth Access Iframe**  
-  Restricts widget usage to authenticated users only. Requires a valid API key, making it essential for protecting sensitive data and controlling access.  
-  You'll need an AI Agent Auth Key (Client API Key) which can be retrieved from [Profile](https://app.chatzy.ai/profile) page.
-  After generating your API key, head over to this [documentation](https://docs.chatzy.ai/api-reference/auhtorized-iframe-access/get-access-token) to learn how to use it.
+The **Introductory Message** is the first message displayed when a user opens the chat widget. Use it to welcome visitors, introduce your AI agent, or explain how it can help.
 
-- **Stream Response**  
-  Displays replies character-by-character as they are generated, simulating live typing for a more dynamic user experience.  
+---
 
-- **Collect Files**  
-  Adds an option for users to upload files directly in the chat.  
+### Conversation Starters
 
-- **Microphone**  
-  Adds a microphone button so users can send voice messages instead of typing.  
+Conversation Starters are predefined prompts that users can click to begin a conversation instantly.
 
-- **Collect Feedback at End of Conversation**  
-  Prompts users to provide feedback once the chat session ends. Useful for improving chatbot quality over time.  
+They help reduce friction by guiding users toward common questions or actions.
 
-- **Show Chatzy Watermark**  
-  Displays a *Powered by Chatzy* watermark at the bottom of the widget.  
+Examples:
 
-- **Disable Reset Button**  
-  Removes the option to clear conversation history, ensuring all chats remain preserved.  
+- "Tell me about your pricing."
+- "Book a demo."
+- "Talk to support."
+- "Show available plans."
 
-### Appearance Customization
+---
 
-You can fully match the widget’s design to your brand:  
-- **AI Bubble Color** – Background color of chatbot messages.  
-- **AI Text Color** – Text color in chatbot messages.  
-- **User Bubble Color** – Background color of user messages.  
-- **User Text Color** – Text color in user messages.  
+## Authentication
 
-### Chatbot Images
+### Enable Auth Access Iframe
 
-- **Chatbot DP URL** – Upload a profile picture for your chatbot.  
-- **Chatbot Icon URL** – Upload the small icon that appears on your site to open the chat window.  
+Enable this option if you want to restrict access to your chatbot to authenticated users only.
+
+This feature requires an **AI Agent Auth Key (Client API Key)**, which can be generated from the **Profile** page.
+
+After generating your API key, follow the authentication guide here:
+
+https://docs.chatzy.ai/api-reference/auhtorized-iframe-access/get-access-token
+
+---
+
+## Widget Features
+
+The following options allow you to enable or disable individual widget capabilities.
+
+| Setting | Description |
+|----------|-------------|
+| **Stream Response** | Displays AI responses progressively as they are generated, creating a natural typing effect. |
+| **Collect Files** | Allows users to upload files directly during the conversation. |
+| **Microphone** | Enables voice input so users can speak instead of typing. |
+| **Collect Feedback at End of Conversation** | Prompts users to rate or provide feedback after the conversation ends. |
+| **Show Chatzy Watermark** | Displays the "Powered by Chatzy AI" watermark at the bottom of the widget. |
+| **Follow-up Suggestions** | Displays suggested follow-up questions or actions after each AI response to encourage continued engagement. |
+| **Disable Reset Button** | Removes the reset conversation button, preventing users from clearing the current chat session. |
+
+---
+
+## Widget Appearance
+
+Click **Edit UI Setting** to customize your chatbot's appearance.
+
+<Frame>
+  <img src="/ai-agents/conversational-ai-agent/settings/chat-widget2.png" />
+</Frame>
+
+You can customize the following:
+
+### Primary Accent Color
+
+Choose the primary color used throughout the widget, including headers, buttons, highlights, and interactive elements.
+
+---
+
+### Chatbot Display Name
+
+Specify the name displayed at the top of the chat window.
+
+Example:
+
+`Chat Expert`
+
+---
+
+### Chatbot Display Picture
+
+Upload the avatar displayed beside the chatbot's messages throughout the conversation.
+
+---
+
+### Chatbot Icon
+
+Upload the floating launcher icon shown on your website before the widget is opened.
+
+---
+
+## Live Preview
+
+The right side of the **Edit UI Settings** window displays a live preview of your chatbot.
+
+As you modify colors, names, images, or icons, the preview updates immediately, allowing you to verify your branding before saving.
+
+Click **Save Draft** to save your widget customization.
