@@ -112,6 +112,7 @@
                       "ai-agents/voice-ai-agent/settings/telephony",
                       "ai-agents/voice-ai-agent/settings/advance-settings",
                       "ai-agents/voice-ai-agent/settings/external-apis",
+                      "ai-agents/voice-ai-agent/settings/tools",
                       "ai-agents/voice-ai-agent/settings/utilities"
                     ]
                   },
@@ -129,7 +130,7 @@
               {
                 "group": "Supported Channels",
                 "icon": "satellite-dish",
-                "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger"]
+                "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger","channels/supported-channels/linkedin"]
               }
             ]
           },
@@ -220,12 +221,17 @@
           {
             "group": "Message Templates",
             "icon": "file-text",
-            "pages": ["message-templates/overview", "message-templates/whatsapp-templates", "message-templates/messenger-templates", "message-templates/instagram-templates"]
+            "pages": ["message-templates/overview", "message-templates/whatsapp-templates", "message-templates/messenger-templates", "message-templates/instagram-templates","message-templates/linkedin-templates"]
           },
           {
             "group": "Dashboard",
             "icon": "house",
             "pages": ["dashboard/overview"]
+          },
+          {
+            "group": "Ask Chatzy AI",
+            "icon": "sparkles",
+            "pages": ["ask-chatzy-ai/overview"]
           },
           {
             "group": "How",
