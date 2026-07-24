@@ -2,19 +2,18 @@
   <img src="/ai-agents/conversational-ai-agent/data.gif"  />
 </Frame>
 
-
-
 Your bot learns from various data sources. The more relevant the data, the better your agent performs.
 
-## **Supported Data Types:**
+## **Supported Data Types**
 - **Text:** Paste plain text directly into the platform.
-- **Files:** Upload formats like `.pdf`, `.docx`, `.txt`, `.csv` (max 20MB).
+- **Files:** Upload documents such as `.pdf`, `.docx`, `.txt`, and `.csv`.
 - **Website URLs:** Add a URL and let Chatzy extract useful content.
 - **FAQs:** Manually input question-answer pairs for precise responses.
 - **Google Drive:** Link a public folder with view-only access.
-- **Images & Videos:** Upload the Pics and Videos as a Data
+- **Media:** Upload images, videos, and PDF documents to enrich your AI agent's knowledge.
 
 ---
+
 ### Website Data Options
 
 When adding **Website URLs** as a data source, Chatzy provides multiple ways to fetch content:
@@ -30,75 +29,100 @@ When adding **Website URLs** as a data source, Chatzy provides multiple ways to 
   Add a single webpage URL to pull specific content.
 
 - **CSV File**  
-  Upload a CSV that contains multiple URLs for bulk training.
+  Upload a CSV containing multiple URLs for bulk website training.
 
 ---
 
-**Apify Crawler (Optional)**
+### Apify Crawler (Optional)
 
-You can toggle **Use Apify Crawler** for a more advanced and accurate crawling option.  
-- It consumes **2 credits per webpage crawled**.  
-- Designed to extract cleaner, structured data optimized for LLM training.  
-- Learn more: [Apify Content Crawler](https://apify.com/apify/website-content-crawler).
+You can enable **Use Apify Crawler** for more advanced and accurate website crawling.
 
----
+- Consumes **2 credits per webpage crawled**.
+- Extracts cleaner, structured content optimized for LLM training.
+- Recommended for large or dynamic websites.
 
-> The Website tab gives you flexibility — crawl entire sites, upload sitemaps, add single links, or bulk import via CSV. For maximum accuracy, enable **Apify Crawler**.
-
----
-
-### FAQ CSV Q&A Import
-
-You can also bulk import FAQs by uploading a **CSV file**:  
-- The **first column** will be treated as the *question*.  
-- The **second column** will be treated as the *answer*.  
-- The file **must not contain headers**.  
-
-This is useful for quickly loading a large set of predefined Q&A pairs into your agent.
+Learn more: [Apify Website Content Crawler](https://apify.com/apify/website-content-crawler)
 
 ---
 
+> The Website tab gives you the flexibility to crawl entire websites, import sitemaps, train from individual pages, or bulk import URLs using CSV files.
+
+---
+
+### FAQ CSV Import
+
+You can bulk import FAQs using a **CSV file**.
+
+- The **first column** is treated as the **Question**.
+- The **second column** is treated as the **Answer**.
+- The CSV **must not contain headers**.
+
+This is the fastest way to upload a large FAQ database.
+
+---
 
 ### Google Drive Import
 
-You can connect your Google Drive to train your agent with files:  
-- Enter the **view-only link** of a Google Drive folder containing your **Sheets or Documents**.  
-- The system will process all files inside the folder.  
-- Ensure the folder is **publicly accessible** (view-only).  
+Train your AI Agent directly from documents stored in Google Drive.
 
-This allows seamless training from existing documents stored in Google Drive.
+- Enter the **view-only link** of a Google Drive folder.
+- The folder may contain **Google Docs** and **Google Sheets**.
+- Ensure the folder is publicly accessible with **Viewer** permission.
+
+All supported files inside the folder will be processed automatically.
 
 ---
 
-### Media Upload
+### Media
 
-You can upload media files to train your AI agent with visual or video references.  
+You can upload media files to provide additional visual and document context to your AI agent.
 
-**Upload Guidelines:**  
-- **Images:** PNG and JPEG only, maximum **5MB each**  
-- **Videos:** MP4 only, maximum **16MB each**  
-- **Descriptions:** Each file requires a short description (maximum **25 words**)  
-- **Limit:** Maximum **30 media files** can be uploaded  
+#### Supported Files
 
-**Options:**  
-- Upload files via drag-and-drop or file picker.  
-- Toggle **Add Directly to Prompt** if you want media links and descriptions to be included directly in the AI Agent’s base prompt.  
+- **Images:** PNG and JPEG (Maximum **5 MB** per file)
+- **Videos:** MP4 (Maximum **16 MB** per file)
+- **Documents:** PDF (Maximum **25 MB** per file)
+
+#### Upload Guidelines
+
+- Each uploaded file requires a **description** (maximum **25 words**).
+- Maximum **30 media files** can be uploaded.
+- Files can be uploaded using drag-and-drop or the file picker.
+- Enable **Add Directly to Prompt** if you want media links and descriptions to be included directly in the AI Agent's Base Prompt.
+
 ---
 
-**🚀 Training Steps:**
-1. Upload or connect your data.
-2. Click **Train** in the top-right corner.
-3. Wait for the progress bar to complete.
-4. Once training finishes, your bot is ready to use the data in live chats.
+## Training Your Data
+
+After adding or updating your knowledge sources:
+
+1. Click **Train** in the top-right corner.
+2. Wait for the training process to complete.
+3. Once training finishes, your AI agent will immediately begin using the latest knowledge during conversations.
+
+### Auto Data Train
+
+If your knowledge sources are updated frequently, you can enable **Auto Data Train** to retrain your agent automatically without manual intervention.
+
+Available options:
+
+- **Off** – Manual training only.
+- **Daily** – Retrains every day.
+- **Weekly** – Retrains once every week.
+- **Fortnightly** – Retrains once every two weeks.
+- **Monthly** – Retrains once every month.
+
+This is especially useful for websites or Google Drive folders whose content changes regularly.
+
 ---
 
-### **Source Type Summary**
+### Source Type Summary
 
-| Source Type   | Example Formats             | Max Size      |
-|---------------|-----------------------------|---------------|
-| Text          | Manual paste                | —             |
-| File Upload   | PDF, DOCX, TXT, CSV         | 20 MB         |
-| Website URL   | Link to be crawled for data | —             |
-| FAQ           | Q&A pairs for knowledge     | —             |
-| Google Drive  | Folder link with docs       | —             |
-| Media Upload  | PNG, JPEG, MP4              | 5 MB (image), 16 MB (video), max 30 files |
+| Source Type | Supported Formats |
+|--------------|-------------------|
+| Text | Manual text input |
+| File Upload | PDF, DOCX, TXT, CSV |
+| Website | Crawl, Sitemap, Link, CSV URLs |
+| FAQ | Manual Q&A or CSV Import |
+| Google Drive | Public Google Docs & Sheets |
+| Media | PNG, JPEG, MP4, PDF (30 files max) |
