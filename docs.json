@@ -157,7 +157,8 @@
                       "journey/studio/actions/send-message",
                       "journey/studio/actions/send-message-in-conversation",
                     "journey/studio/actions/reply-to-instagram-comments",
-                  "journey/studio/actions/send-connection-requests"] 
+                  "journey/studio/actions/send-connection-requests",
+                "journey/studio/actions/send-email"] 
                       },
                       {"group": "AI & Agent",
                         "pages": [
