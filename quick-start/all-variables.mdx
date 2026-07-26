@@ -1,0 +1,134 @@
+
+
+Chatzy variables allow you to dynamically insert information collected during conversations, journeys, APIs, and tools.
+
+Variables can be used in prompts, messages, email templates, WhatsApp templates, API requests, and Journey actions.
+
+---
+
+## Contact Variables
+
+These variables are available when contact information exists.
+
+| Variable | Description |
+|----------|-------------|
+| `{{first_name}}` | Contact's first name |
+| `{{last_name}}` | Contact's last name |
+| `{{full_name}}` | Contact's full name |
+| `{{phn_number}}` | Contact's phone number |
+| `{{email_id}}` | Contact's email address |
+| `{{contact_id}}` | Chatzy Contact ID |
+| `{{iframe_user_id}}` | User ID when using authenticated iframe |
+
+> These variables are available through **Get Contact Details**.
+
+---
+
+## Conversation Variables
+
+Available through the **Get Details** tool.
+
+| Variable | Description |
+|----------|-------------|
+| `{{conversation_id}}` | Current conversation ID |
+| `{{full_name}}` | User's full name |
+| `{{phn_number}}` | User's phone number |
+
+---
+
+
+## Custom Attributes
+
+Any custom attribute saved against a contact automatically becomes available as a variable.
+
+For example, if your contact contains:
+
+```json
+{
+  "company": "Chatzy AI",
+  "plan": "Growth",
+  "city": "Pune"
+}
+```
+
+You can use:
+
+```
+{{company}}
+{{plan}}
+{{city}}
+```
+
+---
+
+### Inbound Webhook
+
+Variables received through an **Inbound Webhook Trigger** are available under:
+
+```text
+{{inbound_webhook.<field_name>}}
+```
+
+Example
+Payload was :
+
+   ```json 
+   {
+  "phone_number": "Chatzy AI",
+  "customer_name": "Growth",
+  "delivery_city": "Pune"
+    }
+    ```
+then you can refer these variables as 
+```text
+{{inbound_webhook.phone_number}}
+{{inbound_webhook.customer_name}}
+{{inbound_webhook.delivery_city}}
+```
+---
+### Extracted Entities
+
+When **Extract Entities** is enabled, the extracted values are available under:
+
+```text
+{{extracted_entities.<entity_name>}}
+```
+
+Example:
+
+```text
+{{extracted_entities.budget}}
+{{extracted_entities.quantity}}
+{{extracted_entities.phone}}
+{{extracted_entities.summary}}
+```
+
+---
+## Where Variables Can Be Used
+
+Variables are supported throughout Chatzy, including:
+
+- AI Agent Base Prompt
+- Execute Code
+- Trigger Journey
+- Send Message
+- Send Email (when using your own SMTP server)
+- WhatsApp Templates
+- Instagram Templates
+- LinkedIn Templates
+- Messenger Templates
+- Google Sheets
+- CRM Integrations
+- Webhooks
+- Conditions
+- Transitions
+
+---
+
+## Inserting Variables
+
+Most editors include a **Variables (`{x}`)** button.
+
+Click it to browse and insert available variables without typing them manually.
+
+> **Tip:** The list of available variables depends on the current Journey, AI Agent, and previously executed actions. Variables created earlier in a Journey become available in subsequent actions.
