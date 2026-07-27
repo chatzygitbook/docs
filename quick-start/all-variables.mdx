@@ -12,27 +12,13 @@ These variables are available when contact information exists.
 
 | Variable | Description |
 |----------|-------------|
-| `{{first_name}}` | Contact's first name |
-| `{{last_name}}` | Contact's last name |
-| `{{full_name}}` | Contact's full name |
-| `{{phn_number}}` | Contact's phone number |
-| `{{email_id}}` | Contact's email address |
-| `{{contact_id}}` | Chatzy Contact ID |
-| `{{iframe_user_id}}` | User ID when using authenticated iframe |
+| `{{contact.first_name}}` | Contact's first name |
+| `{{contact.last_name}}` | Contact's last name |
+| `{{contact.phone_number}}` | Contact's phone number |
+| `{{contact.email}}` | Contact's email address |
+| `{{contact.instagram_id}}` | Instagram Message sender ID |
 
 > These variables are available through **Get Contact Details**.
-
----
-
-## Conversation Variables
-
-Available through the **Get Details** tool.
-
-| Variable | Description |
-|----------|-------------|
-| `{{conversation_id}}` | Current conversation ID |
-| `{{full_name}}` | User's full name |
-| `{{phn_number}}` | User's phone number |
 
 ---
 
@@ -54,9 +40,9 @@ For example, if your contact contains:
 You can use:
 
 ```
-{{company}}
-{{plan}}
-{{city}}
+{{contact.attributes.company}}
+{{contact.attributes.plan}}
+{{contact.attributes.city}}
 ```
 
 ---
