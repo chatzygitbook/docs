@@ -340,7 +340,7 @@
     "primary": {
       "type": "button",
       "label": "Sign Up",
-      "href": "https://app.chatzy.ai/login?auth_state=signup"
+      "href": "https://app.chatzy.ai/login?auth_state=signup&utm_source=docs.chatzy.ai&utm_medium=nav&referrer=https://docs.chatzy.ai"
     },
     "links": [
       {
