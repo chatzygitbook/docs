@@ -1,0 +1,283 @@
+---
+title: "Error Codes"
+description: "Error codes returned by the Chatzy WhatsApp CRM API, with causes and fixes"
+icon: "triangle-alert"
+---
+
+This page documents the error codes returned by the Chatzy WhatsApp CRM API. Errors come back in a standardized JSON format with a specific code and a descriptive message.
+
+## Error response format
+
+All API errors follow a consistent structure:
+
+```json
+{
+  "status": "failure",
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human readable error message"
+  }
+}
+```
+
+For webhook events, errors include additional context:
+
+```json
+{
+  "event_type": "chatzy_error",
+  "timestamp": 1640995200,
+  "provider_message_id": "msg_123",
+  "error": {
+    "code": "ERROR_CODE",
+    "title": "Error description",
+    "details": {
+      "additional_context": "value"
+    }
+  }
+}
+```
+
+## Authentication errors
+
+<AccordionGroup>
+  <Accordion title="INVALID_AUTH_HEADER">
+    **Common causes:**
+
+    - Missing `Authorization` header in the request
+    - Incorrect header format (should be `Bearer YOUR_API_KEY`)
+
+    **Example response:**
+
+    ```json
+    {
+      "status": "failure",
+      "error": {
+        "code": "INVALID_AUTH_HEADER",
+        "message": "Invalid Authorization Header"
+      }
+    }
+    ```
+
+  </Accordion>
+
+  <Accordion title="INVALID_API_KEY">
+    **Common causes:**
+
+    - API key provided is invalid
+    - Revoked API key
+
+    **Example response:**
+
+    ```json
+    {
+      "status": "failure",
+      "error": {
+        "code": "INVALID_API_KEY",
+        "message": "Invalid API Key"
+      }
+    }
+    ```
+
+  </Accordion>
+</AccordionGroup>
+
+## Request validation errors
+
+<AccordionGroup>
+  <Accordion title="INVALID_PAYLOAD">
+    **Common causes:**
+
+    - Missing required fields in the request body
+    - Invalid data types (for example, string instead of number)
+    - Malformed JSON syntax
+    - Field values outside acceptable ranges or formats
+
+    **Example response:**
+
+    ```json
+    {
+      "status": "failure",
+      "error": {
+        "code": "INVALID_PAYLOAD",
+        "message": "Invalid send message payload"
+      }
+    }
+    ```
+
+  </Accordion>
+</AccordionGroup>
+
+## Server errors
+
+<AccordionGroup>
+  <Accordion title="INTERNAL_SERVER_ERROR">
+    **Recommended actions:**
+
+    - Retry the request after a brief delay
+    - Implement exponential backoff for retries
+    - Contact support if the error persists
+    - Check our status page for any ongoing incidents
+
+    **Example response:**
+
+    ```json
+    {
+      "status": "failure",
+      "error": {
+        "code": "INTERNAL_SERVER_ERROR",
+        "message": "Internal server error"
+      }
+    }
+    ```
+
+  </Accordion>
+</AccordionGroup>
+
+## Template and messaging errors
+
+<AccordionGroup>
+  <Accordion title="TEMPLATE_NOT_FOUND">
+    **Event type:** `chatzy_error`
+
+    **Description:** The specified template name does not exist in your account or has been deleted.
+
+    **Resolution:**
+
+    - Verify the template name spelling and case sensitivity
+    - Check if the template exists in your Chatzy dashboard
+    - Ensure the template is approved and active
+    - Use the correct template name as configured in your account
+
+    **Example response:**
+
+    ```json
+    {
+      "event_type": "chatzy_error",
+      "timestamp": 1640995200,
+      "provider_message_id": "msg_123",
+      "error": {
+        "code": "TEMPLATE_NOT_FOUND",
+        "title": "Template with name \"welcome_message\" not found.",
+        "details": {
+          "template_name": "welcome_message"
+        }
+      }
+    }
+    ```
+
+  </Accordion>
+
+  <Accordion title="CONVERSATION_ALREADY_LIVE">
+    **Event type:** `chatzy_error`
+
+    **Description:** Attempted to start a conversation that is already active with the specified phone number.
+
+    **Resolution:**
+
+    - Check the conversation status before attempting to start a new one
+    - Use the existing conversation thread for ongoing communication
+    - Wait for the current conversation to end before starting a new one
+    - Implement conversation state tracking in your application
+
+    **Example response:**
+
+    ```json
+    {
+      "event_type": "chatzy_error",
+      "timestamp": 1640995200,
+      "provider_message_id": "msg_123",
+      "error": {
+        "code": "CONVERSATION_ALREADY_LIVE",
+        "title": "Conversation with +1234567890 is already live"
+      }
+    }
+    ```
+
+  </Accordion>
+
+  <Accordion title="MESSAGE_OUTSIDE_OF_TIME_WINDOW">
+    **Event type:** `chatzy_error`
+
+    **Description:** Template messages can only be sent if more than 24 hours have passed since the user's last message, according to WhatsApp Business API policies.
+
+    **WhatsApp 24 hour window rule:**
+
+    - Free-form messages can only be sent within 24 hours of the user's last message
+    - After 24 hours, only approved template messages are allowed
+    - Template messages can be sent at any time to initiate conversations
+    - Interactive messages are treated as free-form messages
+
+    **Resolution:**
+
+    - Use template messages for outbound communications after 24 hours
+    - Track conversation timestamps to determine the message window
+    - Switch to free-form messages when the user responds within 24 hours
+    - Design templates for common use cases and scenarios
+
+    **Example response:**
+
+    ```json
+    {
+      "event_type": "chatzy_error",
+      "timestamp": 1640995200,
+      "provider_message_id": "msg_123",
+      "error": {
+        "code": "MESSAGE_OUTSIDE_OF_TIME_WINDOW",
+        "title": "You can only send template messages if more than 24 hours have passed since the user's last message."
+      }
+    }
+    ```
+
+  </Accordion>
+
+  <Accordion title="WA_BUSINESS_ID_NOT_FOUND">
+    **Event type:** `chatzy_error`
+
+    **Description:** Multiple WhatsApp channels are associated with this user, but no `wa_business_id` was included in the payload. Include a valid `wa_business_id` in your request.
+
+    **WhatsApp channel routing requirement:**
+
+    - If a user has multiple WhatsApp Business accounts connected, `wa_business_id` is required
+    - The system cannot auto-select a WhatsApp channel when multiple are available
+    - Omitting `wa_business_id` creates routing ambiguity
+    - `wa_business_id` must match one of the WhatsApp channels linked to the user
+
+    **Resolution:**
+
+    - Select the correct `wa_business_id` for the intended channel. You can get `wa_business_id` from **Channels** > **WhatsApp**
+    - Include `wa_business_id` explicitly in the request payload
+    - Ensure the provided `wa_business_id` belongs to the authenticated user
+
+    **Example response:**
+
+    ```json
+    {
+      "event_type": "chatzy_error",
+      "timestamp": 1640995200,
+      "provider_message_id": "msg_123",
+      "error": {
+        "code": "WA_BUSINESS_ID_NOT_FOUND",
+        "title": "Multiple WhatsApp channels are associated with this user 'admin@chatzy.ai', but no `wa_business_id` was included in the payload. Please include a valid `wa_business_id` in your request."
+      }
+    }
+    ```
+
+  </Accordion>
+</AccordionGroup>
+
+## Error handling best practices
+
+- **Parse error responses:** Always check the `status` field and parse the `error` object for specific details
+- **Implement retry logic:** For internal server errors, implement exponential backoff with reasonable limits
+- **Log error details:** Capture error codes, messages, and context for debugging and monitoring
+- **Handle webhook errors:** Process `chatzy_error` events in your webhook handler to track failed operations
+- **Validate before sending:** Pre-validate payloads client side to reduce validation errors
+- **Monitor error patterns:** Track error frequency and types to identify integration issues early
+
+<Warning>
+  **Rate limiting:** The Chatzy API implements rate limiting. If you exceed the rate limits, you
+  receive HTTP `429` status codes. Implement appropriate backoff strategies and respect the rate
+  limit headers in responses.
+</Warning>
+
+For additional support with error handling, or if you hit an undocumented error, contact [support@chatzy.ai](mailto:support@chatzy.ai) with the full error response and context.

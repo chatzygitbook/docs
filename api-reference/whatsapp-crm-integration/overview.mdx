@@ -1,0 +1,120 @@
+---
+title: "WhatsApp CRM Integration"
+description: "Send WhatsApp messages from your CRM through Chatzy AI"
+icon: "plug"
+---
+
+Integrate WhatsApp messaging with your CRM in minutes. This API lets you send messages, receive incoming messages, and track delivery status.
+
+<Info>
+  Install the integration first from **Integrations** in the Chatzy AI app. Installation generates
+  your API key and exposes the API endpoint. See [How to connect WhatsApp with
+  CRM](/how/to-connect-whatsapp-with-crm) for the setup walkthrough.
+</Info>
+
+## Base endpoint
+
+```
+POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message
+```
+
+## Authentication
+
+Every API request must include your API key in the `Authorization` header:
+
+```bash
+curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+<Warning>
+  The API key is shown only once, right after you install the integration or regenerate the key.
+  Store it securely. Regenerating revokes the previous key immediately.
+</Warning>
+
+## Send messages
+
+Send text messages, media, or templates to WhatsApp numbers.
+
+<Tip>
+  Payload structure follows the WhatsApp Cloud API. See the [WhatsApp API
+  documentation](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-messages) for
+  the full field reference.
+</Tip>
+
+`provider_message_id` is your own message id. Chatzy echoes it back on every status update webhook so you can match statuses to records in your CRM.
+
+### Text message
+
+```bash
+curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider_message_id": "msg_abc123",
+    "messaging_product": "whatsapp",
+    "recipient_type": "individual",
+    "to": "<WHATSAPP_USER_PHONE_NUMBER>",
+    "type": "text",
+    "text": {
+      "body": "<BODY_TEXT>"
+    }
+  }'
+```
+
+### Media message payload
+
+```json
+{
+  "provider_message_id": "msg_abc123",
+  "messaging_product": "whatsapp",
+  "recipient_type": "individual",
+  "to": "<WHATSAPP_USER_PHONE_NUMBER>",
+  "type": "image",
+  "image": {
+    "id": "<MEDIA_ID>", // Only if using uploaded media
+    "link": "<MEDIA_URL>", // Only if using hosted media
+    "caption": "<MEDIA_CAPTION_TEXT>"
+  }
+}
+```
+
+### Template message payload
+
+```json
+{
+  "provider_message_id": "msg_abc123",
+  "messaging_product": "whatsapp",
+  "recipient_type": "individual",
+  "to": "PHONE_NUMBER",
+  "type": "template",
+  "template": {
+    "name": "TEMPLATE_NAME",
+    "language": {
+      "code": "LANGUAGE_AND_LOCALE_CODE"
+    },
+    "components": [
+         <NAMED_PARAMETER_INPUT>
+         <POSITIONAL_PARAMETER_INPUT>
+    ]
+  }
+}
+```
+
+<Note>
+  If more than one WhatsApp channel is connected to your account, include `wa_business_id` in the
+  payload so Chatzy knows which number to send from. You can find it under **Channels** >
+  **WhatsApp**.
+</Note>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Webhooks" icon="webhook" href="/api-reference/whatsapp-crm-integration/webhooks">
+    Receive incoming messages and delivery status in your CRM.
+  </Card>
+  <Card title="Error codes" icon="triangle-alert" href="/api-reference/whatsapp-crm-integration/error-codes">
+    Every error code the API returns, with causes and fixes.
+  </Card>
+</CardGroup>

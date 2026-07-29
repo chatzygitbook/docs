@@ -1,0 +1,127 @@
+---
+title: "Webhooks"
+description: "Receive incoming WhatsApp messages and delivery status updates in your CRM"
+icon: "webhook"
+---
+
+Configure your CRM to receive incoming messages and delivery status through webhooks. Set the webhook URL in **Integrations** > **WhatsApp** > **Webhook Setup**, pick the events you want, and Chatzy pushes them to your endpoint.
+
+<Info>
+  Your webhook URL must accept `POST` requests and respond with HTTP `200`. Optional auth headers
+  configured in the app are sent with every request.
+</Info>
+
+Subscribable events: `sent`, `delivered`, `read`, `failed`, `new_message`.
+
+## Incoming message payload
+
+Chatzy sends every subscribed event to your webhook URL in this format:
+
+```bash
+curl -X POST "YOUR_WEBHOOK_URL" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <ID_TOKEN>" \ # auth headers if configured
+  -d '{
+    "event_type": "incoming_message",
+    "timestamp": "<UNIX_TIMESTAMP>",
+    "provider_message_id": null,
+    "from": "<USER_PHONE_NUMBER>",
+    "to": "<WABA_NUMBER>",
+    "messages": [{
+      "id": "<WHATSAPP_MESSAGE_ID>",
+      "type": "text",
+      "timestamp": "<WEBHOOK_SENT_TIMESTAMP>",
+      "text": {
+        "body": "Hi"
+      }
+    }]
+  }'
+```
+
+## Message status updates
+
+Track message delivery with real time status updates sent to your webhook:
+
+```json
+{
+  "event_type": "status_update",
+  "timestamp": "<UNIX_TIMESTAMP>",
+  "provider_message_id": "<PROVIDER_MESSAGE_ID>", // message id sent by your CRM
+  "status": {
+    "id": "<WHATSAPP_MESSAGE_ID>",
+    "status": "sent | delivered | read | failed",
+    "timestamp": "<WEBHOOK_SENT_TIMESTAMP>"
+  }
+}
+```
+
+| Status      | Meaning                                     |
+| ----------- | ------------------------------------------- |
+| `sent`      | Message left Chatzy and reached WhatsApp.   |
+| `delivered` | Message reached the recipient's device.     |
+| `read`      | Recipient opened the message.               |
+| `failed`    | Message could not be sent or delivered.     |
+
+When the status is `failed`, an `error` object is included:
+
+```json
+{
+  "event_type": "status_update",
+  "timestamp": "<UNIX_TIMESTAMP>",
+  "provider_message_id": "<PROVIDER_MESSAGE_ID>", // message id sent by your CRM
+  "status": {
+    "id": "<WHATSAPP_MESSAGE_ID>",
+    "status": "sent | delivered | read | failed",
+    "timestamp": "<WEBHOOK_SENT_TIMESTAMP>",
+    "error": { // will only be present if the status is "failed"
+      "code": <ERROR_CODE>,
+      "title": "<ERROR_TITLE>",
+      "message": "<ERROR_MESSAGE>",
+      "error_data": {
+        "details": "<ERROR_DETAILS>"
+      },
+      "href": "https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes/"
+    }
+  }
+}
+```
+
+## Get message content by WhatsApp message ID
+
+The webhook payload carries the WhatsApp message id. To fetch the full message content for that id, first generate an ID token with your Chatzy AI email and password:
+
+```bash
+curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/get_id_token" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_email_id": "user@example.com",
+    "password": "your_password_here"
+  }'
+```
+
+The response looks like this. The ID token is valid for **1 hour**:
+
+```json
+{
+  "data": {
+    "message": "Successfully retrieved ID token",
+    "idToken": "<ID_TOKEN>",
+    "expiryAt": "<EXPIRY_UNIX_TIMESTAMP>", // in milliseconds - 1 hour expiry
+    "refreshToken": "<REFRESH_TOKEN>", // store securely; POST it back as "refresh_token" to get a
+                                       // new idToken without a password or 2FA code
+    "refreshTokenExpiresAt": "<EXPIRY_UNIX_TIMESTAMP>" // in milliseconds - 30 day expiry
+  }
+}
+```
+
+<Tip>
+  For servers and cron jobs, use the `refresh_token` flow instead of storing a password. Full
+  details in [Get ID token](/api-reference/authentication/get-id-token).
+</Tip>
+
+Now use the ID token to fetch the message content:
+
+```bash
+curl -X GET "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/get_wa_msg_by_id?wa_message_id=YOUR_WA_MESSAGE_ID" \ # received from Incoming Message Payload
+  -H "Authorization: <ID_TOKEN>"
+```

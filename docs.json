@@ -31,7 +31,8 @@
                   "quick-start/use-cases/education"
                 ]
               },
-              "quick-start/functionalities"            ]
+              "quick-start/functionalities"
+            ]
           },
           {
             "group": " AI Agents",
@@ -130,7 +131,13 @@
               {
                 "group": "Supported Channels",
                 "icon": "satellite-dish",
-                "pages": ["channels/supported-channels/whatsapp", "channels/supported-channels/website", "channels/supported-channels/instagram", "channels/supported-channels/messenger","channels/supported-channels/linkedin"]
+                "pages": [
+                  "channels/supported-channels/whatsapp",
+                  "channels/supported-channels/website",
+                  "channels/supported-channels/instagram",
+                  "channels/supported-channels/messenger",
+                  "channels/supported-channels/linkedin"
+                ]
               }
             ]
           },
@@ -152,47 +159,49 @@
                     "group": "Actions",
                     "pages": [
                       "journey/studio/actions/overview",
-                      {"group": "Messaging",
+                      {
+                        "group": "Messaging",
                         "pages": [
-                      "journey/studio/actions/send-message",
-                      "journey/studio/actions/send-message-in-conversation",
-                    "journey/studio/actions/reply-to-instagram-comments",
-                  "journey/studio/actions/send-connection-requests",
-                "journey/studio/actions/send-email"] 
+                          "journey/studio/actions/send-message",
+                          "journey/studio/actions/send-message-in-conversation",
+                          "journey/studio/actions/reply-to-instagram-comments",
+                          "journey/studio/actions/send-connection-requests",
+                          "journey/studio/actions/send-email"
+                        ]
                       },
-                      {"group": "AI & Agent",
+                      {
+                        "group": "AI & Agent",
                         "pages": [
-                      "journey/studio/actions/assign-to-ai-agent",
-                      "journey/studio/actions/assign-to-voice-ai-agent",
-                      "journey/studio/actions/assign-to-human-agent",
-                      "journey/studio/actions/initiate-outbound-whatsapp-call",
-                      "journey/studio/actions/transfer-to-ai-agent",
-                      "journey/studio/actions/transfer-to-human-agent"] 
+                          "journey/studio/actions/assign-to-ai-agent",
+                          "journey/studio/actions/assign-to-voice-ai-agent",
+                          "journey/studio/actions/assign-to-human-agent",
+                          "journey/studio/actions/initiate-outbound-whatsapp-call",
+                          "journey/studio/actions/transfer-to-ai-agent",
+                          "journey/studio/actions/transfer-to-human-agent"
+                        ]
                       },
-                      {"group": "Contacts & conversations",
+                      {
+                        "group": "Contacts & conversations",
                         "pages": [
-                      "journey/studio/actions/update-contact",
-                      "journey/studio/actions/update-conversation",
-                      "journey/studio/actions/extract-entities",
-                    "journey/studio/actions/download-pdf"] 
+                          "journey/studio/actions/update-contact",
+                          "journey/studio/actions/update-conversation",
+                          "journey/studio/actions/extract-entities",
+                          "journey/studio/actions/download-pdf"
+                        ]
                       },
-                      
-                      {"group": "Flow control",
+
+                      {
+                        "group": "Flow control",
                         "pages": [
-                      "journey/studio/actions/wait",
-                      "journey/studio/actions/wait-until",
-                      "journey/studio/actions/conditions",
-                      "journey/studio/actions/remove-from-journey",
-                      "journey/studio/actions/trigger-journey"
-                    ] 
+                          "journey/studio/actions/wait",
+                          "journey/studio/actions/wait-until",
+                          "journey/studio/actions/conditions",
+                          "journey/studio/actions/remove-from-journey",
+                          "journey/studio/actions/trigger-journey"
+                        ]
                       },
-                      
-                      {"group": "Integrations",
-                        "pages": [
-                      "journey/studio/actions/execute-code",
-                      "journey/studio/actions/conversation-event",
-                      "journey/studio/actions/google-sheet"] 
-                      }
+
+                      { "group": "Integrations", "pages": ["journey/studio/actions/execute-code", "journey/studio/actions/conversation-event", "journey/studio/actions/google-sheet"] }
                     ]
                   }
                 ]
@@ -222,7 +231,13 @@
           {
             "group": "Message Templates",
             "icon": "file-text",
-            "pages": ["message-templates/overview", "message-templates/whatsapp-templates", "message-templates/messenger-templates", "message-templates/instagram-templates","message-templates/linkedin-templates"]
+            "pages": [
+              "message-templates/overview",
+              "message-templates/whatsapp-templates",
+              "message-templates/messenger-templates",
+              "message-templates/instagram-templates",
+              "message-templates/linkedin-templates"
+            ]
           },
           {
             "group": "Dashboard",
@@ -253,11 +268,9 @@
             ]
           },
           {
-            "group" :"META",
-            "icon" : "meta",
-            "pages": [
-              "meta/how-to-verify-meta-business-portfolio"
-            ]
+            "group": "META",
+            "icon": "meta",
+            "pages": ["meta/how-to-verify-meta-business-portfolio"]
           }
         ]
       },
@@ -301,6 +314,11 @@
             "group": "Authentication",
             "pages": ["api-reference/authentication/get-id-token"]
           },
+          {
+            "group": "WhatsApp CRM Integration",
+            "pages": ["api-reference/whatsapp-crm-integration/overview", "api-reference/whatsapp-crm-integration/webhooks", "api-reference/whatsapp-crm-integration/error-codes"]
+          },
+
           {
             "group": "Contact Conversations",
             "pages": ["api-reference/contact-conversations/get-contact-conversations", "api-reference/contact-conversations/get-messages-for-contact"]
