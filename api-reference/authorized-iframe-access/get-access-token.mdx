@@ -6,6 +6,8 @@ Securely generate short-lived `access_token` and long-lived `refresh_token` for 
 
 > ⚠️ **Important**: This endpoint **must be called from your server**, not from the client side. The `client_api_key` is sensitive and should never be exposed on the client side.
 
+The `client_api_key` is your **AI Agent Auth Key**. It is issued only by [Generate AI Agent Auth Key](/api-reference/authorized-iframe-access/generate-ai-agent-auth-key) and is shown once, at generation time — there is no page to look it up on later. If you don't have it, regenerate it there.
+
 Once you obtain the tokens, pass the `access_token` to the client-side where the iframe will be embedded.
 
 ### Embed URL for Iframe

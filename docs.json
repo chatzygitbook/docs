@@ -325,7 +325,11 @@
           },
           {
             "group": "Authorized iframe Access",
-            "pages": ["api-reference/authorized-iframe-access/get-access-token", "api-reference/authorized-iframe-access/get-new-access-token-from-refresh-token"]
+            "pages": [
+              "api-reference/authorized-iframe-access/generate-ai-agent-auth-key",
+              "api-reference/authorized-iframe-access/get-access-token",
+              "api-reference/authorized-iframe-access/get-new-access-token-from-refresh-token"
+            ]
           }
         ]
       }

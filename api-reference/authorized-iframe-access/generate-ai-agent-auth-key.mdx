@@ -1,0 +1,96 @@
+---
+openapi: post /generate_api_keys
+---
+
+Issue the **AI Agent Auth Key** — the `client_api_key` that every call to `/ai_agent/get_access_token` requires. Generate it once, store it in your server's secret store, and never ship it to a browser.
+
+> ⚠️ **The key is shown exactly once.** Chatzy only stores a hash of it, so this response is the only place the plaintext key ever appears. If you lose it, you cannot look it up — you must regenerate, which invalidates the old key.
+
+This is a **protected endpoint**. Authenticate it exactly like the other protected APIs, with the `idToken` from [`/get_id_token`](/api-reference/authentication/get-id-token):
+
+```http
+Authorization: <idToken>
+```
+
+The `user_email_id` in the body must be the account that `idToken` was issued for.
+
+### First-time generation
+
+Send `regenerate: false` (or omit it). A key is created only if the account doesn't already have one:
+
+```json
+{
+  "api_key_type": "ai_agent_auth_key",
+  "user_email_id": "user@example.com"
+}
+```
+
+```json
+{
+  "data": {
+    "message": "API key generated successfully",
+    "api_key": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
+  }
+}
+```
+
+If the account **already has a key**, nothing is changed and no key comes back — the existing key keeps working:
+
+```json
+{ "data": { "message": "API key already exists" } }
+```
+
+This makes the default call safe to retry: it can never silently rotate a key that your production servers are already using.
+
+### Regenerating (rotating) the key
+
+Send `regenerate: true` to force a brand-new key:
+
+```json
+{
+  "api_key_type": "ai_agent_auth_key",
+  "user_email_id": "user@example.com",
+  "regenerate": true
+}
+```
+
+> ⚠️ **Regeneration is immediate and irreversible.** The previous key stops working the moment the new one is issued. Any server still calling `/ai_agent/get_access_token` with the old key will fail with `Invalid Client API Key`.
+
+Rotate safely:
+
+1. Call this endpoint with `regenerate: true` and capture `api_key` from the response.
+2. Write it to your secret store and roll out your servers.
+3. Verify by calling `/ai_agent/get_access_token` with the new key.
+
+Tokens already in flight are unaffected — `access_token` and `refresh_token` are signed JWTs and are not re-checked against the auth key. Live iframe sessions keep working, and `/ai_agent/refresh_token` keeps renewing them, until their own expiry. Only **new** `/ai_agent/get_access_token` calls need the new key.
+
+### Example
+
+```bash
+curl -X POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/generate_api_keys \
+  -H "Authorization: <idToken>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "api_key_type": "ai_agent_auth_key",
+    "user_email_id": "user@example.com",
+    "regenerate": false
+  }'
+```
+
+### Errors
+
+Errors come back as `{ "error": { "error": "<message>" } }`.
+
+| Message | Cause |
+| --- | --- |
+| `Unauthorized` / `401` | Missing, malformed or expired `idToken`. Get a fresh one from `/get_id_token`. |
+| `Invalid request data: ...` | Body failed validation — `api_key_type` must be exactly `ai_agent_auth_key`, and `user_email_id` must be a valid email. |
+| `User not found` | No Chatzy account exists for `user_email_id`. |
+
+### Handling the key
+
+- Store it server-side only — a secret manager or an encrypted environment variable. Never commit it, never send it to the browser, never put it in the iframe URL.
+- Treat it as account-wide: one AI Agent Auth Key covers **all** AI Agents on the account, not one `chatbot_id`.
+- Rotate it immediately if it is ever exposed.
+
+Next: use the key to mint iframe tokens with [Get Access Token](/api-reference/authorized-iframe-access/get-access-token).

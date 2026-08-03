@@ -1143,6 +1143,75 @@
         }
       }
     },
+    "/generate_api_keys": {
+      "post": {
+        "summary": "Generate AI Agent Auth Key",
+        "description": "Issues the AI Agent Auth Key (`client_api_key`) used by `POST /ai_agent/get_access_token`. The plaintext key is returned **once, in this response only** - Chatzy stores nothing but a hash of it. If you lose it, call this endpoint again with `regenerate: true`.\n\nThis is a protected endpoint - send the `idToken` from `POST /get_id_token` in the `Authorization` header.",
+        "tags": ["Authorized iframe Access"],
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["api_key_type", "user_email_id"],
+                "properties": {
+                  "api_key_type": {
+                    "type": "string",
+                    "enum": ["ai_agent_auth_key"],
+                    "description": "Type of key to issue. Only `ai_agent_auth_key` is supported.",
+                    "example": "ai_agent_auth_key"
+                  },
+                  "user_email_id": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Email of the Chatzy account the key belongs to. Must match the account the `idToken` was issued for.",
+                    "example": "user@example.com"
+                  },
+                  "regenerate": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "`false` (default) - issue a key only if the account has none; if a key already exists the response says so and returns no key. `true` - always issue a new key and **immediately invalidate the previous one**.",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Key generated, or an existing key was left untouched.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "`API key generated successfully` when a new key was issued, or `API key already exists` when a key was already present and `regenerate` was `false`.",
+                          "example": "API key generated successfully"
+                        },
+                        "api_key": {
+                          "type": "string",
+                          "description": "The plaintext AI Agent Auth Key. Returned **only** when a new key was issued - it is never retrievable again. Absent from the `API key already exists` response.",
+                          "example": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
+                        }
+                      },
+                      "required": ["message"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ai_agent/get_access_token": {
       "post": {
         "summary": "Get Access Token",
@@ -1166,8 +1235,8 @@
                   },
                   "client_api_key": {
                     "type": "string",
-                    "description": "AI Agent Auth Key - Can be retrieved from https://app.chatzy.ai/profile",
-                    "example": "ak-xxxxxxxxxxx"
+                    "description": "AI Agent Auth Key. Issued only by `POST /generate_api_keys` with `api_key_type: \"ai_agent_auth_key\"` - see Generate AI Agent Auth Key. Keep it server-side.",
+                    "example": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
                   }
                 }
               }
