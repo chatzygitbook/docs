@@ -57,7 +57,6 @@
                       "ai-agents/conversational-ai-agent/settings/advance-settings",
                       "ai-agents/conversational-ai-agent/settings/external-apis",
                       "ai-agents/conversational-ai-agent/settings/tools",
-                      "ai-agents/conversational-ai-agent/settings/moderation",
                       "ai-agents/conversational-ai-agent/settings/utilities"
                     ]
                   },
