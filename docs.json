@@ -148,11 +148,13 @@
               "journey/getting-started",
               "journey/dashboard",
               "journey/runs",
+              
               {
                 "group": "Studio",
                 "icon": "external-link",
                 "pages": [
                   "journey/studio/overview",
+                  "journey/variables",
                   "journey/studio/triggers",
                   {
                     "group": "Actions",

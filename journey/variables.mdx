@@ -1,0 +1,235 @@
+Variables allow you to pass data between different actions in a Journey. They can be used to personalize messages, create conditions, execute code, update records, and more.
+
+The variables available in a Journey can come from different sources, such as contact details, inbound webhooks, extracted entities, and previous Journey actions.
+
+---
+
+## Contact Variables
+
+Contact variables contain information associated with the current contact.
+
+Common contact variables include:
+
+```text
+{{contact.first_name}}
+{{contact.last_name}}
+{{contact.phone_number}}
+{{contact.email}}
+{{contact.instagram_id}}
+```
+
+These variables can be used to personalize messages or pass contact information to other actions.
+
+---
+
+## Contact Custom Attributes
+
+Contacts can have custom attributes containing additional information.
+
+Custom attributes can be referenced using:
+
+```text
+{{contact.attributes.<attribute_name>}}
+```
+
+For example:
+
+```text
+{{contact.attributes.company}}
+{{contact.attributes.plan}}
+{{contact.attributes.city}}
+```
+
+Replace `<attribute_name>` with the exact name of the custom attribute.
+
+---
+
+## Inbound Webhook Variables
+
+When a Journey is triggered using an **Inbound Webhook**, the data received in the webhook can be accessed using:
+
+```text
+{{inbound_webhook.<field_name>}}
+```
+
+For example, an inbound webhook can contain the following payload:
+
+```json
+{
+  "inbound_webhook": {
+    "conversation_id": "a7e2ae61-0c1e-4d75-aa4f-cd556d456f764",
+    "variables": {
+      "name": "Avi",
+      "email": "avi@chatzy.ai",
+      "workspace": "Chatzy AI",
+      "visit_day": "2026-08-15",
+      "visit_time": "2026-08-15T15:00:00+05:30"
+    }
+  },
+  "conversation_id": "a7e2ae61-0c1e-4d75-aa4f-cd556d456f764"
+}
+```
+
+Values directly available under `inbound_webhook` can be referenced using:
+
+```text
+{{inbound_webhook.conversation_id}}
+```
+
+> **Tip:** Use the exact field name provided in the inbound webhook payload.
+
+### Nested Inbound Webhook Variables
+
+In the example above, the customer-specific data is stored inside the `variables` object within `inbound_webhook`.
+
+You can access these nested values using:
+
+```text
+{{inbound_webhook.variables.name}}
+{{inbound_webhook.variables.email}}
+{{inbound_webhook.variables.workspace}}
+{{inbound_webhook.variables.visit_day}}
+{{inbound_webhook.variables.visit_time}}
+```
+
+For example:
+
+```text
+{{inbound_webhook.variables.name}}
+```
+
+returns:
+
+```text
+Avi
+```
+
+
+The same approach can be used for any other fields inside the nested `variables` object.
+
+> **Tip:** When working with nested webhook data, follow the structure of the JSON payload. In this example, `name` is inside `variables`, which is inside `inbound_webhook`, so the complete reference is `{{inbound_webhook.variables.name}}`.
+
+---
+
+## Extracted Entity Variables
+
+When an **Extract Entities** action is used, the extracted values can be accessed using:
+
+```text
+{{extracted_entities.<entity_name>}}
+```
+
+For example:
+
+```text
+{{extracted_entities.budget}}
+{{extracted_entities.quantity}}
+{{extracted_entities.phone}}
+{{extracted_entities.summary}}
+```
+
+These variables are useful when you want to use structured information extracted from a user's conversation in later Journey actions.
+
+---
+
+## Variables from Previous Journey Actions
+
+Some Journey actions can create or return values that can be used by subsequent actions.
+
+These variables are dynamically available to later steps in the Journey.
+
+For example, a value returned by an earlier action can be used in a later:
+
+- Send Message action
+- Condition action
+- Webhook/API request
+- Google Sheets action
+- Other supported Journey actions
+
+The exact variables available depend on the actions configured in your Journey.
+
+---
+
+## Using Variables in Conditions
+
+The **Condition** action allows you to create logical branches in your Journey. It evaluates an expression and determines which path the Journey should follow.
+
+Unlike standard variable interpolation, Conditions use the following syntax to reference variables:
+
+```text
+variables["variable_name"]
+```
+
+For example:
+
+```text
+variables["lead_status"] == "Active"
+```
+
+You can use comparison operators to evaluate values:
+
+```text
+variables["lead_status"] == "Prospect"
+```
+
+```text
+variables["lead_status"] != "Inactive"
+```
+
+```text
+variables["order_amount"] > 5000
+```
+
+```text
+variables["quantity"] >= 2
+```
+
+Conditions can be combined with **Add Condition** to create multiple branches.
+
+The conditions are evaluated **from top to bottom**, and the Journey follows the branch whose condition is satisfied.
+
+> **Important:** The Condition action uses `variables["..."]` syntax. Do not use the `{{...}}` interpolation syntax when writing a Condition expression.
+
+---
+
+## Nested Variables in Conditions
+
+Conditions can also work with nested data.
+
+For example, consider the following **Inbound Webhook** payload:
+
+```json
+{
+  "inbound_webhook": {
+    "conversation_id": "a7e2ae61-0c1e-4d75-aa4f-cd556d456f764",
+    "variables": {
+      "name": "Avi",
+      "email": "avi@chatzy.ai",
+      "workspace": "Chatzy AI",
+      "visit_day": "2026-08-15",
+      "visit_time": "2026-08-15T15:00:00+05:30"
+    }
+  },
+  "conversation_id": "a7e2ae61-0c1e-4d75-aa4f-cd556d456f764"
+}
+```
+
+Here, `workspace` is nested inside:
+
+```text
+inbound_webhook → variables → workspace
+```
+
+To use this value in a **Condition**, access each level of the object using `["key_name"]`:
+
+```text
+variables["inbound_webhook"]["variables"]["workspace"] == "Chatzy AI"
+```
+
+
+
+This approach can be used for any nested object or dictionary available in the Journey.
+
+> **Tip:** When creating a Condition for nested data, follow the complete structure of the payload and reference each nested key using `["key_name"]`.
+
+---
