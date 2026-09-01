@@ -1,15 +1,133 @@
 
-
 The **Condition** action allows you to create a logical branch in your journey. This is the "if/else" of your conversational flow, enabling you to send a user down a specific path based on whether a certain condition is met.
+
 <Frame>
-  <img src="/journey/studio/actions/conditions.png" alt="wa1" className="rounded-lg" />
+  <img src="/journey/studio/actions/conditions.png" alt="Condition action" className="rounded-lg" />
 </Frame>
+
 #### Configuration Fields
 
-- **Condition**: This is where you write the rule that the chatbot will evaluate. You can use this field to check a user's input, the value of a variable, or the presence of a tag.  
-- **Add Condition**: This button lets you add more conditions to create more complex branching logic. The chatbot will check each condition in order, from top to bottom.
+- **Condition**: This is where you write the rule that the chatbot will evaluate. You can use this field to check a user's input, the value of a variable, or the presence of a tag.
+
+- **Add Condition**: This button lets you add more conditions to create more complex branching logic. The chatbot evaluates the conditions in order, from top to bottom.
+
 <Frame>
-  <img src="/journey/studio/actions/conditions2.png" alt="wa1" className="rounded-lg" />
+  <img src="/journey/studio/actions/conditions2.png" alt="Condition configuration" className="rounded-lg" />
 </Frame>
 
-You can use these branches to create custom flows.
+### Using Variables
+
+You can use variables available in your journey when creating conditions.
+
+Variables are referenced using the following format:
+
+```text
+variables["variable_name"]
+```
+
+For example:
+
+```text
+variables["lead_status"] == "Prospect"
+```
+
+You can use variables from different sources, including values captured earlier in the journey, inbound webhook data, extracted entities, and tool call outputs.
+
+### Examples
+
+Check whether a lead is a prospect:
+
+```text
+variables["lead_status"] == "Prospect"
+```
+
+Check whether a lead is active:
+
+```text
+variables["lead_status"] == "Active"
+```
+
+Check whether a lead is not inactive:
+
+```text
+variables["lead_status"] != "Inactive"
+```
+
+You can also use comparison operators depending on the type of value you are evaluating.
+
+```text
+variables["order_amount"] > 5000
+```
+
+```text
+variables["quantity"] >= 2
+```
+### Working with Dictionaries
+
+If a variable contains a dictionary (nested object), you can access values inside it using additional keys.
+
+For example, if the variable contains:
+
+```json
+{
+  "customer": {
+    "name": "John",
+    "city": "Mumbai",
+    "status": "Active"
+  }
+}
+```
+
+You can access the nested values in a condition using:
+
+```text
+variables["customer"]["city"] == "Mumbai"
+```
+
+or:
+
+```text
+variables["customer"]["status"] == "Active"
+```
+
+You can also check deeper nested values. For example:
+
+```text
+variables["customer"]["address"]["city"] == "Mumbai"
+```
+
+This is useful when a variable contains structured data returned by a **tool call**, **inbound webhook**, or another journey action.
+
+> **Tip:** Use the exact key names from the dictionary when accessing nested values. Each level of the dictionary is accessed using `["key_name"]`.
+
+### Multiple Conditions
+
+Click **Add Condition** to create multiple branches.
+
+For example:
+
+```text
+variables["lead_status"] == "Prospect"
+```
+
+```text
+variables["lead_status"] == "Inactive"
+```
+
+```text
+variables["lead_status"] == "Active"
+```
+
+The conditions are evaluated **from top to bottom**. The journey follows the branch whose condition is satisfied.
+
+You can also use:
+
+```text
+True
+```
+
+as a default/fallback condition for a branch that should be executed when the previous conditions are not satisfied.
+
+> **Tip:** Use the exact variable name available in your journey when writing a condition. The variable context in the Condition field can help you identify the variables available to use.
+
+You can use these branches to create custom flows based on the data available during a journey.
