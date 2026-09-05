@@ -4,14 +4,14 @@ title: Overview
 
 Interact with the conversational AI agent using this **3-step process**:
 
-### 1. **Start Conversation** (`/init_conversation`)
+## 1. **Start Conversation** (`/init_conversation`)
 
 - **Purpose**: Create a new conversation session.
 - **Required**:
   - `chatbot_id` -> Get this from **Conversational AI Agents** > open your agent's menu (⋮ / hamburger) > **Copy Agent ID**.
 - **Response**: Returns a `conversation_id` (used in later steps) and a intorductory message (if enabled).
 
-### 2. **Send Message** (`/get_inference`)
+## 2. **Send Message** (`/get_inference`)
 
 - **Purpose**: Send a user message to the AI.
 - **Required**:
@@ -20,7 +20,7 @@ Interact with the conversational AI agent using this **3-step process**:
   - `message` (your text)
 - **Response**: Sends user message for processing and returns a `temp_token`.
 
-### 3. **Stream Reply** (`/get-response`)
+## 3. **Stream Reply** (`/get-response`)
 
 - **Purpose**: Get the AI's response in real time via SSE (Server-Sent Events).
 - **Required**:

@@ -5,7 +5,7 @@ The **Condition** action allows you to create a logical branch in your journey. 
   <img src="/journey/studio/actions/conditions.png" alt="Condition action" className="rounded-lg" />
 </Frame>
 
-#### Configuration Fields
+## Configuration Fields
 
 - **Condition**: This is where you write the rule that the chatbot will evaluate. You can use this field to check a user's input, the value of a variable, or the presence of a tag.
 
@@ -15,7 +15,7 @@ The **Condition** action allows you to create a logical branch in your journey. 
   <img src="/journey/studio/actions/conditions2.png" alt="Condition configuration" className="rounded-lg" />
 </Frame>
 
-### Using Variables
+## Using Variables
 
 You can use variables available in your journey when creating conditions.
 
@@ -33,7 +33,7 @@ variables["lead_status"] == "Prospect"
 
 You can use variables from different sources, including values captured earlier in the journey, inbound webhook data, extracted entities, and tool call outputs.
 
-### Examples
+## Examples
 
 Check whether a lead is a prospect:
 
@@ -62,7 +62,7 @@ variables["order_amount"] > 5000
 ```text
 variables["quantity"] >= 2
 ```
-### Working with Dictionaries
+## Working with Dictionaries
 
 If a variable contains a dictionary (nested object), you can access values inside it using additional keys.
 
@@ -100,7 +100,7 @@ This is useful when a variable contains structured data returned by a **tool cal
 
 > **Tip:** Use the exact key names from the dictionary when accessing nested values. Each level of the dictionary is accessed using `["key_name"]`.
 
-### Multiple Conditions
+## Multiple Conditions
 
 Click **Add Condition** to create multiple branches.
 

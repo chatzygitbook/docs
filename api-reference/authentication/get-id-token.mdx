@@ -6,7 +6,7 @@ Authenticates a user with their email and password and returns a JWT `idToken`.
 
 This `idToken` must be included in the `Authorization` header when calling **protected APIs**.
 
-### 🛡️ Authorization Header Format:
+## 🛡️ Authorization Header Format:
 
 ```http
 Authorization: <idToken>
@@ -14,7 +14,7 @@ Authorization: <idToken>
 
 Without a valid token, protected routes will respond with a 401 Unauthorized error. This token expires after **1 hour** after which you must call `/get_id_token` again to obtain a new one.
 
-### 🔐 Accounts with two-factor authentication
+## 🔐 Accounts with two-factor authentication
 
 If the account has 2FA enabled, email and password alone are not enough — the request responds `401` with:
 

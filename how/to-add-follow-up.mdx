@@ -14,13 +14,13 @@ This guide explains how to set up a follow-up message on WhatsApp (or other chan
 
 ---
 
-### Business Use Case
+## Business Use Case
 
 Suppose you want to greet a new lead with a welcome template and then follow up 10 minutes later by asking if they’d like a demo. This sequence ensures your follow-up lands at the right time and in the same conversation thread.
 
 ---
 
-### Step 1: Create a Journey
+## Step 1: Create a Journey
 
 1. Go to **Journeys** in the left menu.  
 2. Click **Create Journey**.  
@@ -28,21 +28,21 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 
 ---
 
-### Step 2: Add a Trigger
+## Step 2: Add a Trigger
 
 1. Add a **Trigger** (e.g., **Conversation Created**, **Contact Added to List**, or **Inbound Webhook**).  
 2. Select the channel (WhatsApp, Instagram, Messenger) and configure any conditions as needed.  
 
 ---
 
-### Step 3: Add the Assign to AI agent Action
+## Step 3: Add the Assign to AI agent Action
 
 1. Click the **+** button → **Action → Assign to AI agent → Select the AI agent **.  
 
 
 ---
 
-### Step 4: Add a Wait-until Step
+## Step 4: Add a Wait-until Step
 
 1. After the Assign to AI Agent step, click **+** → **Action → Wait-until**.  
 2. Set a wait duration (e.g., **10 minutes**) or a specific time that fits your use case. Select event as **Last message is older than duration**
@@ -51,7 +51,7 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 
 ---
 
-### Step 5: Add the Send Message in Conversation Action
+## Step 5: Add the Send Message in Conversation Action
 
 1. After the Wait step, click **+** → **Action → Send Message in Conversation**.  
 2. Configure the action:  
@@ -66,7 +66,7 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 
 ---
 
-### Step 6: Publish and Test
+## Step 6: Publish and Test
 
 1. Click **Save** → **Publish**.  
 2. Test the flow:  
@@ -78,7 +78,7 @@ Suppose you want to greet a new lead with a welcome template and then follow up 
 
 ---
 
-### Tips & Notes
+## Tips & Notes
 
 - For inbound webhooks, use:  
   - **Phone** → `{{inbound_webhook.inbound_webhook.phone_number}}`  

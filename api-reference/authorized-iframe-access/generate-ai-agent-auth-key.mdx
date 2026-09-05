@@ -14,7 +14,7 @@ Authorization: <idToken>
 
 The `user_email_id` in the body must be the account that `idToken` was issued for.
 
-### First-time generation
+## First-time generation
 
 Send `regenerate: false` (or omit it). A key is created only if the account doesn't already have one:
 
@@ -42,7 +42,7 @@ If the account **already has a key**, nothing is changed and no key comes back �
 
 This makes the default call safe to retry: it can never silently rotate a key that your production servers are already using.
 
-### Regenerating (rotating) the key
+## Regenerating (rotating) the key
 
 Send `regenerate: true` to force a brand-new key:
 
@@ -64,7 +64,7 @@ Rotate safely:
 
 Tokens already in flight are unaffected — `access_token` and `refresh_token` are signed JWTs and are not re-checked against the auth key. Live iframe sessions keep working, and `/ai_agent/refresh_token` keeps renewing them, until their own expiry. Only **new** `/ai_agent/get_access_token` calls need the new key.
 
-### Example
+## Example
 
 ```bash
 curl -X POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/generate_api_keys \
@@ -77,7 +77,7 @@ curl -X POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/generat
   }'
 ```
 
-### Errors
+## Errors
 
 Errors come back as `{ "error": { "error": "<message>" } }`.
 
@@ -87,7 +87,7 @@ Errors come back as `{ "error": { "error": "<message>" } }`.
 | `Invalid request data: ...` | Body failed validation — `api_key_type` must be exactly `ai_agent_auth_key`, and `user_email_id` must be a valid email. |
 | `User not found` | No Chatzy account exists for `user_email_id`. |
 
-### Handling the key
+## Handling the key
 
 - Store it server-side only — a secret manager or an encrypted environment variable. Never commit it, never send it to the browser, never put it in the iframe URL.
 - Treat it as account-wide: one AI Agent Auth Key covers **all** AI Agents on the account, not one `chatbot_id`.
