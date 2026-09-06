@@ -10,7 +10,7 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 
 ---
 
-### Requirements
+## Requirements
 
 
 - A **Conversational AI Agent** (to handle natural conversation).  
@@ -18,7 +18,7 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 
 ---
 
-### Step 1: Create a Journey and Webhook
+## Step 1: Create a Journey and Webhook
 
 1. Navigate to **Journeys** in the left menu.  
 2. Click **Create Journey** → choose **Blank Journey**.  
@@ -29,7 +29,7 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 > It only works when the Contact identifier is Conversation ID
 ---
 
-### Step 2: Configure Journey to Handle the Webhook
+## Step 2: Configure Journey to Handle the Webhook
 
 1. In the journey, click **+ Add** → **Action → Transfer to AI Agent**.  
 2. Select the **AI Agent** you want to transfer the conversation to.  
@@ -37,7 +37,7 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 
 ---
 
-### Step 3: Configure the Conversational AI Agent
+## Step 3: Configure the Conversational AI Agent
 
 1. Open your **Conversational AI Agent**.  
 2. Go to **Settings → Tools**.  
@@ -46,7 +46,7 @@ The transfer relies on configuring both a **Journey** and the **Conversational A
 
 ---
 
-### Step 4: Update the Base Prompt  
+## Step 4: Update the Base Prompt  
 
 Inside your agent’s **Base Prompt**, define **when** to trigger the webhook.  
 Use the following instruction format:  
@@ -64,12 +64,12 @@ This ensures the AI knows exactly when to trigger the Journey webhook.
 
 ---
 
-### End-to-End Example
+## End-to-End Example
 
-#### Scenario  
+### Scenario  
 You run a WhatsApp chatbot that first **qualifies leads**. Once a lead is successfully qualified, the chatbot should transfer the conversation to a **Booking AI Agent** to complete the scheduling process.
 
-#### Setup  
+### Setup  
 
 1. **Create Journey**  
    - Trigger → **Inbound Webhook**  

@@ -2,7 +2,7 @@
 title: Overview
 ---
 
-### To upload a document, the process involves two steps:
+## To upload a document, the process involves two steps:
 
 1. **Generate a pre-signed upload URL**
 
@@ -45,11 +45,11 @@ Example response:
 - **If the upload succeeds, AWS S3 responds with HTTP 204 (No Content)**.
 - Any other response indicates an error, handle it accordingly.
 
-![audio_input](/images/upload_documents_1.png)
+![Chat input uploading a document attachment](/images/upload_documents_1.png)
 
 ---
 
-### Using Uploaded Documents in [`/get_inference`](/api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent)
+## Using Uploaded Documents in [`/get_inference`](/api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent)
 
 Once documents are uploaded, they should be passed as part of the documents field in the [`/get_inference`](/api-reference/conversational-ai-agent-interactions/send-message-to-conversational-ai-agent) API payload.
 
