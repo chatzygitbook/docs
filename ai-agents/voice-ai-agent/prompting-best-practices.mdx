@@ -1,0 +1,226 @@
+
+A voice prompt is written for the **ear**. Everything the agent writes is turned into speech, so your prompt must control **language, script, numbers, pacing and call flow** — not just content. This page shows how to plan, write and check a Base Prompt for phone calls.
+
+---
+
+## Using the Prompt Boxes
+
+The [Base Prompt](/ai-agents/voice-ai-agent/settings/base-prompt) page explains the **Introductory Message** and **Prompt** boxes. Keep these two rules in mind when you fill them:
+
+* The character limit is shown above the Prompt box and depends on **Max Tokens** in [Advance Settings](/ai-agents/voice-ai-agent/settings/advance-settings). Keep the prompt for behaviour and move long facts to the [Data](/ai-agents/voice-ai-agent/data) tab.
+* Keep **End of Call** turned **On**. It adds closing instructions after your prompt on every call, so calls end cleanly instead of hitting the duration limit.
+
+> 💡 **Tip:** If your call system already greets the caller and confirms the right person (for example a Journey that dials and introduces the call), turn the **Introductory Message** off and tell the prompt **not to greet again or repeat the caller's name**.
+
+---
+
+## Plan Before You Write
+
+Answer these questions first. Each answer becomes a section of the prompt.
+
+1. **Use case and direction** - Support, sales qualification, feedback, booking or lead follow-up? Inbound or outbound?
+2. **Identity** - Agent name, gender (this sets verb forms in Hindi and similar languages) and the company it speaks for.
+3. **Opening** - Does the call system already greet the caller? If not, write an Introductory Message.
+4. **Languages** - Which language to start in, and which it may switch to (Hindi, English, Hinglish, a regional language).
+5. **Business facts** - The exact prices, plans, hours and policies the agent may state, with currency.
+6. **What you already know** - Name, phone, email, past activity. The agent must **never ask for information already on file**.
+7. **Booking** - Should it book through Cal.com?
+8. **Contact capture** - Should it collect and save name, phone or email?
+9. **Outcome and handoff** - What counts as a successful call, what must happen before the call ends, and when to hand off to a human.
+
+---
+
+## Sections Every Voice Prompt Needs
+
+Use Markdown headings (`##`, `###`) for every section so the agent can follow the structure.
+
+| Section | What it covers |
+| --- | --- |
+| **Identity** | Name, company, who it is talking to. If asked whether it is an AI, it answers honestly |
+| **Objectives** | Short numbered goals. Every objective must have a matching step in the Call Flow |
+| **Voice Output Rules** | How replies sound on a call (see below) |
+| **Numbers and Symbols** | Every number written as words (see below) |
+| **Language Rules** | Starting language, switching, script and gender agreement |
+| **Call Flow** | Numbered steps with an example line for each |
+| **Qualification / Pricing** | Only if the use case needs them |
+| **Common Situations** | Busy, not interested, upset, off-topic, unknown answer |
+| **Closing** | When the call may end and a one-line summary |
+
+---
+
+### Voice Output Rules
+
+Always include these in the prompt:
+
+* Reply in **one to three short sentences**.
+* Ask **one question at a time**, then wait.
+* **No bullets, numbered lists, headings, emojis or markdown** in replies.
+* Speak like a person on a call, not like a document.
+* If interrupted, stop, listen and respond — don't restart or repeat.
+* Not scripted, not a presentation, not a hard sales call.
+* Example lines show intent and tone — adapt them, don't read them word for word.
+
+---
+
+### Numbers and Symbols
+
+The voice reads exactly what the agent writes, so digits and symbols often sound wrong.
+
+* Write **every number as words**, never digits.
+* **English** replies use English words: *"three thousand four hundred and ninety-nine rupees per month"*.
+* **Hindi or Hinglish** replies use Hindi words in Devanagari: *"तीन हज़ार चार सौ निन्यानवे रुपये per month"*.
+* No currency symbols (₹, $), no commas in numbers, no "k" or "/month" — say the currency and "per month" in words.
+* Read **phone numbers and codes one digit at a time**.
+* When repeating a number the caller said, say it back in words.
+
+---
+
+### Language Rules
+
+Add these when more than one language is allowed:
+
+* State the **starting language**. When the caller answers in another allowed language, switch fully; a mixed-language caller gets a mixed reply.
+* **Never reply in a language outside the allowed list.**
+* Write **Hindi in Devanagari** even if the transcript arrives in Roman Hindi. Keep English words, brand names, product terms and URLs in Roman script.
+* List the **product terms never to translate** (your brand, plan names, feature names).
+* Use simple everyday words, not formal vocabulary.
+* Match **verb forms to the agent's gender** — a female persona says *"मैं समझ गई"*, *"मैं बात कर रही हूँ"*.
+* If the agent can't recognise the language, treat it as an accent or audio issue: ask the caller to repeat, then say which languages it understands. Never guess.
+
+---
+
+### Call Flow
+
+Write numbered steps with one example line per step (in each language you support). Include:
+
+1. **Opening** - who you are and why you're calling (no repeat greeting if the system already greeted).
+2. **Wrong person** - if the caller isn't the right person or doesn't recognise the company: apologise, thank and end.
+3. **Understanding the need** - one clarifying question at a time when an answer is vague; never assume.
+4. **Internal mappings** - for example symptom → cause or need → plan, marked *"for your understanding only; do not explain these in detail"*.
+5. **The key action** - the offer, booking or resolution, with a rule that **the call cannot end before it has been made**.
+6. **Not interested or wants to do it themselves** - don't push; thank and close.
+7. **Tool triggers as mid-call events** - for example *"When the caller agrees to a time, call `book_appointment`."*
+
+---
+
+### Qualification and Pricing
+
+**Qualifying leads**
+
+* Ask only the relevant questions, one at a time.
+* Probe a vague answer with **one** short follow-up, then move on.
+* Stop once the picture is clear. Never re-ask what was answered or is already on file.
+* Close with what happens next, without promising a callback you can't guarantee.
+
+**Talking about price**
+
+* Never bring up pricing first — understand the need first.
+* Recommend **one option** and give only its price, and say whether taxes are extra.
+* All amounts in words. State the default currency; mention other currencies only if their prices are in the prompt.
+* Never convert currencies or calculate a customer's bill.
+
+---
+
+### Common Situations
+
+Give the agent an example line for each:
+
+| Situation | What the agent should do |
+| --- | --- |
+| Caller is happy | Thank them and move to the next step |
+| Caller is busy | Ask for two minutes before offering another time |
+| Not interested | Don't push; thank them and close |
+| Frustrated or upset | Acknowledge in one sentence, don't argue, move to a next step or transfer |
+| Unrelated question | Answer briefly if it can, then return to the goal |
+| Doesn't know the answer | Say so honestly and offer a follow-up or transfer |
+
+Always add: **never invent features, model names, integrations, limits, prices or timelines.**
+
+---
+
+## Tools You Can Call From the Prompt
+
+Type `/` in the prompt to insert a tool, and describe the **mid-call moment** that triggers it — for example *"When the caller confirms a time, call `book_appointment`."* The Cal.com tools and Trigger Journey are set up in [Tools](/ai-agents/voice-ai-agent/settings/tools). Two contact tools are also available:
+
+| Tool | Call it when |
+| --- | --- |
+| `get_contact_details` | You need information already on file for this contact |
+| `save_details` | The caller has just given a name, phone or email |
+
+> **Note:** WhatsApp formats (`wa_*`) are for chat agents and never apply to Voice AI Agents.
+
+---
+
+## Matching Settings to Your Prompt
+
+Your prompt and settings must agree. The settings themselves are explained in [Voice](/ai-agents/voice-ai-agent/settings/voice) and [Engine](/ai-agents/voice-ai-agent/settings/engine); use this to pick values:
+
+| If your prompt… | Set |
+| --- | --- |
+| Lets callers mix Hindi and English | **Language → English + Hindi** |
+| Must handle callers whose language you don't know | **Language → India Multilingual** |
+| Uses one regional language only | That single language, for better recognition |
+| Gives the agent a gender | A voice of the same gender — test it with **Play Sample** using your real greeting |
+| Asks callers to look up order IDs or dates | A longer **Check in after** time in Engine and silence timeout in [Telephony](/ai-agents/voice-ai-agent/settings/telephony) |
+| Books appointments | **Include Date & Time Context** in [Utilities](/ai-agents/voice-ai-agent/settings/utilities) |
+| Collects new callers you'll contact again | **Convert Leads to Contacts** in Utilities |
+
+> ⚙️ **Best Practice:** Test every prompt change in the [Playground](/ai-agents/voice-ai-agent/playground) with a real phone call, and change one thing at a time.
+
+---
+
+## Example Prompt
+
+An outbound appointment-booking agent, starting in English and allowed to switch to Hindi.
+
+```markdown
+## Identity
+You are Priya, a voice assistant calling from Avinashwarale Clinic. You speak with patients who asked for a callback. If asked whether you are an AI, say yes honestly.
+
+## Objectives
+1. Confirm you are speaking with the right person.
+2. Understand what they need help with.
+3. Book a consultation slot.
+
+## Voice Output Rules
+- One to three short sentences per reply. One question at a time, then wait.
+- No bullets, lists, headings, emojis or markdown in replies.
+- If interrupted, stop and listen. Do not restart.
+
+## Numbers and Symbols
+- Write every number as words. English: "five hundred rupees". Hindi: "पाँच सौ रुपये".
+- No currency symbols or digits. Read phone numbers one digit at a time.
+
+## Language Rules
+- Start in English. If the caller replies in Hindi, switch fully to Hindi in Devanagari.
+- Only English or Hindi. Keep "Avinashwarale" and doctor names in Roman script.
+- You are female: "मैं समझ गई", "मैं बुक कर रही हूँ".
+
+## Call Flow
+1. Opening: "Hi, this is Priya from Avinashwarale Clinic, calling about your consultation request. Is this a good time?"
+2. Wrong person: apologise, thank them and end the call.
+3. Need: ask what they would like to consult about. One question at a time.
+4. Booking: when they want to book, call check_availability_of_slots and offer two times. When they confirm a time, call book_appointment and read the date and time back in words.
+5. Do not end the call before offering a booking.
+6. If not interested: thank them and close politely.
+
+## Common Situations
+- Busy: "No problem, could I have just two minutes?" If not, offer another time.
+- Upset: acknowledge in one sentence and offer to connect them to the clinic team.
+- Never invent prices, doctors, timings or services.
+
+## Closing
+After a booking or a clear no, summarise in one line and thank them.
+```
+
+---
+
+## Self-Check Before You Publish
+
+- [ ] Every number in example lines is written as words — no ₹, $ or digits
+- [ ] Every Hindi line is in Devanagari; English terms stay in Roman script
+- [ ] Every section has a Markdown heading
+- [ ] Every objective is reached by a step in the Call Flow
+- [ ] Nothing points to content that isn't in the prompt (e.g. "see the dollar prices below" with none listed)
+- [ ] No question asks for information already on file
+- [ ] The prompt fits within the character limit shown above the Prompt box — move long facts to the [Data](/ai-agents/voice-ai-agent/data) tab

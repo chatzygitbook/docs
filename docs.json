@@ -100,6 +100,7 @@
                 "icon": "speech",
                 "pages": [
                   "ai-agents/voice-ai-agent/overview",
+                  "ai-agents/voice-ai-agent/quick-start",
                   "ai-agents/voice-ai-agent/data",
                   {
                     "group": "Settings",
@@ -117,7 +118,11 @@
                     ]
                   },
                   "ai-agents/voice-ai-agent/playground",
-                  "ai-agents/voice-ai-agent/dashboard"
+                  "ai-agents/voice-ai-agent/dashboard",
+                  "ai-agents/voice-ai-agent/prompting-best-practices",
+                  "ai-agents/voice-ai-agent/going-live",
+                  "ai-agents/voice-ai-agent/pricing",
+                  "ai-agents/voice-ai-agent/troubleshooting"
                 ]
               }
             ]
@@ -264,6 +269,7 @@
               "how/to-add-follow-up",
               "how/to-transfer-whatsapp-conversation-from-a-conversational-to-a-flow-based-ai-agent-in-chatzy-ai",
               "how/to-setup-whatsapp-calling",
+              "how/to-set-up-outbound-follow-up-calls",
               "how/to-assign-human-agent-to-a-conversation",
               "how/send-whatsapp-reminders-from-google-sheets",
               "how/to-connect-shopify-to-chatzy-ai"

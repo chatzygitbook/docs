@@ -1,0 +1,66 @@
+
+Most voice problems trace back to one setting. Check the tables below before rewriting your prompt.
+
+---
+
+## Reading Your Call Logs
+
+Open each call in the [Dashboard](/ai-agents/voice-ai-agent/dashboard) and look for these signals:
+
+| Signal in the logs | Likely cause | What to change |
+| --- | --- | --- |
+| Many very short calls hung up by the caller | Greeting too long, wrong language, or the caller doesn't know why you're calling | Shorten the greeting; say who you are and why in the first sentence |
+| Calls ending exactly at the time limit | No clear ending, or the agent loops | Check **End of Call** is on; add a clear wrap-up rule to the prompt |
+| Calls hung up by the agent after silence | Timeout too short for the task | Raise the silence timeout or the check-in delay |
+| Wrong or invented answers | Missing or outdated knowledge | Use **Revise Answer** in the call log, add an FAQ, and **Retrain** |
+| Caller repeats themselves | Transcriber or language mismatch, noisy line | Try another transcriber or a single-language setting |
+| Agent talks over the caller | Endpointing too low | Raise **Endpointing** in the Engine tab |
+
+> 💡 **Tip:** Make one change at a time, **Save version**, and compare the next batch of calls with the last.
+
+---
+
+## Common Problems
+
+| Problem | Check first | Fix |
+| --- | --- | --- |
+| Changes don't show on live calls | Is the change only in the **Working draft**? | **Save version**, then **Publish** |
+| Agent replies too slowly | Endpointing, Buffer Size, model | Lower Endpointing or Buffer Size a step; try a faster model; consider Speech-to-Speech if you don't need tools |
+| Agent cuts callers off | Endpointing, words before interrupting | Raise Endpointing; raise the word count slightly |
+| Agent mishears names or numbers | Language and transcriber | Match the language exactly; try another transcriber; ask the caller to repeat, then read it back |
+| Wrong gender or language in replies | Prompt and voice | State persona gender and language in the prompt; pick a voice of the same gender |
+| Agent can't book or transfer | Mode and tools | Switch to **Standard**; connect Cal.com; turn on **Transfer calls to a human** |
+| Booking lands on the wrong day | Utilities | Turn on **Include Date & Time Context** |
+| Calls drop after a few seconds of silence | Silence timeout | Raise the timeout, or turn on **User Online Detection** so the agent checks in first |
+| Can't place real calls | Channels → Voice | Connect or buy a number and check you have Voice AI minutes left |
+
+---
+
+## FAQ
+
+<AccordionGroup>
+<Accordion title="Can I use a Voice AI Agent on the Free plan?">
+Yes. You get **10 free Voice AI minutes** and can recharge minutes without buying a subscription.
+</Accordion>
+<Accordion title="How many voice agents can I create?">
+Voice agents are unlimited — you pay for the minutes they use. Your plan's overall AI agent limit still applies.
+</Accordion>
+<Accordion title="Do unused minutes expire?">
+No. Recharged minutes have lifetime validity.
+</Accordion>
+<Accordion title="Can I use my own phone number?">
+Yes. Connect a **Twilio** or **Contaque** number in **Channels → Voice**, or buy one through Chatzy for ₹500/month. See [Going Live](/ai-agents/voice-ai-agent/going-live).
+</Accordion>
+<Accordion title="Which languages are supported?">
+English, English (India), English + Hindi, India Multilingual and 12 Indian languages, including Hindi, Marathi, Tamil, Telugu, Bangla and Gujarati.
+</Accordion>
+<Accordion title="Can the agent call people automatically?">
+Yes — through Journeys using [Assign to Voice AI Agent](/journey/studio/actions/assign-to-voice-ai-agent), or on Starter and above through Voice broadcast campaigns.
+</Accordion>
+<Accordion title="Can a human take over a call?">
+Yes, in **Standard** mode with **Transfer calls to a human** turned on in Telephony. On Growth and above, WhatsApp calls can also be handled by a human agent.
+</Accordion>
+<Accordion title="Does testing cost minutes?">
+Playground web chat and web calls are free. A test call to your own phone on Chatzy's number is charged per minute, as shown under **Get call from agent**.
+</Accordion>
+</AccordionGroup>

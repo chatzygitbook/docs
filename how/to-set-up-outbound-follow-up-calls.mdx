@@ -1,0 +1,163 @@
+---
+title: "How to Set Up Outbound Follow-up Calls with a Voice AI Agent"
+icon: "phone-outgoing"
+---
+
+This guide shows how to make a Voice AI Agent **call your customers automatically** when your system sends their details to Chatzy, then save the outcome of each call to the contact.
+
+The example is a clinic calling patients the day before their appointment to confirm it. The same setup works for payment reminders, order confirmations, demo follow-ups or any call with a clear goal.
+
+---
+
+## Requirements
+
+- **Voice AI Agent:** A published [Voice AI Agent](https://app.chatzy.ai/voice-ai-agents) in **Standard** mode. See [Quick Start](/ai-agents/voice-ai-agent/quick-start).
+- **Phone number:** At least one number in **Channels → Voice**. See [Going Live](/ai-agents/voice-ai-agent/going-live).
+- **Voice AI minutes** in your account.
+- **A system that can send a webhook** (your CRM, booking tool or backend).
+
+---
+
+## How It Works
+
+1. Your system sends the customer's details to a Journey's **Inbound Webhook**.
+2. **Initiate Outbound Call** dials the customer and connects your Voice AI Agent, passing the details in as variables.
+3. The Journey waits for the call to end, then **Extract Entities** reads the conversation and picks the outcome.
+4. **Update Contact** saves the outcome, so your team can filter and follow up.
+
+---
+
+## Step 1: Prepare the Voice AI Agent
+
+<Accordion title="Greeting and variables">
+
+Set the **Introductory Message** using variables, so every call opens with the customer's name and the reason for calling:
+
+```text
+Hi {{first_name}}, this is Maya from City Clinic, calling about your appointment tomorrow. Is this a good time?
+```
+
+Use the same variables inside the prompt (type `/` to insert them). Any variable you add here can be filled by the Journey in Step 2.
+
+| Variable | Example value |
+| --- | --- |
+| `{{first_name}}` | Neha |
+| `{{appointment_date}}` | 6 November |
+| `{{appointment_time}}` | 11 a.m. |
+| `{{doctor_name}}` | Dr. Rao |
+| `{{branch}}` | Koregaon Park |
+
+</Accordion>
+
+<Accordion title="What the prompt should handle">
+
+Follow [Prompting Best Practices](/ai-agents/voice-ai-agent/prompting-best-practices) and make sure the prompt covers every possible answer:
+
+- **Confirms** → repeat the date and time in words, mention anything to bring, and close.
+- **Wants to reschedule** → don't pick a new slot on the call unless Cal.com is connected; say the clinic will call back.
+- **Wants to cancel** → accept politely and close.
+- **Wrong person or busy** → ask for the right person, or offer to call later.
+- **Asks a question** → answer from the knowledge base first, then return to the confirmation.
+
+Tell the agent never to ask for details it already has from the variables.
+
+</Accordion>
+
+---
+
+## Step 2: Create the Journey
+
+1. Go to **Journeys** → **Create Journey**, give it a name, choose **Blank Template**, and click **Create**.
+
+### Trigger: Inbound Webhook
+
+2. Click **Add Trigger** → select **Inbound Webhook**, and copy the **Webhook URL**.
+3. Send a test POST request from your system, then click **Refresh Webhook** and select it under **Mapping Request**:
+
+```json
+{
+  "phone": "919800000000",
+  "first_name": "Neha",
+  "appointment_date": "6 November",
+  "appointment_time": "11 a.m.",
+  "doctor_name": "Dr. Rao",
+  "branch": "Koregaon Park"
+}
+```
+
+4. Set **Contact Identifier** to **Phone Number** and its value to `{{inbound_webhook.phone}}`.
+
+See [How to Use the Inbound Webhook Trigger](/how/to-use-the-inbound-webhook-trigger-to-connect-chatzy-ai-with-external-systems) for details.
+
+### Action: Initiate Outbound Call
+
+5. Add an action → **Initiate Outbound Call**, and fill in:
+
+| Field | What to enter |
+| --- | --- |
+| **Channel** | Phone Call |
+| **From Phone Number** | Your number. Select more than one to **rotate calls** between them |
+| **Phone Number to Call** | `{{contact.phone_number}}` |
+| **Voice AI Agent** | The agent from Step 1 |
+| **Variables** | Map each agent variable to a webhook field, e.g. `{{first_name}}` → `{{inbound_webhook.first_name}}` |
+
+The Journey **pauses at this step until the call ends**. The result is saved in the `call` variable:
+
+| Variable | Description |
+| --- | --- |
+| `{{call.status}}` | Outcome of the call (values below) |
+| `{{call.status_label}}` | Outcome in words, e.g. *Line busy*, *Completed* |
+| `{{call.answered}}` | `true` / `false` |
+| `{{call.duration_seconds}}` | Talk time in seconds |
+| `{{call.recording_url}}` | Recording link (answered calls only) |
+| `{{call.conversation_id}}` | Conversation created by the call |
+
+| `call.status` | Meaning |
+| --- | --- |
+| `COMPLETED` | Connected and ended normally |
+| `NOT_ANSWERED: BUSY` | Line busy |
+| `NOT_ANSWERED: NO_ANSWER` | Rang out |
+| `NOT_ANSWERED: REJECTED` | Rejected by the customer |
+| `NOT_ANSWERED: AT_CAPACITY` | Your account was at its concurrent call limit |
+| `FAILED: <reason>` | Agent, model or audio failure |
+| `TIMEOUT` | No result within 2 hours |
+
+The settings panel lists every field and status — click **call** in the note under the variables.
+
+### Action: Wait (optional)
+
+6. Add a [Wait](/journey/studio/actions/wait) action if you want a delay before the next step. For example, a **5-minute** wait starts once the call step has completed, and the Journey continues to the next action after 5 minutes.
+
+### Action: Extract Entities
+
+7. Add [Extract Entities](/journey/studio/actions/extract-entities), set **Conversation ID** to `{{conversation_id}}`, and add one entity with a fixed list of values:
+
+| Entity | Description |
+| --- | --- |
+| `appointment_status` | Exactly one of: Confirmed, Reschedule, Cancelled, No Answer. Based on the customer's final answer. |
+
+The value is saved as `{{extracted_entities.appointment_status}}`.
+
+### Action: Update Contact
+
+8. Add [Update Contact](/journey/studio/actions/update-contact) and save `{{extracted_entities.appointment_status}}` to a contact attribute such as **Appointment Status**.
+
+> 💡 **Tip:** To send the outcome to your own CRM instead, use [Execute Code](/journey/studio/actions/execute-code) to make an API request. Keep API keys out of shared screenshots and docs.
+
+9. Click **Save version**, then **Publish**.
+
+---
+
+## Step 3: Test the Setup
+
+1. Send a test webhook request with **your own phone number**.
+2. Answer the call and try each path: confirm, reschedule, cancel, ask a question.
+3. Open the Journey's **Runs** tab to check each step, and check the contact's **Appointment Status**.
+
+---
+
+## Tips
+
+- **Retry missed calls** — add a [Condition](/journey/studio/actions/conditions) on `{{call.status}}`, and for `NOT_ANSWERED` outcomes wait and call again, or send a WhatsApp message instead.
+- **Follow up on WhatsApp** — after a confirmed call, send the address and timing as a WhatsApp message so the customer has it in writing.
+- **Watch `AT_CAPACITY`** — if it appears often, spread your webhook requests out or add more numbers to rotate.

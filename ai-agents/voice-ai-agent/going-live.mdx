@@ -1,0 +1,78 @@
+
+Once your agent is **published**, it reaches callers through a phone number. This page covers getting a number and the four ways calls can reach your agent.
+
+---
+
+## Get a Phone Number
+
+Go to **Channels → Voice**. The page shows your remaining **Voice AI minutes** and any numbers already connected.
+
+{/* Screenshot to add: Channels → Voice page (numbers table, Buy Phone Number button, Twilio and Contaque cards), saved next to this page.
+<Frame>
+  <img src="/ai-agents/voice-ai-agent/voice-channel.png" alt="Voice channel page for buying a number or connecting Twilio or Contaque" className="rounded-lg" />
+</Frame>
+*/}
+
+<AccordionGroup>
+<Accordion title="Buy a number from Chatzy">
+
+1. Click **Buy Phone Number**.
+2. Each number bought through Chatzy costs **₹500/month** rental.
+
+> **Note:** If the dialog asks you to contact support, the Chatzy team will add the number to your account for you.
+
+</Accordion>
+<Accordion title="Connect your Twilio number">
+
+Make sure you have:
+
+- Twilio **Account SID**
+- Twilio **Account Auth Token**
+- A **phone number purchased from Twilio**
+
+Click **Connect** on the **Twilio** card and enter these details.
+
+</Accordion>
+<Accordion title="Connect your Contaque number">
+
+Make sure you have:
+
+- Contaque **domain** (e.g. `https://lite3.contaquecloud.com`)
+- Contaque **username**
+- Contaque **app key**
+- A **phone number** on your Contaque account
+
+Click **Connect** on the **Contaque** card and enter these details.
+
+</Accordion>
+</AccordionGroup>
+
+---
+
+## Ways Calls Reach Your Agent
+
+| Route | Direction | Plan | Best for |
+| --- | --- | --- | --- |
+| **Phone number** | Inbound | Any | A 24/7 support or enquiry line |
+| **Journeys → [Assign to Voice AI Agent](/journey/studio/actions/assign-to-voice-ai-agent)** | Outbound / Incoming call | Any plan with Journeys | Calling a lead right after a form fill, reminders, follow-ups |
+| **Voice broadcast campaigns** | Outbound | Starter and above | Calling a whole list or segment at once |
+| **[WhatsApp calling](/how/to-setup-whatsapp-calling)** | Inbound & outbound | Growth and above | Voice calls inside WhatsApp, handled by AI or a human |
+
+> 💡 **Tip:** Every route uses the same published agent, so one well-tuned prompt serves inbound, outbound and WhatsApp calls. Transfers, Journeys and Cal.com need **Standard** mode.
+
+---
+
+## Best Practices for Outbound Calls
+
+* **Call fast** - trigger the call within minutes of the form fill or enquiry, while the lead still remembers you.
+* **Say who and why first** - the first sentence should name your business and the reason for the call.
+* **Keep it short** - set a short **Call Termination** limit in [Telephony](/ai-agents/voice-ai-agent/settings/telephony) and ask only questions you will act on.
+* **Hand off the details** - send long information (links, price lists) as a WhatsApp message through a Journey instead of reading it out.
+
+## Best Practices for Inbound Calls
+
+* **Answer the top questions from Data** - add your 20 most common questions as **FAQs** in the [Data](/ai-agents/voice-ai-agent/data) tab.
+* **Allow thinking time** - give the silence timeout a few extra seconds for callers looking up order IDs or dates.
+* **Always offer a person** - turn on **Transfer calls to a human** and tell the prompt when to use it (billing, complaints, explicit request).
+
+

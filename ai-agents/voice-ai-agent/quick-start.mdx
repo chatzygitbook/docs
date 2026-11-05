@@ -1,0 +1,70 @@
+
+This guide takes you from a blank agent to a live phone call. Follow the steps in order — each one builds on the last.
+
+---
+
+## Before You Start
+
+You can build and test a Voice AI Agent on the **Free plan**. You only need minutes and a phone number to take real calls.
+
+| You need | Why | Where to get it |
+| --- | --- | --- |
+| **Voice AI minutes** | Every live call is billed per minute. The Free plan includes **10 free minutes** | **Billing** → recharge Voice AI Mins (no subscription needed) |
+| **A phone number** | Needed for real inbound and outbound calls (not for web tests) | **Channels → Voice** — buy one, or connect Twilio or Contaque |
+| **Business knowledge** | So the agent answers accurately | **Data** tab — text, files, website, FAQs or Google Drive |
+| **A paid plan** *(optional)* | Starter adds Voice broadcast campaigns; Growth adds WhatsApp calling | **Billing** |
+
+> 💡 **Tip:** Before writing anything, decide four things: the **one goal** of the call, the **details you must collect**, **when to hand over** to a human, and **how the call should end**.
+
+---
+
+## Step-by-Step Setup
+
+1. **Create the agent.** Go to **AI Agents → Voice → Create Agent**, or start from a [template](https://app.chatzy.ai/templates?tab=all-agents). Give it a persona name callers will hear, such as *"Priya"*.
+
+2. **Choose the mode.** Keep **Standard** unless you only need fast, simple conversations. See [Standard vs Speech-to-Speech](#standard-vs-speech-to-speech) below.
+3. **Add knowledge.** In the [Data](/ai-agents/voice-ai-agent/data) tab, add your sources and click **Retrain**. Turn on **Auto Data Train** if your website changes often.
+4. **Write the greeting.** In **Settings → Prompt**, set the **Introductory Message**. Type `/` to insert variables such as the contact's name.
+5. **Write the prompt.** Follow [Prompting Best Practices](/ai-agents/voice-ai-agent/prompting-best-practices). Keep **End of Call** turned **On**.
+6. **Pick language and voice.** In the [Voice](/ai-agents/voice-ai-agent/settings/voice) tab, choose your callers' language, a transcriber and a voice. Click **Play Sample** before you decide.
+7. **Set call limits.** In [Telephony](/ai-agents/voice-ai-agent/settings/telephony), set the silence timeout, a hang-up message and a maximum call length. Turn on **Transfer calls to a human** if someone can take calls.
+8. **Connect tools.** In [Tools](/ai-agents/voice-ai-agent/settings/tools), connect Cal.com to book appointments, or select a Journey to trigger.
+9. **Test in the [Playground](/ai-agents/voice-ai-agent/playground)** by chat, web call and a real call to your own phone.
+
+10. **Publish.** Click **Save version**, then **Publish**. Only the published version takes live calls.
+11. **Go live.** Connect a phone number and choose how calls reach the agent — see [Going Live](/ai-agents/voice-ai-agent/going-live).
+12. **Review your first 20 calls** in the [Dashboard](/ai-agents/voice-ai-agent/dashboard) and fix what you hear.
+
+---
+
+## Standard vs Speech-to-Speech
+
+Use the toggle at the **top-right** of the agent's **Settings** to switch modes. Use **Standard** for almost every business call; choose **Speech-to-Speech** only when speed matters more than knowledge, tools or transfers.
+
+{/* Screenshot to add: crop of the Standard / Speech-to-Speech toggle at the top-right of Settings, saved next to this page.
+<Frame>
+  <img src="/ai-agents/voice-ai-agent/agent-mode.png" alt="Toggle for switching a voice agent between Standard and Speech-to-Speech" className="rounded-lg" />
+</Frame>
+*/}
+
+| | Standard | Speech-to-Speech |
+| --- | --- | --- |
+| **How it works** | Transcriber turns speech into text, the AI model replies, a voice reads it aloud | One AI model listens and talks back in its own voice |
+| **Feels like** | Natural, with a short pause before each reply | Faster and more fluid |
+| **Knowledge base** | ✅ | ❌ |
+| **API functions & Journeys** | ✅ | ❌ |
+| **Transfer to a human** | ✅ | ❌ |
+| **Choose transcriber & voice** | ✅ | ❌ (uses the model's own voice) |
+| **Best for** | Support lines, bookings, lead qualification with CRM updates | Simple surveys, greetings, conversational demos |
+
+> ⚙️ **Best Practice:** If the agent must look something up, book a meeting, update a contact or pass the call to a person, it has to run in **Standard** mode.
+
+---
+
+## Drafts, Versions & Publishing
+
+* Edits save automatically to a **Working draft** — live calls keep using the published version.
+* **Save version** keeps a snapshot you can return to. **Publish** makes it live.
+* The **history icon** next to Publish lists earlier versions, so you can roll back a change that made calls worse.
+* In the Playground, use the **Version** dropdown to test the Live version or a saved draft.
+
