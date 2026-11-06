@@ -15,7 +15,7 @@ Integrate WhatsApp messaging with your CRM in minutes. This API lets you send me
 ## Base endpoint
 
 ```
-POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message
+POST https://api.chatzy.ai/public/whatsapp/send_message
 ```
 
 ## Authentication
@@ -23,7 +23,7 @@ POST https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp
 Every API request must include your API key in the `Authorization` header:
 
 ```bash
-curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message" \
+curl -X POST "https://api.chatzy.ai/public/whatsapp/send_message" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json"
 ```
@@ -48,7 +48,7 @@ Send text messages, media, or templates to WhatsApp numbers.
 ### Text message
 
 ```bash
-curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/public/whatsapp/send_message" \
+curl -X POST "https://api.chatzy.ai/public/whatsapp/send_message" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

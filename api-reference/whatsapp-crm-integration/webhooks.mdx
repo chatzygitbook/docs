@@ -91,7 +91,7 @@ When the status is `failed`, an `error` object is included:
 The webhook payload carries the WhatsApp message id. To fetch the full message content for that id, first generate an ID token with your Chatzy AI email and password:
 
 ```bash
-curl -X POST "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/get_id_token" \
+curl -X POST "https://api.chatzy.ai/get_id_token" \
   -H "Content-Type: application/json" \
   -d '{
     "user_email_id": "user@example.com",
@@ -122,6 +122,6 @@ The response looks like this. The ID token is valid for **1 hour**:
 Now use the ID token to fetch the message content:
 
 ```bash
-curl -X GET "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/get_wa_msg_by_id?wa_message_id=YOUR_WA_MESSAGE_ID" \ # received from Incoming Message Payload
+curl -X GET "https://api.chatzy.ai/get_wa_msg_by_id?wa_message_id=YOUR_WA_MESSAGE_ID" \ # received from Incoming Message Payload
   -H "Authorization: <ID_TOKEN>"
 ```

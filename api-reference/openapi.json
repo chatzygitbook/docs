@@ -46,7 +46,7 @@
   },
   "servers": [
     {
-      "url": "https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod",
+      "url": "https://api.chatzy.ai",
       "description": "Production Server"
     }
   ],
