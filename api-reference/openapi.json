@@ -727,10 +727,54 @@
             }
           },
           {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "description": "1-based page number. Cannot be combined with `offset` or `before`. For history that keeps growing while you page, prefer `before`.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Messages per page (default: 20, max: 100).",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "Cursor: a `message_id` of this conversation. Returns the messages older than it. Pass `meta.next_cursor` from the previous response to get the next page; messages that arrive while you page never shift or repeat rows. Cannot be combined with `page` or `offset`.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "include_all",
+            "in": "query",
+            "required": false,
+            "description": "Return every message row of the conversation, with no filtering. By default only `user` and `assistant` messages with content are returned, and sub-agent messages are hidden; with `include_all=true` tool calls, tool results, empty assistant turns and sub-agent messages are included too. Requires the agent owner's (or a team member's, with `team_id`) Cognito ID token in `Authorization: Bearer <token>`; otherwise 401, and 403 for a conversation of another account.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "Maximum number of messages to return (default: 20, max: 100).",
+            "deprecated": true,
+            "description": "Legacy. Maximum number of messages to return (default: 20, max: 100). Prefer `page_size`.",
             "schema": {
               "type": "integer",
               "minimum": 1,
@@ -742,7 +786,8 @@
             "name": "offset",
             "in": "query",
             "required": false,
-            "description": "Number of messages to skip (for pagination, default: 0).",
+            "deprecated": true,
+            "description": "Legacy. Number of messages to skip (default: 0). Prefer `page`.",
             "schema": {
               "type": "integer",
               "minimum": 0,
@@ -761,7 +806,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paginated messages of the conversation.",
+            "description": "Paginated messages of the conversation, newest first (`message_order` descending).",
             "content": {
               "application/json": {
                 "schema": {
@@ -775,22 +820,45 @@
                           "message_id": { "type": "string", "format": "uuid" },
                           "conversation_id": { "type": "string", "format": "uuid" },
                           "conversation_created_at": { "type": "string", "format": "date-time" },
-                          "content": { "type": "string" },
-                          "role": { "type": "string", "enum": ["user", "assistant"] },
+                          "content": { "type": "string", "nullable": true, "description": "Null only with `include_all=true` (e.g. an assistant turn that only called a tool)." },
+                          "role": { "type": "string", "description": "`user` or `assistant`; with `include_all=true` also `tool` and any other stored role." },
+                          "name": { "type": "string", "nullable": true },
                           "tool_calls": { "type": "string", "nullable": true },
+                          "tool_call_id": { "type": "string", "nullable": true },
                           "documents": { "type": "array", "nullable": true },
+                          "message_origin": { "type": "string", "nullable": true },
+                          "reply_failed": { "type": "boolean", "description": "True on a user message whose reply failed." },
                           "created_at": { "type": "string", "format": "date-time" },
                           "message_order": { "type": "integer" }
                         },
                         "required": ["message_id", "conversation_id", "conversation_created_at", "content", "role", "created_at", "message_order"]
                       }
+                    },
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "page": { "type": "integer", "nullable": true, "description": "Null when paging with `before`.", "example": 1 },
+                        "page_size": { "type": "integer", "example": 20 },
+                        "offset": { "type": "integer", "nullable": true, "description": "Null when paging with `before`.", "example": 0 },
+                        "before": { "type": "string", "format": "uuid", "nullable": true },
+                        "next_cursor": { "type": "string", "format": "uuid", "nullable": true, "description": "Pass as `before` to get the next (older) page. Null on the last page." },
+                        "total": { "type": "integer", "description": "Messages matching the request (respects `include_all`).", "example": 49 },
+                        "total_pages": { "type": "integer", "example": 3 },
+                        "has_more": { "type": "boolean", "example": true },
+                        "include_all": { "type": "boolean", "example": false },
+                        "order": { "type": "string", "enum": ["desc"] }
+                      },
+                      "required": ["page", "page_size", "offset", "before", "next_cursor", "total", "total_pages", "has_more", "include_all", "order"]
                     }
                   },
-                  "required": ["messages"]
+                  "required": ["messages", "meta"]
                 }
               }
             }
-          }
+          },
+          "400": { "description": "Invalid parameters: bad values, conflicting `page`/`offset`/`before` or `page_size`/`limit`, or a `before` that is not a message of this conversation." },
+          "401": { "description": "`include_all` without a valid Cognito ID token, or a missing/invalid token for an iframe-authenticated agent." },
+          "403": { "description": "`include_all` on a conversation of another account, or an access token issued for another agent." }
         }
       }
     },
