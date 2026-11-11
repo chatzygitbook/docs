@@ -18,6 +18,12 @@ Integrate WhatsApp messaging with your CRM in minutes. This API lets you send me
 POST https://api.chatzy.ai/public/whatsapp/send_message
 ```
 
+<Warning>
+  The API moved to `https://api.chatzy.ai`. If your integration still calls
+  `https://vevdoh3hve.execute-api.us-east-1.amazonaws.com/prod/...`, replace that part with
+  `https://api.chatzy.ai` and keep the path, headers and body as they are. Your API key does not change.
+</Warning>
+
 ## Authentication
 
 Every API request must include your API key in the `Authorization` header:
