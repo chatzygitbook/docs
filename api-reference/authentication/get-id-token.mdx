@@ -2,6 +2,15 @@
 openapi: post /get_id_token
 ---
 
+<Warning>
+  **Calling the API from a server, script or integration? Use an [API key](/api-reference/api-keys/overview) instead.**
+  Signing in with a password still works and is not going away, but it ties your integration to one person's
+  login: ID tokens expire every hour, refresh tokens every 30 days, two-factor codes cannot be automated, and a
+  password change or sign-out breaks it. An API key has no hourly renewal, can be limited to read-only or to
+  specific areas, can expire or never expire, and can be rotated or revoked on its own. Endpoints that accept
+  API keys are listed in [API Keys](/api-reference/api-keys/overview#endpoints-available-with-an-api-key).
+</Warning>
+
 Authenticates a user with their email and password and returns a JWT `idToken`.
 
 This `idToken` must be included in the `Authorization` header when calling **protected APIs**.

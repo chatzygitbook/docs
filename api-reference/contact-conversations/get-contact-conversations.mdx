@@ -2,6 +2,11 @@
 openapi: get /get_contact_conversations
 ---
 
+<Tip>
+  Accepts an [API key](/api-reference/api-keys/overview) (recommended) as well as an `idToken`. With an API key,
+  `user_email_id` is optional.
+</Tip>
+
 Retrieves a paginated list of contact conversations associated with the given user.
 
 Supports optional search, pagination, and filtering by conversation status. This endpoint is commonly used to display a user's contact list in messaging interfaces.

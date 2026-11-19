@@ -1,0 +1,126 @@
+---
+title: "API Keys"
+description: "Call the Chatzy AI API from your own systems with an account API key"
+icon: "key-round"
+---
+
+An API key lets your own servers, scripts and tools call the Chatzy AI API on behalf of your account, without signing in as a person. Each key belongs to one account, can only do what its access allows, and stops working when it expires or is revoked.
+
+<Info>
+  Create and manage keys under **API Keys** in the [Chatzy AI app](https://app.chatzy.ai/api-keys). Only
+  admins can manage keys, and the page is available on plans that include API access. If the page shows
+  as locked, upgrade your plan.
+</Info>
+
+## Base URL
+
+```
+https://api.chatzy.ai
+```
+
+## Authentication
+
+Send the key in the `Authorization` header on every request:
+
+```bash
+curl "https://api.chatzy.ai/get_contacts?page=1&pageSize=10" \
+  -H "Authorization: Bearer chzy_acc_YOUR_KEY"
+```
+
+- Account keys start with `chzy_acc_`. The app shows only the first characters of a key after it is created.
+- You never need to send `user_email_id`: the key already names its account. If you do send it, it must be your account's email.
+- Every ID you send (contact, list, agent, conversation, journey, campaign, WhatsApp number) must belong to your account. Otherwise the request returns `404`.
+- Do not send `team_id`. A key belongs to one account, so requests that include it are rejected with `400`.
+
+<Warning>
+  The full key is shown only once, right after you create or rotate it. Store it in a secret manager and
+  never put it in browser or mobile app code: anyone holding the key can act on your account within its access.
+</Warning>
+
+## Access levels
+
+When you create a key, you choose what it can do:
+
+| Access | What the key can call |
+| --- | --- |
+| **Full** | Every endpoint listed below, reads and writes. |
+| **Read-only** | Only the read endpoints (`GET`) below. |
+| **Custom** | You pick, per area, **Read** or **Read & write**. Areas you leave out are denied. |
+
+The areas used by the endpoints below:
+
+| Area | Covers |
+| --- | --- |
+| `chatbots` | Conversational and voice AI agents, their conversations and messages |
+| `flows` | Flow-based AI agents and their conversations |
+| `conversations` | Inbox threads and messages per contact |
+| `contacts` | Contacts and tags |
+| `lists-and-segments` | Removing contacts from lists |
+| `campaigns` | Campaigns and campaign statistics |
+| `workflows` | Journeys and their runs |
+| `message_templates` | WhatsApp message templates |
+
+A request outside the key's access returns `403` with `This API key doesn't have permission for this action.`
+
+## Expiry, rotation and revocation
+
+- **Expiry.** A key can expire after 30, 90 or 365 days, on a date you pick, or never.
+- **Rotate.** Rotating issues a new key with the same name, access and lifetime. The old key can keep working for a grace period of up to 7 days, so you can roll the new one out first. A grace period of 0 revokes the old key right away.
+- **Revoke.** Revoking stops a key for good. Allow up to 60 seconds for a revoke to reach every server.
+- The API Keys page shows when each key was last used.
+
+## Endpoints available with an API key
+
+Only the endpoints below accept an API key. Every other endpoint rejects it. See [Endpoints](/api-reference/api-keys/endpoints) for parameters.
+
+### Read
+
+| Method | Path | What it returns | Access needed |
+| --- | --- | --- | --- |
+| `GET` | [`/user_chatbots`](/api-reference/api-keys/endpoints#user_chatbots) | Your AI agents | `chatbots` read |
+| `GET` | [`/get_conversations`](/api-reference/api-keys/endpoints#get_conversations) | An agent's conversations (chat logs) | `chatbots` or `flows` read |
+| `GET` | [`/get_messages`](/api-reference/api-keys/endpoints#get_messages) | Messages of one conversation | `chatbots` read |
+| `GET` | [`/get_contact_conversations`](/api-reference/api-keys/endpoints#get_contact_conversations) | Inbox threads, one per contact and channel | `conversations` read |
+| `GET` | [`/get_contact_conversation_messages`](/api-reference/api-keys/endpoints#get_contact_conversation_messages) | Messages exchanged with one contact | `conversations` read |
+| `GET` | [`/get_contacts`](/api-reference/api-keys/endpoints#get_contacts) | Contacts, with search, filters and paging | `contacts` read |
+| `GET` | [`/get_tags`](/api-reference/api-keys/endpoints#get_tags) | Your contact tags | `contacts` read |
+| `GET` | [`/get_campaigns`](/api-reference/api-keys/endpoints#get_campaigns) | Campaigns | `campaigns` read |
+| `GET` | [`/get_campaign_stats`](/api-reference/api-keys/endpoints#get_campaign_stats) | Delivery statistics of campaigns | `campaigns` read |
+| `GET` | [`/get_wa_msg_templates`](/api-reference/api-keys/endpoints#get_wa_msg_templates) | WhatsApp message templates | `message_templates` read |
+| `GET` | [`/get_workflow`](/api-reference/api-keys/endpoints#get_workflow) | Journeys | `workflows` read |
+| `GET` | [`/get_workflow_instances`](/api-reference/api-keys/endpoints#get_workflow_instances) | Runs of one journey | `workflows` read |
+
+### Write
+
+| Method | Path | What it does | Access needed |
+| --- | --- | --- | --- |
+| `POST` | [`/create_contact`](/api-reference/api-keys/endpoints#create_contact) | Creates contacts (up to 10,000 per call), optionally into a list | `contacts` read & write |
+| `POST` | [`/update_contact`](/api-reference/api-keys/endpoints#update_contact) | Updates one contact | `contacts` read & write |
+| `POST` | [`/delete_contact`](/api-reference/api-keys/endpoints#delete_contact) | Deletes a contact | `contacts` read & write |
+| `POST` | [`/add_contacts_to_group`](/api-reference/api-keys/endpoints#add_contacts_to_group) | Adds contacts to a list | `contacts` read & write |
+| `POST` | [`/delete_contacts_from_group`](/api-reference/api-keys/endpoints#delete_contacts_from_group) | Removes contacts from a list | `lists-and-segments` read & write |
+| `POST` | [`/create_campaign`](/api-reference/api-keys/endpoints#create_campaign) | Creates a WhatsApp or email campaign | `campaigns` read & write |
+
+<Note>
+  More endpoints will be added to this list over time. Billing, team, sign-in and key management are never
+  available with an API key.
+</Note>
+
+## Responses and errors
+
+Every response is JSON with `data` on success and `error` on failure:
+
+```json
+{ "data": { "...": "..." }, "error": null }
+```
+
+| Status | Meaning |
+| --- | --- |
+| `200` | Success. |
+| `400` | Invalid parameters, or `team_id` was sent. |
+| `401` | Missing, invalid, expired or revoked key. Body: `{ "message": "Unauthorized" }`. |
+| `402` | Your plan no longer includes API access. |
+| `404` | An ID in the request does not exist or does not belong to your account. |
+| `403` | The endpoint does not accept API keys, the key's access does not cover it, or `user_email_id` is not your account. |
+| `429` | Too many requests. Retry with backoff. |
+| `500` | Server error. Retry later; contact support if it persists. |

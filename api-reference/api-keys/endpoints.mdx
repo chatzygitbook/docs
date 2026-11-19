@@ -1,0 +1,271 @@
+---
+title: "Endpoints"
+description: "Every endpoint you can call with an API key, with its parameters"
+icon: "list"
+---
+
+All endpoints live under `https://api.chatzy.ai` and take the key as `Authorization: Bearer chzy_acc_...`. `GET` endpoints take query parameters; `POST` endpoints take a JSON body. You never need to send `user_email_id`: the key already names your account. See [API Keys](/api-reference/api-keys/overview) for access levels and errors.
+
+IDs (`chatbot_id`, `contact_id`, `group_id`, ...) are UUIDs. Every ID you send must belong to your account; otherwise the request returns `404`.
+
+## Read
+
+### user_chatbots
+
+`GET /user_chatbots` · needs `chatbots` read
+
+Lists your AI agents.
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `chatbot_id` | uuid | Optional. Return this agent only. |
+| `voicebots_only` | boolean | Optional. Return voice agents only. |
+
+```bash
+curl "https://api.chatzy.ai/user_chatbots" -H "Authorization: Bearer chzy_acc_YOUR_KEY"
+```
+
+### get_conversations
+
+`GET /get_conversations` · needs `chatbots` or `flows` read
+
+Lists one agent's conversations (its chat logs), newest first.
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `chatbot_id` | uuid | The agent's id. Send one of `chatbot_id`, `flow_id` or `squad_id`. |
+| `flow_id` | uuid | A flow-based agent's id. |
+| `squad_id` | uuid | A squad's id. Also send `squadConversations=true`. |
+| `limit` | integer | Default 20. |
+| `offset` | integer | Default 0. |
+| `search` | string | Optional. |
+| `startDate`, `endDate` | ISO date | Optional date range. |
+| `timezone` | string | Optional IANA zone for the date range, e.g. `Asia/Kolkata`. |
+| `showOnlyLeads` | boolean | Default `false`. |
+| `isVoicebot` | boolean | Set `true` for a voice agent. |
+| `callStatus` | string | Voice only: `completed`, `not_answered`, `declined`, `busy`, `not_reachable`, `invalid_number`, `not_placed`, `agent_error`. |
+| `sortBy` | string | `recent` (default), `oldest`, and for voice `duration_desc`, `duration_asc`. |
+
+### get_messages
+
+`GET /get_messages` · needs `chatbots` read
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `conversation_id` | uuid | **Required.** |
+
+### get_contact_conversations
+
+`GET /get_contact_conversations` · needs `conversations` read
+
+Inbox threads, one per contact, channel and WhatsApp number. Full reference: [Get contact conversations](/api-reference/contact-conversations/get-contact-conversations).
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `limit` | integer | 1-100, default 10. |
+| `offset` | integer | Default 0. |
+| `search` | string | Name, email, phone or iframe user id. |
+| `filter` | string | `all`, `unread`, `live`, `user_msg_last_24hrs`, `user_msg_last_7days`, `user_msg_any_time`. |
+| `channel_filter` | string | `all`, `whatsapp`, `messenger`, `instagram`, `website`, `linkedin`. |
+| `wa_business_id_filter` | string | One WhatsApp number. |
+| `tag_filter` | string | Comma-separated tag ids. |
+| `assign_to_status_filter` | string | `pending` or `assigned`. |
+| `assign_to_agent_email_filter` | email | Threads assigned to this team member. |
+| `contact_id` | uuid | One contact. |
+| `include_total` | boolean | Default `false`. |
+
+### get_contact_conversation_messages
+
+`GET /get_contact_conversation_messages` · needs `conversations` read
+
+Messages exchanged with one contact. Full reference: [Get messages for contact](/api-reference/contact-conversations/get-messages-for-contact).
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `contact_id` | uuid | **Required.** |
+| `channel` | string | `whatsapp`, `instagram`, `messenger`, `website`, `linkedin`. |
+| `wa_business_id` | string | One WhatsApp number. |
+| `limit` | integer | 1-100, default 50. |
+| `offset` | integer | Default 0. |
+| `grouped_conversations` | boolean | Default `true`. |
+| `after` | ISO date | Only messages after this time. |
+| `include_total` | boolean | Default `false`. |
+
+### get_contacts
+
+`GET /get_contacts` · needs `contacts` read
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `contact_id` | uuid | Optional. One contact. |
+| `group_id` | uuid | Optional. Contacts in this list. |
+| `search_query` | string | Name, email or phone. |
+| `tag_filter` | string | Comma-separated tag ids. |
+| `channel_filter` | string | Comma-separated: `whatsapp`, `instagram`, `messenger`, `linkedin`, `website`, `voice`, `manual`. |
+| `page` | integer | Default 1. |
+| `pageSize` | integer | Default 10. |
+| `sort_by` | string | `created_at` (default) or `updated_at`. |
+| `sort_order` | string | `desc` (default) or `asc`. |
+
+```bash
+curl "https://api.chatzy.ai/get_contacts?search_query=priya&page=1&pageSize=25" \
+  -H "Authorization: Bearer chzy_acc_YOUR_KEY"
+```
+
+### get_tags
+
+`GET /get_tags` · needs `contacts` read
+
+Lists your contact tags. No parameters.
+
+### get_campaigns
+
+`GET /get_campaigns` · needs `campaigns` read
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `campaign_id` | uuid | Optional. One campaign. |
+| `include_stats` | boolean | Default `false`. |
+
+### get_campaign_stats
+
+`GET /get_campaign_stats` · needs `campaigns` read
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `campaign_id` | uuid | **Required.** |
+| `limit` | integer | 1-100, default 20. |
+| `offset` | integer | Default 0. |
+
+### get_wa_msg_templates
+
+`GET /get_wa_msg_templates` · needs `message_templates` read
+
+Lists your WhatsApp message templates. No parameters.
+
+### get_workflow
+
+`GET /get_workflow` · needs `workflows` read
+
+Lists your journeys.
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `workflow_id` | uuid | Optional. One journey. |
+| `nodes_required` | boolean | Optional. Include the journey's steps. |
+| `trigger` | string | Optional. `inbound_webhook`: only journeys started by an inbound webhook. |
+
+### get_workflow_instances
+
+`GET /get_workflow_instances` · needs `workflows` read
+
+Runs of one journey.
+
+| Parameter | Type | Notes |
+| --- | --- | --- |
+| `workflow_id` | uuid | **Required.** |
+| `page` | integer | Default 1. |
+| `pageSize` | integer | Default 10. |
+| `sort_by` | string | `created_at` (default) or `updated_at`. |
+| `sort_order` | string | `desc` (default) or `asc`. |
+| `search_query` | string | Optional. |
+
+## Write
+
+### create_contact
+
+`POST /create_contact` · needs `contacts` read & write
+
+Creates up to 10,000 contacts per call.
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `contacts` | array | **Required.** Each item: `first_name`, `last_name`, `email`, `phone_number` (with country code), `linkedin_profile_url`, `tags` (array of names: letters, digits, space, `_ - ( )`), `attributes` (array of `{ attribute_name, attribute_value }`). |
+| `list_id` | uuid | Optional. Add the contacts to this list. |
+| `list_name` | string | Optional. Add the contacts to the list with this name, created if it does not exist. |
+| `update_existing` | boolean | Default `false`. Update contacts that already exist instead of skipping them. |
+
+```bash
+curl -X POST "https://api.chatzy.ai/create_contact" \
+  -H "Authorization: Bearer chzy_acc_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contacts": [
+      {
+        "first_name": "Priya",
+        "phone_number": "919876543210",
+        "tags": ["webinar"],
+        "attributes": [{ "attribute_name": "city", "attribute_value": "Pune" }]
+      }
+    ],
+    "update_existing": true
+  }'
+```
+
+### update_contact
+
+`POST /update_contact` · needs `contacts` read & write
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `contact_id` | uuid | **Required.** |
+| `email`, `phone_number`, `linkedin_profile_url` | string | Send at least one, even when changing other fields: the contact's current value is fine. |
+| `first_name`, `last_name` | string | Optional. |
+| `tags` | array of strings | Optional. Replaces the contact's tags. |
+| `attributes` | array | Optional. `{ attribute_name, attribute_value }` items. |
+| `is_blacklisted`, `blacklisted_reason` | boolean, string | Optional. Stop messaging this contact. |
+| `notes` | object | Optional. |
+
+### delete_contact
+
+`POST /delete_contact` · needs `contacts` read & write
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `contact_id` | uuid | **Required.** |
+
+### add_contacts_to_group
+
+`POST /add_contacts_to_group` · needs `contacts` read & write
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `contact_ids` | array of uuids | **Required.** |
+| `group_id` | uuid | The list to add to. Send this or `group_name`, not both. |
+| `group_name` | string | Creates a new list with this name and adds the contacts to it. |
+
+### delete_contacts_from_group
+
+`POST /delete_contacts_from_group` · needs `lists-and-segments` read & write
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `group_id` | uuid | **Required.** |
+| `contact_ids` | array of uuids | **Required.** |
+
+### create_campaign
+
+`POST /create_campaign` · needs `campaigns` read & write
+
+Creates a campaign to a list. Sending and scheduling are done in the app.
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `campaign_name` | string | **Required.** |
+| `channel` | string | **Required.** `whatsapp` or `email`. |
+| `wa_business_id` | string | Required for `whatsapp`: the sending number. |
+| `recipient` | object | **Required.** `{ "recipient_type": "list", "list": { "group_id": "<uuid>" } }` |
+| `message_content` | object | **Required.** See below. |
+
+`message_content` by `message_type`:
+
+```json
+{ "message_type": "whatsapp_template",
+  "whatsapp_template": { "template_id": "<id>", "params": [{ "key": "1", "value": "Priya" }] } }
+
+{ "message_type": "whatsapp_call",
+  "whatsapp_call": { "voice_bot_id": "<voice agent uuid>" } }
+
+{ "message_type": "email",
+  "email": { "email_settings_id": "<uuid or null>", "subject": "Hello", "preheader": "", "body": "<p>Hi</p>" } }
+```

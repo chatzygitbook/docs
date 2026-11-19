@@ -319,6 +319,10 @@
             ]
           },
           {
+            "group": "API Keys",
+            "pages": ["api-reference/api-keys/overview", "api-reference/api-keys/endpoints"]
+          },
+          {
             "group": "Authentication",
             "pages": ["api-reference/authentication/get-id-token"]
           },

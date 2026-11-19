@@ -30,11 +30,16 @@
   ],
   "components": {
     "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Recommended. An account API key (`chzy_acc_...`) created under API Keys in the Chatzy AI app. See /api-reference/api-keys/overview."
+      },
       "BearerAuth": {
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT",
-        "description": "Use the `idToken` retrieved from `/get_id_token` as the Bearer token."
+        "description": "Use the `idToken` retrieved from `/get_id_token` as the Bearer token. Still supported; API keys are recommended for server-to-server use."
       },
       "BearerAuthIframe": {
         "type": "http",
@@ -138,7 +143,7 @@
       "get": {
         "summary": "Get Contact Conversations",
         "tags": ["Contact Conversations"],
-        "security": [{ "BearerAuth": [] }],
+        "security": [{ "ApiKeyAuth": [] }, { "BearerAuth": [] }],
         "parameters": [
           {
             "name": "user_email_id",
@@ -242,7 +247,7 @@
       "get": {
         "summary": "Get Messages for Contact",
         "tags": ["Contact Conversations"],
-        "security": [{ "BearerAuth": [] }],
+        "security": [{ "ApiKeyAuth": [] }, { "BearerAuth": [] }],
         "parameters": [
           {
             "name": "contact_id",
