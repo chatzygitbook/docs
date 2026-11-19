@@ -3,8 +3,8 @@ openapi: post /get_id_token
 ---
 
 <Warning>
-  **Calling the API from a server, script or integration? Use an [API key](/api-reference/api-keys/overview) instead.**
-  Signing in with a password still works and is not going away, but it ties your integration to one person's
+  **Deprecated: this endpoint stops working on 30 November 2026 at 11:59 PM IST. Move to an [API key](/api-reference/api-keys/overview) before then.**
+  Until that date, signing in with a password keeps working for every endpoint that accepts it. It ties your integration to one person's
   login: ID tokens expire every hour, refresh tokens every 30 days, two-factor codes cannot be automated, and a
   password change or sign-out breaks it. An API key has no hourly renewal, can be limited to read-only or to
   specific areas, can expire or never expire, and can be rotated or revoked on its own. Endpoints that accept
