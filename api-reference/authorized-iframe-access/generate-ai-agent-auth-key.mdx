@@ -6,7 +6,13 @@ Issue the **AI Agent Auth Key** — the `client_api_key` that every call to `/ai
 
 > ⚠️ **The key is shown exactly once.** Chatzy only stores a hash of it, so this response is the only place the plaintext key ever appears. If you lose it, you cannot look it up — you must regenerate, which invalidates the old key.
 
-This is a **protected endpoint**. Authenticate it exactly like the other protected APIs, with the `idToken` from [`/get_id_token`](/api-reference/authentication/get-id-token):
+<Tip>
+The easiest way to get this key is the dashboard: open your agent's settings with `?tab=widget-settings&iframe_auth=1`, expand **Authenticated Iframe Access** and click **Generate Auth Key**. See [Chat Widget → Authenticated Iframe Access](/ai-agents/conversational-ai-agent/settings/chat-widget#authenticated-iframe-access).
+</Tip>
+
+AI Agent Auth Keys start with `chzy_agt_`. Keys issued before November 2026 start with `ak-` and keep working until you regenerate.
+
+This is a **protected endpoint** that takes a dashboard sign-in, not an [API key](/api-reference/api-keys/overview). Authenticate it with an `idToken` from [`/get_id_token`](/api-reference/authentication/get-id-token), which stops working on **30 November 2026**; after that, generate the key from the dashboard:
 
 ```http
 Authorization: <idToken>
@@ -29,7 +35,7 @@ Send `regenerate: false` (or omit it). A key is created only if the account does
 {
   "data": {
     "message": "API key generated successfully",
-    "api_key": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
+    "api_key": "chzy_agt_Kf3xQ2mA9pLbVz7TdR4sNhE1yWc6uJoX8gTaZmQ5vB2"
   }
 }
 ```

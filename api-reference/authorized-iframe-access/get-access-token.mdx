@@ -6,7 +6,15 @@ Securely generate short-lived `access_token` and long-lived `refresh_token` for 
 
 > ⚠️ **Important**: This endpoint **must be called from your server**, not from the client side. The `client_api_key` is sensitive and should never be exposed on the client side.
 
-The `client_api_key` is your **AI Agent Auth Key**. It is issued only by [Generate AI Agent Auth Key](/api-reference/authorized-iframe-access/generate-ai-agent-auth-key) and is shown once, at generation time — there is no page to look it up on later. If you don't have it, regenerate it there.
+The `client_api_key` is your **AI Agent Auth Key** (`chzy_agt_...`). Generate it in the dashboard under the agent's **Chat Widget → Authenticated Iframe Access** section (open settings with `?tab=widget-settings&iframe_auth=1` to show it), or with [Generate AI Agent Auth Key](/api-reference/authorized-iframe-access/generate-ai-agent-auth-key). It is shown once, at generation time — there is no page to look it up on later. If you lose it, regenerate it.
+
+## Before you start
+
+Turn on **Enable Auth Access Iframe** for the agent and save; the token lifetimes below come from that same section. See [Chat Widget → Authenticated Iframe Access](/ai-agents/conversational-ai-agent/settings/chat-widget#authenticated-iframe-access).
+
+- `access_token` lives for the agent's **Access Token Expiry** (default 15 minutes).
+- `refresh_token` lives for its **Refresh Token Expiry** (default 7 days).
+- A wrong key, or a key from another Chatzy account, returns `401 Invalid Client API Key`.
 
 Once you obtain the tokens, pass the `access_token` to the client-side where the iframe will be embedded.
 

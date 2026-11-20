@@ -1219,7 +1219,7 @@
     "/generate_api_keys": {
       "post": {
         "summary": "Generate AI Agent Auth Key",
-        "description": "Issues the AI Agent Auth Key (`client_api_key`) used by `POST /ai_agent/get_access_token`. The plaintext key is returned **once, in this response only** - Chatzy stores nothing but a hash of it. If you lose it, call this endpoint again with `regenerate: true`.\n\nThis is a protected endpoint - send the `idToken` from `POST /get_id_token` in the `Authorization` header.",
+        "description": "Issues the AI Agent Auth Key (`client_api_key`) used by `POST /ai_agent/get_access_token`. The plaintext key is returned **once, in this response only** - Chatzy stores nothing but a hash of it. If you lose it, call this endpoint again with `regenerate: true`.\n\nThis is a protected endpoint - send the `idToken` from `POST /get_id_token` in the `Authorization` header (`/get_id_token` stops on 30 November 2026; after that, generate the key in the dashboard: agent settings `?tab=widget-settings&iframe_auth=1`, Authenticated Iframe Access).",
         "tags": ["Authorized iframe Access"],
         "security": [{ "BearerAuth": [] }],
         "requestBody": {
@@ -1272,7 +1272,7 @@
                         "api_key": {
                           "type": "string",
                           "description": "The plaintext AI Agent Auth Key. Returned **only** when a new key was issued - it is never retrievable again. Absent from the `API key already exists` response.",
-                          "example": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
+                          "example": "chzy_agt_Kf3xQ2mA9pLbVz7TdR4sNhE1yWc6uJoX8gTaZmQ5vB2"
                         }
                       },
                       "required": ["message"]
@@ -1309,7 +1309,7 @@
                   "client_api_key": {
                     "type": "string",
                     "description": "AI Agent Auth Key. Issued only by `POST /generate_api_keys` with `api_key_type: \"ai_agent_auth_key\"` - see Generate AI Agent Auth Key. Keep it server-side.",
-                    "example": "ak-Kf3xQ2mA-9pLbVz7T-dR4sNhE1-yWc6uJoX-8gTaZmQ5-vB2"
+                    "example": "chzy_agt_Kf3xQ2mA9pLbVz7TdR4sNhE1yWc6uJoX8gTaZmQ5vB2"
                   }
                 }
               }

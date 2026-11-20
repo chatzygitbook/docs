@@ -31,15 +31,28 @@ Examples:
 
 ## Authentication
 
-### Enable Auth Access Iframe
+### Authenticated Iframe Access
 
-Enable this option if you want to restrict access to your chatbot to authenticated users only.
+Restrict your AI agent's iframe to visitors your own server has signed in. When it is on, the iframe only answers requests that carry a valid `access_token`, which your server gets from Chatzy with your **AI Agent Auth Key**.
 
-This feature requires an **AI Agent Auth Key (Client API Key)**, which can be generated from the **Profile** page.
+This setting is hidden by default. To show it, open the agent's settings with `iframe_auth=1` in the URL:
 
-After generating your API key, follow the authentication guide here:
+```text
+https://app.chatzy.ai/conversational-ai-agents/settings/<AGENT_ID>?tab=widget-settings&iframe_auth=1
+```
 
-https://docs.chatzy.ai/api-reference/auhtorized-iframe-access/get-access-token
+The **Authenticated Iframe Access** section then appears on the **Chat Widget** tab, collapsed. Click it to expand. An agent that already has it on always shows the section, so you can turn it off without the URL flag.
+
+1. Turn on **Enable Auth Access Iframe**.
+2. Click **Generate Auth Key** and copy the key. It is shown **only once**, and the same key works for all your AI agents. **Regenerate** revokes the old key at once.
+3. Pick the **Access Token Expiry** (15 minutes to 7 days, default 15 minutes) and **Refresh Token Expiry** (7 to 90 days, default 7 days).
+4. Click **Save**.
+
+<Warning>
+Once it is on and saved, the plain widget embed and public iframe links stop answering for this agent. Roll out your token flow before you save.
+</Warning>
+
+Then follow [Get Access Token](/api-reference/authorized-iframe-access/get-access-token) to mint tokens on your server and embed the iframe, and [Refresh Token](/api-reference/authorized-iframe-access/get-new-access-token-from-refresh-token) to keep sessions alive.
 
 ---
 
