@@ -9,3 +9,20 @@ footer > div {
 footer > div > div:nth-last-child(-n + 2) {
   display: none;
 }
+
+nav-tag-pill-text,
+.nav-tag-pill-text,
+[data-component-part="nav-tag-pill-text"],
+.nav-tag-pill *,
+[data-component-part="nav-tag-pill"] * {
+  color: #a13007 !important;
+}
+
+/* Dark mode: bright yellow */
+.dark nav-tag-pill-text,
+.dark .nav-tag-pill-text,
+.dark [data-component-part="nav-tag-pill-text"],
+.dark .nav-tag-pill *,
+.dark [data-component-part="nav-tag-pill"] * {
+  color: #facc15 !important;
+}
