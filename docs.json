@@ -146,6 +146,13 @@
             ]
           },
           {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              "integrations/zapier"
+            ]
+          },
+          {
             "group": "Journey",
             "icon": "route",
             "pages": [
