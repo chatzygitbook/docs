@@ -32,23 +32,33 @@ The Chatzy AI app for Zapier links your AI agents and contacts to thousands of o
 ## Before you start
 
 - The Zapier integration is included in the **Starter plan and above**.
-- Only a **Super Admin or Admin** of an organization can connect it to Zapier.
+- Any member of an organization can connect it. The connection acts as that person, with their role's access: for example, a member who can't see agents can't subscribe a Zap to an agent's leads.
 
 ## Connect Chatzy AI to Zapier
 
 1. In Zapier, create a Zap and search for **Chatzy AI** in any step.
 2. Pick a trigger or action and click **Sign in**.
-3. A Chatzy AI window opens. Log in if you are asked to.
+3. A Chatzy AI window opens. Log in if you are asked to (Google sign-in works too).
 4. If you belong to more than one organization, choose the one to connect under **Organization**.
-5. Review what Zapier will be able to do and click **Allow access**.
+5. Review what Zapier will be able to do and click **Continue**.
+
+<Frame>
+  <img src="/integrations/zapier/sign-in.png" alt="The Chatzy AI sign-in page for Zapier: signed-in account, organization picker and what Zapier will be able to do" className="rounded-lg" />
+</Frame>
 
 The window closes and the connection appears in Zapier as *Organization name (your email)*.
 
 ## Manage or disconnect
 
-Every Zapier connection is listed in Chatzy AI under **API Keys**, with the type **Zapier connection**, when it was created, and when it was last used.
+Every Zapier connection is listed in Chatzy AI under **Profile → Connected apps**, with its organization, when it was connected and when it was last used.
 
-To disconnect, click **Revoke** on that row. Zaps using it stop within a minute, and Zapier asks you to reconnect. Revoking it in Chatzy AI is the only way to cut access; removing the connection in Zapier alone leaves it active.
+<Frame>
+  <img src="/integrations/zapier/connected-apps.png" alt="Profile, Connected apps: Zapier and Claude with their organization and a Disconnect button" className="rounded-lg" />
+</Frame>
+
+To disconnect, click **Disconnect**. Zaps using it stop within a minute, their Chatzy AI triggers stop sending data to Zapier, and Zapier asks you to reconnect. Disconnecting in Chatzy AI is the only way to cut access; removing the connection in Zapier alone leaves it active.
+
+A connection stays signed in for a year from when you connect it. After that, Zapier emails you to reconnect.
 
 ## Examples
 
@@ -69,6 +79,6 @@ To disconnect, click **Revoke** on that row. Zaps using it stop within a minute,
 | Message in Zapier | What to do |
 | --- | --- |
 | Your plan doesn't include the Zapier integration. | Upgrade to Starter or above. |
-| You don't have permission to perform this action. | Ask a Super Admin or Admin of the organization to connect it. |
-| Your Chatzy AI connection is no longer valid. | The connection was revoked. Reconnect Chatzy AI in Zapier. |
+| You don't have permission to perform this action. | Your role in the organization doesn't allow this step (for example, reading agents). Ask an admin to change your role, or to connect Zapier themselves. |
+| Your Chatzy AI connection is no longer valid. | The connection was disconnected in Chatzy AI, or its year has run out. Reconnect Chatzy AI in Zapier. |
 | The agent did not reply. | Open the agent's Chat Logs in Chatzy AI to see why (for example, Chat Credits ran out). |
